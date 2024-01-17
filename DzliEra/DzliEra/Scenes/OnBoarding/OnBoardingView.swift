@@ -24,12 +24,7 @@ struct OnBoardingView: View {
                             Group {
                                 if page == pages.last {
                                     Button("Sign up", action: goToZero)
-                                        .frame(maxWidth: .infinity)
-                                        .padding()
-                                        .frame(height: 56)
-                                        .foregroundColor(.black)
-                                        .background(.yellow)
-                                        .cornerRadius(40)
+                                        .signUpButtonStyle
                                         .offset(y: 250)
                                 }
                             }
