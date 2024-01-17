@@ -57,9 +57,9 @@
 				C4D4E5192B57F7DB000B0AE1 /* App */,
 				C4D4E51A2B57F851000B0AE1 /* Scenes */,
 				C4D4E50E2B57F400000B0AE1 /* Assets.xcassets */,
-				C4D4E5102B57F400000B0AE1 /* LaunchScreen.storyboard */,
 				C4D4E5132B57F400000B0AE1 /* Info.plist */,
 				C4D4E51B2B57F85C000B0AE1 /* Extensions */,
+				C4D4E51E2B57F99F000B0AE1 /* LaunchScreen */,
 			);
 			path = DzliEra;
 			sourceTree = "<group>";
@@ -86,6 +86,14 @@
 				C4D4E51C2B57F873000B0AE1 /* ColorExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C4D4E51E2B57F99F000B0AE1 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				C4D4E5102B57F400000B0AE1 /* LaunchScreen.storyboard */,
+			);
+			path = LaunchScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
