@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct testView: View {
+struct OnBoardingView: View {
     
     @State private var pageIndex = 0
     
@@ -17,27 +17,37 @@ struct testView: View {
     var body: some View {
         TabView(selection: $pageIndex) {
             ForEach(pages) { page in
-                VStack {
-                    Spacer()
-                    OnBoardingView(page: page)
-                    Spacer()
-                    if page == pages.last {
-                        Button("Sign up", action: goToZero)
-                    } else {
-                        Button("next", action: incrementPage)
-                    }
-                    Spacer()
+                VStack(spacing: 0) {
+                    OnBoardingComponent(page: page)
+                        .edgesIgnoringSafeArea(.top)
+                        .overlay (
+                            Group {
+                                if page == pages.last {
+                                    Button("Sign up", action: goToZero)
+                                        .frame(maxWidth: .infinity)
+                                        .padding()
+                                        .frame(height: 56)
+                                        .foregroundColor(.black)
+                                        .background(.yellow)
+                                        .cornerRadius(40)
+                                        .offset(y: 250)
+                                }
+                            }
+                        )
                 }
                 .tag(page.tag)
             }
         }
         .animation(.easeInOut, value: pageIndex)
         .tabViewStyle(.page)
+        .edgesIgnoringSafeArea(.top)
         .indexViewStyle(.page(backgroundDisplayMode: .interactive))
         .onAppear {
-            dotAppearance.currentPageIndicatorTintColor = .black
+            dotAppearance.currentPageIndicatorTintColor = .white
             dotAppearance.pageIndicatorTintColor = .gray
         }
+        .background(Color.black)
+        
     }
     
     func incrementPage() {
@@ -50,5 +60,5 @@ struct testView: View {
 }
 
 #Preview {
-    OnBoardingView(page: OnBoardingPageModel.sampleOnBoarding)
+    OnBoardingView()
 }

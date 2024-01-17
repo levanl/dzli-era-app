@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: someScene)
         
-        let onBoardingView = testView()
+        let onBoardingView = OnBoardingView()
         
         let hostingController = UIHostingController(rootView: onBoardingView)
                 
