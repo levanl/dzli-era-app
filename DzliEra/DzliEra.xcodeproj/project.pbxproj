@@ -55,6 +55,8 @@
 		C4BB27A62B593B420021AE4C /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C4BB27A52B593B420021AE4C /* FirebaseRemoteConfigSwift */; };
 		C4BB27A82B593B420021AE4C /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = C4BB27A72B593B420021AE4C /* FirebaseStorage */; };
 		C4BB27AA2B593B420021AE4C /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = C4BB27A92B593B420021AE4C /* FirebaseStorageCombine-Community */; };
+		C4BB27AD2B594B1A0021AE4C /* SignInEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB27AC2B594B1A0021AE4C /* SignInEmailView.swift */; };
+		C4BB27AF2B594B310021AE4C /* SignInEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB27AE2B594B310021AE4C /* SignInEmailViewModel.swift */; };
 		C4D4E5062B57F3FF000B0AE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D4E5052B57F3FF000B0AE1 /* AppDelegate.swift */; };
 		C4D4E5082B57F3FF000B0AE1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D4E5072B57F3FF000B0AE1 /* SceneDelegate.swift */; };
 		C4D4E50F2B57F400000B0AE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4D4E50E2B57F400000B0AE1 /* Assets.xcassets */; };
@@ -87,6 +89,8 @@
 		C4BB275A2B590CD80021AE4C /* Kanit-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-Thin.ttf"; sourceTree = "<group>"; };
 		C4BB276F2B5915950021AE4C /* OnBoardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewModel.swift; sourceTree = "<group>"; };
 		C4BB27722B5939C60021AE4C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C4BB27AC2B594B1A0021AE4C /* SignInEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailView.swift; sourceTree = "<group>"; };
+		C4BB27AE2B594B310021AE4C /* SignInEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailViewModel.swift; sourceTree = "<group>"; };
 		C4D4E5022B57F3FF000B0AE1 /* DzliEra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DzliEra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4D4E5052B57F3FF000B0AE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4D4E5072B57F3FF000B0AE1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -170,6 +174,15 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		C4BB27AB2B593F110021AE4C /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				C4BB27AC2B594B1A0021AE4C /* SignInEmailView.swift */,
+				C4BB27AE2B594B310021AE4C /* SignInEmailViewModel.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		C4D4E4F92B57F3FF000B0AE1 = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +226,7 @@
 		C4D4E51A2B57F851000B0AE1 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				C4BB27AB2B593F110021AE4C /* Authentication */,
 				C4D4E51F2B57FB18000B0AE1 /* OnBoarding */,
 			);
 			path = Scenes;
@@ -374,7 +388,9 @@
 				C4D4E51D2B57F873000B0AE1 /* ColorExtension.swift in Sources */,
 				C4D4E5062B57F3FF000B0AE1 /* AppDelegate.swift in Sources */,
 				C4D4E5292B582CCB000B0AE1 /* OnBoardingView.swift in Sources */,
+				C4BB27AD2B594B1A0021AE4C /* SignInEmailView.swift in Sources */,
 				C4D4E5082B57F3FF000B0AE1 /* SceneDelegate.swift in Sources */,
+				C4BB27AF2B594B310021AE4C /* SignInEmailViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
