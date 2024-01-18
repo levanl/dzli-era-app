@@ -11,7 +11,7 @@ import SwiftUI
 extension Button {
     var signUpButtonStyle: some View {
             self
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: 200)
                 .padding()
                 .frame(height: 56)
                 .foregroundColor(.black)

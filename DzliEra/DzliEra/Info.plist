@@ -19,5 +19,11 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Kanit-ExtraLight.ttf</string>
+		<string>Kanit-Medium.ttf</string>
+		<string>Kanit-Light.ttf</string>
+	</array>
 </dict>
 </plist>
