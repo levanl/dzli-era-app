@@ -57,6 +57,7 @@
 		C4BB27AA2B593B420021AE4C /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = C4BB27A92B593B420021AE4C /* FirebaseStorageCombine-Community */; };
 		C4BB27AD2B594B1A0021AE4C /* SignInEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB27AC2B594B1A0021AE4C /* SignInEmailView.swift */; };
 		C4BB27AF2B594B310021AE4C /* SignInEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB27AE2B594B310021AE4C /* SignInEmailViewModel.swift */; };
+		C4BB27B12B59514A0021AE4C /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB27B02B59514A0021AE4C /* AuthenticationManager.swift */; };
 		C4D4E5062B57F3FF000B0AE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D4E5052B57F3FF000B0AE1 /* AppDelegate.swift */; };
 		C4D4E5082B57F3FF000B0AE1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D4E5072B57F3FF000B0AE1 /* SceneDelegate.swift */; };
 		C4D4E50F2B57F400000B0AE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4D4E50E2B57F400000B0AE1 /* Assets.xcassets */; };
@@ -91,6 +92,7 @@
 		C4BB27722B5939C60021AE4C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C4BB27AC2B594B1A0021AE4C /* SignInEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailView.swift; sourceTree = "<group>"; };
 		C4BB27AE2B594B310021AE4C /* SignInEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailViewModel.swift; sourceTree = "<group>"; };
+		C4BB27B02B59514A0021AE4C /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		C4D4E5022B57F3FF000B0AE1 /* DzliEra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DzliEra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4D4E5052B57F3FF000B0AE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4D4E5072B57F3FF000B0AE1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 			children = (
 				C4BB27AC2B594B1A0021AE4C /* SignInEmailView.swift */,
 				C4BB27AE2B594B310021AE4C /* SignInEmailViewModel.swift */,
+				C4BB27B02B59514A0021AE4C /* AuthenticationManager.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 			files = (
 				C4BB27472B5858580021AE4C /* ButtonExtension.swift in Sources */,
 				C4D4E52B2B583008000B0AE1 /* OnBoardingComponent.swift in Sources */,
+				C4BB27B12B59514A0021AE4C /* AuthenticationManager.swift in Sources */,
 				C4D4E5272B57FC19000B0AE1 /* OnBoardingModel.swift in Sources */,
 				C4BB27702B5915950021AE4C /* OnBoardingViewModel.swift in Sources */,
 				C4D4E51D2B57F873000B0AE1 /* ColorExtension.swift in Sources */,
