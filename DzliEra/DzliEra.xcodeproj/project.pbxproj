@@ -26,6 +26,7 @@
 		C4BB276A2B590CD80021AE4C /* Kanit-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4BB27582B590CD80021AE4C /* Kanit-SemiBoldItalic.ttf */; };
 		C4BB276B2B590CD80021AE4C /* Kanit-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4BB27592B590CD80021AE4C /* Kanit-Italic.ttf */; };
 		C4BB276C2B590CD80021AE4C /* Kanit-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4BB275A2B590CD80021AE4C /* Kanit-Thin.ttf */; };
+		C4BB27702B5915950021AE4C /* OnBoardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB276F2B5915950021AE4C /* OnBoardingViewModel.swift */; };
 		C4D4E5062B57F3FF000B0AE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D4E5052B57F3FF000B0AE1 /* AppDelegate.swift */; };
 		C4D4E5082B57F3FF000B0AE1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D4E5072B57F3FF000B0AE1 /* SceneDelegate.swift */; };
 		C4D4E50F2B57F400000B0AE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4D4E50E2B57F400000B0AE1 /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		C4BB27582B590CD80021AE4C /* Kanit-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		C4BB27592B590CD80021AE4C /* Kanit-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-Italic.ttf"; sourceTree = "<group>"; };
 		C4BB275A2B590CD80021AE4C /* Kanit-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-Thin.ttf"; sourceTree = "<group>"; };
+		C4BB276F2B5915950021AE4C /* OnBoardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewModel.swift; sourceTree = "<group>"; };
 		C4D4E5022B57F3FF000B0AE1 /* DzliEra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DzliEra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4D4E5052B57F3FF000B0AE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4D4E5072B57F3FF000B0AE1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +104,14 @@
 				C4BB274D2B590CD80021AE4C /* Kanit-ThinItalic.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		C4BB27712B59159B0021AE4C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C4D4E52A2B583008000B0AE1 /* OnBoardingComponent.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		C4D4E4F92B57F3FF000B0AE1 = {
@@ -171,9 +181,10 @@
 		C4D4E51F2B57FB18000B0AE1 /* OnBoarding */ = {
 			isa = PBXGroup;
 			children = (
+				C4BB27712B59159B0021AE4C /* Components */,
 				C4D4E5262B57FC19000B0AE1 /* OnBoardingModel.swift */,
 				C4D4E5282B582CCB000B0AE1 /* OnBoardingView.swift */,
-				C4D4E52A2B583008000B0AE1 /* OnBoardingComponent.swift */,
+				C4BB276F2B5915950021AE4C /* OnBoardingViewModel.swift */,
 			);
 			path = OnBoarding;
 			sourceTree = "<group>";
@@ -269,6 +280,7 @@
 				C4BB27472B5858580021AE4C /* ButtonExtension.swift in Sources */,
 				C4D4E52B2B583008000B0AE1 /* OnBoardingComponent.swift in Sources */,
 				C4D4E5272B57FC19000B0AE1 /* OnBoardingModel.swift in Sources */,
+				C4BB27702B5915950021AE4C /* OnBoardingViewModel.swift in Sources */,
 				C4D4E51D2B57F873000B0AE1 /* ColorExtension.swift in Sources */,
 				C4D4E5062B57F3FF000B0AE1 /* AppDelegate.swift in Sources */,
 				C4D4E5292B582CCB000B0AE1 /* OnBoardingView.swift in Sources */,

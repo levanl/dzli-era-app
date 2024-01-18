@@ -8,24 +8,36 @@
 import SwiftUI
 
 struct OnBoardingView: View {
+    // MARK: - Properties
+    @StateObject private var viewModel = OnBoardingViewModel()
     
-    @State private var pageIndex = 0
-    
-    private let pages: [OnBoardingPageModel] = OnBoardingPageModel.sampleOnBoardingPages
-    private let dotAppearance = UIPageControl.appearance()
-    
+    // MARK: - Body
     var body: some View {
-        TabView(selection: $pageIndex) {
-            ForEach(pages) { page in
+        TabView(selection: $viewModel.pageIndex) {
+            ForEach(viewModel.pages) { page in
                 VStack(spacing: 0) {
                     OnBoardingComponent(page: page)
                         .edgesIgnoringSafeArea(.top)
                         .overlay (
                             Group {
-                                if page == pages.last {
-                                    Button("Sign up", action: goToZero)
-                                        .signUpButtonStyle
-                                        .offset(y: 250)
+                                if page == viewModel.pages.last {
+                                    Button(action: {
+                                        
+                                    }) {
+                                        Text("Get Started")
+                                            .font(.custom("Helvetica-Bold", size: 16))
+                                    }
+                                    .signUpButtonStyle
+                                    .offset(y: 250)
+                                } else {
+                                    Button(action: {
+                                        viewModel.incrementPage()
+                                    }) {
+                                        Text("Next")
+                                            .font(.custom("Helvetica-Bold", size: 16))
+                                    }
+                                    .signUpButtonStyle
+                                    .offset(y: 250)
                                 }
                             }
                         )
@@ -33,24 +45,16 @@ struct OnBoardingView: View {
                 .tag(page.tag)
             }
         }
-        .animation(.easeInOut, value: pageIndex)
+        .animation(.easeInOut, value: viewModel.pageIndex)
         .tabViewStyle(.page)
         .edgesIgnoringSafeArea(.top)
         .indexViewStyle(.page(backgroundDisplayMode: .interactive))
         .onAppear {
-            dotAppearance.currentPageIndicatorTintColor = .white
-            dotAppearance.pageIndicatorTintColor = .gray
+            viewModel.dotAppearance.currentPageIndicatorTintColor = .white
+            viewModel.dotAppearance.pageIndicatorTintColor = .gray
         }
         .background(Color.black)
         
-    }
-    
-    func incrementPage() {
-        pageIndex += 1
-    }
-    
-    func goToZero() {
-        pageIndex = 0
     }
 }
 
