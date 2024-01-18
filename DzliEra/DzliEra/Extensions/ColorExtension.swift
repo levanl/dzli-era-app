@@ -10,6 +10,7 @@ import SwiftUI
 struct AppColors {
     static let gray = Color(hex: 0x1C1C1C)
     static let black = Color(hex: 0x191B1F)
+    static let yellow = Color(hex: 0xD2FF10)
 }
 
 extension Color {

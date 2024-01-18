@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -20,7 +21,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: someScene)
         
-//        window?.rootViewController = firstVC
+        let onBoardingView = OnBoardingView()
+        
+        let hostingController = UIHostingController(rootView: onBoardingView)
+                
+        window?.rootViewController = hostingController
         
         window?.makeKeyAndVisible()
     }
