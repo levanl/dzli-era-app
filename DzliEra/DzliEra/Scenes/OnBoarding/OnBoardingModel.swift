@@ -14,11 +14,11 @@ struct OnBoardingPageModel: Identifiable, Equatable {
     var imageURL: String
     var tag: Int
     
-    static var sampleOnBoarding = OnBoardingPageModel(name: "Title Example", description: "hola como setas kete xola", imageURL: "onboarding1", tag: 0)
+    static var sampleOnBoarding = OnBoardingPageModel(name: "Begin Your DzliEra", description: "Users can add their routines and share them with others.", imageURL: "onboarding1", tag: 0)
     
     static var sampleOnBoardingPages: [OnBoardingPageModel] = [
-        OnBoardingPageModel(name: "Welcome To DzliEra App", description: "Science-backed workouts that get better as you do", imageURL: "onboarding1", tag: 0),
-        OnBoardingPageModel(name: "Meet New People", description: "The Best app to get bigger", imageURL: "onboarding2", tag: 1),
-        OnBoardingPageModel(name: "Hazaki", description: "The Best app to get bigger", imageURL: "onboarding3", tag: 2)
+        OnBoardingPageModel(name: "Begin Your DzliEra", description: "Users can add their routines and share them with others.", imageURL: "onboarding1", tag: 0),
+        OnBoardingPageModel(name: "Track Nutrition", description: "Food intake is important for staying healthy and supporting muscle growth.", imageURL: "onboarding2", tag: 0),
+        OnBoardingPageModel(name: "Exercise Library", description: "A comprehensive exercise Library with instructions", imageURL: "onboarding3", tag: 2)
     ]
 }

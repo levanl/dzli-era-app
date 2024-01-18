@@ -12,7 +12,7 @@ struct OnBoardingComponent: View {
     var page: OnBoardingPageModel
     
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 0) {
             
             Image("\(page.imageURL)")
                 .resizable()
@@ -20,10 +20,15 @@ struct OnBoardingComponent: View {
                 .edgesIgnoringSafeArea(.top)
             
             Text(page.name)
-                .font(.title)
+                .font(.custom("Helvetica-Bold", size: 45))
+                .kerning(1)
+                .frame(width: 300)
+                .multilineTextAlignment(.center)
+                .padding(.bottom, 25)
             
             Text(page.description)
-                .font(.subheadline)
+                .font(.custom("Helvetica-Light", size: 16))
+                .multilineTextAlignment(.center)
                 .frame(width: 300)
             
             Spacer()
