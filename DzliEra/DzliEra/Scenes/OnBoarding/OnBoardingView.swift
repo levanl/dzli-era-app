@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OnBoardingView: View {
+struct OnBoardingView: View, WithRootNavigationController {
     // MARK: - Properties
     @StateObject private var viewModel = OnBoardingViewModel()
     
@@ -22,7 +22,7 @@ struct OnBoardingView: View {
                             Group {
                                 if page == viewModel.pages.last {
                                     Button(action: {
-                                        
+                                        self.push(viewController: UIHostingController(rootView: SignInEmailView()), animated: true)
                                     }) {
                                         Text("Get Started")
                                             .font(.custom("Helvetica-Bold", size: 16))

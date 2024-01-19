@@ -58,6 +58,9 @@
 		C4BB27AD2B594B1A0021AE4C /* SignInEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB27AC2B594B1A0021AE4C /* SignInEmailView.swift */; };
 		C4BB27AF2B594B310021AE4C /* SignInEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB27AE2B594B310021AE4C /* SignInEmailViewModel.swift */; };
 		C4BB27B12B59514A0021AE4C /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB27B02B59514A0021AE4C /* AuthenticationManager.swift */; };
+		C4BB27B72B5A85720021AE4C /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB27B62B5A85720021AE4C /* RegisterView.swift */; };
+		C4BB27B92B5A85D70021AE4C /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB27B82B5A85D70021AE4C /* RegisterViewModel.swift */; };
+		C4BB27BC2B5A87660021AE4C /* WithRootNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB27BB2B5A87660021AE4C /* WithRootNavigationController.swift */; };
 		C4D4E5062B57F3FF000B0AE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D4E5052B57F3FF000B0AE1 /* AppDelegate.swift */; };
 		C4D4E5082B57F3FF000B0AE1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D4E5072B57F3FF000B0AE1 /* SceneDelegate.swift */; };
 		C4D4E50F2B57F400000B0AE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4D4E50E2B57F400000B0AE1 /* Assets.xcassets */; };
@@ -93,6 +96,9 @@
 		C4BB27AC2B594B1A0021AE4C /* SignInEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailView.swift; sourceTree = "<group>"; };
 		C4BB27AE2B594B310021AE4C /* SignInEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailViewModel.swift; sourceTree = "<group>"; };
 		C4BB27B02B59514A0021AE4C /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		C4BB27B62B5A85720021AE4C /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		C4BB27B82B5A85D70021AE4C /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		C4BB27BB2B5A87660021AE4C /* WithRootNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithRootNavigationController.swift; sourceTree = "<group>"; };
 		C4D4E5022B57F3FF000B0AE1 /* DzliEra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DzliEra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4D4E5052B57F3FF000B0AE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4D4E5072B57F3FF000B0AE1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -179,11 +185,37 @@
 		C4BB27AB2B593F110021AE4C /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				C4BB27B32B597C6F0021AE4C /* Register */,
+				C4BB27B22B597C660021AE4C /* Sign In */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		C4BB27B22B597C660021AE4C /* Sign In */ = {
+			isa = PBXGroup;
+			children = (
 				C4BB27AC2B594B1A0021AE4C /* SignInEmailView.swift */,
 				C4BB27AE2B594B310021AE4C /* SignInEmailViewModel.swift */,
 				C4BB27B02B59514A0021AE4C /* AuthenticationManager.swift */,
 			);
-			path = Authentication;
+			path = "Sign In";
+			sourceTree = "<group>";
+		};
+		C4BB27B32B597C6F0021AE4C /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				C4BB27B62B5A85720021AE4C /* RegisterView.swift */,
+				C4BB27B82B5A85D70021AE4C /* RegisterViewModel.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		C4BB27BA2B5A874D0021AE4C /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				C4BB27BB2B5A87660021AE4C /* WithRootNavigationController.swift */,
+			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 		C4D4E4F92B57F3FF000B0AE1 = {
@@ -205,6 +237,7 @@
 		C4D4E5042B57F3FF000B0AE1 /* DzliEra */ = {
 			isa = PBXGroup;
 			children = (
+				C4BB27BA2B5A874D0021AE4C /* Navigation */,
 				C4BB27482B590CBC0021AE4C /* Fonts */,
 				C4D4E5192B57F7DB000B0AE1 /* App */,
 				C4D4E51A2B57F851000B0AE1 /* Scenes */,
@@ -392,7 +425,10 @@
 				C4D4E51D2B57F873000B0AE1 /* ColorExtension.swift in Sources */,
 				C4D4E5062B57F3FF000B0AE1 /* AppDelegate.swift in Sources */,
 				C4D4E5292B582CCB000B0AE1 /* OnBoardingView.swift in Sources */,
+				C4BB27B92B5A85D70021AE4C /* RegisterViewModel.swift in Sources */,
+				C4BB27BC2B5A87660021AE4C /* WithRootNavigationController.swift in Sources */,
 				C4BB27AD2B594B1A0021AE4C /* SignInEmailView.swift in Sources */,
+				C4BB27B72B5A85720021AE4C /* RegisterView.swift in Sources */,
 				C4D4E5082B57F3FF000B0AE1 /* SceneDelegate.swift in Sources */,
 				C4BB27AF2B594B310021AE4C /* SignInEmailViewModel.swift in Sources */,
 			);

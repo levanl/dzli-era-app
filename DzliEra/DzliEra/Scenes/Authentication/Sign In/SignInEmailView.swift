@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SignInEmailView: View {
+struct SignInEmailView: View, WithRootNavigationController {
     
     @StateObject private var viewModel = SignInEmailViewModel()
     
@@ -24,9 +24,21 @@ struct SignInEmailView: View {
                 .cornerRadius(10)
             
             Button  {
-                
+                viewModel.signIn()
             } label: {
                 Text("Sign In")
+                    .font(.headline)
+                    .foregroundStyle(.white)
+                    .frame(height: 55)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .cornerRadius(10)
+            }
+            
+            Button  {
+                self.push(viewController: UIHostingController(rootView: RegisterView()), animated: true)
+            } label: {
+                Text("Dont Have an account register NOWW!!")
                     .font(.headline)
                     .foregroundStyle(.white)
                     .frame(height: 55)
