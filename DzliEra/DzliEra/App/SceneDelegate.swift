@@ -21,11 +21,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: someScene)
         
-        let onBoardingView = OnBoardingView()
+//        let onBoardingView = OnBoardingView()
+        var rootView = AnyView(OnBoardingView())
         
-        let hostingController = UIHostingController(rootView: onBoardingView)
-                
-        window?.rootViewController = hostingController
+        let rootViewController = UIHostingController(rootView: rootView)
+        let navigationController = UINavigationController(rootViewController: rootViewController)
+        window?.rootViewController = navigationController
         
         window?.makeKeyAndVisible()
     }
