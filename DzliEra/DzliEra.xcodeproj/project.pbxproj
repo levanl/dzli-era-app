@@ -185,6 +185,7 @@
 		C4BB27AB2B593F110021AE4C /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				C4BB27BE2B5AB4080021AE4C /* AuthComponents */,
 				C4BB27B32B597C6F0021AE4C /* Register */,
 				C4BB27B22B597C660021AE4C /* Sign In */,
 			);
@@ -216,6 +217,13 @@
 				C4BB27BB2B5A87660021AE4C /* WithRootNavigationController.swift */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		C4BB27BE2B5AB4080021AE4C /* AuthComponents */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AuthComponents;
 			sourceTree = "<group>";
 		};
 		C4D4E4F92B57F3FF000B0AE1 = {
