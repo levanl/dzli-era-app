@@ -6,25 +6,21 @@
 //
 
 import Foundation
-
+import FirebaseAuth
 
 final class SignInEmailViewModel: ObservableObject {
+    // MARK: - Properties
     @Published var email = ""
     @Published var password = ""
     
+    // MARK: - Sign In Func
     func signIn() {
-        guard !email.isEmpty, !password.isEmpty else {
-            print("no email and password found")
-            return
-        }
-        
-        Task {
-            do {
-                let returnedUserData = try await AuthenticationManager.shared.createUser(email: email, password: password)
-                print("Success")
-                print(returnedUserData)
-            } catch {
-                print("Error \(error)")
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            if error != nil {
+                print(error!.localizedDescription)
+                print("could not log in")
+            } else {
+                print("Success logged in")
             }
         }
     }

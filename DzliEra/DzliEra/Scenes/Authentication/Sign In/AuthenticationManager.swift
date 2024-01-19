@@ -22,16 +22,19 @@ struct AuthDataResultModel {
 }
 
 final class AuthenticationManager {
-    
+    // MARK: - Singleton
     static let shared = AuthenticationManager()
     
+    // MARK: - Init
     private init() { }
     
+    // MARK: - Create User on Firebase
     func createUser(email: String, password: String) async throws -> AuthDataResultModel {
         let authDataResult = try await Auth.auth().createUser(withEmail: email, password: password)
         return AuthDataResultModel(user: authDataResult.user)
     }
     
+    // MARK: - Get User from Firebase
     func getAuthenticatedUser() throws ->  AuthDataResultModel {
         guard let user = Auth.auth().currentUser else {
             throw URLError(.badServerResponse)

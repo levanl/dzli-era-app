@@ -12,22 +12,27 @@ struct RegisterView: View, WithRootNavigationController {
     @StateObject private var viewModel = RegisterViewModel()
     
     var body: some View {
-        TextField("Email...", text: $viewModel.email)
-            .padding()
-            .background(Color.gray.opacity(0.4))
-            .cornerRadius(10)
-        
-        SecureField("Password...", text: $viewModel.password)
-            .padding()
-            .background(Color.gray.opacity(0.4))
-            .cornerRadius(10)
-        
-        Button {
-            viewModel.Register()
-        } label: {
-            Text("Register")
+
+        VStack {
+            
+            AuthTitleComponent(firstLine: "Hello.", secondLine: "Register Champ")
+                .padding(.bottom, 100)
+            
+            VStack(spacing: 60) {
+                AuthEmailFieldComponent(email: $viewModel.email)
+                
+                AuthPasswordFieldComponent(password: $viewModel.password)
+                
+                AuthButton(action: viewModel.Register, label: Text("Register"))
+            }
+            
+            Spacer()
         }
+        .padding()
+        .padding()
+        .background(AppColors.authPageBackground)
     }
+        
 }
 
 #Preview {
