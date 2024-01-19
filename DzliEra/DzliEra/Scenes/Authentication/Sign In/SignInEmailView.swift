@@ -15,9 +15,8 @@ struct SignInEmailView: View, WithRootNavigationController {
     
     // MARK: - Body
     var body: some View {
-        
+
         VStack {
-            
             AuthTitleComponent(firstLine: "Hello.", secondLine: "Welcome Champ")
                 .padding(.bottom, 100)
             

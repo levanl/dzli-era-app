@@ -9,6 +9,7 @@ import Foundation
 
 
 final class RegisterViewModel: ObservableObject {
+    // MARK: - Properties
     @Published var email = ""
     @Published var password = ""
     

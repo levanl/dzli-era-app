@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct RegisterView: View, WithRootNavigationController {
-    
+    // MARK: - Properties
     @StateObject private var viewModel = RegisterViewModel()
     
+    // MARK: - Body
     var body: some View {
-
+        
         VStack {
             
             AuthTitleComponent(firstLine: "Hello.", secondLine: "Register Champ")
@@ -20,19 +21,16 @@ struct RegisterView: View, WithRootNavigationController {
             
             VStack(spacing: 60) {
                 AuthEmailFieldComponent(email: $viewModel.email)
-                
                 AuthPasswordFieldComponent(password: $viewModel.password)
-                
                 AuthButton(action: viewModel.Register, label: Text("Register"))
             }
-            
             Spacer()
         }
         .padding()
         .padding()
         .background(AppColors.authPageBackground)
     }
-        
+    
 }
 
 #Preview {
