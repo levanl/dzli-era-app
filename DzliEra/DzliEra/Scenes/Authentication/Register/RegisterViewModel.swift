@@ -21,7 +21,7 @@ final class RegisterViewModel: ObservableObject {
         Task {
             do {
                 let returnedUserData = try await AuthenticationManager.shared.createUser(email: email, password: password)
-                print("Success")
+                print("Success Registerd")
                 print(returnedUserData)
             } catch {
                 print("Error \(error)")

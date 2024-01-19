@@ -24,7 +24,6 @@ struct RegisterView: View, WithRootNavigationController {
         
         Button {
             viewModel.Register()
-            
         } label: {
             Text("Register")
         }

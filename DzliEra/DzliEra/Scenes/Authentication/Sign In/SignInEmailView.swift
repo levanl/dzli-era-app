@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+
 
 struct SignInEmailView: View, WithRootNavigationController {
     
@@ -24,7 +26,15 @@ struct SignInEmailView: View, WithRootNavigationController {
                 .cornerRadius(10)
             
             Button  {
-                viewModel.signIn()
+                Auth.auth().signIn(withEmail: viewModel.email, password: viewModel.password) { result, error in
+                    if error != nil {
+                        print(error!.localizedDescription)
+                        
+                        print("no LOgin")
+                    } else {
+                        print("Success logged in")
+                    }
+                }
             } label: {
                 Text("Sign In")
                     .font(.headline)
