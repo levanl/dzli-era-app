@@ -14,8 +14,6 @@ struct AppColors {
     static let authPageBackground = Color(hex: 0x313131)
     static let authFieldHeader = Color(hex: 0x4F4F4F)
     static let authButtonColor = Color(hex: 0x5D9CFF)
-
-    
 }
 
 extension Color {
