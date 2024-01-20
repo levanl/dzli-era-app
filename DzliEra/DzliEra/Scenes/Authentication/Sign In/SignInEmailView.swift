@@ -25,7 +25,7 @@ struct SignInEmailView: View, WithRootNavigationController {
                 
                 AuthPasswordFieldComponent(password: $viewModel.password)
                 
-                AuthButton(action: viewModel.signIn, label: Text("Sign In"))
+                AuthButton(action: temporaryNavToTabBar, label: Text("Sign In"))
                     .padding(.bottom, 60)
             }
             
@@ -40,6 +40,10 @@ struct SignInEmailView: View, WithRootNavigationController {
         .padding()
         .padding()
         .background(AppColors.authPageBackground)
+        
+    }
+    func temporaryNavToTabBar() {
+        self.push(viewController: TabController(), animated: true)
     }
 }
 

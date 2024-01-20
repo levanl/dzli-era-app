@@ -15,7 +15,6 @@ struct RegisterView: View, WithRootNavigationController {
     var body: some View {
         
         VStack {
-            
             AuthTitleComponent(firstLine: "Hello.", secondLine: "Register Champ")
                 .padding(.bottom, 100)
             
