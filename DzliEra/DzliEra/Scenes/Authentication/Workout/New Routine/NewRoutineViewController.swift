@@ -65,11 +65,18 @@ class NewRoutineViewController: UIViewController {
     func setupAddExerciseButton() {
         view.addSubview(addExerciseButton)
         
+        addExerciseButton.addTarget(self, action: #selector(addExerciseButtonTapped), for: .touchUpInside)
+        
         NSLayoutConstraint.activate([
             addExerciseButton.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 24),
             addExerciseButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             addExerciseButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
+    }
+    
+    @objc func addExerciseButtonTapped() {
+        let exercisesVC = ExerciseListViewController()
+        navigationController?.pushViewController(exercisesVC, animated: true)
     }
 
 }

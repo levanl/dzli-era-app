@@ -144,7 +144,6 @@ class WorkoutViewController: UIViewController, NewRoutineDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         
-        // tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomCell")
         view.addSubview(tableView)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
 
@@ -155,11 +154,13 @@ class WorkoutViewController: UIViewController, NewRoutineDelegate {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+    
     @objc func newRoutineButtonTapped() {
         let newRoutineVC = NewRoutineViewController()
         newRoutineVC.delegate = self
         navigationController?.pushViewController(newRoutineVC, animated: true)
     }
+    
     func didSaveRoutine(title: String) {
         print(title)
     }
