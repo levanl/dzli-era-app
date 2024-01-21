@@ -79,6 +79,12 @@ class WorkoutViewController: UIViewController {
         return button
     }()
     
+    private let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -87,6 +93,7 @@ class WorkoutViewController: UIViewController {
         setupStartEmptyWorkoutButton()
         setupRoutinesLabel()
         setupRoutineStackView()
+        setupTableView()
     }
     
     func setupQuickStartLabel() {
@@ -132,4 +139,37 @@ class WorkoutViewController: UIViewController {
             routineStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }
+    
+    func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        // tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomCell")
+        view.addSubview(tableView)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: routineStackView.bottomAnchor, constant: 16),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+}
+
+extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
+        cell.textLabel?.text = "Row \(indexPath.row + 1)"
+        
+        return cell
+    }
+    
+    
 }

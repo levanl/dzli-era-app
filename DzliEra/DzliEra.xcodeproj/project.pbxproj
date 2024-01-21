@@ -77,6 +77,7 @@
 		C4F3A0082B5BC04700B921FB /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0072B5BC04700B921FB /* WorkoutViewController.swift */; };
 		C4F3A00A2B5BC0B800B921FB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0092B5BC0B800B921FB /* HomeViewController.swift */; };
 		C4F3A00C2B5BC7B600B921FB /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A00B2B5BC7B600B921FB /* TabController.swift */; };
+		C4F3A00F2B5D151600B921FB /* NetworkingPackageGeneric in Frameworks */ = {isa = PBXBuildFile; productRef = C4F3A00E2B5D151600B921FB /* NetworkingPackageGeneric */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -153,6 +154,7 @@
 				C4BB27802B593B420021AE4C /* FirebaseAppDistribution-Beta in Frameworks */,
 				C4BB27842B593B420021AE4C /* FirebaseAuthCombine-Community in Frameworks */,
 				C4BB27A22B593B420021AE4C /* FirebasePerformance in Frameworks */,
+				C4F3A00F2B5D151600B921FB /* NetworkingPackageGeneric in Frameworks */,
 				C4BB279A2B593B420021AE4C /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
 				C4BB27A82B593B420021AE4C /* FirebaseStorage in Frameworks */,
 				C4BB278C2B593B420021AE4C /* FirebaseDynamicLinks in Frameworks */,
@@ -396,6 +398,7 @@
 				C4BB27A52B593B420021AE4C /* FirebaseRemoteConfigSwift */,
 				C4BB27A72B593B420021AE4C /* FirebaseStorage */,
 				C4BB27A92B593B420021AE4C /* FirebaseStorageCombine-Community */,
+				C4F3A00E2B5D151600B921FB /* NetworkingPackageGeneric */,
 			);
 			productName = DzliEra;
 			productReference = C4D4E5022B57F3FF000B0AE1 /* DzliEra.app */;
@@ -427,6 +430,7 @@
 			mainGroup = C4D4E4F92B57F3FF000B0AE1;
 			packageReferences = (
 				C4BB27742B593B420021AE4C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				C4F3A00D2B5D151600B921FB /* XCRemoteSwiftPackageReference "networking-package-generic" */,
 			);
 			productRefGroup = C4D4E5032B57F3FF000B0AE1 /* Products */;
 			projectDirPath = "";
@@ -719,6 +723,14 @@
 				minimumVersion = 10.20.0;
 			};
 		};
+		C4F3A00D2B5D151600B921FB /* XCRemoteSwiftPackageReference "networking-package-generic" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/levanl/networking-package-generic.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -856,6 +868,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C4BB27742B593B420021AE4C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		C4F3A00E2B5D151600B921FB /* NetworkingPackageGeneric */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C4F3A00D2B5D151600B921FB /* XCRemoteSwiftPackageReference "networking-package-generic" */;
+			productName = NetworkingPackageGeneric;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
