@@ -28,12 +28,27 @@ class NewRoutineViewController: UIViewController {
         textField.leftViewMode = .always
         return textField
     }()
+    
+    private let addExerciseButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let plusIcon = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        button.setTitle("  Add exercise", for: .normal)
+        button.setImage(plusIcon, for: .normal)
+        button.tintColor = .white
+        button.semanticContentAttribute = .forceLeftToRight
+        button.layer.cornerRadius = 6
+        button.backgroundColor = .blue
+        button.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .black
         setupTitleTextField()
+        setupAddExerciseButton()
         // Do any additional setup after loading the view.
     }
     
@@ -44,6 +59,16 @@ class NewRoutineViewController: UIViewController {
             titleTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
             titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+        ])
+    }
+    
+    func setupAddExerciseButton() {
+        view.addSubview(addExerciseButton)
+        
+        NSLayoutConstraint.activate([
+            addExerciseButton.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 24),
+            addExerciseButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            addExerciseButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }
 
