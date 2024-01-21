@@ -78,6 +78,9 @@
 		C4F3A00A2B5BC0B800B921FB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0092B5BC0B800B921FB /* HomeViewController.swift */; };
 		C4F3A00C2B5BC7B600B921FB /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A00B2B5BC7B600B921FB /* TabController.swift */; };
 		C4F3A00F2B5D151600B921FB /* NetworkingPackageGeneric in Frameworks */ = {isa = PBXBuildFile; productRef = C4F3A00E2B5D151600B921FB /* NetworkingPackageGeneric */; };
+		C4F3A0112B5D163100B921FB /* WorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0102B5D163100B921FB /* WorkoutViewModel.swift */; };
+		C4F3A0132B5D164400B921FB /* WorkoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0122B5D164400B921FB /* WorkoutModel.swift */; };
+		C4F3A0182B5D17D600B921FB /* NewRoutineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0172B5D17D600B921FB /* NewRoutineViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -126,6 +129,9 @@
 		C4F3A0072B5BC04700B921FB /* WorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
 		C4F3A0092B5BC0B800B921FB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C4F3A00B2B5BC7B600B921FB /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
+		C4F3A0102B5D163100B921FB /* WorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewModel.swift; sourceTree = "<group>"; };
+		C4F3A0122B5D164400B921FB /* WorkoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutModel.swift; sourceTree = "<group>"; };
+		C4F3A0172B5D17D600B921FB /* NewRoutineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRoutineViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -341,7 +347,10 @@
 		C4F3A0032B5BBFBC00B921FB /* Workout */ = {
 			isa = PBXGroup;
 			children = (
+				C4F3A0142B5D178600B921FB /* New Routine */,
 				C4F3A0072B5BC04700B921FB /* WorkoutViewController.swift */,
+				C4F3A0102B5D163100B921FB /* WorkoutViewModel.swift */,
+				C4F3A0122B5D164400B921FB /* WorkoutModel.swift */,
 			);
 			path = Workout;
 			sourceTree = "<group>";
@@ -352,6 +361,14 @@
 				C4F3A0052B5BC02B00B921FB /* ProfileViewController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		C4F3A0142B5D178600B921FB /* New Routine */ = {
+			isa = PBXGroup;
+			children = (
+				C4F3A0172B5D17D600B921FB /* NewRoutineViewController.swift */,
+			);
+			path = "New Routine";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -478,6 +495,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4BB27472B5858580021AE4C /* ButtonExtension.swift in Sources */,
+				C4F3A0132B5D164400B921FB /* WorkoutModel.swift in Sources */,
 				C4D4E52B2B583008000B0AE1 /* OnBoardingComponent.swift in Sources */,
 				C4BB27C62B5ABA6B0021AE4C /* AuthPasswordFieldComponent.swift in Sources */,
 				C4BB27B12B59514A0021AE4C /* AuthenticationManager.swift in Sources */,
@@ -497,8 +515,10 @@
 				C4BB27AD2B594B1A0021AE4C /* SignInEmailView.swift in Sources */,
 				C4BB27C02B5AB8640021AE4C /* AuthButtonComponent.swift in Sources */,
 				C4BB27B72B5A85720021AE4C /* RegisterView.swift in Sources */,
+				C4F3A0112B5D163100B921FB /* WorkoutViewModel.swift in Sources */,
 				C4D4E5082B57F3FF000B0AE1 /* SceneDelegate.swift in Sources */,
 				C4BB27AF2B594B310021AE4C /* SignInEmailViewModel.swift in Sources */,
+				C4F3A0182B5D17D600B921FB /* NewRoutineViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WorkoutViewController: UIViewController {
+class WorkoutViewController: UIViewController, NewRoutineDelegate {
     
     private let quickStartLabel: UILabel = {
         let label = UILabel()
@@ -61,7 +61,6 @@ class WorkoutViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 45).isActive = true
         button.layer.cornerRadius = 6
-        
         return button
     }()
     
@@ -133,6 +132,7 @@ class WorkoutViewController: UIViewController {
         routineStackView.addArrangedSubview(newRoutineButton)
         routineStackView.addArrangedSubview(exploreButton)
         
+        newRoutineButton.addTarget(self, action: #selector(newRoutineButtonTapped), for: .touchUpInside)
         NSLayoutConstraint.activate([
             routineStackView.topAnchor.constraint(equalTo: routinesLabel.bottomAnchor, constant: 24),
             routineStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -155,7 +155,14 @@ class WorkoutViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-    
+    @objc func newRoutineButtonTapped() {
+        let newRoutineVC = NewRoutineViewController()
+        newRoutineVC.delegate = self
+        navigationController?.pushViewController(newRoutineVC, animated: true)
+    }
+    func didSaveRoutine(title: String) {
+        print(title)
+    }
 }
 
 extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
