@@ -84,6 +84,7 @@
 		C4F3A01B2B5D316400B921FB /* ExerciseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A01A2B5D316400B921FB /* ExerciseListViewController.swift */; };
 		C4F3A01D2B5D32F900B921FB /* ExerciseListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A01C2B5D32F900B921FB /* ExerciseListViewModel.swift */; };
 		C4F3A01F2B5D3D4100B921FB /* ExerciseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A01E2B5D3D4100B921FB /* ExerciseModel.swift */; };
+		C4F3A0212B5E5EFB00B921FB /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0202B5E5EFB00B921FB /* ExerciseTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -138,6 +139,7 @@
 		C4F3A01A2B5D316400B921FB /* ExerciseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListViewController.swift; sourceTree = "<group>"; };
 		C4F3A01C2B5D32F900B921FB /* ExerciseListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListViewModel.swift; sourceTree = "<group>"; };
 		C4F3A01E2B5D3D4100B921FB /* ExerciseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseModel.swift; sourceTree = "<group>"; };
+		C4F3A0202B5E5EFB00B921FB /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -384,6 +386,7 @@
 				C4F3A01A2B5D316400B921FB /* ExerciseListViewController.swift */,
 				C4F3A01C2B5D32F900B921FB /* ExerciseListViewModel.swift */,
 				C4F3A01E2B5D3D4100B921FB /* ExerciseModel.swift */,
+				C4F3A0202B5E5EFB00B921FB /* ExerciseTableViewCell.swift */,
 			);
 			path = "Exercise List";
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				C4F3A00C2B5BC7B600B921FB /* TabController.swift in Sources */,
 				C4BB27C22B5AB89D0021AE4C /* AuthTitleComponent.swift in Sources */,
 				C4BB27AD2B594B1A0021AE4C /* SignInEmailView.swift in Sources */,
+				C4F3A0212B5E5EFB00B921FB /* ExerciseTableViewCell.swift in Sources */,
 				C4BB27C02B5AB8640021AE4C /* AuthButtonComponent.swift in Sources */,
 				C4BB27B72B5A85720021AE4C /* RegisterView.swift in Sources */,
 				C4F3A0112B5D163100B921FB /* WorkoutViewModel.swift in Sources */,

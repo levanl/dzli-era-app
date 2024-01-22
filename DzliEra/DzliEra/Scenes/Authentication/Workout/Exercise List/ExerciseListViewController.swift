@@ -12,6 +12,9 @@ class ExerciseListViewController: UIViewController {
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = UIColor.gray.withAlphaComponent(1)
         return tableView
     }()
     
@@ -29,7 +32,7 @@ class ExerciseListViewController: UIViewController {
         tableView.dataSource = self
         
         view.addSubview(tableView)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(ExerciseTableViewCell.self, forCellReuseIdentifier: "ExerciseCell")
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
@@ -48,15 +51,15 @@ extension ExerciseListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseCell", for: indexPath) as! ExerciseTableViewCell
         let exercise = viewModel.exercises[indexPath.row]
-        
-        cell.textLabel?.text = exercise.name
-        
-        
+        cell.configure(with: exercise)
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
     
 }
 
