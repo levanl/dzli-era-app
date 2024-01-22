@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ExerciseCellDelegate: AnyObject {
+    func didTapDetailsButton(in cell: ExerciseTableViewCell, with exercise: Exercise)
+}
+
 class ExerciseTableViewCell: UITableViewCell {
     
     private let exerciseImageView: UIImageView = {
@@ -51,6 +55,10 @@ class ExerciseTableViewCell: UITableViewCell {
         return imageView
     }()
     
+    var delegate: ExerciseCellDelegate?
+    
+    var exercise: Exercise?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -71,6 +79,7 @@ class ExerciseTableViewCell: UITableViewCell {
     }
     
     func configure(with exercise: Exercise) {
+        self.exercise = exercise
         if let imageURL = URL(string: exercise.gifURL) {
             DispatchQueue.global().async {
                 if let data = try? Data(contentsOf: imageURL) {
@@ -119,12 +128,17 @@ class ExerciseTableViewCell: UITableViewCell {
         ])
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(actionIconTapped))
-                actionIcon.isUserInteractionEnabled = true
-                actionIcon.addGestureRecognizer(tapGesture)
+        actionIcon.isUserInteractionEnabled = true
+        actionIcon.addGestureRecognizer(tapGesture)
     }
     
     @objc private func actionIconTapped() {
-           print("action tapped")
-       }
+        guard let exercise = exercise else {
+            return
+        }
+        delegate?.didTapDetailsButton(in: self, with: exercise)
+        
+        print("was tapped")
+    }
     
 }

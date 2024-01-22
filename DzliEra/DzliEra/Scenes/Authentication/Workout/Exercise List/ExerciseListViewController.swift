@@ -53,6 +53,7 @@ extension ExerciseListViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseCell", for: indexPath) as! ExerciseTableViewCell
         let exercise = viewModel.exercises[indexPath.row]
+        cell.delegate = self
         cell.configure(with: exercise)
         return cell
     }
@@ -67,5 +68,14 @@ extension ExerciseListViewController: UITableViewDelegate, UITableViewDataSource
 extension ExerciseListViewController: ExerciseListViewModelDelegate {
     func exerciseListViewModelDidFetchData(_ viewModel: ExerciseListViewModel) {
         tableView.reloadData()
+    }
+}
+
+extension ExerciseListViewController: ExerciseCellDelegate {
+    
+    func didTapDetailsButton(in cell: ExerciseTableViewCell, with exercise: Exercise) {
+        let detailsViewController = ExerciseDetailsViewController()
+        detailsViewController.exercise = exercise
+        navigationController?.pushViewController(detailsViewController, animated: true)
     }
 }
