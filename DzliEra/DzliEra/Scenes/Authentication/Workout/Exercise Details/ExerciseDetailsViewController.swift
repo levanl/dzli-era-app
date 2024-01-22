@@ -25,7 +25,7 @@ class ExerciseDetailsViewController: UIViewController {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 8  // Adjust as needed
+        imageView.layer.cornerRadius = 8
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -39,6 +39,7 @@ class ExerciseDetailsViewController: UIViewController {
     }
     
     private func setupImageView() {
+        
         view.addSubview(exerciseImageView)
         
         NSLayoutConstraint.activate([
@@ -54,6 +55,8 @@ class ExerciseDetailsViewController: UIViewController {
             return
         }
         nameLabel.text = exercise.name
+        
+        exerciseImageView.image = UIImage.gifImageWithName("workout")
         
         DispatchQueue.global().async {
             if let imageData = try? Data(contentsOf: imageURL) {

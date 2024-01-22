@@ -87,6 +87,7 @@
 		C4F3A0212B5E5EFB00B921FB /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0202B5E5EFB00B921FB /* ExerciseTableViewCell.swift */; };
 		C4F3A0232B5E87E800B921FB /* ExerciseDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0222B5E87E800B921FB /* ExerciseDetailsViewController.swift */; };
 		C4F3A0262B5E993200B921FB /* GifLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0252B5E993200B921FB /* GifLoader.swift */; };
+		C4F3A0282B5E9F3800B921FB /* workout.gif in Resources */ = {isa = PBXBuildFile; fileRef = C4F3A0272B5E9F3800B921FB /* workout.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -144,6 +145,7 @@
 		C4F3A0202B5E5EFB00B921FB /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
 		C4F3A0222B5E87E800B921FB /* ExerciseDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailsViewController.swift; sourceTree = "<group>"; };
 		C4F3A0252B5E993200B921FB /* GifLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifLoader.swift; sourceTree = "<group>"; };
+		C4F3A0272B5E9F3800B921FB /* workout.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = workout.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,6 +299,7 @@
 				C4BB27722B5939C60021AE4C /* GoogleService-Info.plist */,
 				C4D4E51B2B57F85C000B0AE1 /* Extensions */,
 				C4D4E51E2B57F99F000B0AE1 /* LaunchScreen */,
+				C4F3A0272B5E9F3800B921FB /* workout.gif */,
 				C4F3A00B2B5BC7B600B921FB /* TabController.swift */,
 			);
 			path = DzliEra;
@@ -517,6 +520,7 @@
 				C4D4E50F2B57F400000B0AE1 /* Assets.xcassets in Resources */,
 				C4BB276B2B590CD80021AE4C /* Kanit-Italic.ttf in Resources */,
 				C4BB27622B590CD80021AE4C /* Kanit-MediumItalic.ttf in Resources */,
+				C4F3A0282B5E9F3800B921FB /* workout.gif in Resources */,
 				C4BB27732B5939C60021AE4C /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
