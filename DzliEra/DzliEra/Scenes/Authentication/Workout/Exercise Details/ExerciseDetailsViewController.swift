@@ -21,30 +21,48 @@ class ExerciseDetailsViewController: UIViewController {
         return label
     }()
     
+    private let exerciseImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 8  // Adjust as needed
+        imageView.clipsToBounds = true
+        return imageView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
-        setupNameLabel()
+        view.backgroundColor = .black
+        setupImageView()
         updateUI()
     }
     
-    private func setupNameLabel() {
-        view.addSubview(nameLabel)
+    private func setupImageView() {
+        view.addSubview(exerciseImageView)
         
         NSLayoutConstraint.activate([
-            nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            nameLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            nameLabel.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 16),
-            nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -16)
+            exerciseImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            exerciseImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            exerciseImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            exerciseImageView.heightAnchor.constraint(equalToConstant: 300)
         ])
     }
     
     private func updateUI() {
-        guard let exercise = exercise else {
+        guard let exercise = exercise, let imageURL = URL(string: exercise.gifURL) else {
             return
         }
-        
         nameLabel.text = exercise.name
+        
+        DispatchQueue.global().async {
+            if let imageData = try? Data(contentsOf: imageURL) {
+                let image = UIImage.gifImageWithData(imageData)
+                
+                DispatchQueue.main.async {
+                    self.exerciseImageView.image = image
+                }
+            }
+        }
     }
 }

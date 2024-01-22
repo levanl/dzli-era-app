@@ -86,6 +86,7 @@
 		C4F3A01F2B5D3D4100B921FB /* ExerciseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A01E2B5D3D4100B921FB /* ExerciseModel.swift */; };
 		C4F3A0212B5E5EFB00B921FB /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0202B5E5EFB00B921FB /* ExerciseTableViewCell.swift */; };
 		C4F3A0232B5E87E800B921FB /* ExerciseDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0222B5E87E800B921FB /* ExerciseDetailsViewController.swift */; };
+		C4F3A0262B5E993200B921FB /* GifLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0252B5E993200B921FB /* GifLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,6 +143,7 @@
 		C4F3A01E2B5D3D4100B921FB /* ExerciseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseModel.swift; sourceTree = "<group>"; };
 		C4F3A0202B5E5EFB00B921FB /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
 		C4F3A0222B5E87E800B921FB /* ExerciseDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailsViewController.swift; sourceTree = "<group>"; };
+		C4F3A0252B5E993200B921FB /* GifLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +325,7 @@
 			children = (
 				C4D4E51C2B57F873000B0AE1 /* ColorExtension.swift */,
 				C4BB27462B5858580021AE4C /* ButtonExtension.swift */,
+				C4F3A0252B5E993200B921FB /* GifLoader.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -533,6 +536,7 @@
 				C4BB27B12B59514A0021AE4C /* AuthenticationManager.swift in Sources */,
 				C4D4E5272B57FC19000B0AE1 /* OnBoardingModel.swift in Sources */,
 				C4F3A00A2B5BC0B800B921FB /* HomeViewController.swift in Sources */,
+				C4F3A0262B5E993200B921FB /* GifLoader.swift in Sources */,
 				C4BB27702B5915950021AE4C /* OnBoardingViewModel.swift in Sources */,
 				C4D4E51D2B57F873000B0AE1 /* ColorExtension.swift in Sources */,
 				C4BB27C42B5ABA430021AE4C /* AuthEmailFieldComponent.swift in Sources */,
