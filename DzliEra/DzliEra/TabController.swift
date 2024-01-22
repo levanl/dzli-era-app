@@ -33,15 +33,11 @@ class TabController: UITabBarController {
         self.setViewControllers([home, profile, workout], animated: true)
     }
     
-    private func createNav(with title: String, and image: UIImage?, vc: UIViewController) -> UINavigationController {
-        let nav = UINavigationController(rootViewController: vc)
+    private func createNav(with title: String, and image: UIImage?, vc: UIViewController) -> UIViewController {
         
-        nav.tabBarItem.image = image
+        vc.tabBarItem.image = image
         
-        if let buttonImage = UIImage(named: "Button") {
-            nav.viewControllers.first?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: buttonImage, style: .plain, target: nil, action: nil)
-        }
         
-        return nav
+        return vc
     }
 }
