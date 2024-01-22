@@ -23,6 +23,8 @@ class ExerciseTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = .white
+        label.lineBreakMode = .byTruncatingTail
+        label.widthAnchor.constraint(lessThanOrEqualToConstant: 200).isActive = true
         return label
     }()
     
@@ -42,13 +44,20 @@ class ExerciseTableViewCell: UITableViewCell {
         return stackView
     }()
     
+    private let actionIcon: UIImageView = {
+        let imageView = UIImageView(image: UIImage(systemName: "info.circle"))
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         contentView.backgroundColor = .black
         setupImageView()
         setupStackView()
-        
+        setupActionIcon()
     }
     
     required init?(coder: NSCoder) {
@@ -97,9 +106,25 @@ class ExerciseTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            stackView.leadingAnchor.constraint(equalTo: exerciseImageView.trailingAnchor, constant: 8),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            stackView.leadingAnchor.constraint(equalTo: exerciseImageView.trailingAnchor, constant: 12)
         ])
     }
+    
+    private func setupActionIcon() {
+        addSubview(actionIcon)
+        
+        NSLayoutConstraint.activate([
+            actionIcon.centerYAnchor.constraint(equalTo: centerYAnchor),
+            actionIcon.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+        ])
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(actionIconTapped))
+                actionIcon.isUserInteractionEnabled = true
+                actionIcon.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func actionIconTapped() {
+           print("action tapped")
+       }
     
 }
