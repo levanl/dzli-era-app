@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+
+struct Routine {
+    var title: String
+    var exercises: [Exercise]
+}

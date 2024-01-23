@@ -8,12 +8,14 @@
 import UIKit
 
 protocol NewRoutineDelegate: AnyObject {
-    func didSaveRoutine(title: String)
+    func didSaveRoutine(title: String, exercises: [Exercise])
 }
 
 class NewRoutineViewController: UIViewController, NewRoutineDelegate {
-    func didSaveRoutine(title: String) {
-        print("saved")
+    func didSaveRoutine(title: String, exercises: [Exercise]) {
+        delegate?.didSaveRoutine(title: title, exercises: exercises)
+        print("Routine saved with title: \(title)")
+        navigationController?.popViewController(animated: true)
     }
     
     weak var delegate: NewRoutineDelegate?
@@ -122,10 +124,8 @@ class NewRoutineViewController: UIViewController, NewRoutineDelegate {
     @objc func saveButtonTapped() {
         // Implement your save logic here
         if let title = titleTextField.text, !title.isEmpty {
-            delegate?.didSaveRoutine(title: title)
-            navigationController?.popViewController(animated: true)
+            didSaveRoutine(title: title, exercises: viewModel.exercises)
         } else {
-            // Show an alert or handle the case where the title is empty
         }
     }
     

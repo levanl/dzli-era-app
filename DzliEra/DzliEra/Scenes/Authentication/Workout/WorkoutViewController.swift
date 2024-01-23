@@ -148,7 +148,7 @@ class WorkoutViewController: UIViewController, NewRoutineDelegate {
         
         view.addSubview(tableView)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-
+        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: routineStackView.bottomAnchor, constant: 16),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -163,22 +163,24 @@ class WorkoutViewController: UIViewController, NewRoutineDelegate {
         navigationController?.pushViewController(newRoutineVC, animated: true)
     }
     
-    func didSaveRoutine(title: String) {
-        print(title)
+    func didSaveRoutine(title: String, exercises: [Exercise]) {
+        viewModel.addRoutine(title: title, exercises: exercises)
+        tableView.reloadData()
     }
 }
 
 extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        return viewModel.routines.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        
-        cell.textLabel?.text = "Row \(indexPath.row + 1)"
-        
-        return cell
+            
+            let routine = viewModel.routines[indexPath.row]
+            cell.textLabel?.text = routine.title
+            
+            return cell
     }
     
     
