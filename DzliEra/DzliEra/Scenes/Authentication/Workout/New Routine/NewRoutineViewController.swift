@@ -13,10 +13,12 @@ protocol NewRoutineDelegate: AnyObject {
 
 class NewRoutineViewController: UIViewController, NewRoutineDelegate {
     func didSaveRoutine(title: String) {
-        print(title)
+        print("saved")
     }
     
     weak var delegate: NewRoutineDelegate?
+    
+    var selectedExercise: Exercise?
     
     private let titleTextField: UITextField = {
         let textField = UITextField()
@@ -54,17 +56,24 @@ class NewRoutineViewController: UIViewController, NewRoutineDelegate {
         tableView.separatorColor = UIColor.gray.withAlphaComponent(1)
         return tableView
     }()
-
+    
+    private lazy var saveButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonTapped))
+        return button
+    }()
+    
     private let viewModel = NewRoutineViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .black
         viewModel.delegate = self
         setupTitleTextField()
         setupAddExerciseButton()
         setupTableView()
+        
+        navigationItem.rightBarButtonItem = saveButton
     }
     
     func setupTitleTextField() {
@@ -106,22 +115,32 @@ class NewRoutineViewController: UIViewController, NewRoutineDelegate {
     
     @objc func addExerciseButtonTapped() {
         let exercisesVC = ExerciseListViewController()
+        exercisesVC.exerciseListDelegate = self
         navigationController?.pushViewController(exercisesVC, animated: true)
     }
-
+    
+    @objc func saveButtonTapped() {
+        // Implement your save logic here
+        if let title = titleTextField.text, !title.isEmpty {
+            delegate?.didSaveRoutine(title: title)
+            navigationController?.popViewController(animated: true)
+        } else {
+            // Show an alert or handle the case where the title is empty
+        }
+    }
+    
 }
 
 
 extension NewRoutineViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        viewModel.exercises.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseCell", for: indexPath) as! ExerciseTableViewCell
-//        let exercise = viewModel.exercises[indexPath.row]
-//        cell.delegate = self
-//        cell.configure(with: exercise)
+        let exercise = viewModel.exercises[indexPath.row]
+        cell.configure(with: exercise)
         return cell
     }
     
@@ -131,3 +150,9 @@ extension NewRoutineViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+extension NewRoutineViewController: ExerciseListDelegate {
+    func didSelectExercise(_ exercise: Exercise) {
+        viewModel.addExercise(exercise)
+        tableView.reloadData()
+    }
+}

@@ -84,6 +84,8 @@ class WorkoutViewController: UIViewController, NewRoutineDelegate {
         return tableView
     }()
     
+    private let viewModel = WorkoutViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -79,31 +79,20 @@ class ExerciseTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-
+        
     }
-    
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         if selected {
-            
-            UIView.animate(withDuration: 0.2, animations: {
-                self.exerciseImageView.transform = CGAffineTransform(translationX: 10, y: 0)
-                self.stackView.transform = CGAffineTransform(translationX: 10, y: 0)
-                self.blueRectangleView.isHidden = false
-            })
-            
+            animateOnSelection()
         } else {
-            
-            UIView.animate(withDuration: 0.2, animations: {
-                    self.exerciseImageView.transform = .identity
-                    self.stackView.transform = .identity
-                    self.blueRectangleView.isHidden = true
-                })
+            animateOnDeselection()
         }
         
     }
+    
     
     func configure(with exercise: Exercise) {
         self.exercise = exercise
@@ -160,15 +149,31 @@ class ExerciseTableViewCell: UITableViewCell {
     }
     
     private func setupRectangle() {
-            contentView.addSubview(blueRectangleView)
-
-            NSLayoutConstraint.activate([
-                blueRectangleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-                blueRectangleView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
-                blueRectangleView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6),
-                blueRectangleView.widthAnchor.constraint(equalToConstant: 5),
-            ])
-        }
+        contentView.addSubview(blueRectangleView)
+        
+        NSLayoutConstraint.activate([
+            blueRectangleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            blueRectangleView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
+            blueRectangleView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6),
+            blueRectangleView.widthAnchor.constraint(equalToConstant: 5),
+        ])
+    }
+    
+    private func animateOnSelection() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.exerciseImageView.transform = CGAffineTransform(translationX: 10, y: 0)
+            self.stackView.transform = CGAffineTransform(translationX: 10, y: 0)
+            self.blueRectangleView.isHidden = false
+        })
+    }
+    
+    private func animateOnDeselection() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.exerciseImageView.transform = .identity
+            self.stackView.transform = .identity
+            self.blueRectangleView.isHidden = true
+        })
+    }
     
     @objc private func actionIconTapped() {
         guard let exercise = exercise else {

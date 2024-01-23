@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+class WorkoutViewModel {
+    var routines: [Routine] = []
+
+    func addRoutine(title: String, exercises: [Exercise]) {
+        let newRoutine = Routine(title: title, exercises: exercises)
+        routines.append(newRoutine)
+    }
+}

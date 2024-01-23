@@ -18,7 +18,6 @@ class ExerciseListViewModel {
     
     weak var delegate: ExerciseListViewModelDelegate?
     
-    
     var numberOfExercises: Int {
         exercises.count
     }

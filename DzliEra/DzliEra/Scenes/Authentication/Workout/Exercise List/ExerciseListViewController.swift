@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ExerciseListDelegate: AnyObject {
+    func didSelectExercise(_ exercise: Exercise)
+}
+
 class ExerciseListViewController: UIViewController {
     
     private let tableView: UITableView = {
@@ -32,6 +36,8 @@ class ExerciseListViewController: UIViewController {
     
     private let viewModel = ExerciseListViewModel()
     
+    weak var exerciseListDelegate: ExerciseListDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
@@ -56,22 +62,23 @@ class ExerciseListViewController: UIViewController {
     }
     
     func setupSelectButton() {
-            selectButton.addTarget(self, action: #selector(selectButtonTapped), for: .touchUpInside)
-            view.addSubview(selectButton)
-
-            NSLayoutConstraint.activate([
-                selectButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                selectButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                selectButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-                selectButton.heightAnchor.constraint(equalToConstant: 50)
-            ])
-        }
+        selectButton.addTarget(self, action: #selector(selectButtonTapped), for: .touchUpInside)
+        view.addSubview(selectButton)
+        
+        NSLayoutConstraint.activate([
+            selectButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            selectButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            selectButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            selectButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
     
     
     @objc func selectButtonTapped() {
         if let indexPath = selectedIndexPath {
             let selectedExercise = viewModel.exercises[indexPath.row]
-            print("Selected exercise: \(selectedExercise.name)")
+            exerciseListDelegate?.didSelectExercise(selectedExercise)
+            navigationController?.popViewController(animated: true)
         }
     }
 }
@@ -94,14 +101,14 @@ extension ExerciseListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            selectedIndexPath = indexPath
-            selectButton.isHidden = false
-        }
-
-        func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-            selectedIndexPath = nil
-            selectButton.isHidden = true
-        }
+        selectedIndexPath = indexPath
+        selectButton.isHidden = false
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        selectedIndexPath = nil
+        selectButton.isHidden = true
+    }
 }
 
 

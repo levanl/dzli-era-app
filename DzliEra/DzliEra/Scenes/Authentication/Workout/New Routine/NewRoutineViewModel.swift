@@ -11,4 +11,10 @@ import Foundation
 class NewRoutineViewModel {
     
     weak var delegate: NewRoutineDelegate?
+    
+    var exercises: [Exercise] = []
+
+    func addExercise(_ exercise: Exercise) {
+        exercises.append(exercise)
+    }
 }
