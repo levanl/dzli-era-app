@@ -11,7 +11,10 @@ protocol NewRoutineDelegate: AnyObject {
     func didSaveRoutine(title: String)
 }
 
-class NewRoutineViewController: UIViewController {
+class NewRoutineViewController: UIViewController, NewRoutineDelegate {
+    func didSaveRoutine(title: String) {
+        print(title)
+    }
     
     weak var delegate: NewRoutineDelegate?
     
@@ -42,14 +45,26 @@ class NewRoutineViewController: UIViewController {
         button.heightAnchor.constraint(equalToConstant: 45).isActive = true
         return button
     }()
+    
+    private let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = UIColor.gray.withAlphaComponent(1)
+        return tableView
+    }()
 
+    private let viewModel = NewRoutineViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .black
+        viewModel.delegate = self
         setupTitleTextField()
         setupAddExerciseButton()
-        // Do any additional setup after loading the view.
+        setupTableView()
     }
     
     func setupTitleTextField() {
@@ -74,9 +89,45 @@ class NewRoutineViewController: UIViewController {
         ])
     }
     
+    func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        view.addSubview(tableView)
+        tableView.register(ExerciseTableViewCell.self, forCellReuseIdentifier: "ExerciseCell")
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: addExerciseButton.bottomAnchor, constant: 16),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
     @objc func addExerciseButtonTapped() {
         let exercisesVC = ExerciseListViewController()
         navigationController?.pushViewController(exercisesVC, animated: true)
     }
 
 }
+
+
+extension NewRoutineViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseCell", for: indexPath) as! ExerciseTableViewCell
+//        let exercise = viewModel.exercises[indexPath.row]
+//        cell.delegate = self
+//        cell.configure(with: exercise)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+}
+

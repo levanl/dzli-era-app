@@ -88,6 +88,7 @@
 		C4F3A0232B5E87E800B921FB /* ExerciseDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0222B5E87E800B921FB /* ExerciseDetailsViewController.swift */; };
 		C4F3A0262B5E993200B921FB /* GifLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0252B5E993200B921FB /* GifLoader.swift */; };
 		C4F3A0282B5E9F3800B921FB /* workout.gif in Resources */ = {isa = PBXBuildFile; fileRef = C4F3A0272B5E9F3800B921FB /* workout.gif */; };
+		C4F3A02A2B5FC38700B921FB /* NewRoutineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0292B5FC38700B921FB /* NewRoutineViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +147,7 @@
 		C4F3A0222B5E87E800B921FB /* ExerciseDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailsViewController.swift; sourceTree = "<group>"; };
 		C4F3A0252B5E993200B921FB /* GifLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifLoader.swift; sourceTree = "<group>"; };
 		C4F3A0272B5E9F3800B921FB /* workout.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = workout.gif; sourceTree = "<group>"; };
+		C4F3A0292B5FC38700B921FB /* NewRoutineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRoutineViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -385,6 +387,7 @@
 			isa = PBXGroup;
 			children = (
 				C4F3A0172B5D17D600B921FB /* NewRoutineViewController.swift */,
+				C4F3A0292B5FC38700B921FB /* NewRoutineViewModel.swift */,
 			);
 			path = "New Routine";
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				C4F3A01F2B5D3D4100B921FB /* ExerciseModel.swift in Sources */,
 				C4F3A0062B5BC02B00B921FB /* ProfileViewController.swift in Sources */,
 				C4D4E5292B582CCB000B0AE1 /* OnBoardingView.swift in Sources */,
+				C4F3A02A2B5FC38700B921FB /* NewRoutineViewModel.swift in Sources */,
 				C4BB27B92B5A85D70021AE4C /* RegisterViewModel.swift in Sources */,
 				C4F3A0082B5BC04700B921FB /* WorkoutViewController.swift in Sources */,
 				C4F3A01D2B5D32F900B921FB /* ExerciseListViewModel.swift in Sources */,

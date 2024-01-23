@@ -18,6 +18,18 @@ class ExerciseListViewController: UIViewController {
         return tableView
     }()
     
+    private let selectButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Select", for: .normal)
+        button.backgroundColor = .blue
+        button.setTitleColor(.white, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.isHidden = true
+        return button
+    }()
+    
+    private var selectedIndexPath: IndexPath?
+    
     private let viewModel = ExerciseListViewModel()
     
     override func viewDidLoad() {
@@ -25,6 +37,7 @@ class ExerciseListViewController: UIViewController {
         view.backgroundColor = .black
         viewModel.delegate = self
         setupTableView()
+        setupSelectButton()
     }
     
     func setupTableView() {
@@ -42,7 +55,25 @@ class ExerciseListViewController: UIViewController {
         ])
     }
     
+    func setupSelectButton() {
+            selectButton.addTarget(self, action: #selector(selectButtonTapped), for: .touchUpInside)
+            view.addSubview(selectButton)
+
+            NSLayoutConstraint.activate([
+                selectButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                selectButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                selectButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+                selectButton.heightAnchor.constraint(equalToConstant: 50)
+            ])
+        }
     
+    
+    @objc func selectButtonTapped() {
+        if let indexPath = selectedIndexPath {
+            let selectedExercise = viewModel.exercises[indexPath.row]
+            print("Selected exercise: \(selectedExercise.name)")
+        }
+    }
 }
 
 extension ExerciseListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -62,6 +93,15 @@ extension ExerciseListViewController: UITableViewDelegate, UITableViewDataSource
         return 100
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            selectedIndexPath = indexPath
+            selectButton.isHidden = false
+        }
+
+        func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+            selectedIndexPath = nil
+            selectButton.isHidden = true
+        }
 }
 
 
