@@ -26,10 +26,14 @@ class ExerciseListViewController: UIViewController {
     private let selectButton: UIButton = {
         let button = UIButton()
         button.setTitle("Select", for: .normal)
-        button.backgroundColor = .blue
         button.setTitleColor(.white, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isHidden = true
+        button.tintColor = .white
+        button.semanticContentAttribute = .forceLeftToRight
+        button.layer.cornerRadius = 6
+        button.backgroundColor = .blue
+        button.heightAnchor.constraint(equalToConstant: 45).isActive = true
         return button
     }()
     
@@ -67,8 +71,8 @@ class ExerciseListViewController: UIViewController {
         view.addSubview(selectButton)
         
         NSLayoutConstraint.activate([
-            selectButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            selectButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            selectButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            selectButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
             selectButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             selectButton.heightAnchor.constraint(equalToConstant: 50)
         ])
