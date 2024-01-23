@@ -9,7 +9,7 @@ import UIKit
 
 class WorkoutTableViewCell: UITableViewCell {
     static let identifier = "WorkoutCell"
-
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -17,15 +17,15 @@ class WorkoutTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     private let workoutNamesLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = .white
+        label.textColor = .gray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     private let startRoutineButton: UIButton = {
         let button = UIButton()
         button.setTitle("Start Routine", for: .normal)
@@ -34,40 +34,49 @@ class WorkoutTableViewCell: UITableViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
+        contentView.backgroundColor = UIColor(AppColors.gray)
+        contentView.layer.cornerRadius = 6
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     private func setupViews() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(workoutNamesLabel)
         contentView.addSubview(startRoutineButton)
-
+        
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-
-            workoutNamesLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
+            
+            workoutNamesLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 6),
             workoutNamesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             workoutNamesLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-
-            startRoutineButton.topAnchor.constraint(equalTo: workoutNamesLabel.bottomAnchor, constant: 8),
+            
+            startRoutineButton.topAnchor.constraint(equalTo: workoutNamesLabel.bottomAnchor, constant: 10),
             startRoutineButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             startRoutineButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            startRoutineButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+            startRoutineButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
+        
+        let selectedBackgroundView = UIView()
+        selectedBackgroundView.backgroundColor = UIColor(AppColors.gray)
+        selectedBackgroundView.layer.cornerRadius = 8
+        selectedBackgroundView.layer.masksToBounds = true
+        
+        self.selectedBackgroundView = selectedBackgroundView
     }
-
+    
     func configure(with routine: Routine) {
         titleLabel.text = routine.title
         workoutNamesLabel.text = "Workouts: \(routine.exercises.map { $0.name }.joined(separator: ", "))"
-
+        
     }
 }

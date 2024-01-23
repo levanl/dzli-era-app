@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ExerciseListDelegate: AnyObject {
-    func didSelectExercise(_ exercise: Exercise)
+    func didSelectExercises(_ exercise: [Exercise])
 }
 
 class ExerciseListViewController: UIViewController {
@@ -19,6 +19,7 @@ class ExerciseListViewController: UIViewController {
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = UIColor.gray.withAlphaComponent(1)
+        tableView.allowsMultipleSelection = true
         return tableView
     }()
     
@@ -75,11 +76,13 @@ class ExerciseListViewController: UIViewController {
     
     
     @objc func selectButtonTapped() {
-        if let indexPath = selectedIndexPath {
-            let selectedExercise = viewModel.exercises[indexPath.row]
-            exerciseListDelegate?.didSelectExercise(selectedExercise)
-            navigationController?.popViewController(animated: true)
-        }
+        guard let selectedIndexPaths = tableView.indexPathsForSelectedRows else {
+                    return
+                }
+                
+                let selectedExercises = selectedIndexPaths.map { viewModel.exercises[$0.row] }
+                exerciseListDelegate?.didSelectExercises(selectedExercises)
+                navigationController?.popViewController(animated: true)
     }
 }
 

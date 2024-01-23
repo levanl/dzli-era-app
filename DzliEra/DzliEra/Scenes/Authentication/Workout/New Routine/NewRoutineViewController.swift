@@ -151,8 +151,11 @@ extension NewRoutineViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension NewRoutineViewController: ExerciseListDelegate {
-    func didSelectExercise(_ exercise: Exercise) {
-        viewModel.addExercise(exercise)
+    
+    func didSelectExercises(_ exercises: [Exercise]) {
+        for exercise in exercises {
+            viewModel.addExercise(exercise)
+        }
         tableView.reloadData()
     }
 }

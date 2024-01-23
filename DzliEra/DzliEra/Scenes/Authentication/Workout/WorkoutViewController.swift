@@ -81,6 +81,7 @@ class WorkoutViewController: UIViewController, NewRoutineDelegate {
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .black
         return tableView
     }()
     
@@ -147,7 +148,7 @@ class WorkoutViewController: UIViewController, NewRoutineDelegate {
         tableView.dataSource = self
         
         view.addSubview(tableView)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(WorkoutTableViewCell.self, forCellReuseIdentifier: WorkoutTableViewCell.identifier)
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: routineStackView.bottomAnchor, constant: 16),
@@ -167,6 +168,8 @@ class WorkoutViewController: UIViewController, NewRoutineDelegate {
         viewModel.addRoutine(title: title, exercises: exercises)
         tableView.reloadData()
     }
+    
+    
 }
 
 extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
@@ -175,13 +178,12 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            
-            let routine = viewModel.routines[indexPath.row]
-            cell.textLabel?.text = routine.title
-            
-            return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutTableViewCell.identifier, for: indexPath) as! WorkoutTableViewCell
+        
+        let routine = viewModel.routines[indexPath.row]
+        cell.configure(with: routine)
+        
+        cell.backgroundColor = .black
+        return cell
     }
-    
-    
 }
