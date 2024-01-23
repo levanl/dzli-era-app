@@ -140,6 +140,7 @@ extension NewRoutineViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseCell", for: indexPath) as! ExerciseTableViewCell
         let exercise = viewModel.exercises[indexPath.row]
+        cell.delegate = self
         cell.configure(with: exercise)
         return cell
     }
@@ -157,5 +158,15 @@ extension NewRoutineViewController: ExerciseListDelegate {
             viewModel.addExercise(exercise)
         }
         tableView.reloadData()
+    }
+}
+
+
+extension NewRoutineViewController: ExerciseCellDelegate {
+    
+    func didTapDetailsButton(in cell: ExerciseTableViewCell, with exercise: Exercise) {
+        let detailsViewController = ExerciseDetailsViewController()
+        detailsViewController.exercise = exercise
+        navigationController?.pushViewController(detailsViewController, animated: true)
     }
 }
