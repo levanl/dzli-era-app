@@ -96,12 +96,28 @@ class StartedRoutineViewController: UIViewController {
         return view
     }()
     
+    let stackSeparatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .clear
+        return tableView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
         startTimer()
         setupWorkoutInfoStack()
         setupWorkoutInfoCounterStack()
+        setupStackSeparator()
+        setupTableView()
     }
     
     deinit {
@@ -129,13 +145,12 @@ class StartedRoutineViewController: UIViewController {
         
         if let navigationBar = navigationController?.navigationBar {
             navigationBar.addSubview(separatorView)
-
-            // Set up constraints for the separatorView
+            
             NSLayoutConstraint.activate([
                 separatorView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: 10),
                 separatorView.leadingAnchor.constraint(equalTo: navigationBar.leadingAnchor),
                 separatorView.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor),
-                separatorView.heightAnchor.constraint(equalToConstant: 1) // Adjust the height as needed
+                separatorView.heightAnchor.constraint(equalToConstant: 3)
             ])
         }
     }
@@ -153,6 +168,34 @@ class StartedRoutineViewController: UIViewController {
             workoutInfoCounterStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
         
+    }
+    
+    private func setupStackSeparator() {
+        
+        view.addSubview(stackSeparatorView)
+        
+        NSLayoutConstraint.activate([
+            stackSeparatorView.topAnchor.constraint(equalTo: workoutInfoCounterStack.bottomAnchor, constant: 30),
+            stackSeparatorView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            stackSeparatorView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            stackSeparatorView.heightAnchor.constraint(equalToConstant: 1)
+        ])
+    }
+    
+    private func setupTableView() {
+        view.addSubview(tableView)
+        
+        tableView.register(StartedWorkoutTableViewCell.self, forCellReuseIdentifier: "StartedExerciseCell")
+
+        tableView.delegate = self
+        tableView.dataSource = self
+
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: stackSeparatorView.bottomAnchor, constant: 8),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     func startTimer() {
@@ -184,4 +227,26 @@ class StartedRoutineViewController: UIViewController {
         }
         timerLabel.text = timerText
     }
+}
+
+
+extension StartedRoutineViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        routine?.exercises.count ?? 4
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StartedExerciseCell", for: indexPath) as! StartedWorkoutTableViewCell
+        if let exercise = routine?.exercises[indexPath.row] {
+            cell.configure(with: exercise)
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+    
 }
