@@ -122,8 +122,7 @@ class NewRoutineViewController: UIViewController, NewRoutineDelegate {
     }
     
     @objc func saveButtonTapped() {
-        // Implement your save logic here
-        if let title = titleTextField.text, !title.isEmpty {
+        if let title = titleTextField.text, !title.isEmpty, !viewModel.exercises.isEmpty {
             didSaveRoutine(title: title, exercises: viewModel.exercises)
         } else {
         }

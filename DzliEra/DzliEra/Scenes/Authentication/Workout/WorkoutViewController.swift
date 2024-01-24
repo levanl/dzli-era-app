@@ -7,8 +7,10 @@
 
 import UIKit
 
-class WorkoutViewController: UIViewController, NewRoutineDelegate {
+// MARK: - WorkoutViewController
+final class WorkoutViewController: UIViewController, NewRoutineDelegate {
     
+    // MARK: - Properties
     private let quickStartLabel: UILabel = {
         let label = UILabel()
         label.text = "Quick Start"
@@ -26,7 +28,6 @@ class WorkoutViewController: UIViewController, NewRoutineDelegate {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     
     private let startEmptyWorkoutButton: UIButton = {
         let button = UIButton()
@@ -74,7 +75,6 @@ class WorkoutViewController: UIViewController, NewRoutineDelegate {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 45).isActive = true
         button.layer.cornerRadius = 6
-        
         return button
     }()
     
@@ -85,11 +85,12 @@ class WorkoutViewController: UIViewController, NewRoutineDelegate {
         return tableView
     }()
     
+    // MARK: - ViewModel reference
     private let viewModel = WorkoutViewModel()
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .black
         setupQuickStartLabel()
         setupStartEmptyWorkoutButton()
@@ -98,9 +99,9 @@ class WorkoutViewController: UIViewController, NewRoutineDelegate {
         setupTableView()
     }
     
-    func setupQuickStartLabel() {
+    // MARK: - Private Methods
+    private func setupQuickStartLabel() {
         view.addSubview(quickStartLabel)
-        
         NSLayoutConstraint.activate([
             quickStartLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             quickStartLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -108,9 +109,8 @@ class WorkoutViewController: UIViewController, NewRoutineDelegate {
         ])
     }
     
-    func setupRoutinesLabel() {
+    private func setupRoutinesLabel() {
         view.addSubview(routinesLabel)
-        
         NSLayoutConstraint.activate([
             routinesLabel.topAnchor.constraint(equalTo: startEmptyWorkoutButton.bottomAnchor, constant: 24),
             routinesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -118,7 +118,7 @@ class WorkoutViewController: UIViewController, NewRoutineDelegate {
         ])
     }
     
-    func setupStartEmptyWorkoutButton() {
+    private func setupStartEmptyWorkoutButton() {
         view.addSubview(startEmptyWorkoutButton)
         
         NSLayoutConstraint.activate([
@@ -126,15 +126,12 @@ class WorkoutViewController: UIViewController, NewRoutineDelegate {
             startEmptyWorkoutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             startEmptyWorkoutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
-        
     }
     
-    func setupRoutineStackView() {
+    private func setupRoutineStackView() {
         view.addSubview(routineStackView)
-        
         routineStackView.addArrangedSubview(newRoutineButton)
         routineStackView.addArrangedSubview(exploreButton)
-        
         newRoutineButton.addTarget(self, action: #selector(newRoutineButtonTapped), for: .touchUpInside)
         NSLayoutConstraint.activate([
             routineStackView.topAnchor.constraint(equalTo: routinesLabel.bottomAnchor, constant: 24),
@@ -143,11 +140,11 @@ class WorkoutViewController: UIViewController, NewRoutineDelegate {
         ])
     }
     
-    func setupTableView() {
+    private func setupTableView() {
+        view.addSubview(tableView)
+        
         tableView.delegate = self
         tableView.dataSource = self
-        
-        view.addSubview(tableView)
         tableView.register(WorkoutTableViewCell.self, forCellReuseIdentifier: WorkoutTableViewCell.identifier)
         
         NSLayoutConstraint.activate([
@@ -158,6 +155,7 @@ class WorkoutViewController: UIViewController, NewRoutineDelegate {
         ])
     }
     
+    // MARK: - Button Tap Methods
     @objc func newRoutineButtonTapped() {
         let newRoutineVC = NewRoutineViewController()
         newRoutineVC.delegate = self
@@ -168,10 +166,9 @@ class WorkoutViewController: UIViewController, NewRoutineDelegate {
         viewModel.addRoutine(title: title, exercises: exercises)
         tableView.reloadData()
     }
-    
-    
 }
 
+// MARK: - TableView
 extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.routines.count
