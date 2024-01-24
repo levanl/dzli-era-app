@@ -184,8 +184,24 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         
         let routine = viewModel.routines[indexPath.row]
         cell.configure(with: routine)
+        cell.delegate = self
         
         cell.backgroundColor = .black
         return cell
     }
+}
+
+
+extension WorkoutViewController: WorkoutTableViewCellDelegate {
+    func didSelectRoutine(_ routine: Routine) {
+        let routineDetailVC = RoutineDetailViewController()
+        routineDetailVC.routine = routine
+        navigationController?.pushViewController(routineDetailVC, animated: true)
+    }
+    
+    func didTapStartRoutine(_ routine: Routine) {
+            let startedRoutineVC = StartedRoutineViewController()
+            startedRoutineVC.routine = routine
+            navigationController?.pushViewController(startedRoutineVC, animated: true)
+        }
 }

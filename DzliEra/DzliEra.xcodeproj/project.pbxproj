@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C40920CB2B6030650089F99E /* WorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40920CA2B6030650089F99E /* WorkoutTableViewCell.swift */; };
+		C40920CE2B6128D10089F99E /* RoutineDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40920CD2B6128D10089F99E /* RoutineDetailViewController.swift */; };
+		C40920D12B6151640089F99E /* StartedRoutineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40920D02B6151640089F99E /* StartedRoutineViewController.swift */; };
 		C4BB27472B5858580021AE4C /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB27462B5858580021AE4C /* ButtonExtension.swift */; };
 		C4BB275B2B590CD80021AE4C /* Kanit-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4BB27492B590CD80021AE4C /* Kanit-ExtraLight.ttf */; };
 		C4BB275C2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4BB274A2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf */; };
@@ -94,6 +96,8 @@
 
 /* Begin PBXFileReference section */
 		C40920CA2B6030650089F99E /* WorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTableViewCell.swift; sourceTree = "<group>"; };
+		C40920CD2B6128D10089F99E /* RoutineDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineDetailViewController.swift; sourceTree = "<group>"; };
+		C40920D02B6151640089F99E /* StartedRoutineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedRoutineViewController.swift; sourceTree = "<group>"; };
 		C4BB27462B5858580021AE4C /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		C4BB27492B590CD80021AE4C /* Kanit-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-ExtraLight.ttf"; sourceTree = "<group>"; };
 		C4BB274A2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -191,6 +195,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C40920CC2B6128A40089F99E /* Routine Datails */ = {
+			isa = PBXGroup;
+			children = (
+				C40920CD2B6128D10089F99E /* RoutineDetailViewController.swift */,
+			);
+			path = "Routine Datails";
+			sourceTree = "<group>";
+		};
+		C40920CF2B61514C0089F99E /* Started Routine */ = {
+			isa = PBXGroup;
+			children = (
+				C40920D02B6151640089F99E /* StartedRoutineViewController.swift */,
+			);
+			path = "Started Routine";
+			sourceTree = "<group>";
+		};
 		C4BB27482B590CBC0021AE4C /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -367,6 +387,8 @@
 		C4F3A0032B5BBFBC00B921FB /* Workout */ = {
 			isa = PBXGroup;
 			children = (
+				C40920CF2B61514C0089F99E /* Started Routine */,
+				C40920CC2B6128A40089F99E /* Routine Datails */,
 				C4F3A0242B5E8E9B00B921FB /* Exercise Details */,
 				C4F3A0192B5D311100B921FB /* Exercise List */,
 				C4F3A0142B5D178600B921FB /* New Routine */,
@@ -566,8 +588,10 @@
 				C4F3A0212B5E5EFB00B921FB /* ExerciseTableViewCell.swift in Sources */,
 				C4BB27C02B5AB8640021AE4C /* AuthButtonComponent.swift in Sources */,
 				C4BB27B72B5A85720021AE4C /* RegisterView.swift in Sources */,
+				C40920D12B6151640089F99E /* StartedRoutineViewController.swift in Sources */,
 				C4F3A0112B5D163100B921FB /* WorkoutViewModel.swift in Sources */,
 				C4F3A01B2B5D316400B921FB /* ExerciseListViewController.swift in Sources */,
+				C40920CE2B6128D10089F99E /* RoutineDetailViewController.swift in Sources */,
 				C4D4E5082B57F3FF000B0AE1 /* SceneDelegate.swift in Sources */,
 				C4BB27AF2B594B310021AE4C /* SignInEmailViewModel.swift in Sources */,
 				C4F3A0182B5D17D600B921FB /* NewRoutineViewController.swift in Sources */,

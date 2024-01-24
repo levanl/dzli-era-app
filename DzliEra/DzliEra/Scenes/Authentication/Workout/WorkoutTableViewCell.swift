@@ -7,10 +7,18 @@
 
 import UIKit
 
+protocol WorkoutTableViewCellDelegate: AnyObject {
+    func didSelectRoutine(_ routine: Routine)
+    func didTapStartRoutine(_ routine: Routine)
+}
+
 // MARK: - WorkoutTableViewCell
 final class WorkoutTableViewCell: UITableViewCell {
     static let identifier = "WorkoutCell"
-    
+
+    weak var delegate: WorkoutTableViewCellDelegate?
+    var routine: Routine?
+
     // MARK: - Properties
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -70,6 +78,8 @@ final class WorkoutTableViewCell: UITableViewCell {
             startRoutineButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
         
+        startRoutineButton.addTarget(self, action: #selector(startRoutineButtonTapped), for: .touchUpInside)
+        
         let selectedBackgroundView = UIView()
         selectedBackgroundView.backgroundColor = UIColor(AppColors.gray)
         selectedBackgroundView.layer.cornerRadius = 8
@@ -81,6 +91,20 @@ final class WorkoutTableViewCell: UITableViewCell {
     // MARK: - Configure Method
     func configure(with routine: Routine) {
         titleLabel.text = routine.title
+        self.routine = routine
         workoutNamesLabel.text = "Workouts: \(routine.exercises.map { $0.name }.joined(separator: ", "))"
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(cellTapped))
+            contentView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func cellTapped() {
+            guard let routine = routine else { return }
+            delegate?.didSelectRoutine(routine)
+        }
+    
+    @objc private func startRoutineButtonTapped() {
+        guard let routine = routine else { return }
+        delegate?.didTapStartRoutine(routine)
     }
 }
