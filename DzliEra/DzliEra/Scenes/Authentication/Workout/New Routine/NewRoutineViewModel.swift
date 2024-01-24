@@ -8,10 +8,10 @@
 import Foundation
 
 
-class NewRoutineViewModel {
+final class NewRoutineViewModel {
     
+    // MARK: - Properties
     weak var delegate: NewRoutineDelegate?
-    
     var exercises: [Exercise] = []
 
     func addExercise(_ exercise: Exercise) {

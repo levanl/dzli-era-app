@@ -7,21 +7,15 @@
 
 import UIKit
 
+// MARK: - NewRoutine Protocol
 protocol NewRoutineDelegate: AnyObject {
     func didSaveRoutine(title: String, exercises: [Exercise])
 }
 
-class NewRoutineViewController: UIViewController, NewRoutineDelegate {
-    func didSaveRoutine(title: String, exercises: [Exercise]) {
-        delegate?.didSaveRoutine(title: title, exercises: exercises)
-        print("Routine saved with title: \(title)")
-        navigationController?.popViewController(animated: true)
-    }
+// MARK: - ViewController
+final class NewRoutineViewController: UIViewController, NewRoutineDelegate {
     
-    weak var delegate: NewRoutineDelegate?
-    
-    var selectedExercise: Exercise?
-    
+    // MARK: - Properties
     private let titleTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter Routine Title"
@@ -64,23 +58,30 @@ class NewRoutineViewController: UIViewController, NewRoutineDelegate {
         return button
     }()
     
+    weak var delegate: NewRoutineDelegate?
+    
+    var selectedExercise: Exercise?
+    
     private let viewModel = NewRoutineViewModel()
     
+    // MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupUI()
+    }
+    
+    // MARK: - Private Methods
+    private func setupUI() {
         view.backgroundColor = .black
         viewModel.delegate = self
         setupTitleTextField()
         setupAddExerciseButton()
         setupTableView()
-        
         navigationItem.rightBarButtonItem = saveButton
     }
     
-    func setupTitleTextField() {
+    private func setupTitleTextField() {
         view.addSubview(titleTextField)
-        
         NSLayoutConstraint.activate([
             titleTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
             titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -88,11 +89,9 @@ class NewRoutineViewController: UIViewController, NewRoutineDelegate {
         ])
     }
     
-    func setupAddExerciseButton() {
+    private func setupAddExerciseButton() {
         view.addSubview(addExerciseButton)
-        
         addExerciseButton.addTarget(self, action: #selector(addExerciseButtonTapped), for: .touchUpInside)
-        
         NSLayoutConstraint.activate([
             addExerciseButton.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 24),
             addExerciseButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -100,7 +99,7 @@ class NewRoutineViewController: UIViewController, NewRoutineDelegate {
         ])
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -125,12 +124,19 @@ class NewRoutineViewController: UIViewController, NewRoutineDelegate {
         if let title = titleTextField.text, !title.isEmpty, !viewModel.exercises.isEmpty {
             didSaveRoutine(title: title, exercises: viewModel.exercises)
         } else {
+            print("cant doit")
         }
+    }
+    
+    func didSaveRoutine(title: String, exercises: [Exercise]) {
+        delegate?.didSaveRoutine(title: title, exercises: exercises)
+        print("Routine saved with title: \(title)")
+        navigationController?.popViewController(animated: true)
     }
     
 }
 
-
+// MARK: - TableView
 extension NewRoutineViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.exercises.count
@@ -150,8 +156,8 @@ extension NewRoutineViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+// MARK: - Exercise List Delegate
 extension NewRoutineViewController: ExerciseListDelegate {
-    
     func didSelectExercises(_ exercises: [Exercise]) {
         for exercise in exercises {
             viewModel.addExercise(exercise)
@@ -160,9 +166,8 @@ extension NewRoutineViewController: ExerciseListDelegate {
     }
 }
 
-
+// MARK: - Exercise Cell Delegate
 extension NewRoutineViewController: ExerciseCellDelegate {
-    
     func didTapDetailsButton(in cell: ExerciseTableViewCell, with exercise: Exercise) {
         let detailsViewController = ExerciseDetailsViewController()
         detailsViewController.exercise = exercise

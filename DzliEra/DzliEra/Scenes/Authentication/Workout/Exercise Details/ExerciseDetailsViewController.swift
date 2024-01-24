@@ -7,9 +7,10 @@
 
 import UIKit
 
+// MARK: - ViewController
 class ExerciseDetailsViewController: UIViewController {
     
-    
+    // MARK: - Properties
     var exercise: Exercise?
     
     private let exerciseImageView: UIImageView = {
@@ -63,6 +64,7 @@ class ExerciseDetailsViewController: UIViewController {
         return label
     }()
     
+    // MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -73,8 +75,8 @@ class ExerciseDetailsViewController: UIViewController {
         updateUI()
     }
     
+    // MARK: - Private Properties
     private func setupImageView() {
-        
         view.addSubview(exerciseImageView)
         
         NSLayoutConstraint.activate([
@@ -101,7 +103,7 @@ class ExerciseDetailsViewController: UIViewController {
     
     private func setupInstructionsLabel() {
         view.addSubview(instructionsLabel)
-
+        
         NSLayoutConstraint.activate([
             instructionsLabel.topAnchor.constraint(equalTo: exerciseInfoStackView.bottomAnchor, constant: 24),
             instructionsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -116,20 +118,20 @@ class ExerciseDetailsViewController: UIViewController {
         }
         
         let secondaryMusclesString = exercise.secondaryMuscles.joined(separator: ", ")
-    
+        
         let numberedInstructions = exercise.instructions.enumerated().map { (index, instruction) in
             return "\(index + 1). \(instruction)"
         }
         
         let instructionsString = numberedInstructions.joined(separator: "\n\n")
-
+        
         
         nameLabel.text = exercise.name
         targetLabel.text = "Target: " + exercise.target
         secondaryLabel.text = "Secondary: " + secondaryMusclesString
         exerciseImageView.image = UIImage.gifImageWithName("workout")
         instructionsLabel.text = "Instructions:\n\n" + instructionsString
-
+        
         DispatchQueue.global().async {
             if let imageData = try? Data(contentsOf: imageURL) {
                 let image = UIImage.gifImageWithData(imageData)

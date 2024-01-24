@@ -8,14 +8,16 @@
 import Foundation
 import NetworkingPackageGeneric
 
+// MARK: - ExerciseListViewModelDelegate
 protocol ExerciseListViewModelDelegate: AnyObject {
     func exerciseListViewModelDidFetchData(_ viewModel: ExerciseListViewModel)
 }
 
-class ExerciseListViewModel {
+// MARK: - ViewModel
+final class ExerciseListViewModel {
     
+    // MARK: - Properties
     var exercises: [Exercise] = []
-    
     weak var delegate: ExerciseListViewModelDelegate?
     
     var numberOfExercises: Int {
@@ -26,6 +28,7 @@ class ExerciseListViewModel {
         return "Exercise \(index + 1)"
     }
     
+    // MARK: - Init
     init() {
         fetchWorkoutData()
     }
