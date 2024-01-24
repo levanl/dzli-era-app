@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+// MARK: - Model
 struct Routine {
     var title: String
     var exercises: [Exercise]

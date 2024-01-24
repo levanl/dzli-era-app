@@ -91,6 +91,12 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+    }
+    
+    // MARK: - Private Methods
+    
+    private func setupUI() {
         view.backgroundColor = .black
         setupQuickStartLabel()
         setupStartEmptyWorkoutButton()
@@ -99,7 +105,6 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
         setupTableView()
     }
     
-    // MARK: - Private Methods
     private func setupQuickStartLabel() {
         view.addSubview(quickStartLabel)
         NSLayoutConstraint.activate([

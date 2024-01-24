@@ -7,9 +7,11 @@
 
 import UIKit
 
-class WorkoutTableViewCell: UITableViewCell {
+// MARK: - WorkoutTableViewCell
+final class WorkoutTableViewCell: UITableViewCell {
     static let identifier = "WorkoutCell"
     
+    // MARK: - Properties
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -35,6 +37,7 @@ class WorkoutTableViewCell: UITableViewCell {
         return button
     }()
     
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -46,6 +49,7 @@ class WorkoutTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Private Methods
     private func setupViews() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(workoutNamesLabel)
@@ -74,9 +78,9 @@ class WorkoutTableViewCell: UITableViewCell {
         self.selectedBackgroundView = selectedBackgroundView
     }
     
+    // MARK: - Configure Method
     func configure(with routine: Routine) {
         titleLabel.text = routine.title
         workoutNamesLabel.text = "Workouts: \(routine.exercises.map { $0.name }.joined(separator: ", "))"
-        
     }
 }

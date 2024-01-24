@@ -7,9 +7,12 @@
 
 import Foundation
 
-class WorkoutViewModel {
+// MARK: - ViewModel
+final class WorkoutViewModel {
+    // MARK: - Properties
     var routines: [Routine] = []
 
+    // MARK: - Methods
     func addRoutine(title: String, exercises: [Exercise]) {
         let newRoutine = Routine(title: title, exercises: exercises)
         routines.append(newRoutine)
