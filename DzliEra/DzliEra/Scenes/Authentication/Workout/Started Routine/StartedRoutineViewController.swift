@@ -143,16 +143,16 @@ class StartedRoutineViewController: UIViewController {
             workoutInfoStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
         
-        if let navigationBar = navigationController?.navigationBar {
-            navigationBar.addSubview(separatorView)
-            
-            NSLayoutConstraint.activate([
-                separatorView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: 10),
-                separatorView.leadingAnchor.constraint(equalTo: navigationBar.leadingAnchor),
-                separatorView.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor),
-                separatorView.heightAnchor.constraint(equalToConstant: 3)
-            ])
-        }
+//        if let navigationBar = navigationController?.navigationBar {
+//            navigationBar.addSubview(separatorView)
+//            
+//            NSLayoutConstraint.activate([
+//                separatorView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: 10),
+//                separatorView.leadingAnchor.constraint(equalTo: navigationBar.leadingAnchor),
+//                separatorView.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor),
+//                separatorView.heightAnchor.constraint(equalToConstant: 3)
+//            ])
+//        }
     }
     
     private func setupWorkoutInfoCounterStack() {
@@ -245,7 +245,7 @@ extension StartedRoutineViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+                return 300
     }
     
     
