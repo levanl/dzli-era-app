@@ -12,6 +12,8 @@ class StartedRoutineViewController: UIViewController {
     var routine: Routine?
     var timer: Timer?
     var elapsedTime: Int = 0
+    var totalSets: Int = 0
+        var totalReps: Int = 0
     
     private let durationLabel: UILabel = {
         let label = UILabel()
@@ -26,7 +28,7 @@ class StartedRoutineViewController: UIViewController {
     private let volumeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.text = "Volume"
+        label.text = "Reps"
         label.textColor = .gray
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -61,7 +63,7 @@ class StartedRoutineViewController: UIViewController {
         return label
     }()
     
-    private let kgLabel: UILabel = {
+    private let repsCounterLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.text = "0"
@@ -151,7 +153,7 @@ class StartedRoutineViewController: UIViewController {
         view.addSubview(workoutInfoCounterStack)
         
         workoutInfoCounterStack.addArrangedSubview(timerLabel)
-        workoutInfoCounterStack.addArrangedSubview(kgLabel)
+        workoutInfoCounterStack.addArrangedSubview(repsCounterLabel)
         workoutInfoCounterStack.addArrangedSubview(setCounterLabel)
         
         NSLayoutConstraint.activate([
@@ -233,6 +235,8 @@ extension StartedRoutineViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StartedExerciseCell", for: indexPath) as! StartedWorkoutTableViewCell
+        cell.delegate = self
+        
         if let exercise = routine?.exercises[indexPath.row] {
             cell.configure(with: exercise)
         }
@@ -241,8 +245,25 @@ extension StartedRoutineViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-                return 300
+                return 200
     }
     
     
+}
+
+extension StartedRoutineViewController: StartedWorkoutTableViewCellDelegate {
+    func updateValues(in cell: StartedWorkoutTableViewCell, with sets: Int, reps: Int) {
+        if cell.isSelected {
+                    totalSets += sets
+                    totalReps += reps
+            print(sets)
+
+                } else {
+                    totalSets -= sets
+                    totalReps -= reps
+                    print(sets)
+                }
+        repsCounterLabel.text = String(totalSets)
+        setCounterLabel.text = String(totalReps)
+    }
 }

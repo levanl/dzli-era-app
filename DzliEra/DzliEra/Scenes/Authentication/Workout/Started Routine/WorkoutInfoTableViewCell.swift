@@ -7,14 +7,8 @@
 
 import UIKit
 
-protocol WorkoutInfoTableViewCellDelegate: AnyObject {
-    func checkmarkTapped(in cell: WorkoutInfoTableViewCell)
-}
-
 class WorkoutInfoTableViewCell: UITableViewCell {
-        
-    weak var delegate: WorkoutInfoTableViewCellDelegate?
-
+    
     private let infoStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -71,7 +65,7 @@ class WorkoutInfoTableViewCell: UITableViewCell {
         infoStackView.addArrangedSubview(checkmarkBox)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(checkmarkTapped))
-                checkmarkBox.addGestureRecognizer(tapGesture)
+        checkmarkBox.addGestureRecognizer(tapGesture)
         
         NSLayoutConstraint.activate([
             infoStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
@@ -86,18 +80,18 @@ class WorkoutInfoTableViewCell: UITableViewCell {
     
     @objc private func checkmarkTapped() {
         if checkmarkBox.tintColor == .gray {
-                    checkmarkBox.tintColor = UIColor(red: 129/255, green: 203/255, blue: 74/255, alpha: 1.0)
-                    contentView.backgroundColor = UIColor(red: 45/255, green: 96/255, blue: 18/255, alpha: 1.0)
-                    setSelected(true, animated: true)
-                } else {
-                    checkmarkBox.tintColor = .gray
-                    contentView.backgroundColor = .black
-                    setSelected(false, animated: true)
-                }
+            checkmarkBox.tintColor = UIColor(red: 129/255, green: 203/255, blue: 74/255, alpha: 1.0)
+            contentView.backgroundColor = UIColor(red: 45/255, green: 96/255, blue: 18/255, alpha: 1.0)
+            setSelected(true, animated: true)
+        } else {
+            checkmarkBox.tintColor = .gray
+            contentView.backgroundColor = .black
+            setSelected(false, animated: true)
         }
-
-        override func setSelected(_ selected: Bool, animated: Bool) {
-            super.setSelected(selected, animated: animated)
-            
-        }
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+    }
 }

@@ -7,7 +7,16 @@
 
 import UIKit
 
+protocol StartedWorkoutTableViewCellDelegate: AnyObject {
+    func updateValues(in cell: StartedWorkoutTableViewCell, with sets: Int, reps: Int)
+}
+
 class StartedWorkoutTableViewCell: UITableViewCell {
+    
+    weak var delegate: StartedWorkoutTableViewCellDelegate?    
+    var currentSets: Int = 0
+    var currentReps: Int = 0
+    
     
     private let exerciseImageView: UIImageView = {
         let imageView = UIImageView()
@@ -36,14 +45,6 @@ class StartedWorkoutTableViewCell: UITableViewCell {
         return stackView
     }()
     
-    private let tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .clear
-        return tableView
-    }()
-    
-    
     private let headerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -57,7 +58,7 @@ class StartedWorkoutTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "SET"
         label.textColor = .gray
-        label.textAlignment = .left
+        label.textAlignment = .center
         return label
     }()
     
@@ -74,7 +75,45 @@ class StartedWorkoutTableViewCell: UITableViewCell {
         imageView.image = UIImage(systemName: "checkmark")
         imageView.tintColor = .gray
         imageView.clipsToBounds = true
-        imageView.contentMode = .right
+        imageView.contentMode = .center
+        return imageView
+    }()
+    
+    private let infoStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.distribution = .fillEqually
+        return stackView
+    }()
+    
+    private let setsTextField: UITextField = {
+        let textField = UITextField()
+        textField.text = "0"
+        textField.textColor = .white
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.textAlignment = .center
+        return textField
+    }()
+    
+    private let repsTextField: UITextField = {
+        let textField = UITextField()
+        textField.text = "0"
+        textField.textColor = .white
+        textField.textAlignment = .center
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    private let checkmarkBox: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "checkmark.square.fill")
+        imageView.tintColor = .gray
+        imageView.clipsToBounds = true
+        imageView.contentMode = .center
+        imageView.isUserInteractionEnabled = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -83,7 +122,7 @@ class StartedWorkoutTableViewCell: UITableViewCell {
         contentView.backgroundColor = .black
         setupStackView()
         setupHeaderStackView()
-        setupTableView()
+        setupInfoStackView()
     }
     
     required init?(coder: NSCoder) {
@@ -136,35 +175,50 @@ class StartedWorkoutTableViewCell: UITableViewCell {
         ])
     }
     
-    private func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
+    private func setupInfoStackView() {
+        contentView.addSubview(infoStackView)
         
-        contentView.addSubview(tableView)
         
-        tableView.register(WorkoutInfoTableViewCell.self, forCellReuseIdentifier: "WorkoutInfo")
+        infoStackView.addArrangedSubview(setsTextField)
+        infoStackView.addArrangedSubview(repsTextField)
+        infoStackView.addArrangedSubview(checkmarkBox)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(checkmarkTapped))
+        checkmarkBox.addGestureRecognizer(tapGesture)
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: headerStackView.bottomAnchor, constant: 30),
-            tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            infoStackView.topAnchor.constraint(equalTo: headerStackView.bottomAnchor, constant: 8),
+            infoStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            infoStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            infoStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            
+            checkmarkBox.widthAnchor.constraint(equalToConstant: 50),
+            checkmarkBox.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
-    
-}
-
-extension StartedWorkoutTableViewCell: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+    @objc private func checkmarkTapped() {
+        if checkmarkBox.tintColor == .gray {
+            checkmarkBox.tintColor = UIColor(red: 129/255, green: 203/255, blue: 74/255, alpha: 1.0)
+            infoStackView.backgroundColor = UIColor(red: 45/255, green: 96/255, blue: 18/255, alpha: 1.0)
+            setSelected(true, animated: true)
+            
+            currentSets = Int(setsTextField.text ?? "") ?? 0
+                        currentReps = Int(repsTextField.text ?? "") ?? 0
+            delegate?.updateValues(in: self, with: currentSets, reps: currentReps)
+        } else {
+            checkmarkBox.tintColor = .gray
+            infoStackView.backgroundColor = .black
+            setSelected(false, animated: true)
+            currentSets = Int(setsTextField.text ?? "") ?? 0
+                        currentReps = Int(repsTextField.text ?? "") ?? 0
+            delegate?.updateValues(in: self, with: currentSets, reps: currentReps)
+        }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WorkoutInfo", for: indexPath) as! WorkoutInfoTableViewCell
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
         
-        return cell
     }
-    
     
 }
