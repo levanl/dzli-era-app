@@ -13,7 +13,7 @@ protocol StartedWorkoutTableViewCellDelegate: AnyObject {
 
 class StartedWorkoutTableViewCell: UITableViewCell {
     
-    weak var delegate: StartedWorkoutTableViewCellDelegate?    
+    weak var delegate: StartedWorkoutTableViewCellDelegate?
     var currentSets: Int = 0
     var currentReps: Int = 0
     
@@ -202,16 +202,15 @@ class StartedWorkoutTableViewCell: UITableViewCell {
             checkmarkBox.tintColor = UIColor(red: 129/255, green: 203/255, blue: 74/255, alpha: 1.0)
             infoStackView.backgroundColor = UIColor(red: 45/255, green: 96/255, blue: 18/255, alpha: 1.0)
             setSelected(true, animated: true)
-            
             currentSets = Int(setsTextField.text ?? "") ?? 0
-                        currentReps = Int(repsTextField.text ?? "") ?? 0
+            currentReps = Int(repsTextField.text ?? "") ?? 0
             delegate?.updateValues(in: self, with: currentSets, reps: currentReps)
         } else {
             checkmarkBox.tintColor = .gray
             infoStackView.backgroundColor = .black
             setSelected(false, animated: true)
             currentSets = Int(setsTextField.text ?? "") ?? 0
-                        currentReps = Int(repsTextField.text ?? "") ?? 0
+            currentReps = Int(repsTextField.text ?? "") ?? 0
             delegate?.updateValues(in: self, with: currentSets, reps: currentReps)
         }
     }

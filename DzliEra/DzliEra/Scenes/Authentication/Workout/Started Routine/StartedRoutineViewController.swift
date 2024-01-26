@@ -223,6 +223,9 @@ class StartedRoutineViewController: UIViewController {
     }
     
     @objc private func finishButtonTapped() {
+        var saveWorkoutVC = SaveWorkoutViewController()
+        
+        
         print("Finish button tapped")
     }
 }
