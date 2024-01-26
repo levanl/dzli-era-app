@@ -225,7 +225,7 @@ class StartedRoutineViewController: UIViewController {
     @objc private func finishButtonTapped() {
         var saveWorkoutVC = SaveWorkoutViewController()
         
-        
+        navigationController?.pushViewController(saveWorkoutVC, animated: true)
         print("Finish button tapped")
     }
 }

@@ -14,6 +14,7 @@
 		C40920D52B6276110089F99E /* WorkoutInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40920D42B6276110089F99E /* WorkoutInfoTableViewCell.swift */; };
 		C40920D72B63A7040089F99E /* TableViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40920D62B63A7040089F99E /* TableViewFooter.swift */; };
 		C473B0962B63BF1300C34CC0 /* SaveWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */; };
+		C473B0982B63DEAD00C34CC0 /* SaveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B0972B63DEAD00C34CC0 /* SaveCollectionViewCell.swift */; };
 		C4BB27472B5858580021AE4C /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB27462B5858580021AE4C /* ButtonExtension.swift */; };
 		C4BB275B2B590CD80021AE4C /* Kanit-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4BB27492B590CD80021AE4C /* Kanit-ExtraLight.ttf */; };
 		C4BB275C2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4BB274A2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf */; };
@@ -106,6 +107,7 @@
 		C40920D42B6276110089F99E /* WorkoutInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutInfoTableViewCell.swift; sourceTree = "<group>"; };
 		C40920D62B63A7040089F99E /* TableViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewFooter.swift; sourceTree = "<group>"; };
 		C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveWorkoutViewController.swift; sourceTree = "<group>"; };
+		C473B0972B63DEAD00C34CC0 /* SaveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCollectionViewCell.swift; sourceTree = "<group>"; };
 		C4BB27462B5858580021AE4C /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		C4BB27492B590CD80021AE4C /* Kanit-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-ExtraLight.ttf"; sourceTree = "<group>"; };
 		C4BB274A2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */,
+				C473B0972B63DEAD00C34CC0 /* SaveCollectionViewCell.swift */,
 			);
 			path = "Save Workout";
 			sourceTree = "<group>";
@@ -601,6 +604,7 @@
 				C4D4E5292B582CCB000B0AE1 /* OnBoardingView.swift in Sources */,
 				C4F3A02A2B5FC38700B921FB /* NewRoutineViewModel.swift in Sources */,
 				C4BB27B92B5A85D70021AE4C /* RegisterViewModel.swift in Sources */,
+				C473B0982B63DEAD00C34CC0 /* SaveCollectionViewCell.swift in Sources */,
 				C40920D72B63A7040089F99E /* TableViewFooter.swift in Sources */,
 				C4F3A0082B5BC04700B921FB /* WorkoutViewController.swift in Sources */,
 				C4F3A01D2B5D32F900B921FB /* ExerciseListViewModel.swift in Sources */,
