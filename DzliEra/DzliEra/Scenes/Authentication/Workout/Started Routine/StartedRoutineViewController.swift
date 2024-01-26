@@ -113,6 +113,9 @@ class StartedRoutineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        
+        let finishButton = UIBarButtonItem(title: "Finish", style: .plain, target: self, action: #selector(finishButtonTapped))
+        navigationItem.rightBarButtonItem = finishButton
         startTimer()
         setupWorkoutInfoStack()
         setupWorkoutInfoCounterStack()
@@ -142,17 +145,6 @@ class StartedRoutineViewController: UIViewController {
             workoutInfoStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             workoutInfoStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
-        
-//        if let navigationBar = navigationController?.navigationBar {
-//            navigationBar.addSubview(separatorView)
-//            
-//            NSLayoutConstraint.activate([
-//                separatorView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: 10),
-//                separatorView.leadingAnchor.constraint(equalTo: navigationBar.leadingAnchor),
-//                separatorView.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor),
-//                separatorView.heightAnchor.constraint(equalToConstant: 3)
-//            ])
-//        }
     }
     
     private func setupWorkoutInfoCounterStack() {
@@ -226,6 +218,10 @@ class StartedRoutineViewController: UIViewController {
             timerText = String(format: "%ds", seconds)
         }
         timerLabel.text = timerText
+    }
+    
+    @objc private func finishButtonTapped() {
+        print("Finish button tapped")
     }
 }
 
