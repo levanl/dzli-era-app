@@ -8,7 +8,7 @@
 import UIKit
 
 class SaveWorkoutViewController: UIViewController {
-    private var libraryImages: [UIImage] = [UIImage(named: "onboarding1")!]
+    private var libraryImages: [UIImage] = []
     
     private let durationLabel: UILabel = {
         let label = UILabel()
@@ -97,14 +97,23 @@ class SaveWorkoutViewController: UIViewController {
         return button
     }()
     
-    
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
+        layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .black
         return collectionView
+    }()
+    
+    private let emptyLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "No images available"
+        label.textAlignment = .center
+        label.textColor = .gray
+        label.isHidden = false
+        return label
     }()
     
     
@@ -171,9 +180,17 @@ class SaveWorkoutViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: addImageButton.bottomAnchor, constant: 24),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            collectionView.heightAnchor.constraint(equalToConstant: 140)
+        ])
+        
+        view.addSubview(emptyLabel)
+        NSLayoutConstraint.activate([
+            emptyLabel.topAnchor.constraint(equalTo: collectionView.topAnchor),
+            emptyLabel.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
+            emptyLabel.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
+            emptyLabel.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor)
         ])
         
     }
@@ -195,6 +212,11 @@ extension SaveWorkoutViewController: UIImagePickerControllerDelegate, UINavigati
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let selectedImage = info[.originalImage] as? UIImage {
             libraryImages.append(selectedImage)
+            if libraryImages.isEmpty {
+                emptyLabel.isHidden = false
+            } else {
+                emptyLabel.isHidden = true
+            }
             collectionView.reloadData()
         } else { }
         dismiss(animated: true)
@@ -202,7 +224,7 @@ extension SaveWorkoutViewController: UIImagePickerControllerDelegate, UINavigati
     
 }
 
-extension SaveWorkoutViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension SaveWorkoutViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         libraryImages.count
@@ -215,8 +237,8 @@ extension SaveWorkoutViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: 200, height: 200)
-        }
+        return CGSize(width: 120, height: 120)
+    }
 }
 
 
