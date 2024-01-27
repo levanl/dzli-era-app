@@ -8,7 +8,7 @@
 import UIKit
 
 class SaveWorkoutViewController: UIViewController {
-    private let libraryImages: [UIImage] = []
+    private var libraryImages: [UIImage] = [UIImage(named: "onboarding1")!]
     
     private let durationLabel: UILabel = {
         let label = UILabel()
@@ -86,26 +86,21 @@ class SaveWorkoutViewController: UIViewController {
         return stackView
     }()
     
-    private let container: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .black
-        view.addSolidBorder()
-        return view
+    private let addImageButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Add Image", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.setTitleColor(.white, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = UIColor(AppColors.gray)
+        button.layer.cornerRadius = 6
+        return button
     }()
     
-    private let iconImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(systemName: "photo")
-        imageView.tintColor = .white
-        return imageView
-    }()
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .white
@@ -119,8 +114,8 @@ class SaveWorkoutViewController: UIViewController {
         view.backgroundColor = .black
         setupWorkoutInfoStack()
         setupWorkoutInfoCounterStack()
-        setupImageContainerPicker()
-        setupCollectionView()
+        setupAddImageButton()
+        setupImageCollectionView()
     }
     
     
@@ -154,59 +149,114 @@ class SaveWorkoutViewController: UIViewController {
         
     }
     
-    private func setupImageContainerPicker() {
+    private func setupAddImageButton() {
+        view.addSubview(addImageButton)
         
-        view.addSubview(container)
+        addImageButton.addTarget(self, action: #selector(addImageButtonTapped), for: .touchUpInside)
+        
         NSLayoutConstraint.activate([
-            container.topAnchor.constraint(equalTo: workoutInfoStack.bottomAnchor, constant: 50),
-            container.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            container.widthAnchor.constraint(equalToConstant: 130),
-            container.heightAnchor.constraint(equalToConstant: 130),
+            addImageButton.topAnchor.constraint(equalTo: workoutInfoCounterStack.bottomAnchor, constant: 24),
+            addImageButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            addImageButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32)
         ])
         
-        container.addSubview(iconImageView)
-        NSLayoutConstraint.activate([
-            iconImageView.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-            iconImageView.centerYAnchor.constraint(equalTo: container.centerYAnchor),
-            iconImageView.widthAnchor.constraint(equalTo: container.widthAnchor, multiplier: 0.3),
-            iconImageView.heightAnchor.constraint(equalTo: container.heightAnchor, multiplier: 0.3),
-        ])
     }
     
-    private func setupCollectionView() {
-        
+    private func setupImageCollectionView() {
         view.addSubview(collectionView)
-        
-        collectionView.register(SaveCollectionViewCell.self, forCellWithReuseIdentifier: "SaveCell")
-        
-        
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: workoutInfoStack.bottomAnchor, constant: 30),
-            collectionView.leadingAnchor.constraint(equalTo: container.trailingAnchor, constant: 30),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-        
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        collectionView.register(SaveCollectionViewCell.self, forCellWithReuseIdentifier: "MyCell")
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: addImageButton.bottomAnchor, constant: 24),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
+    }
+    
+    @objc private func addImageButtonTapped() {
+        showImagePicker()
+    }
+    
+    private func showImagePicker() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
+        present(imagePicker, animated: true, completion: nil)
     }
 }
 
+extension SaveWorkoutViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let selectedImage = info[.originalImage] as? UIImage {
+            libraryImages.append(selectedImage)
+            collectionView.reloadData()
+        } else { }
+        dismiss(animated: true)
+    }
+    
+}
+
 extension SaveWorkoutViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        3
+        libraryImages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaveCell", for: indexPath) as! SaveCollectionViewCell
-        //                cell.imageView.image = libraryImages[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell", for: indexPath) as! SaveCollectionViewCell
+        cell.configureCell(with: libraryImages[indexPath.item])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 100)
+            return CGSize(width: 200, height: 200)
+        }
+}
+
+
+
+class MyCollectionViewCell: UICollectionViewCell {
+    
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        contentView.addSubview(imageView)
+        imageView.frame = contentView.bounds
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configureCell(with image: UIImage) {
+        imageView.image = image
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
