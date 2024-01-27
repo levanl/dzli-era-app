@@ -9,6 +9,9 @@ import UIKit
 
 class SaveWorkoutViewController: UIViewController {
     private var libraryImages: [UIImage] = []
+    var elapsedTime: Int = 0
+    var totalSets: Int = 0
+    var totalReps: Int = 0
     
     private let durationLabel: UILabel = {
         let label = UILabel()
@@ -51,7 +54,7 @@ class SaveWorkoutViewController: UIViewController {
     private let timerLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.text = "0 KG"
+        label.text = "0"
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -116,18 +119,79 @@ class SaveWorkoutViewController: UIViewController {
         return label
     }()
     
+    private let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Description"
+        label.textAlignment = .left
+        label.textColor = .gray
+        label.isHidden = false
+        return label
+    }()
+    
+    private let descriptionTextView: UITextView = {
+            let textView = UITextView()
+            textView.translatesAutoresizingMaskIntoConstraints = false
+            textView.textColor = .white
+            textView.font = UIFont.systemFont(ofSize: 16)
+            textView.backgroundColor = UIColor.black
+            textView.layer.borderWidth = 1.0
+            textView.layer.borderColor = UIColor.gray.cgColor
+            textView.layer.cornerRadius = 8
+            return textView
+        }()
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Title"
+        label.textAlignment = .left
+        label.textColor = .gray
+        label.isHidden = false
+        return label
+    }()
+    
+    private let titleTextView: UITextView = {
+            let textView = UITextView()
+            textView.translatesAutoresizingMaskIntoConstraints = false
+            textView.textColor = .white
+            textView.font = UIFont.systemFont(ofSize: 16)
+            textView.backgroundColor = UIColor.black
+            textView.layer.borderWidth = 1.0
+            textView.layer.borderColor = UIColor.gray.cgColor
+            textView.layer.cornerRadius = 8
+            return textView
+        }()
+
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .black
+        updateInfoLabels()
         setupWorkoutInfoStack()
         setupWorkoutInfoCounterStack()
         setupAddImageButton()
         setupImageCollectionView()
+        setupDescriptionTextView()
+        setupTitleTextView()
     }
     
-    
+    private func updateInfoLabels() {
+        let minutes = elapsedTime / 60
+        let seconds = elapsedTime % 60
+        
+        let timerText: String
+        if minutes > 0 {
+            timerText = String(format: "%dmin %02ds", minutes, seconds)
+        } else {
+            timerText = String(format: "%ds", seconds)
+        }
+        
+        timerLabel.text = timerText
+        repsCounterLabel.text = "\(totalReps)"
+        setCounterLabel.text = "\(totalSets)"
+    }
     
     private func setupWorkoutInfoStack() {
         view.addSubview(workoutInfoStack)
@@ -194,6 +258,42 @@ class SaveWorkoutViewController: UIViewController {
         ])
         
     }
+    
+    private func setupDescriptionTextView() {
+        
+        view.addSubview(descriptionLabel)
+        
+            view.addSubview(descriptionTextView)
+
+            NSLayoutConstraint.activate([
+                descriptionLabel.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 16),
+                descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                
+                descriptionTextView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 12),
+                descriptionTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                descriptionTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                descriptionTextView.heightAnchor.constraint(equalToConstant: 80)
+            ])
+        }
+    
+    private func setupTitleTextView() {
+        
+        view.addSubview(titleLabel)
+        
+            view.addSubview(titleTextView)
+
+            NSLayoutConstraint.activate([
+                titleLabel.topAnchor.constraint(equalTo: descriptionTextView.bottomAnchor, constant: 12),
+                titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                
+                titleTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
+                titleTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                titleTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                titleTextView.heightAnchor.constraint(equalToConstant: 30)
+            ])
+        }
     
     @objc private func addImageButtonTapped() {
         showImagePicker()
@@ -265,50 +365,3 @@ class MyCollectionViewCell: UICollectionViewCell {
         imageView.image = image
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-extension UIView {
-    func addDashedBorder() {
-        let color = UIColor.red.cgColor
-        
-        let shapeLayer:CAShapeLayer = CAShapeLayer()
-        let frameSize = self.frame.size
-        let shapeRect = CGRect(x: 0, y: 0, width: frameSize.width, height: frameSize.height)
-        
-        shapeLayer.bounds = shapeRect
-        shapeLayer.position = CGPoint(x: frameSize.width/2, y: frameSize.height/2)
-        shapeLayer.fillColor = UIColor.clear.cgColor
-        shapeLayer.strokeColor = color
-        shapeLayer.lineWidth = 2
-        shapeLayer.lineJoin = CAShapeLayerLineJoin.round
-        shapeLayer.lineDashPattern = [6,3]
-        shapeLayer.path = UIBezierPath(roundedRect: shapeRect, cornerRadius: 5).cgPath
-        
-        self.layer.addSublayer(shapeLayer)
-    }
-}
-
-
-extension UIView {
-    func addSolidBorder() {
-        self.layer.borderWidth = 2.0
-        self.layer.borderColor = UIColor.white.cgColor
-        self.layer.cornerRadius = 8
-    }
-}
-

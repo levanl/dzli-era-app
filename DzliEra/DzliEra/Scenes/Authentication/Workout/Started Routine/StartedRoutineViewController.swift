@@ -13,7 +13,7 @@ class StartedRoutineViewController: UIViewController {
     var timer: Timer?
     var elapsedTime: Int = 0
     var totalSets: Int = 0
-        var totalReps: Int = 0
+    var totalReps: Int = 0
     
     private let durationLabel: UILabel = {
         let label = UILabel()
@@ -56,7 +56,7 @@ class StartedRoutineViewController: UIViewController {
     private let timerLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.text = "0 KG"
+        label.text = "0"
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -223,7 +223,11 @@ class StartedRoutineViewController: UIViewController {
     }
     
     @objc private func finishButtonTapped() {
-        var saveWorkoutVC = SaveWorkoutViewController()
+        let saveWorkoutVC = SaveWorkoutViewController()
+        
+        saveWorkoutVC.elapsedTime = elapsedTime
+            saveWorkoutVC.totalSets = totalSets
+            saveWorkoutVC.totalReps = totalReps
         
         navigationController?.pushViewController(saveWorkoutVC, animated: true)
         print("Finish button tapped")
