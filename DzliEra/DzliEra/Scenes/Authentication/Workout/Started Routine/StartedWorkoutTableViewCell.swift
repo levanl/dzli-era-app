@@ -21,7 +21,6 @@ class StartedWorkoutTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = imageView.frame.size.width / 2
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -107,7 +106,9 @@ class StartedWorkoutTableViewCell: UITableViewCell {
     
     private let checkmarkBox: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "checkmark.square.fill")
+        let config = UIImage.SymbolConfiguration(paletteColors: [.white, .secondaryLabel, .secondaryLabel])
+        let image = UIImage(systemName: "checkmark.diamond.fill", withConfiguration: config)
+        imageView.image = image
         imageView.tintColor = .gray
         imageView.clipsToBounds = true
         imageView.contentMode = .center
@@ -136,6 +137,7 @@ class StartedWorkoutTableViewCell: UITableViewCell {
                         self.exerciseImageView.image = UIImage(data: data)
                         
                         self.exerciseImageView.layer.cornerRadius = self.exerciseImageView.frame.size.width / 2
+                        self.exerciseImageView.setNeedsLayout()
                     }
                 }
             }
@@ -151,7 +153,7 @@ class StartedWorkoutTableViewCell: UITableViewCell {
         exerciseStackView.addArrangedSubview(nameLabel)
         
         NSLayoutConstraint.activate([
-            exerciseStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            exerciseStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             exerciseStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             exerciseStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
@@ -197,14 +199,20 @@ class StartedWorkoutTableViewCell: UITableViewCell {
     
     @objc private func checkmarkTapped() {
         if checkmarkBox.tintColor == .gray {
-            checkmarkBox.tintColor = UIColor(red: 129/255, green: 203/255, blue: 74/255, alpha: 1.0)
+            
+            let newPaletteColors: [UIColor] = [.white, UIColor(red: 129/255, green: 203/255, blue: 74/255, alpha: 1.0), UIColor(red: 129/255, green: 203/255, blue: 74/255, alpha: 1.0)]
+            let newConfig = UIImage.SymbolConfiguration(paletteColors: newPaletteColors)
+            let newImage = UIImage(systemName: "checkmark.diamond.fill", withConfiguration: newConfig)
+            checkmarkBox.image = newImage
             infoStackView.backgroundColor = UIColor(red: 45/255, green: 96/255, blue: 18/255, alpha: 1.0)
             setSelected(true, animated: true)
             currentSets = Int(setsTextField.text ?? "") ?? 0
             currentReps = Int(repsTextField.text ?? "") ?? 0
             delegate?.updateValues(in: self, with: currentSets, reps: currentReps)
         } else {
-            checkmarkBox.tintColor = .gray
+            let config = UIImage.SymbolConfiguration(paletteColors: [.white, .secondaryLabel, .secondaryLabel])
+            let newImage = UIImage(systemName: "checkmark.diamond.fill", withConfiguration: config)
+            checkmarkBox.image = newImage
             infoStackView.backgroundColor = .black
             setSelected(false, animated: true)
             currentSets = Int(setsTextField.text ?? "") ?? 0

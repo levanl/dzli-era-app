@@ -177,6 +177,9 @@ class SaveWorkoutViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let finishButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(finishButtonTapped))
+        navigationItem.rightBarButtonItem = finishButton
         view.backgroundColor = .black
         updateInfoLabels()
         setupWorkoutInfoStack()
@@ -321,6 +324,10 @@ class SaveWorkoutViewController: UIViewController {
     
     @objc private func addImageButtonTapped() {
         showImagePicker()
+    }
+    
+    @objc private func finishButtonTapped() {
+        print("finish")
     }
     
     @objc private func discardButtonTapped() {
