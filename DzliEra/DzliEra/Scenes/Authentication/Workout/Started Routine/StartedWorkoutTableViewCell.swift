@@ -17,7 +17,6 @@ class StartedWorkoutTableViewCell: UITableViewCell {
     var currentSets: Int = 0
     var currentReps: Int = 0
     
-    
     private let exerciseImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -31,7 +30,7 @@ class StartedWorkoutTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textColor = .white
+        label.textColor = .systemBlue
         label.lineBreakMode = .byTruncatingTail
         label.widthAnchor.constraint(lessThanOrEqualToConstant: 200).isActive = true
         return label
@@ -153,8 +152,8 @@ class StartedWorkoutTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             exerciseStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            exerciseStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            exerciseStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            exerciseStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            exerciseStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
             exerciseImageView.widthAnchor.constraint(lessThanOrEqualToConstant: 50),
             exerciseImageView.heightAnchor.constraint(lessThanOrEqualToConstant: 50)
@@ -169,7 +168,7 @@ class StartedWorkoutTableViewCell: UITableViewCell {
         headerStackView.addArrangedSubview(checkmarkImageView)
         
         NSLayoutConstraint.activate([
-            headerStackView.topAnchor.constraint(equalTo: exerciseStackView.bottomAnchor, constant: 30),
+            headerStackView.topAnchor.constraint(equalTo: exerciseStackView.bottomAnchor, constant: 24),
             headerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             headerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
         ])
@@ -177,7 +176,6 @@ class StartedWorkoutTableViewCell: UITableViewCell {
     
     private func setupInfoStackView() {
         contentView.addSubview(infoStackView)
-        
         
         infoStackView.addArrangedSubview(setsTextField)
         infoStackView.addArrangedSubview(repsTextField)
@@ -187,13 +185,13 @@ class StartedWorkoutTableViewCell: UITableViewCell {
         checkmarkBox.addGestureRecognizer(tapGesture)
         
         NSLayoutConstraint.activate([
-            infoStackView.topAnchor.constraint(equalTo: headerStackView.bottomAnchor, constant: 8),
+            infoStackView.topAnchor.constraint(equalTo: headerStackView.bottomAnchor, constant: 4),
             infoStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             infoStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             infoStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
             
-            checkmarkBox.widthAnchor.constraint(equalToConstant: 50),
-            checkmarkBox.heightAnchor.constraint(equalToConstant: 50)
+            checkmarkBox.widthAnchor.constraint(equalToConstant: 30),
+            checkmarkBox.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
     
