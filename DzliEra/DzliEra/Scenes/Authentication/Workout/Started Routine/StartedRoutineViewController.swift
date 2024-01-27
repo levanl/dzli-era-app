@@ -180,10 +180,10 @@ class StartedRoutineViewController: UIViewController {
         view.addSubview(tableView)
         
         tableView.register(StartedWorkoutTableViewCell.self, forCellReuseIdentifier: "StartedExerciseCell")
-
+        
         tableView.delegate = self
         tableView.dataSource = self
-
+        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: stackSeparatorView.bottomAnchor, constant: 8),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -226,8 +226,8 @@ class StartedRoutineViewController: UIViewController {
         let saveWorkoutVC = SaveWorkoutViewController()
         
         saveWorkoutVC.elapsedTime = elapsedTime
-            saveWorkoutVC.totalSets = totalSets
-            saveWorkoutVC.totalReps = totalReps
+        saveWorkoutVC.totalSets = totalSets
+        saveWorkoutVC.totalReps = totalReps
         
         navigationController?.pushViewController(saveWorkoutVC, animated: true)
         print("Finish button tapped")
@@ -252,7 +252,7 @@ extension StartedRoutineViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-                return 200
+        return 200
     }
     
     
@@ -261,15 +261,15 @@ extension StartedRoutineViewController: UITableViewDelegate, UITableViewDataSour
 extension StartedRoutineViewController: StartedWorkoutTableViewCellDelegate {
     func updateValues(in cell: StartedWorkoutTableViewCell, with sets: Int, reps: Int) {
         if cell.isSelected {
-                    totalSets += sets
-                    totalReps += reps
+            totalSets += sets
+            totalReps += reps
             print(sets)
-
-                } else {
-                    totalSets -= sets
-                    totalReps -= reps
-                    print(sets)
-                }
+            
+        } else {
+            totalSets -= sets
+            totalReps -= reps
+            print(sets)
+        }
         repsCounterLabel.text = String(totalSets)
         setCounterLabel.text = String(totalReps)
     }

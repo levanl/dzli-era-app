@@ -130,16 +130,16 @@ class SaveWorkoutViewController: UIViewController {
     }()
     
     private let descriptionTextView: UITextView = {
-            let textView = UITextView()
-            textView.translatesAutoresizingMaskIntoConstraints = false
-            textView.textColor = .white
-            textView.font = UIFont.systemFont(ofSize: 16)
-            textView.backgroundColor = UIColor.black
-            textView.layer.borderWidth = 1.0
-            textView.layer.borderColor = UIColor.gray.cgColor
-            textView.layer.cornerRadius = 8
-            return textView
-        }()
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.textColor = .white
+        textView.font = UIFont.systemFont(ofSize: 16)
+        textView.backgroundColor = UIColor.black
+        textView.layer.borderWidth = 1.0
+        textView.layer.borderColor = UIColor.gray.cgColor
+        textView.layer.cornerRadius = 8
+        return textView
+    }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -152,18 +152,28 @@ class SaveWorkoutViewController: UIViewController {
     }()
     
     private let titleTextView: UITextView = {
-            let textView = UITextView()
-            textView.translatesAutoresizingMaskIntoConstraints = false
-            textView.textColor = .white
-            textView.font = UIFont.systemFont(ofSize: 16)
-            textView.backgroundColor = UIColor.black
-            textView.layer.borderWidth = 1.0
-            textView.layer.borderColor = UIColor.gray.cgColor
-            textView.layer.cornerRadius = 8
-            return textView
-        }()
-
-
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.textColor = .white
+        textView.font = UIFont.systemFont(ofSize: 16)
+        textView.backgroundColor = UIColor.black
+        textView.layer.borderWidth = 1.0
+        textView.layer.borderColor = UIColor.gray.cgColor
+        textView.layer.cornerRadius = 8
+        return textView
+    }()
+    
+    private let discardWorkoutButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Discard Workout", for: .normal)
+        button.titleLabel?.font = UIFont(name: "Helvetica", size: 16)
+        button.setTitleColor(.red, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .clear
+        button.layer.cornerRadius = 6
+        return button
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -175,6 +185,7 @@ class SaveWorkoutViewController: UIViewController {
         setupImageCollectionView()
         setupDescriptionTextView()
         setupTitleTextView()
+        setupDiscardWorkoutButton()
     }
     
     private func updateInfoLabels() {
@@ -263,40 +274,73 @@ class SaveWorkoutViewController: UIViewController {
         
         view.addSubview(descriptionLabel)
         
-            view.addSubview(descriptionTextView)
-
-            NSLayoutConstraint.activate([
-                descriptionLabel.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 16),
-                descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                
-                descriptionTextView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 12),
-                descriptionTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                descriptionTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                descriptionTextView.heightAnchor.constraint(equalToConstant: 80)
-            ])
-        }
+        view.addSubview(descriptionTextView)
+        
+        NSLayoutConstraint.activate([
+            descriptionLabel.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 16),
+            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            descriptionTextView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 12),
+            descriptionTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            descriptionTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            descriptionTextView.heightAnchor.constraint(equalToConstant: 80)
+        ])
+    }
     
     private func setupTitleTextView() {
         
         view.addSubview(titleLabel)
         
-            view.addSubview(titleTextView)
-
-            NSLayoutConstraint.activate([
-                titleLabel.topAnchor.constraint(equalTo: descriptionTextView.bottomAnchor, constant: 12),
-                titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                
-                titleTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
-                titleTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                titleTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                titleTextView.heightAnchor.constraint(equalToConstant: 30)
-            ])
-        }
+        view.addSubview(titleTextView)
+        
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: descriptionTextView.bottomAnchor, constant: 12),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            titleTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
+            titleTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            titleTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            titleTextView.heightAnchor.constraint(equalToConstant: 30)
+        ])
+    }
+    
+    private func setupDiscardWorkoutButton() {
+        view.addSubview(discardWorkoutButton)
+        
+        NSLayoutConstraint.activate([
+            discardWorkoutButton.topAnchor.constraint(equalTo: titleTextView.bottomAnchor, constant: 24),
+            discardWorkoutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 16),
+            discardWorkoutButton.leadingAnchor  .constraint(equalTo: view.leadingAnchor, constant: -16)
+        ])
+        
+        discardWorkoutButton.addTarget(self, action: #selector(discardButtonTapped), for: .touchUpInside)
+        
+    }
     
     @objc private func addImageButtonTapped() {
         showImagePicker()
+    }
+    
+    @objc private func discardButtonTapped() {
+        let alertController = UIAlertController(
+            title: "Discard Workout",
+            message: "Are you sure you want to discard this workout?",
+            preferredStyle: .alert
+        )
+        
+        let discardAction = UIAlertAction(title: "Discard", style: .destructive) { _ in
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(discardAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+        
     }
     
     private func showImagePicker() {
@@ -338,30 +382,5 @@ extension SaveWorkoutViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 120, height: 120)
-    }
-}
-
-
-
-class MyCollectionViewCell: UICollectionViewCell {
-    
-    private let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        contentView.addSubview(imageView)
-        imageView.frame = contentView.bounds
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func configureCell(with image: UIImage) {
-        imageView.image = image
     }
 }
