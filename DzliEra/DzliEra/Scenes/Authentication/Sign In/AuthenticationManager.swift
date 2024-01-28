@@ -35,7 +35,7 @@ final class AuthenticationManager {
     }
     
     // MARK: - Get User from Firebase
-    func getAuthenticatedUser() throws ->  AuthDataResultModel {
+    func getAuthenticatedUser() async throws ->  AuthDataResultModel {
         guard let user = Auth.auth().currentUser else {
             throw URLError(.badServerResponse)
         }
