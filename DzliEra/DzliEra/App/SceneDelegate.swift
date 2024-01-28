@@ -24,8 +24,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        let onBoardingView = OnBoardingView()
         var rootView = AnyView(OnBoardingView())
         
-        let rootViewController = UIHostingController(rootView: rootView)
-        let navigationController = UINavigationController(rootViewController: rootViewController)
+//        let rootViewController = UIHostingController(rootView: rootView)
+        let navigationController = UINavigationController(rootViewController: TabController())
         window?.rootViewController = navigationController
         
         window?.makeKeyAndVisible()
