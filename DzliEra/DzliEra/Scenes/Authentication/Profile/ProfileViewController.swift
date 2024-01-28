@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    private var user: AuthDataResultModel? = nil
+    private var user: DBUser? = nil
     
     private let profileLabel: UILabel = {
         let label = UILabel()
@@ -25,7 +25,8 @@ class ProfileViewController: UIViewController {
         
         Task {
             do {
-                self.user = try await AuthenticationManager.shared.getAuthenticatedUser()
+                let authDataResult = try await AuthenticationManager.shared.getAuthenticatedUser()
+                self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
                 print("User loaded: \(self.user?.email ?? "Unknown email")")
                 DispatchQueue.main.async {
                     self.profileLabel.text = self.user?.email

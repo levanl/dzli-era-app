@@ -15,7 +15,7 @@ struct SignInEmailView: View, WithRootNavigationController {
     
     // MARK: - Body
     var body: some View {
-
+        
         VStack {
             AuthTitleComponent(firstLine: "Hello.", secondLine: "Welcome Champ")
                 .padding(.bottom, 100)
@@ -43,7 +43,16 @@ struct SignInEmailView: View, WithRootNavigationController {
         
     }
     func temporaryNavToTabBar() {
-        self.push(viewController: TabController(), animated: true)
+        Task {
+            do {
+                try await viewModel.signIn()
+                
+                
+                self.push(viewController: TabController(), animated: true)
+            } catch {
+                print("Error signing in: \(error)")
+            }
+        }
     }
 }
 

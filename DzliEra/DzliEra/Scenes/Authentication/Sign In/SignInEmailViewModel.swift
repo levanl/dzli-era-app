@@ -14,14 +14,8 @@ final class SignInEmailViewModel: ObservableObject {
     @Published var password = ""
     
     // MARK: - Sign In Func
-    func signIn() {
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
-            if error != nil {
-                print(error!.localizedDescription)
-                print("could not log in")
-            } else {
-                print("Success logged in")
-            }
-        }
+    func signIn() async throws {
+        let authDataResult = try await AuthenticationManager.shared.signInUser(email: email, password: password)
+        try await UserManager.shared.createNewUser(auth: authDataResult)
     }
 }
