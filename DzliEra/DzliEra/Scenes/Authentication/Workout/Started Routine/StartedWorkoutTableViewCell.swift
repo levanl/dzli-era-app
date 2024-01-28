@@ -198,7 +198,7 @@ class StartedWorkoutTableViewCell: UITableViewCell {
     }
     
     @objc private func checkmarkTapped() {
-        if checkmarkBox.tintColor == .gray {
+        if infoStackView.backgroundColor == .black {
             
             let newPaletteColors: [UIColor] = [.white, UIColor(red: 129/255, green: 203/255, blue: 74/255, alpha: 1.0), UIColor(red: 129/255, green: 203/255, blue: 74/255, alpha: 1.0)]
             let newConfig = UIImage.SymbolConfiguration(paletteColors: newPaletteColors)
