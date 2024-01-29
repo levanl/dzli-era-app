@@ -16,7 +16,7 @@ final class SignInEmailViewModel: ObservableObject {
     // MARK: - Sign In Func
     func signIn() async throws {
         let authDataResult = try await AuthenticationManager.shared.signInUser(email: email, password: password)
-        let user = DBUser(userId: authDataResult.uid, email: authDataResult.email, photoUrl: authDataResult.photoUrl, dateCreated: Date())
+        let user = DBUser(auth: authDataResult)
         try await UserManager.shared.createNewUser(user: user)
 //        try await UserManager.shared.createNewUser(auth: authDataResult)
     }
