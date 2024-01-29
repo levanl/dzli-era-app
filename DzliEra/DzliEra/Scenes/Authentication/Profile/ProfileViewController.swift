@@ -44,8 +44,6 @@ class ProfileViewController: UIViewController {
     private func setupProfileLabel() {
         view.addSubview(profileLabel)
         
-        //        profileLabel.text = user?.email
-        
         NSLayoutConstraint.activate([
             profileLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
             profileLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
