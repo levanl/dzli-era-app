@@ -47,7 +47,6 @@ struct SignInEmailView: View, WithRootNavigationController {
             do {
                 try await viewModel.signIn()
                 
-                
                 self.push(viewController: TabController(), animated: true)
             } catch {
                 print("Error signing in: \(error)")

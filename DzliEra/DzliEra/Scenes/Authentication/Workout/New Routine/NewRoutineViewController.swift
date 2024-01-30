@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - NewRoutine Protocol
 protocol NewRoutineDelegate: AnyObject {
-    func didSaveRoutine(title: String, exercises: [Exercise])
+    func didSaveRoutine(title: String, exercises: [Exercise]) async
 }
 
 // MARK: - ViewController
@@ -54,7 +54,7 @@ final class NewRoutineViewController: UIViewController, NewRoutineDelegate {
     }()
     
     private lazy var saveButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonTapped))
+        let button = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonTappedWrapper))
         return button
     }()
     
@@ -68,6 +68,10 @@ final class NewRoutineViewController: UIViewController, NewRoutineDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.loadUser()
     }
     
     // MARK: - Private Methods
@@ -120,17 +124,43 @@ final class NewRoutineViewController: UIViewController, NewRoutineDelegate {
         navigationController?.pushViewController(exercisesVC, animated: true)
     }
     
-    @objc func saveButtonTapped() {
+    func saveButtonTapped() async {
         if let title = titleTextField.text, !title.isEmpty, !viewModel.exercises.isEmpty {
-            didSaveRoutine(title: title, exercises: viewModel.exercises)
+            await didSaveRoutine(title: title, exercises: viewModel.exercises)
         } else {
             print("cant doit")
         }
     }
     
-    func didSaveRoutine(title: String, exercises: [Exercise]) {
-        delegate?.didSaveRoutine(title: title, exercises: exercises)
-        print("Routine saved with title: \(title)")
+    @objc func saveButtonTappedWrapper() {
+        Task {
+            await saveButtonTapped()
+        }
+    }
+    
+    func didSaveRoutine(title: String, exercises: [Exercise])  async {
+        
+        do {
+            guard var user = viewModel.user else {
+                print("Error: User not found.")
+                return
+            }
+            
+            let newRoutine = Routine(title: title, exercises: exercises)
+            
+            user.addRoutine(newRoutine)
+            
+            print(user.routines ?? "araachemodzmao da")
+            
+            try await UserManager.shared.uploadRoutines(userId: user.userId, routines: user.routines ?? [])
+            print("Routines uploaded to Firestore successfully")
+            
+            await delegate?.didSaveRoutine(title: title, exercises: exercises)
+            
+        } catch {
+            print("Error saving routine: \(error)")
+        }
+        
         navigationController?.popViewController(animated: true)
     }
     

@@ -15,6 +15,7 @@ struct DBUser: Codable {
     let photoUrl: String?
     let dateCreated: Date?
     let isPremium: Bool?
+    var routines: [Routine]?
     
     init(auth: AuthDataResultModel) {
         self.userId = auth.uid
@@ -22,6 +23,7 @@ struct DBUser: Codable {
         self.photoUrl = auth.photoUrl
         self.dateCreated = Date()
         self.isPremium = false
+        self.routines = nil
     }
     
     init(
@@ -29,25 +31,24 @@ struct DBUser: Codable {
         email: String? = nil,
         photoUrl: String? = nil,
         dateCreated: Date? = nil,
-        isPremium: Bool? = nil
+        isPremium: Bool? = nil,
+        routines: [Routine]? = nil
     ) {
         self.userId = userId
         self.email = email
         self.photoUrl = photoUrl
         self.dateCreated = dateCreated
         self.isPremium = isPremium
+        self.routines = routines
     }
     
-//    func togglePremiumStatus() -> DBUser {
-//        let currentValue = isPremium ?? false
-//        return DBUser (
-//            userId: userId,
-//            email: email,
-//            photoUrl:photoUrl,
-//            dateCreated: Date(),
-//            isPremium: !currentValue
-//        )
-//    }
+    mutating func addRoutine(_ routine: Routine) {
+        if routines == nil {
+            routines = [routine]
+        } else {
+            routines?.append(routine)
+        }
+    }
     
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"
@@ -55,6 +56,7 @@ struct DBUser: Codable {
         case photoUrl = "photo_url"
         case dateCreated = "date_created"
         case isPremium = "user_isPremium"
+        case routines = "routines"
     }
     
     init(from decoder: Decoder) throws {
@@ -64,6 +66,7 @@ struct DBUser: Codable {
         self.photoUrl = try container.decodeIfPresent(String.self, forKey: .photoUrl)
         self.dateCreated = try container.decodeIfPresent(Date.self, forKey: .dateCreated)
         self.isPremium = try container.decodeIfPresent(Bool.self, forKey: .isPremium)
+        self.routines = try container.decodeIfPresent([Routine].self, forKey: .routines)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -73,6 +76,7 @@ struct DBUser: Codable {
         try container.encodeIfPresent(self.photoUrl, forKey: .photoUrl)
         try container.encodeIfPresent(self.dateCreated, forKey: .dateCreated)
         try container.encodeIfPresent(self.isPremium, forKey: .isPremium)
+        try container.encodeIfPresent(self.routines, forKey: .routines)
     }
 }
 
@@ -87,18 +91,6 @@ final class UserManager {
         userCollection.document(userId)
     }
     
-//    private let encoder: Firestore.Encoder = {
-//        let encoder = Firestore.Encoder()
-//        encoder.keyEncodingStrategy = .convertToSnakeCase
-//        return encoder
-//    }()
-//    
-//    private let decoder: Firestore.Decoder = {
-//        let decoder = Firestore.Decoder()
-//        decoder.keyDecodingStrategy = .convertFromSnakeCase
-//        return decoder
-//    }()
-//    
     func createNewUser(user: DBUser) async throws {
         try userDocument(userId: user.userId).setData(from: user, merge: false)
     }
@@ -107,49 +99,29 @@ final class UserManager {
         try await userDocument(userId: userId).getDocument(as: DBUser.self)
     }
     
-    func updateUserPremumStatus(userId: String, isPremium: Bool) async throws {
-        var data: [String:Any] = [
-            "user_isPremium": isPremium
-        ]
-        try await userDocument(userId: userId).updateData(data)
+    func uploadRoutines(userId: String, routines: [Routine]) async throws {
+        var routinesData: [[String: Any]] = []
+
+        for routine in routines {
+            let routineData: [String: Any] = [
+                "title": routine.title,
+                "exercises": try routine.exercises.map { try $0.toFirestoreData() }
+            ]
+            routinesData.append(routineData)
+        }
+
+        let data: [String: Any] = ["routines": routinesData]
+
+        try await userDocument(userId: userId).setData(data, merge: true)
     }
-    
-    
-    //
-    //    func updateUserPremumStatus(user: DBUser) async throws {
-    //        try userDocument(userId: user.userId).setData(from: user, merge: true, encoder: encoder)
-    //    }
-    //
-    //    func createNewUser(auth: AuthDataResultModel) async throws {
-    //
-    //        print("initadajnsdfuasufnoasfnba")
-    //        var userData: [String:Any] = [
-    //            "user_id" : auth.uid,
-    //            "date_created" : Timestamp()
-    //        ]
-    //
-    //        if let email = auth.email {
-    //            userData["email"] = email
-    //        }
-    //
-    //        if let photoUrl = auth.photoUrl {
-    //            userData["photo_url"] = photoUrl
-    //        }
-    //
-    //        try await userDocument(userId: auth.uid).setData(userData, merge: false)
-    //    }
-    
-    //    func getUser(userId: String) async throws -> DBUser {
-    //        let snapshot = try await userDocument(userId: userId).getDocument()
-    //
-    //        guard let data = snapshot.data(),  let userId = data["user_id"] as? String else {
-    //            throw URLError(.badServerResponse)
-    //        }
-    //
-    //        let email = data["email"] as? String
-    //        let photoUrl = data["photo_url"] as? String
-    //        let dateCreated = data["date_created"] as? Date
-    //
-    //        return DBUser(userId: userId, email: email, photoUrl: photoUrl, dateCreated: dateCreated)
-    //    }
+}
+
+extension Exercise {
+    func toFirestoreData() throws -> [String: Any] {
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        let data = try encoder.encode(self)
+        let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+        return dictionary ?? [:]
+    }
 }
