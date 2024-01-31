@@ -81,12 +81,12 @@ class ExerciseListViewController: UIViewController {
     
     @objc func selectButtonTapped() {
         guard let selectedIndexPaths = tableView.indexPathsForSelectedRows else {
-                    return
-                }
-                
-                let selectedExercises = selectedIndexPaths.map { viewModel.exercises[$0.row] }
-                exerciseListDelegate?.didSelectExercises(selectedExercises)
-                navigationController?.popViewController(animated: true)
+            return
+        }
+        
+        let selectedExercises = selectedIndexPaths.map { viewModel.exercises[$0.row] }
+        exerciseListDelegate?.didSelectExercises(selectedExercises)
+        navigationController?.popViewController(animated: true)
     }
 }
 

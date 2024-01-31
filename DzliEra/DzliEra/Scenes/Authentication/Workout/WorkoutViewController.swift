@@ -91,8 +91,26 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel.onDataUpdate = { [weak self] in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
+        
+        viewModel.fetchRoutines()
+        
         setupUI()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //        viewModel.fetchRoutines()
+        //        tableView.reloadData()
+    }
+    
+    
+    
     
     // MARK: - Private Methods
     
@@ -200,8 +218,8 @@ extension WorkoutViewController: WorkoutTableViewCellDelegate {
     }
     
     func didTapStartRoutine(_ routine: Routine) {
-            let startedRoutineVC = StartedRoutineViewController()
-            startedRoutineVC.routine = routine
-            navigationController?.pushViewController(startedRoutineVC, animated: true)
-        }
+        let startedRoutineVC = StartedRoutineViewController()
+        startedRoutineVC.routine = routine
+        navigationController?.pushViewController(startedRoutineVC, animated: true)
+    }
 }

@@ -82,6 +82,7 @@ struct DBUser: Codable {
 
 final class UserManager {
     
+    // MARK: - Singleton Reference
     static let shared = UserManager()
     private init() {  }
     
@@ -91,17 +92,19 @@ final class UserManager {
         userCollection.document(userId)
     }
     
+    // MARK: - Create User
     func createNewUser(user: DBUser) async throws {
         try userDocument(userId: user.userId).setData(from: user, merge: false)
     }
     
+    // MARK: - Get User
     func getUser(userId: String) async throws -> DBUser {
         try await userDocument(userId: userId).getDocument(as: DBUser.self)
     }
     
+    // MARK: - Upload users Routines
     func uploadRoutines(userId: String, routines: [Routine]) async throws {
         var routinesData: [[String: Any]] = []
-
         for routine in routines {
             let routineData: [String: Any] = [
                 "title": routine.title,
@@ -109,12 +112,25 @@ final class UserManager {
             ]
             routinesData.append(routineData)
         }
-
         let data: [String: Any] = ["routines": routinesData]
-
+        
         try await userDocument(userId: userId).setData(data, merge: true)
     }
+    
+    // MARK: - Get Routines for User
+    func getRoutines(userId: String) async throws -> [Routine] {
+        let document = userDocument(userId: userId)
+        let documentSnapshot = try await document.getDocument()
+        
+        guard let data = try? documentSnapshot.data(as: DBUser.self) else {
+            throw NSError(domain: "YourErrorDomain", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to decode user data."])
+        }
+        
+        return data.routines ?? []
+    }
 }
+
+
 
 extension Exercise {
     func toFirestoreData() throws -> [String: Any] {
