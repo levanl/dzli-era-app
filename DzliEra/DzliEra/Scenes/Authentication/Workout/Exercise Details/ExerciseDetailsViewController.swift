@@ -117,20 +117,20 @@ class ExerciseDetailsViewController: UIViewController {
             return
         }
         
-        let secondaryMusclesString = exercise.secondaryMuscles.joined(separator: ", ")
+        let secondaryMusclesString = exercise.secondaryMuscles?.joined(separator: ", ")
         
-        let numberedInstructions = exercise.instructions.enumerated().map { (index, instruction) in
+        let numberedInstructions = exercise.instructions?.enumerated().map { (index, instruction) in
             return "\(index + 1). \(instruction)"
         }
         
-        let instructionsString = numberedInstructions.joined(separator: "\n\n")
+        let instructionsString = numberedInstructions?.joined(separator: "\n\n")
         
         
         nameLabel.text = exercise.name
         targetLabel.text = "Target: " + exercise.target
-        secondaryLabel.text = "Secondary: " + secondaryMusclesString
+        secondaryLabel.text = "Secondary: " + (secondaryMusclesString ?? "none")
         exerciseImageView.image = UIImage.gifImageWithName("workout")
-        instructionsLabel.text = "Instructions:\n\n" + instructionsString
+        instructionsLabel.text = "Instructions:\n\n" + (instructionsString ?? "none")
         
         DispatchQueue.global().async {
             if let imageData = try? Data(contentsOf: imageURL) {

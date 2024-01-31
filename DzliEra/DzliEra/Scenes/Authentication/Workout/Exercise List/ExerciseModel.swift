@@ -12,12 +12,25 @@ struct Exercise: Codable {
     let equipment: Equipment
     let gifURL: String
     let id, name, target: String
-    let secondaryMuscles, instructions: [String]
-
+    let secondaryMuscles, instructions: [String]?
+    
     enum CodingKeys: String, CodingKey {
         case bodyPart, equipment
         case gifURL = "gifUrl"
         case id, name, target, secondaryMuscles, instructions
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.bodyPart = try container.decodeIfPresent(String.self, forKey: .bodyPart) ?? ""
+        self.equipment = try container.decodeIfPresent(Equipment.self, forKey: .equipment) ?? .bodyWeight
+        self.gifURL = try container.decodeIfPresent(String.self, forKey: .gifURL) ?? ""
+        self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? ""
+        self.name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
+        self.target = try container.decodeIfPresent(String.self, forKey: .target) ?? ""
+        self.secondaryMuscles = try container.decodeIfPresent([String].self, forKey: .secondaryMuscles) ?? []
+        self.instructions = try container.decodeIfPresent([String].self, forKey: .instructions) ?? []
     }
 }
 

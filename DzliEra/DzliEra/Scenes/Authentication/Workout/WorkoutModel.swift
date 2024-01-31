@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Model
-struct Routine {
+struct Routine: Codable {
     var title: String
     var exercises: [Exercise]
 }
