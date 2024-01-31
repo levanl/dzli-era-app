@@ -11,22 +11,22 @@ import Vortex
 struct NiceJobView: View {
     var workout: DoneWorkout?
     
-    @State private var isConfettiActive = false
+    @State private var isFireworksActive = false
+    
     
     var body: some View {
         VStack {
+            
             Text("Good job!")
                 .font(.title)
                 .foregroundColor(.white)
-            
-            
             Spacer()
-            
-            
-            
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black.edgesIgnoringSafeArea(.all))
+        .onAppear {
+            isFireworksActive = true
+        }
         .overlay(
             VortexView(createFireworks()
                       ) {
@@ -37,7 +37,6 @@ struct NiceJobView: View {
                       }
                 .ignoresSafeArea()
         )
-        
     }
     
     func createFireworks() -> VortexSystem {
