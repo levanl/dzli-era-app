@@ -114,6 +114,18 @@ final class UserManager {
 
         try await userDocument(userId: userId).setData(data, merge: true)
     }
+    
+    // MARK: - Get Routines for User
+        func getRoutines(userId: String) async throws -> [Routine] {
+            let document = userDocument(userId: userId)
+            let documentSnapshot = try await document.getDocument()
+
+            guard let data = try? documentSnapshot.data(as: DBUser.self) else {
+                throw NSError(domain: "YourErrorDomain", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to decode user data."])
+            }
+
+            return data.routines ?? []
+        }
 }
 
 extension Exercise {
