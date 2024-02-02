@@ -331,7 +331,8 @@ class SaveWorkoutViewController: UIViewController {
         let title = titleTextView.text ?? ""
         let workout = DoneWorkout(title: title, elapsedTime: elapsedTime, totalReps: totalReps, images: libraryImages)
         
-        self.navigationController?.present(UIHostingController(rootView: NiceJobView()), animated: true)
+        
+        self.navigationController?.present(UIHostingController(rootView: NiceJobView(workout: workout)), animated: true)
 
             print("finish")
     }

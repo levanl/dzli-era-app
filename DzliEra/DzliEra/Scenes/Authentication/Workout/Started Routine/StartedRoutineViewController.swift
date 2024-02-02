@@ -270,7 +270,7 @@ extension StartedRoutineViewController: StartedWorkoutTableViewCellDelegate {
             totalReps -= reps
             print(sets)
         }
-        repsCounterLabel.text = String(totalSets)
-        setCounterLabel.text = String(totalReps)
+        repsCounterLabel.text = String(totalReps)
+        setCounterLabel.text = String(totalSets)
     }
 }

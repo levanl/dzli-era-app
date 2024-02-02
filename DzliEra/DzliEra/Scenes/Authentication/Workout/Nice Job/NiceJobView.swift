@@ -9,17 +9,74 @@ import SwiftUI
 import Vortex
 
 struct NiceJobView: View {
-    var workout: DoneWorkout?
+    var workout: DoneWorkout
     
     @State private var isFireworksActive = false
-    
+    @StateObject var viewModel: NiceJobViewModel = NiceJobViewModel()
     
     var body: some View {
         VStack {
             
-            Text("Good job!")
+            Text("Nice Work!")
                 .font(.title)
                 .foregroundColor(.white)
+                .padding(.bottom, 30)
+            
+            VStack {
+                TabView {
+                    ForEach (0..<workout.images.count + 1) {  index in
+                        if index == 0 {
+                            VStack(alignment: .leading) {
+                                Text("Summary")
+                                    .multilineTextAlignment(.center)
+                                    .font(.title)
+                                    .foregroundColor(.black)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.horizontal, 16)
+                                    .padding(.top, 24)
+                                    .padding(.bottom, 46)
+                                
+                                
+                                HStack {
+                                    InfoBox(title: "Duration", value: "\(workout.elapsedTime)",icon: "Timer")
+                                    Spacer()
+                                    InfoBox(title: "Exercises", value: "\(workout.totalReps)",icon: "Kunti")
+                                }
+                                .padding(.horizontal, 12)
+                                
+                                HStack {
+                                    InfoBox(title: "Sets", value: "\(workout.totalReps)", icon: "Repeat")
+                                    Spacer()
+                                    InfoBox(title: "Volume", value: "\(workout.totalReps)",icon: "wona")
+                                }
+                                .padding(.horizontal, 12)
+    
+                                Spacer()
+                            }
+                            
+                            
+                           
+                        } else {
+                            Image(uiImage: workout.images[index - 1])
+                                .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 380, height: 450)
+                                            .clipped()
+
+                        }
+                    }
+                }
+                .background(.white)
+                .tabViewStyle(PageTabViewStyle())
+                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .frame(height: 450)
+            }
+            .padding(.horizontal, 10)
+            
+            
+            
+            
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -94,6 +151,42 @@ struct NiceJobView: View {
 
 struct NiceJobView_Previews: PreviewProvider {
     static var previews: some View {
-        NiceJobView()
+        NiceJobView(workout: DoneWorkout(title: "abara", elapsedTime: 52, totalReps: 5, images: [UIImage(named: "onboarding1")!, UIImage(named: "onboarding2")!, UIImage(named: "onboarding3")!]))
+    }
+}
+
+
+struct InfoBox: View {
+    var title: String
+    var value: String
+    var icon: String?
+    
+    
+    var body: some View {
+        VStack {
+            if let icon = icon {
+                Image(icon)
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(.white)
+                    .padding(.bottom, 4)
+            }
+            
+            Text(value)
+                .font(.title)
+                .foregroundColor(.black)
+            
+            Text(title)
+                .font(.footnote)
+                .foregroundColor(.gray)
+        }
+        .padding()
+        .frame(maxWidth: .infinity)
+        .background(Color.white)
+        .cornerRadius(10)
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(Color.gray, lineWidth: 1)
+        )
     }
 }

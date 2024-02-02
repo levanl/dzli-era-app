@@ -83,6 +83,7 @@ class StartedWorkoutTableViewCell: UITableViewCell {
         stackView.axis = .horizontal
         stackView.spacing = 8
         stackView.distribution = .fillEqually
+        stackView.backgroundColor = .black
         return stackView
     }()
     
@@ -198,6 +199,7 @@ class StartedWorkoutTableViewCell: UITableViewCell {
     }
     
     @objc private func checkmarkTapped() {
+        
         if infoStackView.backgroundColor == .black {
             
             let newPaletteColors: [UIColor] = [.white, UIColor(red: 129/255, green: 203/255, blue: 74/255, alpha: 1.0), UIColor(red: 129/255, green: 203/255, blue: 74/255, alpha: 1.0)]
@@ -208,6 +210,7 @@ class StartedWorkoutTableViewCell: UITableViewCell {
             setSelected(true, animated: true)
             currentSets = Int(setsTextField.text ?? "") ?? 0
             currentReps = Int(repsTextField.text ?? "") ?? 0
+            print("clicked black")
             delegate?.updateValues(in: self, with: currentSets, reps: currentReps)
         } else {
             let config = UIImage.SymbolConfiguration(paletteColors: [.white, .secondaryLabel, .secondaryLabel])
@@ -217,6 +220,7 @@ class StartedWorkoutTableViewCell: UITableViewCell {
             setSelected(false, animated: true)
             currentSets = Int(setsTextField.text ?? "") ?? 0
             currentReps = Int(repsTextField.text ?? "") ?? 0
+            print("clicked green")
             delegate?.updateValues(in: self, with: currentSets, reps: currentReps)
         }
     }

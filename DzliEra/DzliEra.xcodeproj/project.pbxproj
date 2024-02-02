@@ -13,6 +13,7 @@
 		C40920D32B6179D40089F99E /* StartedWorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40920D22B6179D40089F99E /* StartedWorkoutTableViewCell.swift */; };
 		C40920D52B6276110089F99E /* WorkoutInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40920D42B6276110089F99E /* WorkoutInfoTableViewCell.swift */; };
 		C40920D72B63A7040089F99E /* TableViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40920D62B63A7040089F99E /* TableViewFooter.swift */; };
+		C446D1182B6AAE4F00C319A1 /* NiceJobViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446D1172B6AAE4F00C319A1 /* NiceJobViewModel.swift */; };
 		C473B0962B63BF1300C34CC0 /* SaveWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */; };
 		C473B0982B63DEAD00C34CC0 /* SaveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B0972B63DEAD00C34CC0 /* SaveCollectionViewCell.swift */; };
 		C473B09E2B6685BF00C34CC0 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B09D2B6685BF00C34CC0 /* UserManager.swift */; };
@@ -110,6 +111,7 @@
 		C40920D22B6179D40089F99E /* StartedWorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedWorkoutTableViewCell.swift; sourceTree = "<group>"; };
 		C40920D42B6276110089F99E /* WorkoutInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutInfoTableViewCell.swift; sourceTree = "<group>"; };
 		C40920D62B63A7040089F99E /* TableViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewFooter.swift; sourceTree = "<group>"; };
+		C446D1172B6AAE4F00C319A1 /* NiceJobViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiceJobViewModel.swift; sourceTree = "<group>"; };
 		C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveWorkoutViewController.swift; sourceTree = "<group>"; };
 		C473B0972B63DEAD00C34CC0 /* SaveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCollectionViewCell.swift; sourceTree = "<group>"; };
 		C473B09D2B6685BF00C34CC0 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				C473B0A02B6A717700C34CC0 /* NiceJobView.swift */,
+				C446D1172B6AAE4F00C319A1 /* NiceJobViewModel.swift */,
 			);
 			path = "Nice Job";
 			sourceTree = "<group>";
@@ -628,6 +631,7 @@
 				C4F3A0232B5E87E800B921FB /* ExerciseDetailsViewController.swift in Sources */,
 				C473B0A12B6A717700C34CC0 /* NiceJobView.swift in Sources */,
 				C40920CB2B6030650089F99E /* WorkoutTableViewCell.swift in Sources */,
+				C446D1182B6AAE4F00C319A1 /* NiceJobViewModel.swift in Sources */,
 				C4BB27C62B5ABA6B0021AE4C /* AuthPasswordFieldComponent.swift in Sources */,
 				C4BB27B12B59514A0021AE4C /* AuthenticationManager.swift in Sources */,
 				C4D4E5272B57FC19000B0AE1 /* OnBoardingModel.swift in Sources */,
