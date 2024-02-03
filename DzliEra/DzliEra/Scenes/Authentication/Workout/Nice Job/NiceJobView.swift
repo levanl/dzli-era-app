@@ -50,19 +50,19 @@ struct NiceJobView: View {
                                     InfoBox(title: "Volume", value: "\(workout.totalReps)",icon: "wona")
                                 }
                                 .padding(.horizontal, 12)
-    
+                                
                                 Spacer()
                             }
                             
                             
-                           
+                            
                         } else {
                             Image(uiImage: workout.images[index - 1])
                                 .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 380, height: 450)
-                                            .clipped()
-
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 380, height: 450)
+                                .clipped()
+                            
                         }
                     }
                 }
@@ -74,10 +74,22 @@ struct NiceJobView: View {
             }
             .padding(.horizontal, 10)
             
-            
-            
-            
             Spacer()
+            Button(action: {
+                
+            }) {
+                Text("Done")
+                    .font(.custom("Helvetica-Bold", size: 20))
+            }
+            .font(.headline)
+            .foregroundColor(.white)
+            .frame(height: 55)
+            .frame(maxWidth: .infinity)
+            .background(AppColors.authButtonColor)
+            .cornerRadius(10)
+            .shadow(color: Color.blue.opacity(0.5), radius: 10, x: 0, y: 5)
+            .padding(.horizontal, 10)
+        
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black.edgesIgnoringSafeArea(.all))
@@ -149,11 +161,11 @@ struct NiceJobView: View {
 }
 
 
-struct NiceJobView_Previews: PreviewProvider {
-    static var previews: some View {
-        NiceJobView(workout: DoneWorkout(title: "abara", elapsedTime: 52, totalReps: 5, images: [UIImage(named: "onboarding1")!, UIImage(named: "onboarding2")!, UIImage(named: "onboarding3")!]))
-    }
-}
+//struct NiceJobView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NiceJobView(workout: DoneWorkout(title: "abara", elapsedTime: 52, totalReps: 5, images: [UIImage(named: "onboarding1")!, UIImage(named: "onboarding2")!, UIImage(named: "onboarding3")!]))
+//    }
+//}
 
 
 struct InfoBox: View {
