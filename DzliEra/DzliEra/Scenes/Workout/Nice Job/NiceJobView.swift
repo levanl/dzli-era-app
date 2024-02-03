@@ -89,7 +89,7 @@ struct NiceJobView: View {
             .cornerRadius(10)
             .shadow(color: Color.blue.opacity(0.5), radius: 10, x: 0, y: 5)
             .padding(.horizontal, 10)
-        
+            
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black.edgesIgnoringSafeArea(.all))

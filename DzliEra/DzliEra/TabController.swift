@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class TabController: UITabBarController {
     
@@ -26,7 +27,9 @@ class TabController: UITabBarController {
         UITabBar.appearance().standardAppearance = tabBarAppearance
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         
-        let home = self.createNav(with: "Home", and: UIImage(systemName: "house"), vc: HomeViewController())
+        let homeView = UIHostingController(rootView: HomeView())
+
+        let home = self.createNav(with: "Home", and: UIImage(systemName: "house"), vc: homeView)
         let profile = self.createNav(with: "Workout", and: UIImage(systemName: "list.clipboard.fill"), vc: WorkoutViewController())
         let workout = self.createNav(with: "Profile", and: UIImage(systemName: "person.crop.circle"), vc: ProfileViewController())
         
