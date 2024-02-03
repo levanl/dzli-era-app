@@ -14,7 +14,7 @@ struct NiceJobView: View, WithRootNavigationController {
     @ObservedObject var sharedViewModel = SharedViewModel.shared
     @State private var isOverlayVisible = true
     @Environment(\.presentationMode) var presentationMode
-
+    
     
     var body: some View {
         VStack {
@@ -78,7 +78,7 @@ struct NiceJobView: View, WithRootNavigationController {
             
             Spacer()
             Button(action: {
-                let newWorkout = PostedWorkout(userEmail: "example@gmail.com", time: "10", reps: "20", sets: "20")
+                let newWorkout = PostedWorkout(userEmail: "example@gmail.com", time: "10", reps: "20", sets: "20", exercises: workout.exercises)
                 sharedViewModel.postableWorkouts.append(newWorkout)
                 presentationMode.wrappedValue.dismiss()
                 self.push(viewController: TabController(), animated: true)
@@ -98,24 +98,24 @@ struct NiceJobView: View, WithRootNavigationController {
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.black.edgesIgnoringSafeArea(.all).allowsHitTesting(true))
+        .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear {
             Timer.scheduledTimer(withTimeInterval: 7, repeats: false) { _ in
-                            isOverlayVisible = false
-                        }
+                isOverlayVisible = false
+            }
         }
         .overlay(
             Group {
-                            if isOverlayVisible {
-                                VortexView(createFireworks()) {
-                                    Circle()
-                                        .fill(.white)
-                                        .frame(width: 32)
-                                        .tag("circle")
-                                }
-                                .ignoresSafeArea()
-                            }
-                        }
+                if isOverlayVisible {
+                    VortexView(createFireworks()) {
+                        Circle()
+                            .fill(.white)
+                            .frame(width: 32)
+                            .tag("circle")
+                    }
+                    .ignoresSafeArea()
+                }
+            }
         )
     }
     

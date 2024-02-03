@@ -13,6 +13,6 @@ struct PostedWorkout: Identifiable {
     let time: String
     let reps: String
     let sets: String
-    
+    let exercises: [Exercise]
     
 }
