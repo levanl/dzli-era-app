@@ -8,11 +8,14 @@
 import SwiftUI
 import Vortex
 
-struct NiceJobView: View {
+struct NiceJobView: View, WithRootNavigationController {
     var workout: DoneWorkout
     
     @State private var isFireworksActive = false
     @StateObject var viewModel: NiceJobViewModel = NiceJobViewModel()
+    @State private var isOverlayVisible = true
+    @Environment(\.presentationMode) var presentationMode
+
     
     var body: some View {
         VStack {
@@ -76,7 +79,10 @@ struct NiceJobView: View {
             
             Spacer()
             Button(action: {
+                presentationMode.wrappedValue.dismiss()
+                self.push(viewController: TabController(), animated: true)
                 
+                print("oee")
             }) {
                 Text("Done")
                     .font(.custom("Helvetica-Bold", size: 20))
@@ -92,19 +98,24 @@ struct NiceJobView: View {
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.black.edgesIgnoringSafeArea(.all))
+        .background(Color.black.edgesIgnoringSafeArea(.all).allowsHitTesting(true))
         .onAppear {
-            isFireworksActive = true
+            Timer.scheduledTimer(withTimeInterval: 7, repeats: false) { _ in
+                            isOverlayVisible = false
+                        }
         }
         .overlay(
-            VortexView(createFireworks()
-                      ) {
-                          Circle()
-                              .fill(.white)
-                              .frame(width: 32)
-                              .tag("circle")
-                      }
-                .ignoresSafeArea()
+            Group {
+                            if isOverlayVisible {
+                                VortexView(createFireworks()) {
+                                    Circle()
+                                        .fill(.white)
+                                        .frame(width: 32)
+                                        .tag("circle")
+                                }
+                                .ignoresSafeArea()
+                            }
+                        }
         )
     }
     

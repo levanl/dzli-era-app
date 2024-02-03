@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    var postableWorkouts: [PostedWorkout]?
+    
     var body: some View {
-        Text("HomeView")
+            Text("HomeView")
+    
     }
 }
 
 #Preview {
-    HomeView()
+    HomeView(postableWorkouts: [PostedWorkout(userEmail: "levexa@gmail.com", time: "55.10", reps: "12", sets: "12", exercises: [Exercise(name: "levana", bodyPart: "fexi", equipment: .bodyWeight, gifURL: "heyo", id: "soi", target: "delts")])])
 }
