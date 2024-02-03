@@ -7,16 +7,27 @@
 
 import SwiftUI
 
+class SharedViewModel: ObservableObject {
+    static let shared = SharedViewModel()
+
+    @Published var postableWorkouts: [PostedWorkout] = [PostedWorkout(userEmail: "example@gmail.com", time: "10", reps: "20", sets: "20")]
+
+    private init() {}
+}
+
 struct HomeView: View {
     
-    var postableWorkouts: [PostedWorkout]?
+    @ObservedObject var sharedViewModel = SharedViewModel.shared
     
     var body: some View {
-            Text("HomeView")
-    
+        VStack {
+            List(sharedViewModel.postableWorkouts, id: \.id) { workout in
+                Text(workout.sets)
+            }
+        }
     }
 }
 
 #Preview {
-    HomeView(postableWorkouts: [PostedWorkout(userEmail: "levexa@gmail.com", time: "55.10", reps: "12", sets: "12", exercises: [Exercise(name: "levana", bodyPart: "fexi", equipment: .bodyWeight, gifURL: "heyo", id: "soi", target: "delts")])])
+    HomeView()
 }

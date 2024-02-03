@@ -10,9 +10,8 @@ import Vortex
 
 struct NiceJobView: View, WithRootNavigationController {
     var workout: DoneWorkout
-    
     @State private var isFireworksActive = false
-    @StateObject var viewModel: NiceJobViewModel = NiceJobViewModel()
+    @ObservedObject var sharedViewModel = SharedViewModel.shared
     @State private var isOverlayVisible = true
     @Environment(\.presentationMode) var presentationMode
 
@@ -79,10 +78,11 @@ struct NiceJobView: View, WithRootNavigationController {
             
             Spacer()
             Button(action: {
+                let newWorkout = PostedWorkout(userEmail: "example@gmail.com", time: "10", reps: "20", sets: "20")
+                sharedViewModel.postableWorkouts.append(newWorkout)
                 presentationMode.wrappedValue.dismiss()
                 self.push(viewController: TabController(), animated: true)
                 
-                print("oee")
             }) {
                 Text("Done")
                     .font(.custom("Helvetica-Bold", size: 20))
@@ -91,7 +91,7 @@ struct NiceJobView: View, WithRootNavigationController {
             .foregroundColor(.white)
             .frame(height: 55)
             .frame(maxWidth: .infinity)
-            .background(AppColors.authButtonColor)
+            .background(isOverlayVisible ? AppColors.gray : AppColors.authButtonColor)
             .cornerRadius(10)
             .shadow(color: Color.blue.opacity(0.5), radius: 10, x: 0, y: 5)
             .padding(.horizontal, 10)

@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct PostedWorkout {
-    
+struct PostedWorkout: Identifiable {
+    let id = UUID()
     let userEmail: String
     let time: String
     let reps: String
     let sets: String
-    let exercises: [Exercise]
+    
     
 }
