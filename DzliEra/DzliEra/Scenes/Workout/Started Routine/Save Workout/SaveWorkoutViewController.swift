@@ -6,13 +6,15 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SaveWorkoutViewController: UIViewController {
     private var libraryImages: [UIImage] = []
     var elapsedTime: Int = 0
     var totalSets: Int = 0
     var totalReps: Int = 0
-    
+    var exercises: [Exercise] = []
+
     private let durationLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 14)
@@ -327,7 +329,13 @@ class SaveWorkoutViewController: UIViewController {
     }
     
     @objc private func finishButtonTapped() {
-        print("finish")
+        let title = titleTextView.text ?? ""
+        let workout = DoneWorkout(title: title, elapsedTime: elapsedTime, totalReps: totalReps, images: libraryImages, exercises: exercises)
+        
+        
+        self.navigationController?.present(UIHostingController(rootView: NiceJobView(workout: workout)), animated: true)
+
+            print("finish")
     }
     
     @objc private func discardButtonTapped() {
@@ -390,4 +398,14 @@ extension SaveWorkoutViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 120, height: 120)
     }
+}
+
+
+
+struct DoneWorkout {
+    var title: String
+    var elapsedTime: Int
+    var totalReps: Int
+    var images: [UIImage]
+    var exercises: [Exercise]
 }

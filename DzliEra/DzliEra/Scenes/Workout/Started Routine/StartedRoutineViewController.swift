@@ -228,6 +228,7 @@ class StartedRoutineViewController: UIViewController {
         saveWorkoutVC.elapsedTime = elapsedTime
         saveWorkoutVC.totalSets = totalSets
         saveWorkoutVC.totalReps = totalReps
+        saveWorkoutVC.exercises = routine?.exercises ?? []
         
         navigationController?.pushViewController(saveWorkoutVC, animated: true)
         print("Finish button tapped")
@@ -264,13 +265,12 @@ extension StartedRoutineViewController: StartedWorkoutTableViewCellDelegate {
             totalSets += sets
             totalReps += reps
             print(sets)
-            
         } else {
             totalSets -= sets
             totalReps -= reps
             print(sets)
         }
-        repsCounterLabel.text = String(totalSets)
-        setCounterLabel.text = String(totalReps)
+        repsCounterLabel.text = String(totalReps)
+        setCounterLabel.text = String(totalSets)
     }
 }

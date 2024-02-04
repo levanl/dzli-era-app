@@ -20,6 +20,18 @@ struct Exercise: Codable {
         case id, name, target, secondaryMuscles, instructions
     }
     
+    
+    init(name: String, bodyPart: String, equipment: Equipment, gifURL: String, id: String, target: String, secondaryMuscles: [String]? = nil, instructions: [String]? = nil) {
+            self.name = name
+            self.bodyPart = bodyPart
+            self.equipment = equipment
+            self.gifURL = gifURL
+            self.id = id
+            self.target = target
+            self.secondaryMuscles = secondaryMuscles ?? []
+            self.instructions = instructions ?? []
+        }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         

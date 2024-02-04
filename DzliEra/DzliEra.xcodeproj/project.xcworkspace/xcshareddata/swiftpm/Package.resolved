@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "effects-library",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/GetStream/effects-library",
+      "state" : {
+        "revision" : "09ebd8e7536aa6dd70a48042244524e895ccd2aa",
+        "version" : "1.0.0"
+      }
+    },
+    {
       "identity" : "firebase-ios-sdk",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/firebase-ios-sdk.git",
@@ -124,6 +133,15 @@
       "state" : {
         "revision" : "65e8f29b2d63c4e38e736b25c27b83e012159be8",
         "version" : "1.25.2"
+      }
+    },
+    {
+      "identity" : "vortex",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/twostraws/Vortex",
+      "state" : {
+        "revision" : "3eabf0572fd37e943be64b9d2589f97f1999cb26",
+        "version" : "1.0.0"
       }
     }
   ],
