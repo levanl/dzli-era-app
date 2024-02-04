@@ -63,25 +63,24 @@ struct PostedWorkoutView: View {
             Chart {
                 ForEach(chartData) { data in
                     BarMark(x: .value("count", data.count),
-                            y: .value("muscleType", data.muscleType)
+                            y: .value("muscleType", data.muscleType),
+                            height: 10
                     )
+                    
+                    .annotation(position: .trailing, alignment: .leading) {
+                        Text("33%")
+                            .foregroundStyle(Color.white)
+                    }
                     
                 }
             }
             .frame(height: 200)
-            .chartXAxis {AxisMarks(values: .automatic) {
-                AxisValueLabel()
-                    .foregroundStyle(Color.white)
-                
-                }
-            }
             .chartYAxis {AxisMarks(values: .automatic) {
                 AxisValueLabel()
                     .foregroundStyle(Color.white)
+                    .font(.title3)
                 }
             }
-
-            .padding(.trailing, 30)
 
             Spacer()
             
