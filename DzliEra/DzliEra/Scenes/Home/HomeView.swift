@@ -29,7 +29,7 @@ class SharedViewModel: ObservableObject {
     private init() {}
 }
 
-struct HomeView: View {
+struct HomeView: View, WithRootNavigationController {
     
     @ObservedObject var sharedViewModel = SharedViewModel.shared
     
@@ -109,6 +109,9 @@ struct HomeView: View {
                     }
                     .frame(height: 300)
                     .listRowBackground(AppColors.gray)
+                    .onTapGesture {
+                        self.push(viewController: UIHostingController(rootView: PostedWorkoutView(workout: workout)), animated: true)
+                    }
                     
                 }
             }
