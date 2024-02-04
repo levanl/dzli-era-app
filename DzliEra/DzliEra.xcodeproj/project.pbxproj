@@ -437,9 +437,17 @@
 			path = OnBoarding;
 			sourceTree = "<group>";
 		};
+		C4E027A32B6FA1C2000FA8B6 /* PostedWorkoutView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PostedWorkoutView;
+			sourceTree = "<group>";
+		};
 		C4F3A0022B5BBF5800B921FB /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				C4E027A32B6FA1C2000FA8B6 /* PostedWorkoutView */,
 				C4E0279F2B6E77F4000FA8B6 /* HomeView.swift */,
 				C4E027A12B6E7AE6000FA8B6 /* HomeModel.swift */,
 			);

@@ -78,7 +78,8 @@ struct NiceJobView: View, WithRootNavigationController {
             
             Spacer()
             Button(action: {
-                let newWorkout = PostedWorkout(userEmail: "example@gmail.com", time: "10", reps: "20", sets: "20", exercises: workout.exercises)
+
+                let newWorkout = PostedWorkout(userEmail: sharedViewModel.user?.email ?? "Default@gmail.com", time: String(workout.elapsedTime), reps: String(workout.totalReps), sets: "21", exercises: workout.exercises)
                 sharedViewModel.postableWorkouts.append(newWorkout)
                 presentationMode.wrappedValue.dismiss()
                 self.push(viewController: TabController(), animated: true)
@@ -103,6 +104,7 @@ struct NiceJobView: View, WithRootNavigationController {
             Timer.scheduledTimer(withTimeInterval: 7, repeats: false) { _ in
                 isOverlayVisible = false
             }
+            sharedViewModel.fetchCurrentUser()
         }
         .overlay(
             Group {
