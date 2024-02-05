@@ -90,6 +90,7 @@
 		C4E027A22B6E7AE6000FA8B6 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E027A12B6E7AE6000FA8B6 /* HomeModel.swift */; };
 		C4E027A52B6FAE39000FA8B6 /* PostedWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E027A42B6FAE39000FA8B6 /* PostedWorkoutView.swift */; };
 		C4E027A72B6FEF28000FA8B6 /* ProfileChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E027A62B6FEF28000FA8B6 /* ProfileChart.swift */; };
+		C4E027AA2B711526000FA8B6 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E027A92B711526000FA8B6 /* StatisticsView.swift */; };
 		C4F3A0062B5BC02B00B921FB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0052B5BC02B00B921FB /* ProfileViewController.swift */; };
 		C4F3A0082B5BC04700B921FB /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0072B5BC04700B921FB /* WorkoutViewController.swift */; };
 		C4F3A00C2B5BC7B600B921FB /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A00B2B5BC7B600B921FB /* TabController.swift */; };
@@ -164,6 +165,7 @@
 		C4E027A12B6E7AE6000FA8B6 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		C4E027A42B6FAE39000FA8B6 /* PostedWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostedWorkoutView.swift; sourceTree = "<group>"; };
 		C4E027A62B6FEF28000FA8B6 /* ProfileChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileChart.swift; sourceTree = "<group>"; };
+		C4E027A92B711526000FA8B6 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		C4F3A0052B5BC02B00B921FB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C4F3A0072B5BC04700B921FB /* WorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
 		C4F3A00B2B5BC7B600B921FB /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
@@ -449,6 +451,14 @@
 			path = PostedWorkoutView;
 			sourceTree = "<group>";
 		};
+		C4E027A82B711516000FA8B6 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				C4E027A92B711526000FA8B6 /* StatisticsView.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
 		C4F3A0022B5BBF5800B921FB /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -479,6 +489,7 @@
 		C4F3A0042B5BBFC300B921FB /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				C4E027A82B711516000FA8B6 /* Statistics */,
 				C4F3A0052B5BC02B00B921FB /* ProfileViewController.swift */,
 				C4E027A62B6FEF28000FA8B6 /* ProfileChart.swift */,
 			);
@@ -669,6 +680,7 @@
 				C4E027A22B6E7AE6000FA8B6 /* HomeModel.swift in Sources */,
 				C40920D72B63A7040089F99E /* TableViewFooter.swift in Sources */,
 				C4F3A0082B5BC04700B921FB /* WorkoutViewController.swift in Sources */,
+				C4E027AA2B711526000FA8B6 /* StatisticsView.swift in Sources */,
 				C4F3A01D2B5D32F900B921FB /* ExerciseListViewModel.swift in Sources */,
 				C4BB27BC2B5A87660021AE4C /* WithRootNavigationController.swift in Sources */,
 				C40920D52B6276110089F99E /* WorkoutInfoTableViewCell.swift in Sources */,

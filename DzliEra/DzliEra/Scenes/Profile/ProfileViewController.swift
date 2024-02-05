@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SwiftUI
+
 
 class ProfileViewController: UIViewController {
     
@@ -37,6 +39,75 @@ class ProfileViewController: UIViewController {
         return stackView
     }()
     
+    private let statisticsButton: UIButton = {
+        let button = UIButton()
+        let list = UIImage(systemName: "chart.bar", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.blue, renderingMode: .alwaysOriginal)
+        button.setImage(list, for: .normal)
+        button.setTitle("  Statistics", for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = UIColor(AppColors.gray)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        button.layer.cornerRadius = 6
+        return button
+    }()
+    
+    private let exerciseLibraryButton: UIButton = {
+        let button = UIButton()
+        let magnifyingglass = UIImage(systemName: "book.closed.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.blue, renderingMode: .alwaysOriginal)
+        button.setImage(magnifyingglass, for: .normal)
+        button.setTitle("  Exercises", for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = UIColor(AppColors.gray)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        button.layer.cornerRadius = 6
+        return button
+    }()
+    
+    private let infoStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 8
+        return stackView
+    }()
+    
+    private let foodButton: UIButton = {
+        let button = UIButton()
+        let list = UIImage(systemName: "fork.knife", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.blue, renderingMode: .alwaysOriginal)
+        button.setImage(list, for: .normal)
+        button.setTitle("  Nutrition", for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = UIColor(AppColors.gray)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        button.layer.cornerRadius = 6
+        return button
+    }()
+    
+    private let calendarButton: UIButton = {
+        let button = UIButton()
+        let magnifyingglass = UIImage(systemName: "calendar", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.blue, renderingMode: .alwaysOriginal)
+        button.setImage(magnifyingglass, for: .normal)
+        button.setTitle("  Calendar", for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = UIColor(AppColors.gray)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        button.layer.cornerRadius = 6
+        return button
+    }()
+    
+    private let secondaryInfoStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 8
+        return stackView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +128,7 @@ class ProfileViewController: UIViewController {
         
         view.backgroundColor = .black
         setupProfileStackView()
+        setupInfoStackViews()
     }
     
     
@@ -77,10 +149,38 @@ class ProfileViewController: UIViewController {
         
     }
     
+    private func setupInfoStackViews() {
+        view.addSubview(infoStackView)
+        
+        infoStackView.addArrangedSubview(statisticsButton)
+        statisticsButton.addTarget(self, action: #selector(statisticsButtonTapped), for: .touchUpInside)
+        
+        infoStackView.addArrangedSubview(exerciseLibraryButton)
+        
+        NSLayoutConstraint.activate([
+            infoStackView.topAnchor.constraint(equalTo: profileStackView.bottomAnchor, constant: 60),
+            infoStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            infoStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+        ])
+        
+        view.addSubview(secondaryInfoStackView)
+        
+        secondaryInfoStackView.addArrangedSubview(foodButton)
+        secondaryInfoStackView.addArrangedSubview(calendarButton)
+        
+        NSLayoutConstraint.activate([
+            secondaryInfoStackView.topAnchor.constraint(equalTo: infoStackView.bottomAnchor, constant: 8),
+            secondaryInfoStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            secondaryInfoStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+        ])
+    }
+
     private func loadProfileImage() {
-            self.profileImageView.image = UIImage(named: "onboarding1")
-        }
-   
+        self.profileImageView.image = UIImage(named: "onboarding1")
+    }
     
+    @objc private func statisticsButtonTapped() {
+        
+    }
     
 }
