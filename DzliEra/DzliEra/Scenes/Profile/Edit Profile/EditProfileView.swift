@@ -10,15 +10,21 @@ import PhotosUI
 
 struct EditProfileView: View {
     
-    @StateObject private var photoViewModel = PhotoPickerViewModel()
+    @StateObject private var photoLibraryViewModel = PhotoPickerViewModel()
     @State private var isShowingActionSheet = false
     @State private var avatarImage: UIImage?
     @State var showPicker: Bool = false
+    @State private var name: String = ""
+    @State private var bio: String = ""
+    @State private var sex: String = ""
+    @State private var selectedSexIndex = 0
+    
+    let sexes = ["Male", "Female", "Other"]
     
     var body: some View {
         VStack {
             
-            Image(uiImage: photoViewModel.selectedImage ?? UIImage(resource: .onboarding1))
+            Image(uiImage: photoLibraryViewModel.selectedImage ?? UIImage(resource: .onboarding1))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 120, height: 120)
@@ -26,8 +32,6 @@ struct EditProfileView: View {
                 .overlay(Circle().stroke(Color.white, lineWidth: 4))
                 .shadow(radius: 10)
                 .padding(.bottom, 10)
-            
-            
             
             Button(action: {
                 self.isShowingActionSheet.toggle()
@@ -44,14 +48,92 @@ struct EditProfileView: View {
                 Button {
                     showPicker.toggle()
                 } label: {
-                    Label("Gallery", systemImage: "photo.artframe")
+                    Label("Photo Library", systemImage: "photo.artframe")
                 }
             }
-            .photosPicker(isPresented: $showPicker, selection: $photoViewModel.imageSelection)
+            .photosPicker(isPresented: $showPicker, selection: $photoLibraryViewModel.imageSelection)
             
+            VStack(alignment: .leading) {
+                Text("Public Profile Data")
+                    .foregroundColor(.gray)
+                    .padding(.leading)
+                    .font(.headline)
+                
+                
+                HStack {
+                    Text("Name:")
+                        .foregroundColor(.white)
+                        .padding(.leading)
+                    Spacer()
+                    TextField("Enter your name", text: $name)
+                        .foregroundColor(.white)
+                        .frame(height: 80)
+                        .padding(.trailing)
+                }
+                
+                Divider()
+                    .background(.white)
+                
+                HStack {
+                    Text("Bio:")
+                        .foregroundColor(.white)
+                        .padding(.leading)
+                    Spacer()
+                    TextField("Enter your bio", text: $bio)
+                        .foregroundColor(.white)
+                        .frame(height: 80)
+                        .padding(.trailing)
+                }
+                Divider()
+                    .background(.white)
+                
+            }
+            .padding(.top, 30)
+            .padding(.bottom, 40)
+            
+            VStack(alignment: .leading) {
+                Text("Private Data")
+                    .foregroundColor(.gray)
+                    .padding(.leading)
+                    .font(.headline)
+                
+                HStack {
+                    Text("Sex")
+                        .foregroundColor(.white)
+                        .padding(.leading)
+                        .padding(.trailing, 8)
+                    Picker(selection: $selectedSexIndex, label: Text("")) {
+                        ForEach(0 ..< sexes.count) {
+                            Text(self.sexes[$0])
+                        }
+                    }
+                    .pickerStyle(MenuPickerStyle())
+                    .frame(height: 50)
+                    Spacer()
+                }
+                
+                Divider()
+                    .background(.white)
+            }
             Spacer()
             
+            Button(action: {
+                // Implement save functionality here
+            }) {
+                Text("Save")
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .cornerRadius(10)
+            }
+            .padding()
+            
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.black.edgesIgnoringSafeArea(.all))
+        
+        
     }
 }
 
@@ -75,7 +157,9 @@ final class PhotoPickerViewModel: ObservableObject {
         Task {
             if let data = try? await selection.loadTransferable(type: Data.self) {
                 if let uiImage = UIImage(data: data) {
-                    selectedImage = uiImage
+                    DispatchQueue.main.async { [weak self] in
+                        self?.selectedImage = uiImage
+                    }
                     return
                 }
             }

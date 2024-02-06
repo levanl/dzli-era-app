@@ -92,6 +92,7 @@
 		C4E027A72B6FEF28000FA8B6 /* ProfileChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E027A62B6FEF28000FA8B6 /* ProfileChart.swift */; };
 		C4E027AA2B711526000FA8B6 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E027A92B711526000FA8B6 /* StatisticsView.swift */; };
 		C4E027AD2B72489B000FA8B6 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E027AC2B72489B000FA8B6 /* EditProfileView.swift */; };
+		C4E027AF2B728476000FA8B6 /* FrameHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E027AE2B728476000FA8B6 /* FrameHandler.swift */; };
 		C4F3A0062B5BC02B00B921FB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0052B5BC02B00B921FB /* ProfileViewController.swift */; };
 		C4F3A0082B5BC04700B921FB /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0072B5BC04700B921FB /* WorkoutViewController.swift */; };
 		C4F3A00C2B5BC7B600B921FB /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A00B2B5BC7B600B921FB /* TabController.swift */; };
@@ -168,6 +169,7 @@
 		C4E027A62B6FEF28000FA8B6 /* ProfileChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileChart.swift; sourceTree = "<group>"; };
 		C4E027A92B711526000FA8B6 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		C4E027AC2B72489B000FA8B6 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		C4E027AE2B728476000FA8B6 /* FrameHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameHandler.swift; sourceTree = "<group>"; };
 		C4F3A0052B5BC02B00B921FB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C4F3A0072B5BC04700B921FB /* WorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
 		C4F3A00B2B5BC7B600B921FB /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 			isa = PBXGroup;
 			children = (
 				C4E027AC2B72489B000FA8B6 /* EditProfileView.swift */,
+				C4E027AE2B728476000FA8B6 /* FrameHandler.swift */,
 			);
 			path = "Edit Profile";
 			sourceTree = "<group>";
@@ -676,6 +679,7 @@
 				C4BB27B12B59514A0021AE4C /* AuthenticationManager.swift in Sources */,
 				C4D4E5272B57FC19000B0AE1 /* OnBoardingModel.swift in Sources */,
 				C4F3A0262B5E993200B921FB /* GifLoader.swift in Sources */,
+				C4E027AF2B728476000FA8B6 /* FrameHandler.swift in Sources */,
 				C4BB27702B5915950021AE4C /* OnBoardingViewModel.swift in Sources */,
 				C473B0962B63BF1300C34CC0 /* SaveWorkoutViewController.swift in Sources */,
 				C4D4E51D2B57F873000B0AE1 /* ColorExtension.swift in Sources */,
@@ -857,6 +861,7 @@
 				DEVELOPMENT_TEAM = X825NANUF8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DzliEra/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera required for preview";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -885,6 +890,7 @@
 				DEVELOPMENT_TEAM = X825NANUF8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DzliEra/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera required for preview";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
