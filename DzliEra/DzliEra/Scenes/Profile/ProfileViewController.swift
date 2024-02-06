@@ -109,6 +109,19 @@ class ProfileViewController: UIViewController {
         return stackView
     }()
     
+    private let editProfileButton: UIButton = {
+        let button = UIButton()
+        let magnifyingglass = UIImage(systemName: "brain.head.profile.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.blue, renderingMode: .alwaysOriginal)
+        button.setImage(magnifyingglass, for: .normal)
+        button.setTitle("  Edit Profile", for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = UIColor(AppColors.gray)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        button.layer.cornerRadius = 6
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -128,13 +141,9 @@ class ProfileViewController: UIViewController {
         
         view.backgroundColor = .black
         
-        let editButton = UIBarButtonItem(title: "Edit Profile", style: .plain, target: self, action: #selector(editProfileTapped))
-
-            // Add the button to the navigation item
-            navigationItem.rightBarButtonItem = editButton
-
         setupProfileStackView()
         setupInfoStackViews()
+        setupEditProfileButton()
     }
     
     
@@ -180,6 +189,18 @@ class ProfileViewController: UIViewController {
             secondaryInfoStackView.topAnchor.constraint(equalTo: infoStackView.bottomAnchor, constant: 8),
             secondaryInfoStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             secondaryInfoStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+        ])
+    }
+    
+    private func setupEditProfileButton() {
+        view.addSubview(editProfileButton)
+        
+        editProfileButton.addTarget(self, action: #selector(editProfileTapped), for: .touchUpInside)
+        
+        NSLayoutConstraint.activate([
+            editProfileButton.topAnchor.constraint(equalTo: secondaryInfoStackView.bottomAnchor, constant: 8),
+            editProfileButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            editProfileButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }
 
