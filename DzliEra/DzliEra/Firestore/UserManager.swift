@@ -16,6 +16,7 @@ struct DBUser: Codable {
     let dateCreated: Date?
     let isPremium: Bool?
     var routines: [Routine]?
+    var postedWorkouts: [PostedWorkout]?
     
     init(auth: AuthDataResultModel) {
         self.userId = auth.uid
@@ -24,6 +25,7 @@ struct DBUser: Codable {
         self.dateCreated = Date()
         self.isPremium = false
         self.routines = nil
+        self.postedWorkouts = nil
     }
     
     init(
@@ -32,7 +34,8 @@ struct DBUser: Codable {
         photoUrl: String? = nil,
         dateCreated: Date? = nil,
         isPremium: Bool? = nil,
-        routines: [Routine]? = nil
+        routines: [Routine]? = nil,
+        postedWorkouts: [PostedWorkout]? = nil
     ) {
         self.userId = userId
         self.email = email
@@ -40,6 +43,7 @@ struct DBUser: Codable {
         self.dateCreated = dateCreated
         self.isPremium = isPremium
         self.routines = routines
+        self.postedWorkouts = postedWorkouts
     }
     
     mutating func addRoutine(_ routine: Routine) {
@@ -57,6 +61,7 @@ struct DBUser: Codable {
         case dateCreated = "date_created"
         case isPremium = "user_isPremium"
         case routines = "routines"
+        case postedWorkouts = "posted_workouts"
     }
     
     init(from decoder: Decoder) throws {
@@ -67,6 +72,7 @@ struct DBUser: Codable {
         self.dateCreated = try container.decodeIfPresent(Date.self, forKey: .dateCreated)
         self.isPremium = try container.decodeIfPresent(Bool.self, forKey: .isPremium)
         self.routines = try container.decodeIfPresent([Routine].self, forKey: .routines)
+        self.postedWorkouts = try container.decodeIfPresent([PostedWorkout].self, forKey: .postedWorkouts)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -77,15 +83,17 @@ struct DBUser: Codable {
         try container.encodeIfPresent(self.dateCreated, forKey: .dateCreated)
         try container.encodeIfPresent(self.isPremium, forKey: .isPremium)
         try container.encodeIfPresent(self.routines, forKey: .routines)
+        try container.encodeIfPresent(self.postedWorkouts, forKey: .postedWorkouts)
     }
 }
 
 final class UserManager {
     
     static let shared = UserManager()
-    private init() {  }
+    private init() { }
     
     private let userCollection = Firestore.firestore().collection("users")
+    private let postedWorkoutsCollection = Firestore.firestore().collection("posted_workouts")
     
     private func userDocument(userId: String) -> DocumentReference {
         userCollection.document(userId)
@@ -101,7 +109,7 @@ final class UserManager {
     
     func uploadRoutines(userId: String, routines: [Routine]) async throws {
         var routinesData: [[String: Any]] = []
-
+        
         for routine in routines {
             let routineData: [String: Any] = [
                 "title": routine.title,
@@ -109,23 +117,48 @@ final class UserManager {
             ]
             routinesData.append(routineData)
         }
-
+        
         let data: [String: Any] = ["routines": routinesData]
-
+        
         try await userDocument(userId: userId).setData(data, merge: true)
     }
     
     // MARK: - Get Routines for User
-        func getRoutines(userId: String) async throws -> [Routine] {
-            let document = userDocument(userId: userId)
-            let documentSnapshot = try await document.getDocument()
-
-            guard let data = try? documentSnapshot.data(as: DBUser.self) else {
-                throw NSError(domain: "YourErrorDomain", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to decode user data."])
-            }
-
-            return data.routines ?? []
+    func getRoutines(userId: String) async throws -> [Routine] {
+        let document = userDocument(userId: userId)
+        let documentSnapshot = try await document.getDocument()
+        
+        guard let data = try? documentSnapshot.data(as: DBUser.self) else {
+            throw NSError(domain: "YourErrorDomain", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to decode user data."])
         }
+        
+        return data.routines ?? []
+    }
+    
+    private func postedWorkoutDocument(userId: String) -> DocumentReference {
+        postedWorkoutsCollection.document(userId)
+    }
+    
+    func uploadPostedWorkout(userId: String, postedWorkouts: [PostedWorkout]) async throws {
+        var postedWorkoutsData: [[String: Any]] = []
+        
+        for workout in postedWorkouts {
+            let workoutData: [String: Any] = [
+                "userEmail": workout.userEmail,
+                "time": workout.time,
+                "reps": workout.reps,
+                "sets": workout.sets,
+                "exercises": try workout.exercises.map { try $0.toFirestoreData() }
+            ]
+            
+            postedWorkoutsData.append(workoutData)
+        }
+        
+        let data: [String: Any] = ["postedWorkouts": postedWorkoutsData]
+        try await userDocument(userId: userId).setData(data, merge: true)
+    }
+    
+    
 }
 
 extension Exercise {

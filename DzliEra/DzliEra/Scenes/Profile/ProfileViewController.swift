@@ -156,6 +156,8 @@ class ProfileViewController: UIViewController {
         statisticsButton.addTarget(self, action: #selector(statisticsButtonTapped), for: .touchUpInside)
         
         infoStackView.addArrangedSubview(exerciseLibraryButton)
+        exerciseLibraryButton.addTarget(self, action: #selector(exerciseLibraryButtonTapped), for: .touchUpInside)
+
         
         NSLayoutConstraint.activate([
             infoStackView.topAnchor.constraint(equalTo: profileStackView.bottomAnchor, constant: 60),
@@ -180,7 +182,11 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func statisticsButtonTapped() {
-        
+        self.navigationController?.pushViewController(UIHostingController(rootView: StatisticsView()), animated: true)
+    }
+    
+    @objc private func exerciseLibraryButtonTapped() {
+        self.navigationController?.pushViewController(ExerciseListViewController(), animated: true)
     }
     
 }

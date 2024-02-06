@@ -7,12 +7,11 @@
 
 import Foundation
 
-struct PostedWorkout: Identifiable {
-    let id = UUID()
+struct PostedWorkout: Identifiable, Codable {
+    var id = UUID()
     let userEmail: String
     let time: String
     let reps: String
     let sets: String
     let exercises: [Exercise]
-    
 }
