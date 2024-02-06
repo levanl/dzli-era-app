@@ -29,17 +29,15 @@ struct EditProfileView: View {
                 Text("Change Picture")
                     .foregroundColor(.blue)
             }
-            .actionSheet(isPresented: $isShowingActionSheet) {
-                            ActionSheet(title: Text("Change Profile Picture"), buttons: [
-                                .default(Text("Select Library Photo")) {
-                                    // Handle select library photo action
-                                },
-                                .default(Text("Take Photo")) {
-                                    // Handle take photo action
-                                },
-                                .cancel()
-                            ])
-                        }
+            .confirmationDialog("Change Your Profile Picture", isPresented: $isShowingActionSheet, titleVisibility: .automatic) {
+                Button("Select Library Photo") {}
+                Button("Take Photo") {}
+                
+                Button("Cancel", role: .cancel) {}
+            } message: {
+                Text("heyoo")
+            }
+
             Spacer()
             
         }
