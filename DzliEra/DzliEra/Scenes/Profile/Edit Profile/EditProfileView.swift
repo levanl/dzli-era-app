@@ -11,6 +11,8 @@ import PhotosUI
 struct EditProfileView: View {
     
     @StateObject private var photoLibraryViewModel = PhotoPickerViewModel()
+    @StateObject private var viewModel = EditProfileViewModel()
+    
     @State private var isShowingActionSheet = false
     @State private var avatarImage: UIImage?
     @State var showPicker: Bool = false
@@ -118,7 +120,15 @@ struct EditProfileView: View {
             Spacer()
             
             Button(action: {
-                // Implement save functionality here
+                Task {
+                    do {
+                        try await UserManager.shared.updateUserProfile(userId: viewModel.user?.userId ?? "nil", name: name, bio: bio, sex: sexes[selectedSexIndex], image: photoLibraryViewModel.selectedImage)
+                        
+                        print("Profile updated successfully!")
+                    } catch {
+                        print("Error updating profile: \(error.localizedDescription)")
+                    }
+                }
             }) {
                 Text("Save")
                     .foregroundColor(.white)
@@ -132,6 +142,9 @@ struct EditProfileView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black.edgesIgnoringSafeArea(.all))
+        .onAppear {
+            viewModel.fetchCurrentUser()
+        }
         
         
     }
@@ -162,6 +175,23 @@ final class PhotoPickerViewModel: ObservableObject {
                     }
                     return
                 }
+            }
+        }
+    }
+}
+
+final class EditProfileViewModel: ObservableObject {
+    
+    var user: DBUser?
+    
+    func fetchCurrentUser() {
+        Task {
+            do {
+                let authDataResult = try await AuthenticationManager.shared.getAuthenticatedUser()
+                self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
+                print("User loaded: \(self.user?.email ?? "Unknown email")")
+            } catch {
+                print("Error loading user: \(error)")
             }
         }
     }

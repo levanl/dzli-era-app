@@ -196,21 +196,25 @@ final class UserManager {
             ]
             
         if let image = image, let imageData = image.jpegData(compressionQuality: 0.5) {
-            // Upload image to storage and get the URL
-            // For example, using Firebase Storage:
             let storageRef = Storage.storage().reference().child("profile_images").child(userId)
-            storageRef.putData(imageData, metadata: nil) { (metadata, error) in
-                if let error = error {
-                    print("Error uploading image: \(error.localizedDescription)")
-                    return
-                }
-                storageRef.downloadURL { (url, error) in
-                    guard let imageUrl = url?.absoluteString else {
-                        print("Error getting download URL: \(error?.localizedDescription ?? "Unknown error")")
-                        return
-                    }
-                    userData["photoUrl"] = imageUrl
-                    try? await userDocument(userId: userId).setData(userData, merge: true)
+            
+            Task {
+                do {
+                    let metadata = await storageRef.putData(imageData)
+                    
+                    let url = try await storageRef.downloadURL()
+                    let imageUrl = url.absoluteString
+                    
+                    var userData: [String: Any] = [
+                        "name": name,
+                        "bio": bio,
+                        "sex": sex,
+                        "photoUrl": imageUrl
+                    ]
+                    
+                    try await userDocument(userId: userId).setData(userData, merge: true)
+                } catch {
+                    print("Error uploading image or getting download URL: \(error.localizedDescription)")
                 }
             }
         }
