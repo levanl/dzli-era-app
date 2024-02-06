@@ -78,7 +78,7 @@ struct NiceJobView: View, WithRootNavigationController {
             
             Spacer()
             Button(action: {
-
+                
                 let newWorkout = PostedWorkout(userEmail: sharedViewModel.user?.email ?? "Default@gmail.com", time: String(workout.elapsedTime), reps: String(workout.totalReps), sets: "21", exercises: workout.exercises)
                 Task {
                     do {
@@ -86,7 +86,7 @@ struct NiceJobView: View, WithRootNavigationController {
                         sharedViewModel.user?.addPostedWorkout(newWorkout)
                         
                         try await UserManager.shared.uploadPostedWorkout(userId: sharedViewModel.user?.userId ?? "ravidzma", postedWorkouts: sharedViewModel.user?.postedWorkouts ?? [])
-
+                        
                     }
                     catch {
                         

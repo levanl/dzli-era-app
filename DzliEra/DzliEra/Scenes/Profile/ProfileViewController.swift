@@ -127,6 +127,12 @@ class ProfileViewController: UIViewController {
         }
         
         view.backgroundColor = .black
+        
+        let editButton = UIBarButtonItem(title: "Edit Profile", style: .plain, target: self, action: #selector(editProfileTapped))
+
+            // Add the button to the navigation item
+            navigationItem.rightBarButtonItem = editButton
+
         setupProfileStackView()
         setupInfoStackViews()
     }
@@ -189,4 +195,7 @@ class ProfileViewController: UIViewController {
         self.navigationController?.pushViewController(ExerciseListViewController(), animated: true)
     }
     
+    @objc private func editProfileTapped() {
+        self.navigationController?.pushViewController(UIHostingController(rootView: EditProfileView()), animated: true)
+    }
 }
