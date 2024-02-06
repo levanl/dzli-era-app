@@ -54,6 +54,14 @@ struct DBUser: Codable {
         }
     }
     
+    mutating func addPostedWorkout(_ workout: PostedWorkout) {
+        if postedWorkouts == nil {
+            postedWorkouts = [workout]
+        } else {
+            postedWorkouts?.append(workout)
+        }
+    }
+    
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"
         case email = "email"
