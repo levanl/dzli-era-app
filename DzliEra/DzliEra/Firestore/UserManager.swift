@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import FirebaseStorage
 
 struct DBUser: Codable {
     let userId: String
@@ -17,6 +18,9 @@ struct DBUser: Codable {
     let isPremium: Bool?
     var routines: [Routine]?
     var postedWorkouts: [PostedWorkout]?
+    var name: String?
+    var bio: String?
+    var sex: String?
     
     init(auth: AuthDataResultModel) {
         self.userId = auth.uid
@@ -26,6 +30,9 @@ struct DBUser: Codable {
         self.isPremium = false
         self.routines = nil
         self.postedWorkouts = nil
+        self.name = nil
+        self.bio = nil
+        self.sex = nil
     }
     
     init(
@@ -35,7 +42,10 @@ struct DBUser: Codable {
         dateCreated: Date? = nil,
         isPremium: Bool? = nil,
         routines: [Routine]? = nil,
-        postedWorkouts: [PostedWorkout]? = nil
+        postedWorkouts: [PostedWorkout]? = nil,
+        name: String? = nil,
+        bio: String? = nil,
+        sex: String? = nil
     ) {
         self.userId = userId
         self.email = email
@@ -44,6 +54,9 @@ struct DBUser: Codable {
         self.isPremium = isPremium
         self.routines = routines
         self.postedWorkouts = postedWorkouts
+        self.name = name
+        self.bio = bio
+        self.sex = sex
     }
     
     mutating func addRoutine(_ routine: Routine) {
@@ -70,6 +83,9 @@ struct DBUser: Codable {
         case isPremium = "user_isPremium"
         case routines = "routines"
         case postedWorkouts = "posted_workouts"
+        case name = "name"
+        case bio = "bio"
+        case sex = "sex"
     }
     
     init(from decoder: Decoder) throws {
@@ -81,6 +97,9 @@ struct DBUser: Codable {
         self.isPremium = try container.decodeIfPresent(Bool.self, forKey: .isPremium)
         self.routines = try container.decodeIfPresent([Routine].self, forKey: .routines)
         self.postedWorkouts = try container.decodeIfPresent([PostedWorkout].self, forKey: .postedWorkouts)
+        self.name = try container.decodeIfPresent(String.self, forKey: .name)
+        self.bio = try container.decodeIfPresent(String.self, forKey: .bio)
+        self.sex = try container.decodeIfPresent(String.self, forKey: .sex)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -92,6 +111,9 @@ struct DBUser: Codable {
         try container.encodeIfPresent(self.isPremium, forKey: .isPremium)
         try container.encodeIfPresent(self.routines, forKey: .routines)
         try container.encodeIfPresent(self.postedWorkouts, forKey: .postedWorkouts)
+        try container.encodeIfPresent(self.name, forKey: .name)
+        try container.encodeIfPresent(self.bio, forKey: .bio)
+        try container.encodeIfPresent(self.sex, forKey: .sex)
     }
 }
 
@@ -166,6 +188,34 @@ final class UserManager {
         try await userDocument(userId: userId).setData(data, merge: true)
     }
     
+    func updateUserProfile(userId: String, name: String, bio: String, sex: String, image: UIImage?) async throws {
+            var userData: [String: Any] = [
+                "name": name,
+                "bio": bio,
+                "sex": sex
+            ]
+            
+        if let image = image, let imageData = image.jpegData(compressionQuality: 0.5) {
+            // Upload image to storage and get the URL
+            // For example, using Firebase Storage:
+            let storageRef = Storage.storage().reference().child("profile_images").child(userId)
+            storageRef.putData(imageData, metadata: nil) { (metadata, error) in
+                if let error = error {
+                    print("Error uploading image: \(error.localizedDescription)")
+                    return
+                }
+                storageRef.downloadURL { (url, error) in
+                    guard let imageUrl = url?.absoluteString else {
+                        print("Error getting download URL: \(error?.localizedDescription ?? "Unknown error")")
+                        return
+                    }
+                    userData["photoUrl"] = imageUrl
+                    try? await userDocument(userId: userId).setData(userData, merge: true)
+                }
+            }
+        }
+            try await userDocument(userId: userId).setData(userData, merge: true)
+        }
     
 }
 
