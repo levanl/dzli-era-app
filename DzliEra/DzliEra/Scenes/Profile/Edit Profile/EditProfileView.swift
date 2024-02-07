@@ -124,6 +124,7 @@ struct EditProfileView: View {
                     do {
                         try await UserManager.shared.updateUserProfile(userId: viewModel.user?.userId ?? "nil", name: name, bio: bio, sex: sexes[selectedSexIndex], image: photoLibraryViewModel.selectedImage)
                         
+                        viewModel.saveProfileImage(item: photoLibraryViewModel.imageSelection!)
                         print("Profile updated successfully!")
                     } catch {
                         print("Error updating profile: \(error.localizedDescription)")
@@ -194,5 +195,18 @@ final class EditProfileViewModel: ObservableObject {
                 print("Error loading user: \(error)")
             }
         }
+    }
+    
+    func saveProfileImage(item: PhotosPickerItem) {
+        
+        
+        Task {
+            guard let data = try await item.loadTransferable(type: Data.self) else { return }
+            let (path, name) = try await StorageManager.shared.saveImage(data: data)
+            print("SUCCESS")
+            print(path)
+            print(name)
+        }
+        
     }
 }
