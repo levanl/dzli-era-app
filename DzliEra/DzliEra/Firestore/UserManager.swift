@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import FirebaseStorage
 
 struct DBUser: Codable {
     let userId: String
@@ -16,6 +17,11 @@ struct DBUser: Codable {
     let dateCreated: Date?
     let isPremium: Bool?
     var routines: [Routine]?
+    var postedWorkouts: [PostedWorkout]?
+    var name: String?
+    var bio: String?
+    var sex: String?
+    let profileImagePath: String?
     
     init(auth: AuthDataResultModel) {
         self.userId = auth.uid
@@ -24,6 +30,11 @@ struct DBUser: Codable {
         self.dateCreated = Date()
         self.isPremium = false
         self.routines = nil
+        self.postedWorkouts = nil
+        self.name = nil
+        self.bio = nil
+        self.sex = nil
+        self.profileImagePath = nil
     }
     
     init(
@@ -32,7 +43,12 @@ struct DBUser: Codable {
         photoUrl: String? = nil,
         dateCreated: Date? = nil,
         isPremium: Bool? = nil,
-        routines: [Routine]? = nil
+        routines: [Routine]? = nil,
+        postedWorkouts: [PostedWorkout]? = nil,
+        name: String? = nil,
+        bio: String? = nil,
+        sex: String? = nil,
+        profileImagePath: String? = nil
     ) {
         self.userId = userId
         self.email = email
@@ -40,6 +56,11 @@ struct DBUser: Codable {
         self.dateCreated = dateCreated
         self.isPremium = isPremium
         self.routines = routines
+        self.postedWorkouts = postedWorkouts
+        self.name = name
+        self.bio = bio
+        self.sex = sex
+        self.profileImagePath = profileImagePath
     }
     
     mutating func addRoutine(_ routine: Routine) {
@@ -50,6 +71,14 @@ struct DBUser: Codable {
         }
     }
     
+    mutating func addPostedWorkout(_ workout: PostedWorkout) {
+        if postedWorkouts == nil {
+            postedWorkouts = [workout]
+        } else {
+            postedWorkouts?.append(workout)
+        }
+    }
+    
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"
         case email = "email"
@@ -57,6 +86,11 @@ struct DBUser: Codable {
         case dateCreated = "date_created"
         case isPremium = "user_isPremium"
         case routines = "routines"
+        case postedWorkouts = "posted_workouts"
+        case name = "name"
+        case bio = "bio"
+        case sex = "sex"
+        case profileImagePath = "profile_image_path"
     }
     
     init(from decoder: Decoder) throws {
@@ -67,6 +101,11 @@ struct DBUser: Codable {
         self.dateCreated = try container.decodeIfPresent(Date.self, forKey: .dateCreated)
         self.isPremium = try container.decodeIfPresent(Bool.self, forKey: .isPremium)
         self.routines = try container.decodeIfPresent([Routine].self, forKey: .routines)
+        self.postedWorkouts = try container.decodeIfPresent([PostedWorkout].self, forKey: .postedWorkouts)
+        self.name = try container.decodeIfPresent(String.self, forKey: .name)
+        self.bio = try container.decodeIfPresent(String.self, forKey: .bio)
+        self.sex = try container.decodeIfPresent(String.self, forKey: .sex)
+        self.profileImagePath = try container.decodeIfPresent(String.self, forKey: .profileImagePath)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -77,15 +116,21 @@ struct DBUser: Codable {
         try container.encodeIfPresent(self.dateCreated, forKey: .dateCreated)
         try container.encodeIfPresent(self.isPremium, forKey: .isPremium)
         try container.encodeIfPresent(self.routines, forKey: .routines)
+        try container.encodeIfPresent(self.postedWorkouts, forKey: .postedWorkouts)
+        try container.encodeIfPresent(self.name, forKey: .name)
+        try container.encodeIfPresent(self.bio, forKey: .bio)
+        try container.encodeIfPresent(self.sex, forKey: .sex)
+        try container.encodeIfPresent(self.profileImagePath, forKey: .profileImagePath)
     }
 }
 
 final class UserManager {
     
     static let shared = UserManager()
-    private init() {  }
+    private init() { }
     
     private let userCollection = Firestore.firestore().collection("users")
+    private let postedWorkoutsCollection = Firestore.firestore().collection("posted_workouts")
     
     private func userDocument(userId: String) -> DocumentReference {
         userCollection.document(userId)
@@ -101,7 +146,7 @@ final class UserManager {
     
     func uploadRoutines(userId: String, routines: [Routine]) async throws {
         var routinesData: [[String: Any]] = []
-
+        
         for routine in routines {
             let routineData: [String: Any] = [
                 "title": routine.title,
@@ -109,23 +154,83 @@ final class UserManager {
             ]
             routinesData.append(routineData)
         }
-
+        
         let data: [String: Any] = ["routines": routinesData]
-
+        
         try await userDocument(userId: userId).setData(data, merge: true)
     }
     
     // MARK: - Get Routines for User
-        func getRoutines(userId: String) async throws -> [Routine] {
-            let document = userDocument(userId: userId)
-            let documentSnapshot = try await document.getDocument()
-
-            guard let data = try? documentSnapshot.data(as: DBUser.self) else {
-                throw NSError(domain: "YourErrorDomain", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to decode user data."])
-            }
-
-            return data.routines ?? []
+    func getRoutines(userId: String) async throws -> [Routine] {
+        let document = userDocument(userId: userId)
+        let documentSnapshot = try await document.getDocument()
+        
+        guard let data = try? documentSnapshot.data(as: DBUser.self) else {
+            throw NSError(domain: "YourErrorDomain", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to decode user data."])
         }
+        
+        return data.routines ?? []
+    }
+    
+    private func postedWorkoutDocument(userId: String) -> DocumentReference {
+        postedWorkoutsCollection.document(userId)
+    }
+    
+    func uploadPostedWorkout(userId: String, postedWorkouts: [PostedWorkout]) async throws {
+        var postedWorkoutsData: [[String: Any]] = []
+        
+        for workout in postedWorkouts {
+            let workoutData: [String: Any] = [
+                "userEmail": workout.userEmail,
+                "time": workout.time,
+                "reps": workout.reps,
+                "sets": workout.sets,
+                "exercises": try workout.exercises.map { try $0.toFirestoreData() }
+            ]
+            
+            postedWorkoutsData.append(workoutData)
+        }
+        
+        let data: [String: Any] = ["postedWorkouts": postedWorkoutsData]
+        try await userDocument(userId: userId).setData(data, merge: true)
+    }
+    
+    func updateUserProfile(userId: String, name: String, bio: String, sex: String, image: UIImage?) async throws {
+            
+            
+        if let image = image, let imageData = image.jpegData(compressionQuality: 0.5) {
+            let storageRef = Storage.storage().reference().child("profile_images").child(userId)
+            
+            Task {
+                do {
+                    let metadata = storageRef.putData(imageData)
+                    
+                    let url = try await storageRef.downloadURL()
+                    let imageUrl = url.absoluteString
+                    
+                    let userData: [String: Any] = [
+                        "name": name,
+                        "bio": bio,
+                        "sex": sex,
+                        "photoUrl": imageUrl
+                    ]
+                    
+                    try await userDocument(userId: userId).setData(userData, merge: true)
+                } catch {
+                    print("Error uploading image or getting download URL: \(error.localizedDescription)")
+                }
+            }
+        }
+//            try await userDocument(userId: userId).setData(userData, merge: true)
+        }
+    
+    func updateUserProfileImage(userId: String, path: String) async throws {
+        let data: [String: Any] = [
+            DBUser.CodingKeys.profileImagePath.rawValue : path,
+        ]
+        try await userDocument(userId: userId).updateData(data)
+    }
+    
 }
 
 extension Exercise {
