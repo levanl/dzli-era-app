@@ -189,11 +189,7 @@ final class UserManager {
     }
     
     func updateUserProfile(userId: String, name: String, bio: String, sex: String, image: UIImage?) async throws {
-            var userData: [String: Any] = [
-                "name": name,
-                "bio": bio,
-                "sex": sex
-            ]
+            
             
         if let image = image, let imageData = image.jpegData(compressionQuality: 0.5) {
             let storageRef = Storage.storage().reference().child("profile_images").child(userId)
@@ -218,7 +214,7 @@ final class UserManager {
                 }
             }
         }
-            try await userDocument(userId: userId).setData(userData, merge: true)
+//            try await userDocument(userId: userId).setData(userData, merge: true)
         }
     
 }
