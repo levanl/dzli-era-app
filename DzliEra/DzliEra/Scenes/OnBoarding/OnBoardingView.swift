@@ -54,6 +54,8 @@ struct OnBoardingView: View, WithRootNavigationController {
         .onAppear {
             viewModel.dotAppearance.currentPageIndicatorTintColor = .white
             viewModel.dotAppearance.pageIndicatorTintColor = .gray
+            
+            print(AuthenticationManager.shared.isUserLoggedIn())
         }
         .background(Color.black)
         

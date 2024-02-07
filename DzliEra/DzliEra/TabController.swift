@@ -44,3 +44,22 @@ final class TabController: UITabBarController {
         return vc
     }
 }
+
+
+
+struct TabControllerWrapper: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> TabController {
+        return TabController()
+    }
+    
+    func updateUIViewController(_ uiViewController: TabController, context: Context) {
+        // Update the view controller if needed
+    }
+}
+
+struct ContentView: View {
+    var body: some View {
+        // Your content view here
+        Text("Content View")
+    }
+}

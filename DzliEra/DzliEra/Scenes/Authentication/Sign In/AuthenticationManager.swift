@@ -48,6 +48,10 @@ final class AuthenticationManager {
         return AuthDataResultModel(user: user)
     }
     
+    func signOut() throws {
+        try Auth.auth().signOut()
+    }
+    
     func isUserLoggedIn() -> Bool {
         return Auth.auth().currentUser != nil
     }
