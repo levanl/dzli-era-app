@@ -150,6 +150,8 @@ struct EditProfileView: View {
             }
             .padding()
             
+            
+            
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black.edgesIgnoringSafeArea(.all))

@@ -203,7 +203,7 @@ final class UserManager {
             
             Task {
                 do {
-//                    let metadata = await storageRef.putData(imageData)
+                    let metadata = storageRef.putData(imageData)
                     
                     let url = try await storageRef.downloadURL()
                     let imageUrl = url.absoluteString

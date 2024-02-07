@@ -205,9 +205,30 @@ class ProfileViewController: UIViewController {
     }
 
     private func loadProfileImage() {
-        self.profileImageView.image = UIImage(named: "onboarding1")
+        guard let userId = user?.userId, let imagePath = user?.profileImagePath, let imageURL = user?.photoUrl else {
+            self.profileImageView.image = UIImage(named: "onboarding1") // Load default image if user or image path is nil
+            return
+        }
+
+        // Construct the full URL for the image
+
+        // Download the image data from the URL
+        URLSession.shared.dataTask(with: URL(string: imageURL)!) { data, response, error in
+            guard let data = data, error == nil else {
+                print("Error loading profile image: \(error?.localizedDescription ?? "Unknown error")")
+                DispatchQueue.main.async {
+                    self.profileImageView.image = UIImage(named: "onboarding1") // Load default image on error
+                }
+                return
+            }
+            
+            // Convert the downloaded data to UIImage and update the profileImageView
+            DispatchQueue.main.async {
+                self.profileImageView.image = UIImage(data: data)
+            }
+        }.resume()
     }
-    
+
     @objc private func statisticsButtonTapped() {
         self.navigationController?.pushViewController(UIHostingController(rootView: StatisticsView()), animated: true)
     }
