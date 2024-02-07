@@ -21,6 +21,7 @@ struct DBUser: Codable {
     var name: String?
     var bio: String?
     var sex: String?
+    let profileImagePath: String?
     
     init(auth: AuthDataResultModel) {
         self.userId = auth.uid
@@ -33,6 +34,7 @@ struct DBUser: Codable {
         self.name = nil
         self.bio = nil
         self.sex = nil
+        self.profileImagePath = nil
     }
     
     init(
@@ -45,7 +47,8 @@ struct DBUser: Codable {
         postedWorkouts: [PostedWorkout]? = nil,
         name: String? = nil,
         bio: String? = nil,
-        sex: String? = nil
+        sex: String? = nil,
+        profileImagePath: String? = nil
     ) {
         self.userId = userId
         self.email = email
@@ -57,6 +60,7 @@ struct DBUser: Codable {
         self.name = name
         self.bio = bio
         self.sex = sex
+        self.profileImagePath = profileImagePath
     }
     
     mutating func addRoutine(_ routine: Routine) {
@@ -86,6 +90,7 @@ struct DBUser: Codable {
         case name = "name"
         case bio = "bio"
         case sex = "sex"
+        case profileImagePath = "profile_image_path"
     }
     
     init(from decoder: Decoder) throws {
@@ -100,6 +105,7 @@ struct DBUser: Codable {
         self.name = try container.decodeIfPresent(String.self, forKey: .name)
         self.bio = try container.decodeIfPresent(String.self, forKey: .bio)
         self.sex = try container.decodeIfPresent(String.self, forKey: .sex)
+        self.profileImagePath = try container.decodeIfPresent(String.self, forKey: .profileImagePath)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -114,6 +120,7 @@ struct DBUser: Codable {
         try container.encodeIfPresent(self.name, forKey: .name)
         try container.encodeIfPresent(self.bio, forKey: .bio)
         try container.encodeIfPresent(self.sex, forKey: .sex)
+        try container.encodeIfPresent(self.profileImagePath, forKey: .profileImagePath)
     }
 }
 
@@ -196,12 +203,12 @@ final class UserManager {
             
             Task {
                 do {
-                    let metadata = await storageRef.putData(imageData)
+//                    let metadata = await storageRef.putData(imageData)
                     
                     let url = try await storageRef.downloadURL()
                     let imageUrl = url.absoluteString
                     
-                    var userData: [String: Any] = [
+                    let userData: [String: Any] = [
                         "name": name,
                         "bio": bio,
                         "sex": sex,
@@ -216,6 +223,13 @@ final class UserManager {
         }
 //            try await userDocument(userId: userId).setData(userData, merge: true)
         }
+    
+    func updateUserProfileImage(userId: String, path: String) async throws {
+        let data: [String: Any] = [
+            DBUser.CodingKeys.profileImagePath.rawValue : path,
+        ]
+        try await userDocument(userId: userId).updateData(data)
+    }
     
 }
 

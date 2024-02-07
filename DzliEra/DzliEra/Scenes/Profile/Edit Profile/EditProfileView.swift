@@ -20,21 +20,31 @@ struct EditProfileView: View {
     @State private var bio: String = ""
     @State private var sex: String = ""
     @State private var selectedSexIndex = 0
-    
+    @State private var imageData: Data? = nil
     let sexes = ["Male", "Female", "Other"]
     
     var body: some View {
         VStack {
             
-            Image(uiImage: photoLibraryViewModel.selectedImage ?? UIImage(resource: .onboarding1))
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 120, height: 120)
-                .clipShape(Circle())
-                .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                .shadow(radius: 10)
-                .padding(.bottom, 10)
-            
+            if let imageData = imageData {
+                Image(uiImage: UIImage(data: imageData) ?? UIImage(resource: .onboarding1))
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 120, height: 120)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                    .shadow(radius: 10)
+                    .padding(.bottom, 10)
+            } else {
+                Image(uiImage: photoLibraryViewModel.selectedImage ?? UIImage(resource: .onboarding1))
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 120, height: 120)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                    .shadow(radius: 10)
+                    .padding(.bottom, 10)
+            }
             Button(action: {
                 self.isShowingActionSheet.toggle()
             }) {
@@ -145,6 +155,15 @@ struct EditProfileView: View {
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear {
             viewModel.fetchCurrentUser()
+            
+            if let path = viewModel.user?.profileImagePath, let userId = viewModel.user?.userId {
+                
+                Task {
+                    let data = try await StorageManager.shared.getData(userId: userId, path: path)
+                    self.imageData = data
+                }
+                
+            }
         }
         
         
@@ -202,10 +221,11 @@ final class EditProfileViewModel: ObservableObject {
         
         Task {
             guard let data = try await item.loadTransferable(type: Data.self) else { return }
-            let (path, name) = try await StorageManager.shared.saveImage(data: data)
+            let (path, name) = try await StorageManager.shared.saveImage(data: data, userId: user?.userId ?? "nil")
             print("SUCCESS")
             print(path)
             print(name)
+            try await UserManager.shared.updateUserProfileImage(userId: user?.userId ?? "ravime", path: name)
         }
         
     }
