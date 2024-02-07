@@ -26,6 +26,7 @@ struct OnBoardingView: View, WithRootNavigationController {
                                     }) {
                                         Text("Get Started")
                                             .font(.custom("Helvetica-Bold", size: 16))
+                                            .frame(minWidth: 100, maxWidth: .infinity, minHeight: 44, maxHeight: 44, alignment: .center)
                                     }
                                     .signUpButtonStyle
                                     .offset(y: 250)
@@ -35,6 +36,7 @@ struct OnBoardingView: View, WithRootNavigationController {
                                     }) {
                                         Text("Next")
                                             .font(.custom("Helvetica-Bold", size: 16))
+                                            .frame(minWidth: 100, maxWidth: .infinity, minHeight: 44, maxHeight: 44, alignment: .center)
                                     }
                                     .signUpButtonStyle
                                     .offset(y: 250)
