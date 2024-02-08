@@ -81,7 +81,7 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .black
+        tableView.backgroundColor = UIColor(AppColors.backgroundColor)
         return tableView
     }()
     
@@ -113,7 +113,7 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
     // MARK: - Private Methods
     
     private func setupUI() {
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor(AppColors.backgroundColor)
         setupQuickStartLabel()
         setupStartEmptyWorkoutButton()
         setupRoutinesLabel()
@@ -202,8 +202,12 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configure(with: routine)
         cell.delegate = self
         
-        cell.backgroundColor = .black
+        cell.backgroundColor = UIColor(AppColors.backgroundColor)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        150
     }
 }
 
