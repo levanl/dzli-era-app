@@ -13,7 +13,7 @@ final class TabController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupTabs()
-        self.tabBar.tintColor = .blue
+        self.tabBar.tintColor = UIColor(AppColors.secondaryRed)
         self.tabBar.frame.size.height = 60
         self.tabBar.layer.cornerRadius = 10
         self.tabBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -23,7 +23,7 @@ final class TabController: UITabBarController {
     private func setupTabs() {
         let tabBarAppearance: UITabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithDefaultBackground()
-        tabBarAppearance.backgroundColor = UIColor(AppColors.gray)
+        tabBarAppearance.backgroundColor = UIColor(AppColors.secondaryBackgroundColor)
         UITabBar.appearance().standardAppearance = tabBarAppearance
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         

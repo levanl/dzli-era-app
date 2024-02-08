@@ -102,7 +102,7 @@ struct HomeView: View, WithRootNavigationController {
                                         .font(.system(size: 18))
                                         
                                 }
-                                .listRowBackground(AppColors.gray)
+                                .listRowBackground(AppColors.secondaryBackgroundColor)
                                 
                             }
                             
@@ -113,7 +113,7 @@ struct HomeView: View, WithRootNavigationController {
                         Spacer()
                     }
                     .frame(height: 300)
-                    .listRowBackground(AppColors.gray)
+                    .listRowBackground(AppColors.secondaryBackgroundColor)
                     .onTapGesture {
                         self.push(viewController: UIHostingController(rootView: PostedWorkoutView(workout: workout)), animated: true)
                     }
@@ -122,8 +122,7 @@ struct HomeView: View, WithRootNavigationController {
             }
             .listStyle(InsetGroupedListStyle())
             .scrollContentBackground(.hidden)
-            .background(Color.black.edgesIgnoringSafeArea(.all))
-            .navigationBarTitle("Your Title", displayMode: .inline)
+            .background(AppColors.backgroundColor)
             
         }
     }
