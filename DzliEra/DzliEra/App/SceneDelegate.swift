@@ -20,7 +20,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: someScene)
         
-//        let onBoardingView = OnBoardingView()
         
         var rootView: AnyView
 

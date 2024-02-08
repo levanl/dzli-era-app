@@ -165,10 +165,10 @@ struct EditProfileView: View, WithRootNavigationController {
                 }
             }) {
                 Text("log out")
-                    .foregroundColor(.white)
+                    .foregroundColor(.red)
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(Color.blue)
+                    .background(Color.clear)
                     .cornerRadius(10)
             }
             .padding()

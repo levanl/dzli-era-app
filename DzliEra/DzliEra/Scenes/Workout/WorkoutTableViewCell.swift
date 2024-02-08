@@ -39,7 +39,7 @@ final class WorkoutTableViewCell: UITableViewCell {
     private let startRoutineButton: UIButton = {
         let button = UIButton()
         button.setTitle("Start Routine", for: .normal)
-        button.backgroundColor = .blue
+        button.backgroundColor = UIColor(AppColors.primaryRed)
         button.layer.cornerRadius = 6
         button.translatesAutoresizingMaskIntoConstraints = false
         return button

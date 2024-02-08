@@ -17,6 +17,10 @@ struct AppColors {
     static let backgroundColor = Color(hex: 0x181922)
     static let secondaryBackgroundColor = Color(hex: 0x21212F)
     static let secondaryRed = Color(hex: 0xD9435C)
+    static let primaryRed = Color(hex: 0xDF455D)
+    static let secondaryGray = Color(hex: 0x2D2D39)
+
+    
 }
 
 extension Color {

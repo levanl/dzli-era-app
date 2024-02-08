@@ -41,11 +41,11 @@ class ProfileViewController: UIViewController {
     
     private let statisticsButton: UIButton = {
         let button = UIButton()
-        let list = UIImage(systemName: "chart.bar", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.blue, renderingMode: .alwaysOriginal)
+        let list = UIImage(systemName: "chart.bar", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal)
         button.setImage(list, for: .normal)
         button.setTitle("  Statistics", for: .normal)
         button.tintColor = .white
-        button.backgroundColor = UIColor(AppColors.gray)
+        button.backgroundColor = UIColor(AppColors.primaryRed)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 45).isActive = true
         button.layer.cornerRadius = 6
@@ -54,11 +54,11 @@ class ProfileViewController: UIViewController {
     
     private let exerciseLibraryButton: UIButton = {
         let button = UIButton()
-        let magnifyingglass = UIImage(systemName: "book.closed.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.blue, renderingMode: .alwaysOriginal)
+        let magnifyingglass = UIImage(systemName: "book.closed.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal)
         button.setImage(magnifyingglass, for: .normal)
         button.setTitle("  Exercises", for: .normal)
         button.tintColor = .white
-        button.backgroundColor = UIColor(AppColors.gray)
+        button.backgroundColor = UIColor(AppColors.primaryRed)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 45).isActive = true
         button.layer.cornerRadius = 6
@@ -76,11 +76,11 @@ class ProfileViewController: UIViewController {
     
     private let foodButton: UIButton = {
         let button = UIButton()
-        let list = UIImage(systemName: "fork.knife", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.blue, renderingMode: .alwaysOriginal)
+        let list = UIImage(systemName: "fork.knife", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal)
         button.setImage(list, for: .normal)
         button.setTitle("  Nutrition", for: .normal)
         button.tintColor = .white
-        button.backgroundColor = UIColor(AppColors.gray)
+        button.backgroundColor = UIColor(AppColors.primaryRed)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 45).isActive = true
         button.layer.cornerRadius = 6
@@ -89,11 +89,11 @@ class ProfileViewController: UIViewController {
     
     private let calendarButton: UIButton = {
         let button = UIButton()
-        let magnifyingglass = UIImage(systemName: "calendar", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.blue, renderingMode: .alwaysOriginal)
+        let magnifyingglass = UIImage(systemName: "calendar", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal)
         button.setImage(magnifyingglass, for: .normal)
         button.setTitle("  Calendar", for: .normal)
         button.tintColor = .white
-        button.backgroundColor = UIColor(AppColors.gray)
+        button.backgroundColor = UIColor(AppColors.primaryRed)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 45).isActive = true
         button.layer.cornerRadius = 6
@@ -111,11 +111,11 @@ class ProfileViewController: UIViewController {
     
     private let editProfileButton: UIButton = {
         let button = UIButton()
-        let magnifyingglass = UIImage(systemName: "brain.head.profile.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.blue, renderingMode: .alwaysOriginal)
+        let magnifyingglass = UIImage(systemName: "brain.head.profile.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal)
         button.setImage(magnifyingglass, for: .normal)
         button.setTitle("  Edit Profile", for: .normal)
         button.tintColor = .white
-        button.backgroundColor = UIColor(AppColors.gray)
+        button.backgroundColor = UIColor(AppColors.primaryRed)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 45).isActive = true
         button.layer.cornerRadius = 6
@@ -139,7 +139,7 @@ class ProfileViewController: UIViewController {
             }
         }
         
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor(AppColors.backgroundColor)
         
         setupProfileStackView()
         setupInfoStackViews()
