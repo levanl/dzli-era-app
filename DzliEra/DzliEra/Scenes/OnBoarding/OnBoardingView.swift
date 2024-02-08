@@ -22,6 +22,8 @@ struct OnBoardingView: View, WithRootNavigationController {
                             Group {
                                 if page == viewModel.pages.last {
                                     Button(action: {
+                                        UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
+
                                         self.push(viewController: UIHostingController(rootView: SignInEmailView()), animated: true)
                                     }) {
                                         Text("Get Started")

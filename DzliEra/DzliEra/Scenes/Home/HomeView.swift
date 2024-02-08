@@ -33,6 +33,8 @@ struct HomeView: View, WithRootNavigationController {
     
     @ObservedObject var sharedViewModel = SharedViewModel.shared
     
+    
+    
     var body: some View {
         NavigationView {
             List {
@@ -60,6 +62,7 @@ struct HomeView: View, WithRootNavigationController {
                                 Text("Time")
                                     .foregroundStyle(.gray)
                                     .font(.system(size: 14))
+                                    
                                 Text(workout.time)
                                     .foregroundColor(.white)
                                     .font(.system(size: 24))
@@ -70,6 +73,7 @@ struct HomeView: View, WithRootNavigationController {
                                 Text("Reps")
                                     .foregroundStyle(.gray)
                                     .font(.system(size: 14))
+                                    
                                 Text(workout.reps)
                                     .foregroundColor(.white)
                                     .font(.system(size: 24))
@@ -96,6 +100,7 @@ struct HomeView: View, WithRootNavigationController {
                                     Text(exercise.name)
                                         .foregroundColor(.white)
                                         .font(.system(size: 18))
+                                        
                                 }
                                 .listRowBackground(AppColors.gray)
                                 
