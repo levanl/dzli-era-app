@@ -192,7 +192,13 @@ final class UserManager {
         }
         
         let data: [String: Any] = ["postedWorkouts": postedWorkoutsData]
-        try await userDocument(userId: userId).setData(data, merge: true)
+            
+            let userDocRef = userDocument(userId: userId)
+            for workoutData in postedWorkoutsData {
+                try await userDocRef.updateData([
+                    "postedWorkouts": FieldValue.arrayUnion([workoutData])
+                ])
+            }
     }
     
     func updateUserProfile(userId: String, name: String, bio: String, sex: String, image: UIImage?) async throws {
