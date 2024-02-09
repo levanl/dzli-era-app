@@ -20,6 +20,8 @@
 		C473B0A12B6A717700C34CC0 /* NiceJobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B0A02B6A717700C34CC0 /* NiceJobView.swift */; };
 		C473B0A42B6A815400C34CC0 /* EffectsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = C473B0A32B6A815400C34CC0 /* EffectsLibrary */; };
 		C473B0A72B6A871F00C34CC0 /* Vortex in Frameworks */ = {isa = PBXBuildFile; productRef = C473B0A62B6A871F00C34CC0 /* Vortex */; };
+		C49624DA2B7662C9009159FD /* SkeletonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49624D92B7662C9009159FD /* SkeletonCell.swift */; };
+		C49624DC2B7662E7009159FD /* SkeletonLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49624DB2B7662E7009159FD /* SkeletonLoadable.swift */; };
 		C4BB27472B5858580021AE4C /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB27462B5858580021AE4C /* ButtonExtension.swift */; };
 		C4BB275B2B590CD80021AE4C /* Kanit-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4BB27492B590CD80021AE4C /* Kanit-ExtraLight.ttf */; };
 		C4BB275C2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4BB274A2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf */; };
@@ -123,6 +125,8 @@
 		C473B0972B63DEAD00C34CC0 /* SaveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCollectionViewCell.swift; sourceTree = "<group>"; };
 		C473B09D2B6685BF00C34CC0 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		C473B0A02B6A717700C34CC0 /* NiceJobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiceJobView.swift; sourceTree = "<group>"; };
+		C49624D92B7662C9009159FD /* SkeletonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonCell.swift; sourceTree = "<group>"; };
+		C49624DB2B7662E7009159FD /* SkeletonLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonLoadable.swift; sourceTree = "<group>"; };
 		C4BB27462B5858580021AE4C /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		C4BB27492B590CD80021AE4C /* Kanit-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-ExtraLight.ttf"; sourceTree = "<group>"; };
 		C4BB274A2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -506,6 +510,8 @@
 				C4F3A0102B5D163100B921FB /* WorkoutViewModel.swift */,
 				C4F3A0122B5D164400B921FB /* WorkoutModel.swift */,
 				C40920CA2B6030650089F99E /* WorkoutTableViewCell.swift */,
+				C49624D92B7662C9009159FD /* SkeletonCell.swift */,
+				C49624DB2B7662E7009159FD /* SkeletonLoadable.swift */,
 			);
 			path = Workout;
 			sourceTree = "<group>";
@@ -714,10 +720,12 @@
 				C40920D52B6276110089F99E /* WorkoutInfoTableViewCell.swift in Sources */,
 				C4F3A00C2B5BC7B600B921FB /* TabController.swift in Sources */,
 				C4BB27C22B5AB89D0021AE4C /* AuthTitleComponent.swift in Sources */,
+				C49624DA2B7662C9009159FD /* SkeletonCell.swift in Sources */,
 				C473B09E2B6685BF00C34CC0 /* UserManager.swift in Sources */,
 				C4BB27AD2B594B1A0021AE4C /* SignInEmailView.swift in Sources */,
 				C4E027A52B6FAE39000FA8B6 /* PostedWorkoutView.swift in Sources */,
 				C4F3A0212B5E5EFB00B921FB /* ExerciseTableViewCell.swift in Sources */,
+				C49624DC2B7662E7009159FD /* SkeletonLoadable.swift in Sources */,
 				C4BB27C02B5AB8640021AE4C /* AuthButtonComponent.swift in Sources */,
 				C4BB27B72B5A85720021AE4C /* RegisterView.swift in Sources */,
 				C40920D12B6151640089F99E /* StartedRoutineViewController.swift in Sources */,
