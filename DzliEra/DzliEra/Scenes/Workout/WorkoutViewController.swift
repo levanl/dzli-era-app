@@ -32,13 +32,13 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
     private let startEmptyWorkoutButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        let plusIcon = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.blue, renderingMode: .alwaysOriginal)
+        let plusIcon = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(UIColor(AppColors.secondaryRed), renderingMode: .alwaysOriginal)
         button.setTitle("  Start Empty Workout", for: .normal)
         button.setImage(plusIcon, for: .normal)
         button.tintColor = .white
         button.semanticContentAttribute = .forceLeftToRight
         button.layer.cornerRadius = 6
-        button.backgroundColor = UIColor(AppColors.gray)
+        button.backgroundColor = UIColor(AppColors.secondaryBackgroundColor)
         button.heightAnchor.constraint(equalToConstant: 45).isActive = true
         return button
     }()
@@ -54,11 +54,11 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
     
     private let newRoutineButton: UIButton = {
         let button = UIButton()
-        let list = UIImage(systemName: "list.clipboard", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.blue, renderingMode: .alwaysOriginal)
+        let list = UIImage(systemName: "list.clipboard", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(UIColor(AppColors.secondaryRed), renderingMode: .alwaysOriginal)
         button.setImage(list, for: .normal)
         button.setTitle("  New Routine", for: .normal)
         button.tintColor = .white
-        button.backgroundColor = UIColor(AppColors.gray)
+        button.backgroundColor = UIColor(AppColors.secondaryBackgroundColor)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 45).isActive = true
         button.layer.cornerRadius = 6
@@ -67,11 +67,11 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
     
     private let exploreButton: UIButton = {
         let button = UIButton()
-        let magnifyingglass = UIImage(systemName: "magnifyingglass", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.blue, renderingMode: .alwaysOriginal)
+        let magnifyingglass = UIImage(systemName: "magnifyingglass", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(UIColor(AppColors.secondaryRed), renderingMode: .alwaysOriginal)
         button.setImage(magnifyingglass, for: .normal)
         button.setTitle("  Explore", for: .normal)
         button.tintColor = .white
-        button.backgroundColor = UIColor(AppColors.gray)
+        button.backgroundColor = UIColor(AppColors.secondaryBackgroundColor)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 45).isActive = true
         button.layer.cornerRadius = 6
@@ -81,7 +81,7 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .black
+        tableView.backgroundColor = UIColor(AppColors.backgroundColor)
         return tableView
     }()
     
@@ -113,7 +113,7 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
     // MARK: - Private Methods
     
     private func setupUI() {
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor(AppColors.backgroundColor)
         setupQuickStartLabel()
         setupStartEmptyWorkoutButton()
         setupRoutinesLabel()
@@ -202,8 +202,12 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configure(with: routine)
         cell.delegate = self
         
-        cell.backgroundColor = .black
+        cell.backgroundColor = UIColor(AppColors.backgroundColor)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        150
     }
 }
 

@@ -8,12 +8,12 @@
 import UIKit
 import SwiftUI
 
-class TabController: UITabBarController {
+final class TabController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupTabs()
-        self.tabBar.tintColor = .blue
+        self.tabBar.tintColor = UIColor(AppColors.secondaryRed)
         self.tabBar.frame.size.height = 60
         self.tabBar.layer.cornerRadius = 10
         self.tabBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -23,12 +23,12 @@ class TabController: UITabBarController {
     private func setupTabs() {
         let tabBarAppearance: UITabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithDefaultBackground()
-        tabBarAppearance.backgroundColor = UIColor(AppColors.gray)
+        tabBarAppearance.backgroundColor = UIColor(AppColors.secondaryBackgroundColor)
         UITabBar.appearance().standardAppearance = tabBarAppearance
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         
         let homeView = UIHostingController(rootView: HomeView())
-
+        
         let home = self.createNav(with: "Home", and: UIImage(systemName: "house"), vc: homeView)
         let profile = self.createNav(with: "Workout", and: UIImage(systemName: "list.clipboard.fill"), vc: WorkoutViewController())
         let workout = self.createNav(with: "Profile", and: UIImage(systemName: "person.crop.circle"), vc: ProfileViewController())
@@ -44,3 +44,5 @@ class TabController: UITabBarController {
         return vc
     }
 }
+
+

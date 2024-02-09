@@ -8,7 +8,7 @@
 import SwiftUI
 import PhotosUI
 
-struct EditProfileView: View {
+struct EditProfileView: View, WithRootNavigationController {
     
     @StateObject private var photoLibraryViewModel = PhotoPickerViewModel()
     @StateObject private var viewModel = EditProfileViewModel()
@@ -150,6 +150,29 @@ struct EditProfileView: View {
             }
             .padding()
             
+            Button(action: {
+                Task {
+                    do {
+                        print(AuthenticationManager.shared.isUserLoggedIn())
+
+                        try viewModel.logOut()
+                        self.push(viewController: UIHostingController(rootView: SignInEmailView()), animated: true)
+                        print(AuthenticationManager.shared.isUserLoggedIn())
+                    }
+                    catch {
+                        
+                    }
+                }
+            }) {
+                Text("log out")
+                    .foregroundColor(.red)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.clear)
+                    .cornerRadius(10)
+            }
+            .padding()
+            
             
             
         }
@@ -230,5 +253,9 @@ final class EditProfileViewModel: ObservableObject {
             try await UserManager.shared.updateUserProfileImage(userId: user?.userId ?? "ravime", path: name)
         }
         
+    }
+    
+    func logOut() throws {
+        try AuthenticationManager.shared.signOut()
     }
 }

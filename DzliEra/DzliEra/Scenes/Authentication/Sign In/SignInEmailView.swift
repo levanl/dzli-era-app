@@ -42,6 +42,7 @@ struct SignInEmailView: View, WithRootNavigationController {
         .background(AppColors.authPageBackground)
         
     }
+    
     func temporaryNavToTabBar() {
         Task {
             do {

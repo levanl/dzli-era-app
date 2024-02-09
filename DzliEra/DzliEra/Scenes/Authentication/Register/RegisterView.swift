@@ -11,6 +11,7 @@ struct RegisterView: View, WithRootNavigationController {
     // MARK: - Properties
     @StateObject private var viewModel = RegisterViewModel()
     
+    
     // MARK: - Body
     var body: some View {
         
@@ -21,13 +22,21 @@ struct RegisterView: View, WithRootNavigationController {
             VStack(spacing: 60) {
                 AuthEmailFieldComponent(email: $viewModel.email)
                 AuthPasswordFieldComponent(password: $viewModel.password)
-                AuthButton(action: viewModel.Register, label: Text("Register"))
+                AuthButton(action: registerToSignIn, label: Text("Register"))
             }
             Spacer()
         }
         .padding()
         .padding()
         .background(AppColors.authPageBackground)
+    }
+    
+    func registerToSignIn() {
+        viewModel.Register {
+            if viewModel.didCompleteRegistration {
+                self.pop(animated: true)
+            }
+        }
     }
     
 }

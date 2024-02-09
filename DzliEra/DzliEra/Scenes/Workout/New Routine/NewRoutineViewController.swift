@@ -21,7 +21,7 @@ final class NewRoutineViewController: UIViewController, NewRoutineDelegate {
         textField.placeholder = "Enter Routine Title"
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.textColor = .white
-        textField.backgroundColor = UIColor(AppColors.gray)
+        textField.backgroundColor = UIColor(AppColors.secondaryGray)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.heightAnchor.constraint(equalToConstant: 45).isActive = true
         textField.layer.cornerRadius = 6
@@ -39,7 +39,7 @@ final class NewRoutineViewController: UIViewController, NewRoutineDelegate {
         button.tintColor = .white
         button.semanticContentAttribute = .forceLeftToRight
         button.layer.cornerRadius = 6
-        button.backgroundColor = .blue
+        button.backgroundColor = UIColor(AppColors.primaryRed)
         button.heightAnchor.constraint(equalToConstant: 45).isActive = true
         return button
     }()
@@ -76,7 +76,7 @@ final class NewRoutineViewController: UIViewController, NewRoutineDelegate {
     
     // MARK: - Private Methods
     private func setupUI() {
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor(AppColors.backgroundColor)
         viewModel.delegate = self
         setupTitleTextField()
         setupAddExerciseButton()

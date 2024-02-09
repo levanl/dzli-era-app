@@ -39,7 +39,7 @@ final class WorkoutTableViewCell: UITableViewCell {
     private let startRoutineButton: UIButton = {
         let button = UIButton()
         button.setTitle("Start Routine", for: .normal)
-        button.backgroundColor = .blue
+        button.backgroundColor = UIColor(AppColors.primaryRed)
         button.layer.cornerRadius = 6
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -49,8 +49,14 @@ final class WorkoutTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
-        contentView.backgroundColor = UIColor(AppColors.gray)
+        contentView.backgroundColor = UIColor(AppColors.secondaryBackgroundColor)
         contentView.layer.cornerRadius = 6
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
     }
     
     required init?(coder: NSCoder) {

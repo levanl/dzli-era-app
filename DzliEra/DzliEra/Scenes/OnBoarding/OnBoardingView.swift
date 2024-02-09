@@ -22,10 +22,13 @@ struct OnBoardingView: View, WithRootNavigationController {
                             Group {
                                 if page == viewModel.pages.last {
                                     Button(action: {
+                                        UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
+
                                         self.push(viewController: UIHostingController(rootView: SignInEmailView()), animated: true)
                                     }) {
                                         Text("Get Started")
                                             .font(.custom("Helvetica-Bold", size: 16))
+                                            .frame(minWidth: 100, maxWidth: .infinity, minHeight: 44, maxHeight: 44, alignment: .center)
                                     }
                                     .signUpButtonStyle
                                     .offset(y: 250)
@@ -35,6 +38,7 @@ struct OnBoardingView: View, WithRootNavigationController {
                                     }) {
                                         Text("Next")
                                             .font(.custom("Helvetica-Bold", size: 16))
+                                            .frame(minWidth: 100, maxWidth: .infinity, minHeight: 44, maxHeight: 44, alignment: .center)
                                     }
                                     .signUpButtonStyle
                                     .offset(y: 250)
@@ -52,6 +56,8 @@ struct OnBoardingView: View, WithRootNavigationController {
         .onAppear {
             viewModel.dotAppearance.currentPageIndicatorTintColor = .white
             viewModel.dotAppearance.pageIndicatorTintColor = .gray
+            
+            print(AuthenticationManager.shared.isUserLoggedIn())
         }
         .background(Color.black)
         
