@@ -21,9 +21,9 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
     }()
     
     let games = [
-                Game("Pacman", "1980"),
-                Game("Space Invaders", "1978"),
-                Game("Frogger", "1981")
+        Game("Pacman", "1980"),
+        Game("Space Invaders", "1978"),
+        Game("Frogger", "1981")
     ]
     
     private let routinesLabel: UILabel = {
@@ -103,17 +103,17 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
                 self?.tableView.reloadData()
             }
         }
-
+        
         viewModel.fetchRoutines()
-
+        
         setupUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-           super.viewDidAppear(animated)
-           //        viewModel.fetchRoutines()
-           //        tableView.reloadData()
-       }
+        super.viewDidAppear(animated)
+        //        viewModel.fetchRoutines()
+        //        tableView.reloadData()
+    }
     
     
     // MARK: - Private Methods
@@ -173,7 +173,7 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(WorkoutTableViewCell.self, forCellReuseIdentifier: WorkoutTableViewCell.identifier)
-        tableView.register(SkeletonCell.self, forCellReuseIdentifier: SkeletonCell.identifier)
+        tableView.register(WorkoutSkeletonCell.self, forCellReuseIdentifier: WorkoutSkeletonCell.identifier)
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: routineStackView.bottomAnchor, constant: 16),
@@ -204,22 +204,22 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-                if viewModel.routines.isEmpty {
-        
-                           let cell = tableView.dequeueReusableCell(withIdentifier: SkeletonCell.identifier, for: indexPath) as! SkeletonCell
-                            cell.game = games[indexPath.row]
-                    cell.backgroundColor =  UIColor(AppColors.backgroundColor)
-                    return cell
-                } else {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutTableViewCell.identifier, for: indexPath) as! WorkoutTableViewCell
-                    
-                    let routine = viewModel.routines[indexPath.row]
-                    cell.configure(with: routine)
-                    cell.delegate = self
-                    
-                    cell.backgroundColor = UIColor(AppColors.backgroundColor)
-                    return cell
-                }
+        if viewModel.routines.isEmpty {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutSkeletonCell.identifier, for: indexPath) as! WorkoutSkeletonCell
+            cell.game = games[indexPath.row]
+            cell.backgroundColor =  UIColor(AppColors.backgroundColor)
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutTableViewCell.identifier, for: indexPath) as! WorkoutTableViewCell
+            
+            let routine = viewModel.routines[indexPath.row]
+            cell.configure(with: routine)
+            cell.delegate = self
+            
+            cell.backgroundColor = UIColor(AppColors.backgroundColor)
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -236,8 +236,8 @@ extension WorkoutViewController: WorkoutTableViewCellDelegate {
     }
     
     func didTapStartRoutine(_ routine: Routine) {
-            let startedRoutineVC = StartedRoutineViewController()
-            startedRoutineVC.routine = routine
-            navigationController?.pushViewController(startedRoutineVC, animated: true)
-        }
+        let startedRoutineVC = StartedRoutineViewController()
+        startedRoutineVC.routine = routine
+        navigationController?.pushViewController(startedRoutineVC, animated: true)
+    }
 }

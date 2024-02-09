@@ -20,8 +20,9 @@
 		C473B0A12B6A717700C34CC0 /* NiceJobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B0A02B6A717700C34CC0 /* NiceJobView.swift */; };
 		C473B0A42B6A815400C34CC0 /* EffectsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = C473B0A32B6A815400C34CC0 /* EffectsLibrary */; };
 		C473B0A72B6A871F00C34CC0 /* Vortex in Frameworks */ = {isa = PBXBuildFile; productRef = C473B0A62B6A871F00C34CC0 /* Vortex */; };
-		C49624DA2B7662C9009159FD /* SkeletonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49624D92B7662C9009159FD /* SkeletonCell.swift */; };
+		C49624DA2B7662C9009159FD /* WorkoutSkeletonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49624D92B7662C9009159FD /* WorkoutSkeletonCell.swift */; };
 		C49624DC2B7662E7009159FD /* SkeletonLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49624DB2B7662E7009159FD /* SkeletonLoadable.swift */; };
+		C49624DE2B766DFB009159FD /* ExerciseSkeletonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49624DD2B766DFB009159FD /* ExerciseSkeletonCell.swift */; };
 		C4BB27472B5858580021AE4C /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB27462B5858580021AE4C /* ButtonExtension.swift */; };
 		C4BB275B2B590CD80021AE4C /* Kanit-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4BB27492B590CD80021AE4C /* Kanit-ExtraLight.ttf */; };
 		C4BB275C2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4BB274A2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf */; };
@@ -125,8 +126,9 @@
 		C473B0972B63DEAD00C34CC0 /* SaveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCollectionViewCell.swift; sourceTree = "<group>"; };
 		C473B09D2B6685BF00C34CC0 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		C473B0A02B6A717700C34CC0 /* NiceJobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiceJobView.swift; sourceTree = "<group>"; };
-		C49624D92B7662C9009159FD /* SkeletonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonCell.swift; sourceTree = "<group>"; };
+		C49624D92B7662C9009159FD /* WorkoutSkeletonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSkeletonCell.swift; sourceTree = "<group>"; };
 		C49624DB2B7662E7009159FD /* SkeletonLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonLoadable.swift; sourceTree = "<group>"; };
+		C49624DD2B766DFB009159FD /* ExerciseSkeletonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSkeletonCell.swift; sourceTree = "<group>"; };
 		C4BB27462B5858580021AE4C /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		C4BB27492B590CD80021AE4C /* Kanit-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-ExtraLight.ttf"; sourceTree = "<group>"; };
 		C4BB274A2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -510,7 +512,7 @@
 				C4F3A0102B5D163100B921FB /* WorkoutViewModel.swift */,
 				C4F3A0122B5D164400B921FB /* WorkoutModel.swift */,
 				C40920CA2B6030650089F99E /* WorkoutTableViewCell.swift */,
-				C49624D92B7662C9009159FD /* SkeletonCell.swift */,
+				C49624D92B7662C9009159FD /* WorkoutSkeletonCell.swift */,
 				C49624DB2B7662E7009159FD /* SkeletonLoadable.swift */,
 			);
 			path = Workout;
@@ -543,6 +545,7 @@
 				C4F3A01C2B5D32F900B921FB /* ExerciseListViewModel.swift */,
 				C4F3A01E2B5D3D4100B921FB /* ExerciseModel.swift */,
 				C4F3A0202B5E5EFB00B921FB /* ExerciseTableViewCell.swift */,
+				C49624DD2B766DFB009159FD /* ExerciseSkeletonCell.swift */,
 			);
 			path = "Exercise List";
 			sourceTree = "<group>";
@@ -694,6 +697,7 @@
 				C446D1182B6AAE4F00C319A1 /* NiceJobViewModel.swift in Sources */,
 				C4BB27C62B5ABA6B0021AE4C /* AuthPasswordFieldComponent.swift in Sources */,
 				C4BB27B12B59514A0021AE4C /* AuthenticationManager.swift in Sources */,
+				C49624DE2B766DFB009159FD /* ExerciseSkeletonCell.swift in Sources */,
 				C4D4E5272B57FC19000B0AE1 /* OnBoardingModel.swift in Sources */,
 				C4F3A0262B5E993200B921FB /* GifLoader.swift in Sources */,
 				C4E027AF2B728476000FA8B6 /* FrameHandler.swift in Sources */,
@@ -720,7 +724,7 @@
 				C40920D52B6276110089F99E /* WorkoutInfoTableViewCell.swift in Sources */,
 				C4F3A00C2B5BC7B600B921FB /* TabController.swift in Sources */,
 				C4BB27C22B5AB89D0021AE4C /* AuthTitleComponent.swift in Sources */,
-				C49624DA2B7662C9009159FD /* SkeletonCell.swift in Sources */,
+				C49624DA2B7662C9009159FD /* WorkoutSkeletonCell.swift in Sources */,
 				C473B09E2B6685BF00C34CC0 /* UserManager.swift in Sources */,
 				C4BB27AD2B594B1A0021AE4C /* SignInEmailView.swift in Sources */,
 				C4E027A52B6FAE39000FA8B6 /* PostedWorkoutView.swift in Sources */,

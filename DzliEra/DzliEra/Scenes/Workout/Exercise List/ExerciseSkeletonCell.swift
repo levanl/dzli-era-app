@@ -1,5 +1,5 @@
 //
-//  SkeletonCell.swift
+//  ExerciseSkeletonCell.swift
 //  DzliEra
 //
 //  Created by Levan Loladze on 09.02.24.
@@ -7,16 +7,8 @@
 
 import UIKit
 
-struct Game {
-    let title: String
-    let year: String
-    init(_ name: String, _ year: String) {
-        self.title = name
-        self.year = year
-    }
-}
 
-class SkeletonCell: UITableViewCell {
+class ExerciseSkeletonCell: UITableViewCell {
     static let identifier = "SkeletonCell"
     
     let titleLabel = UILabel()
@@ -59,7 +51,7 @@ class SkeletonCell: UITableViewCell {
     
 }
 
-extension SkeletonCell {
+extension ExerciseSkeletonCell {
     
     func setup() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -104,16 +96,5 @@ extension SkeletonCell {
 }
 
 // inherit
-extension SkeletonCell: SkeletonLoadable {}
+extension ExerciseSkeletonCell: SkeletonLoadable {}
 
-extension UIColor {
-    
-    static var gradientDarkGrey: UIColor {
-        return UIColor(red: 239 / 255.0, green: 241 / 255.0, blue: 241 / 255.0, alpha: 1)
-    }
-    
-    static var gradientLightGrey: UIColor {
-        return UIColor(red: 201 / 255.0, green: 201 / 255.0, blue: 201 / 255.0, alpha: 1)
-    }
-    
-}
