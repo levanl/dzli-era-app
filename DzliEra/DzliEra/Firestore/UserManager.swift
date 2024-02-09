@@ -192,18 +192,56 @@ final class UserManager {
         }
         
         let data: [String: Any] = ["postedWorkouts": postedWorkoutsData]
+        
+        let userDocRef = userDocument(userId: userId)
+        for workoutData in postedWorkoutsData {
+            try await userDocRef.updateData([
+                "postedWorkouts": FieldValue.arrayUnion([workoutData])
+            ])
+        }
+    }
+    
+    func savePostedWorkoutsToCollection(postedWorkouts: [PostedWorkout]) async throws {
+        let batch = Firestore.firestore().batch()
+        
+        for workout in postedWorkouts {
+            let workoutData: [String: Any] = [
+                
+                "userEmail": workout.userEmail,
+                "time": workout.time,
+                "reps": workout.reps,
+                "sets": workout.sets,
+                "exercises": try workout.exercises.map { try $0.toFirestoreData() }
+            ]
             
-            let userDocRef = userDocument(userId: userId)
-            for workoutData in postedWorkoutsData {
-                try await userDocRef.updateData([
-                    "postedWorkouts": FieldValue.arrayUnion([workoutData])
-                ])
+            let workoutDocRef = postedWorkoutsCollection.document()
+            batch.setData(workoutData, forDocument: workoutDocRef)
+        }
+        
+        // Commit the batch write
+        try await batch.commit()
+    }
+    
+    func fetchAllPostedWorkouts() async throws -> [PostedWorkout] {
+        var allPostedWorkouts: [PostedWorkout] = []
+        
+        // Get all documents from the 'posted_workouts' collection
+        let querySnapshot = try await postedWorkoutsCollection.getDocuments()
+        
+        // Iterate through the documents
+        for document in querySnapshot.documents {
+            // Convert document data to PostedWorkout object
+            if let postedWorkout = try? document.data(as: PostedWorkout.self) {
+                allPostedWorkouts.append(postedWorkout)
             }
+        }
+        
+        return allPostedWorkouts
     }
     
     func updateUserProfile(userId: String, name: String, bio: String, sex: String, image: UIImage?) async throws {
-            
-            
+        
+        
         if let image = image, let imageData = image.jpegData(compressionQuality: 0.5) {
             let storageRef = Storage.storage().reference().child("profile_images").child(userId)
             
@@ -227,8 +265,8 @@ final class UserManager {
                 }
             }
         }
-//            try await userDocument(userId: userId).setData(userData, merge: true)
-        }
+        //            try await userDocument(userId: userId).setData(userData, merge: true)
+    }
     
     func updateUserProfileImage(userId: String, path: String) async throws {
         let data: [String: Any] = [
