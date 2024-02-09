@@ -20,6 +20,12 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
         return label
     }()
     
+    let games = [
+                Game("Pacman", "1980"),
+                Game("Space Invaders", "1978"),
+                Game("Frogger", "1981")
+    ]
+    
     private let routinesLabel: UILabel = {
         let label = UILabel()
         label.text = "Routines"
@@ -167,6 +173,7 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(WorkoutTableViewCell.self, forCellReuseIdentifier: WorkoutTableViewCell.identifier)
+        tableView.register(SkeletonCell.self, forCellReuseIdentifier: SkeletonCell.identifier)
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: routineStackView.bottomAnchor, constant: 16),
