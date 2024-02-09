@@ -199,18 +199,27 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
 // MARK: - TableView
 extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.routines.count
+        return viewModel.routines.count > 0 ? viewModel.routines.count : games.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutTableViewCell.identifier, for: indexPath) as! WorkoutTableViewCell
         
-        let routine = viewModel.routines[indexPath.row]
-        cell.configure(with: routine)
-        cell.delegate = self
+                if viewModel.routines.isEmpty {
         
-        cell.backgroundColor = UIColor(AppColors.backgroundColor)
-        return cell
+                           let cell = tableView.dequeueReusableCell(withIdentifier: SkeletonCell.identifier, for: indexPath) as! SkeletonCell
+                            cell.game = games[indexPath.row]
+                    cell.backgroundColor =  UIColor(AppColors.backgroundColor)
+                    return cell
+                } else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutTableViewCell.identifier, for: indexPath) as! WorkoutTableViewCell
+                    
+                    let routine = viewModel.routines[indexPath.row]
+                    cell.configure(with: routine)
+                    cell.delegate = self
+                    
+                    cell.backgroundColor = UIColor(AppColors.backgroundColor)
+                    return cell
+                }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
