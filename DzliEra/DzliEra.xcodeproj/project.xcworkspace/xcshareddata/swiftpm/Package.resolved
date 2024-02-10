@@ -118,6 +118,15 @@
       }
     },
     {
+      "identity" : "networkingpackagerapid",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/levanl/NetworkingPackageRapid.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "0a1e99cc989f1233193cbcd28142357188e4b0e5"
+      }
+    },
+    {
       "identity" : "promises",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/promises.git",
