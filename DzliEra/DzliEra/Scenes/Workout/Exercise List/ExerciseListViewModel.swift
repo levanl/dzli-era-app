@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import NetworkingPackageGeneric
+import NetworkingPackageRapid
 
 // MARK: - ExerciseListViewModelDelegate
 protocol ExerciseListViewModelDelegate: AnyObject {
@@ -51,29 +51,18 @@ final class ExerciseListViewModel {
             "X-RapidAPI-Host": "exercisedb.p.rapidapi.com"
         ]
         
-        request.allHTTPHeaderFields = headers
-        request.httpMethod = "GET"
-        
-        let session = URLSession.shared
-        
-        let dataTask = session.dataTask(with: request) { (data, response, error) in
-            if let error = error {
-                print("Error: \(error)")
-            } else if let data = data {
-                do {
-                    let decoder = JSONDecoder()
-                    self.exercises = try decoder.decode(Exercises.self, from: data)
-                    
-                    DispatchQueue.main.async {
-                        self.delegate?.exerciseListViewModelDidFetchData(self)
-                    }
-                    
-                    print("Fetched exercises: \(self.exercises)")
-                } catch {
-                    print("Error decoding JSON: \(error)")
+        NetworkManagerRapid.fetchData(from: urlString, headers: headers, modelType: Exercises.self) { result in
+            switch result {
+            case .success(let exercises):
+                self.exercises = exercises
+                DispatchQueue.main.async {
+                    self.delegate?.exerciseListViewModelDidFetchData(self)
                 }
+                
+            case .failure(let error):
+                // Handle error
+                print("Error: \(error)")
             }
         }
-        dataTask.resume()
     }
 }

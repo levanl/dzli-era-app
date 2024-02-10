@@ -23,6 +23,7 @@
 		C49624DA2B7662C9009159FD /* WorkoutSkeletonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49624D92B7662C9009159FD /* WorkoutSkeletonCell.swift */; };
 		C49624DC2B7662E7009159FD /* SkeletonLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49624DB2B7662E7009159FD /* SkeletonLoadable.swift */; };
 		C49624DE2B766DFB009159FD /* ExerciseSkeletonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49624DD2B766DFB009159FD /* ExerciseSkeletonCell.swift */; };
+		C49624E12B779D50009159FD /* NetworkingPackageRapid in Frameworks */ = {isa = PBXBuildFile; productRef = C49624E02B779D50009159FD /* NetworkingPackageRapid */; };
 		C4BB27472B5858580021AE4C /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB27462B5858580021AE4C /* ButtonExtension.swift */; };
 		C4BB275B2B590CD80021AE4C /* Kanit-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4BB27492B590CD80021AE4C /* Kanit-ExtraLight.ttf */; };
 		C4BB275C2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4BB274A2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf */; };
@@ -211,6 +212,7 @@
 				C4BB277C2B593B420021AE4C /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				C4BB27822B593B420021AE4C /* FirebaseAuth in Frameworks */,
 				C4BB27862B593B420021AE4C /* FirebaseCrashlytics in Frameworks */,
+				C49624E12B779D50009159FD /* NetworkingPackageRapid in Frameworks */,
 				C4BB27A62B593B420021AE4C /* FirebaseRemoteConfigSwift in Frameworks */,
 				C4BB27982B593B420021AE4C /* FirebaseInAppMessaging-Beta in Frameworks */,
 				C4BB278A2B593B420021AE4C /* FirebaseDatabaseSwift in Frameworks */,
@@ -605,6 +607,7 @@
 				C4F3A00E2B5D151600B921FB /* NetworkingPackageGeneric */,
 				C473B0A32B6A815400C34CC0 /* EffectsLibrary */,
 				C473B0A62B6A871F00C34CC0 /* Vortex */,
+				C49624E02B779D50009159FD /* NetworkingPackageRapid */,
 			);
 			productName = DzliEra;
 			productReference = C4D4E5022B57F3FF000B0AE1 /* DzliEra.app */;
@@ -639,6 +642,7 @@
 				C4F3A00D2B5D151600B921FB /* XCRemoteSwiftPackageReference "networking-package-generic" */,
 				C473B0A22B6A815300C34CC0 /* XCRemoteSwiftPackageReference "effects-library" */,
 				C473B0A52B6A871F00C34CC0 /* XCRemoteSwiftPackageReference "Vortex" */,
+				C49624DF2B779D50009159FD /* XCRemoteSwiftPackageReference "NetworkingPackageRapid" */,
 			);
 			productRefGroup = C4D4E5032B57F3FF000B0AE1 /* Products */;
 			projectDirPath = "";
@@ -973,6 +977,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		C49624DF2B779D50009159FD /* XCRemoteSwiftPackageReference "NetworkingPackageRapid" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/levanl/NetworkingPackageRapid.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		C4BB27742B593B420021AE4C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -1001,6 +1013,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C473B0A52B6A871F00C34CC0 /* XCRemoteSwiftPackageReference "Vortex" */;
 			productName = Vortex;
+		};
+		C49624E02B779D50009159FD /* NetworkingPackageRapid */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C49624DF2B779D50009159FD /* XCRemoteSwiftPackageReference "NetworkingPackageRapid" */;
+			productName = NetworkingPackageRapid;
 		};
 		C4BB27752B593B420021AE4C /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
