@@ -35,10 +35,17 @@ final class WorkoutViewModel {
                 print("User loaded: \(self.user?.email ?? "Unknown email")")
                 let routines = try await UserManager.shared.getRoutines(userId: user?.userId ?? "none")
                 self.routines = routines
+                
+                if routines.isEmpty {
+                                // Set status to idle
+                                self.fetchingStatus = .idle
+                            } else {
+                                // Set status to success
+                                self.fetchingStatus = .success
+                            }
                 DispatchQueue.main.async {
                     self.onDataUpdate?()
                 }
-                self.fetchingStatus = .success
                 
             } catch {
                 print("Error loading user: \(error)")

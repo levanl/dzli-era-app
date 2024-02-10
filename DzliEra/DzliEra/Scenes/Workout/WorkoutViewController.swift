@@ -199,7 +199,16 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
 // MARK: - TableView
 extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.routines.count > 0 ? viewModel.routines.count : games.count
+        switch viewModel.fetchingStatus {
+        case .fetching:
+            return games.count
+        case .success:
+            return viewModel.routines.count
+        case .failure:
+            return 0
+        case .idle:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
