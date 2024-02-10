@@ -11,6 +11,8 @@ import Foundation
 final class WorkoutViewModel {
     // MARK: - Properties
     
+    var fetchingStatus: FetchingStatus = .idle
+    
     var user: DBUser?
     
     var onDataUpdate: (() -> Void)?
@@ -24,6 +26,8 @@ final class WorkoutViewModel {
     }
     
     func fetchRoutines() {
+        self.fetchingStatus = .fetching
+        
         Task {
             do {
                 let authDataResult = try await AuthenticationManager.shared.getAuthenticatedUser()
@@ -31,12 +35,31 @@ final class WorkoutViewModel {
                 print("User loaded: \(self.user?.email ?? "Unknown email")")
                 let routines = try await UserManager.shared.getRoutines(userId: user?.userId ?? "none")
                 self.routines = routines
+                
+                if routines.isEmpty {
+                                // Set status to idle
+                                self.fetchingStatus = .idle
+                            } else {
+                                // Set status to success
+                                self.fetchingStatus = .success
+                            }
                 DispatchQueue.main.async {
                     self.onDataUpdate?()
                 }
+                
             } catch {
                 print("Error loading user: \(error)")
+                
+                self.fetchingStatus = .failure
+                
             }
         }
+    }
+    
+    enum FetchingStatus {
+        case idle
+        case fetching
+        case success
+        case failure
     }
 }

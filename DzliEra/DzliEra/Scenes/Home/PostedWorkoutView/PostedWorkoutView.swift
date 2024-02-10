@@ -90,10 +90,6 @@ struct PostedWorkoutView: View {
     }
 }
 
-#Preview {
-    PostedWorkoutView(workout: PostedWorkout(userEmail: "blach@gmail.com", time: "10", reps: "20", sets: "32", exercises: [Exercise(name: "rows", bodyPart: "fexi", equipment: .cable, gifURL: "onboarding1", id: "asiudaiu", target: "aodsoisahda"),Exercise(name: "FEXi", bodyPart: "fexi", equipment: .cable, gifURL: "onboarding1", id: "asiudaiu", target: "LOMI")]))
-}
-
 
 struct MuscleSplit: Identifiable {
     let id = UUID()

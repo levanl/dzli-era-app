@@ -20,6 +20,12 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
         return label
     }()
     
+    let games = [
+        Game("Pacman", "1980"),
+        Game("Space Invaders", "1978"),
+        Game("Frogger", "1981")
+    ]
+    
     private let routinesLabel: UILabel = {
         let label = UILabel()
         label.text = "Routines"
@@ -97,17 +103,17 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
                 self?.tableView.reloadData()
             }
         }
-
+        
         viewModel.fetchRoutines()
-
+        
         setupUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-           super.viewDidAppear(animated)
-           //        viewModel.fetchRoutines()
-           //        tableView.reloadData()
-       }
+        super.viewDidAppear(animated)
+        //        viewModel.fetchRoutines()
+        //        tableView.reloadData()
+    }
     
     
     // MARK: - Private Methods
@@ -167,6 +173,7 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(WorkoutTableViewCell.self, forCellReuseIdentifier: WorkoutTableViewCell.identifier)
+        tableView.register(WorkoutSkeletonCell.self, forCellReuseIdentifier: WorkoutSkeletonCell.identifier)
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: routineStackView.bottomAnchor, constant: 16),
@@ -192,18 +199,40 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
 // MARK: - TableView
 extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.routines.count
+        switch viewModel.fetchingStatus {
+        case .fetching:
+            return games.count
+        case .success:
+            return viewModel.routines.count
+        case .failure:
+            return 0
+        case .idle:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutTableViewCell.identifier, for: indexPath) as! WorkoutTableViewCell
+        switch viewModel.fetchingStatus {
+            case .fetching:
+                let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutSkeletonCell.identifier, for: indexPath) as! WorkoutSkeletonCell
+                cell.game = games[indexPath.row]
+                cell.backgroundColor =  UIColor(AppColors.backgroundColor)
+                return cell
+            case .success:
+                let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutTableViewCell.identifier, for: indexPath) as! WorkoutTableViewCell
+                
+                let routine = viewModel.routines[indexPath.row]
+                cell.configure(with: routine)
+                cell.delegate = self
+                
+                cell.backgroundColor = UIColor(AppColors.backgroundColor)
+                return cell
+            case .failure:
+                return UITableViewCell()
+            case .idle:
+                return UITableViewCell()
+            }
         
-        let routine = viewModel.routines[indexPath.row]
-        cell.configure(with: routine)
-        cell.delegate = self
-        
-        cell.backgroundColor = UIColor(AppColors.backgroundColor)
-        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -220,8 +249,8 @@ extension WorkoutViewController: WorkoutTableViewCellDelegate {
     }
     
     func didTapStartRoutine(_ routine: Routine) {
-            let startedRoutineVC = StartedRoutineViewController()
-            startedRoutineVC.routine = routine
-            navigationController?.pushViewController(startedRoutineVC, animated: true)
-        }
+        let startedRoutineVC = StartedRoutineViewController()
+        startedRoutineVC.routine = routine
+        navigationController?.pushViewController(startedRoutineVC, animated: true)
+    }
 }

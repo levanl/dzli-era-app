@@ -87,6 +87,7 @@ struct NiceJobView: View, WithRootNavigationController {
                         
                         try await UserManager.shared.uploadPostedWorkout(userId: sharedViewModel.user?.userId ?? "ravidzma", postedWorkouts: sharedViewModel.user?.postedWorkouts ?? [])
                         
+                        try await UserManager.shared.savePostedWorkoutsToCollection(postedWorkouts: sharedViewModel.user?.postedWorkouts ?? [])
                     }
                     catch {
                         

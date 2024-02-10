@@ -23,6 +23,18 @@ class ExerciseListViewController: UIViewController {
         return tableView
     }()
     
+    let games = [
+        Game("Pacman", "1980"),
+        Game("Space Invaders", "1978"),
+        Game("Frogger", "1981"),
+        Game("Pacman", "1980"),
+        Game("Space Invaders", "1978"),
+        Game("Frogger", "1981"),
+        Game("Pacman", "1980"),
+        Game("Space Invaders", "1978"),
+        Game("Frogger", "1981")
+    ]
+    
     private let selectButton: UIButton = {
         let button = UIButton()
         button.setTitle("Select", for: .normal)
@@ -45,7 +57,7 @@ class ExerciseListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor(AppColors.backgroundColor)
         viewModel.delegate = self
         setupTableView()
         setupSelectButton()
@@ -57,6 +69,7 @@ class ExerciseListViewController: UIViewController {
         
         view.addSubview(tableView)
         tableView.register(ExerciseTableViewCell.self, forCellReuseIdentifier: "ExerciseCell")
+        tableView.register(ExerciseSkeletonCell.self, forCellReuseIdentifier: ExerciseSkeletonCell.identifier)
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
@@ -92,15 +105,23 @@ class ExerciseListViewController: UIViewController {
 
 extension ExerciseListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.numberOfExercises
+        viewModel.exercises.count > 0 ? viewModel.exercises.count : games.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseCell", for: indexPath) as! ExerciseTableViewCell
-        let exercise = viewModel.exercises[indexPath.row]
-        cell.delegate = self
-        cell.configure(with: exercise)
-        return cell
+        
+        if viewModel.exercises.isEmpty {
+            let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseSkeletonCell.identifier, for: indexPath) as! ExerciseSkeletonCell
+            cell.game = games[indexPath.row]
+            cell.backgroundColor =  UIColor(AppColors.backgroundColor)
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseCell", for: indexPath) as! ExerciseTableViewCell
+            let exercise = viewModel.exercises[indexPath.row]
+            cell.delegate = self
+            cell.configure(with: exercise)
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
