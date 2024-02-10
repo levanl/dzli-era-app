@@ -44,8 +44,6 @@ final class ExerciseListViewModel {
             return
         }
         
-        var request = URLRequest(url: url!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10)
-        
         let headers = [
             "X-RapidAPI-Key": "e25ec639d7mshd940771000c24d6p1f2c8ejsn3c254eb3fe8a",
             "X-RapidAPI-Host": "exercisedb.p.rapidapi.com"
