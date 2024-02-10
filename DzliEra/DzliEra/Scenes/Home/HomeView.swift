@@ -10,21 +10,47 @@ import SwiftUI
 class SharedViewModel: ObservableObject {
     static let shared = SharedViewModel()
     
+    @Published var postableWorkouts: [PostedWorkout] = []
+    
+    
     var user: DBUser?
     
     func fetchCurrentUser() {
+        
+        print("fetch user called")
         Task {
             do {
+                
                 let authDataResult = try await AuthenticationManager.shared.getAuthenticatedUser()
                 self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
                 print("User loaded: \(self.user?.email ?? "Unknown email")")
+                
+                print("fetch user finished")
             } catch {
                 print("Error loading user: \(error)")
             }
         }
     }
     
-    @Published var postableWorkouts: [PostedWorkout] = [PostedWorkout(userEmail: "example@gmail.com", time: "10", reps: "20", sets: "20", exercises: [Exercise(name: "rows", bodyPart: "fexi", equipment: .cable, gifURL: "onboarding1", id: "asiudaiu", target: "aodsoisahda"),Exercise(name: "rows", bodyPart: "fexi", equipment: .cable, gifURL: "onboarding1", id: "asiudaiu", target: "aodsoisahda")])]
+
+//    func fetchPostedWorkouts() {
+//
+//        print("PostedWorkout sTArted")
+//        Task {
+//            do {
+//
+//                DispatchQueue.main.async {
+//                    self.postableWorkouts = fetchedWorkouts
+//                }
+//
+//                print("PostedWorkout done")
+//            } catch {
+//                print("Error fetching posted workouts: \(error.localizedDescription)")
+//            }
+//        }
+//    }
+//
+    
     
     private init() {}
 }
@@ -32,8 +58,6 @@ class SharedViewModel: ObservableObject {
 struct HomeView: View, WithRootNavigationController {
     
     @ObservedObject var sharedViewModel = SharedViewModel.shared
-    
-    
     
     var body: some View {
         NavigationView {
@@ -62,7 +86,7 @@ struct HomeView: View, WithRootNavigationController {
                                 Text("Time")
                                     .foregroundStyle(.gray)
                                     .font(.system(size: 14))
-                                    
+                                
                                 Text(workout.time)
                                     .foregroundColor(.white)
                                     .font(.system(size: 24))
@@ -73,7 +97,7 @@ struct HomeView: View, WithRootNavigationController {
                                 Text("Reps")
                                     .foregroundStyle(.gray)
                                     .font(.system(size: 14))
-                                    
+                                
                                 Text(workout.reps)
                                     .foregroundColor(.white)
                                     .font(.system(size: 24))
@@ -100,7 +124,7 @@ struct HomeView: View, WithRootNavigationController {
                                     Text(exercise.name)
                                         .foregroundColor(.white)
                                         .font(.system(size: 18))
-                                        
+                                    
                                 }
                                 .listRowBackground(AppColors.secondaryBackgroundColor)
                                 
@@ -123,7 +147,9 @@ struct HomeView: View, WithRootNavigationController {
             .listStyle(InsetGroupedListStyle())
             .scrollContentBackground(.hidden)
             .background(AppColors.backgroundColor)
-            
+            .task {
+//                SharedViewModel.shared.fetchPostedWorkouts()
+            }
         }
     }
 }

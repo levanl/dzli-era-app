@@ -203,23 +203,27 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch viewModel.fetchingStatus {
+            case .fetching:
+                let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutSkeletonCell.identifier, for: indexPath) as! WorkoutSkeletonCell
+                cell.game = games[indexPath.row]
+                cell.backgroundColor =  UIColor(AppColors.backgroundColor)
+                return cell
+            case .success:
+                let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutTableViewCell.identifier, for: indexPath) as! WorkoutTableViewCell
+                
+                let routine = viewModel.routines[indexPath.row]
+                cell.configure(with: routine)
+                cell.delegate = self
+                
+                cell.backgroundColor = UIColor(AppColors.backgroundColor)
+                return cell
+            case .failure:
+                return UITableViewCell()
+            case .idle:
+                return UITableViewCell()
+            }
         
-        if viewModel.routines.isEmpty {
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutSkeletonCell.identifier, for: indexPath) as! WorkoutSkeletonCell
-            cell.game = games[indexPath.row]
-            cell.backgroundColor =  UIColor(AppColors.backgroundColor)
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutTableViewCell.identifier, for: indexPath) as! WorkoutTableViewCell
-            
-            let routine = viewModel.routines[indexPath.row]
-            cell.configure(with: routine)
-            cell.delegate = self
-            
-            cell.backgroundColor = UIColor(AppColors.backgroundColor)
-            return cell
-        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

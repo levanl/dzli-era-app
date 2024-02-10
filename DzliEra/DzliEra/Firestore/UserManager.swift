@@ -191,8 +191,6 @@ final class UserManager {
             postedWorkoutsData.append(workoutData)
         }
         
-        let data: [String: Any] = ["postedWorkouts": postedWorkoutsData]
-        
         let userDocRef = userDocument(userId: userId)
         for workoutData in postedWorkoutsData {
             try await userDocRef.updateData([
@@ -218,25 +216,7 @@ final class UserManager {
             batch.setData(workoutData, forDocument: workoutDocRef)
         }
         
-        // Commit the batch write
         try await batch.commit()
-    }
-    
-    func fetchAllPostedWorkouts() async throws -> [PostedWorkout] {
-        var allPostedWorkouts: [PostedWorkout] = []
-        
-        // Get all documents from the 'posted_workouts' collection
-        let querySnapshot = try await postedWorkoutsCollection.getDocuments()
-        
-        // Iterate through the documents
-        for document in querySnapshot.documents {
-            // Convert document data to PostedWorkout object
-            if let postedWorkout = try? document.data(as: PostedWorkout.self) {
-                allPostedWorkouts.append(postedWorkout)
-            }
-        }
-        
-        return allPostedWorkouts
     }
     
     func updateUserProfile(userId: String, name: String, bio: String, sex: String, image: UIImage?) async throws {
@@ -265,7 +245,6 @@ final class UserManager {
                 }
             }
         }
-        //            try await userDocument(userId: userId).setData(userData, merge: true)
     }
     
     func updateUserProfileImage(userId: String, path: String) async throws {
