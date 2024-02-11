@@ -10,8 +10,8 @@ import SwiftUI
 class SharedViewModel: ObservableObject {
     static let shared = SharedViewModel()
     
-    @Published var postableWorkouts: [PostedWorkout] = []
-    
+    @Published var postableWorkouts: [PostedWorkout] = [PostedWorkout(userEmail: "example@gmail.com", time: "10", reps: "20", sets: "20", exercises: [Exercise(name: "rows", bodyPart: "fexi", equipment: .cable, gifURL: "onboarding1", id: "asiudaiu", target: "aodsoisahda"),Exercise(name: "rows", bodyPart: "fexi", equipment: .cable, gifURL: "onboarding1", id: "asiudaiu", target: "aodsoisahda")]) ]
+
     
     var user: DBUser?
     
@@ -137,6 +137,7 @@ struct HomeView: View, WithRootNavigationController {
                         Spacer()
                     }
                     .frame(height: 300)
+                    .padding(.bottom, 30)
                     .listRowBackground(AppColors.secondaryBackgroundColor)
                     .onTapGesture {
                         self.push(viewController: UIHostingController(rootView: PostedWorkoutView(workout: workout)), animated: true)
