@@ -184,7 +184,7 @@ class ProfileViewController: UIViewController {
         
         secondaryInfoStackView.addArrangedSubview(foodButton)
         secondaryInfoStackView.addArrangedSubview(calendarButton)
-        
+        foodButton.addTarget(self, action: #selector(foodButtonTapped), for: .touchUpInside)
         NSLayoutConstraint.activate([
             secondaryInfoStackView.topAnchor.constraint(equalTo: infoStackView.bottomAnchor, constant: 8),
             secondaryInfoStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -228,7 +228,13 @@ class ProfileViewController: UIViewController {
             }
         }.resume()
     }
+    
+    
 
+    @objc private func foodButtonTapped() {
+        self.navigationController?.pushViewController(NutritionViewController(), animated: true)
+    }
+    
     @objc private func statisticsButtonTapped() {
         self.navigationController?.pushViewController(UIHostingController(rootView: StatisticsView()), animated: true)
     }
