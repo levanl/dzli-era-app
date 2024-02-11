@@ -8,19 +8,24 @@
 import UIKit
 
 class NutritionViewController: UIViewController {
-
-    
-    private let tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .clear
-        tableView.separatorStyle = .singleLine
-        tableView.separatorColor = UIColor.gray.withAlphaComponent(1)
-        tableView.allowsMultipleSelection = true
-        return tableView
-    }()
     
     private let viewModel = NutritionViewModel()
+    
+    private let nutritionNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "heyap"
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let nutritionImageView: UIImageView = {
+            let imageView = UIImageView()
+            imageView.contentMode = .scaleAspectFit
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            return imageView
+        }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,47 +37,62 @@ class NutritionViewController: UIViewController {
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
-        setupNutritionTableView()
+        setupNutritionNameLabel()
+        setupNutritionImageView()
     }
     
-    
-    private func setupNutritionTableView() {
-        view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
+    private func setupNutritionNameLabel() {
+        view.addSubview(nutritionNameLabel)
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60)
+            nutritionNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
+            nutritionNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            nutritionNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }
-
 }
 
 extension NutritionViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        // Handle text changes
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchText = searchBar.text else { return }
+        
+        //        viewModel.fetchImageData(for: searchText)
+        searchBar.resignFirstResponder()
     }
-
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        guard let searchText = searchBar.text else { return true }
+        viewModel.fetchNutritionData(for: searchText) { nutritionData in
+            guard let nutritionData = nutritionData else {
+                // Handle case when no data is available
+                return
+            }
+            DispatchQueue.main.async {
+                self.updateNutritionLabel(with: nutritionData)
+            }
+        }
+        
+        
+        searchBar.resignFirstResponder()
+        return true
+    }
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        // Handle cancel button tap
-    }
-}
-
-
-extension NutritionViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+    private func updateNutritionLabel(with nutritionData: [NutritionModel]) {
+        guard let firstNutrition = nutritionData.first else {
+            return
+        }
+        nutritionNameLabel.text = "Name: \(firstNutrition.name)\nCalories: \(firstNutrition.calories)"
     }
     
     
 }
+

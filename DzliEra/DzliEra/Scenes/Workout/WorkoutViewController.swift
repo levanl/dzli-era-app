@@ -207,7 +207,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         case .failure:
             return 0
         case .idle:
-            return 0
+            return viewModel.routines.count
         }
     }
     
@@ -230,7 +230,14 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
             case .failure:
                 return UITableViewCell()
             case .idle:
-                return UITableViewCell()
+                let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutTableViewCell.identifier, for: indexPath) as! WorkoutTableViewCell
+                
+                let routine = viewModel.routines[indexPath.row]
+                cell.configure(with: routine)
+                cell.delegate = self
+                
+                cell.backgroundColor = UIColor(AppColors.backgroundColor)
+                return cell
             }
         
     }

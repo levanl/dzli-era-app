@@ -26,6 +26,7 @@
 		C49624E12B779D50009159FD /* NetworkingPackageRapid in Frameworks */ = {isa = PBXBuildFile; productRef = C49624E02B779D50009159FD /* NetworkingPackageRapid */; };
 		C49624E42B77AEA0009159FD /* NutritionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49624E32B77AEA0009159FD /* NutritionViewController.swift */; };
 		C49624E62B78D6CD009159FD /* NutritionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49624E52B78D6CD009159FD /* NutritionViewModel.swift */; };
+		C49624E82B78DD4F009159FD /* NutritionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49624E72B78DD4F009159FD /* NutritionModel.swift */; };
 		C4BB27472B5858580021AE4C /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB27462B5858580021AE4C /* ButtonExtension.swift */; };
 		C4BB275B2B590CD80021AE4C /* Kanit-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4BB27492B590CD80021AE4C /* Kanit-ExtraLight.ttf */; };
 		C4BB275C2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4BB274A2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf */; };
@@ -134,6 +135,7 @@
 		C49624DD2B766DFB009159FD /* ExerciseSkeletonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSkeletonCell.swift; sourceTree = "<group>"; };
 		C49624E32B77AEA0009159FD /* NutritionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionViewController.swift; sourceTree = "<group>"; };
 		C49624E52B78D6CD009159FD /* NutritionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionViewModel.swift; sourceTree = "<group>"; };
+		C49624E72B78DD4F009159FD /* NutritionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionModel.swift; sourceTree = "<group>"; };
 		C4BB27462B5858580021AE4C /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		C4BB27492B590CD80021AE4C /* Kanit-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-ExtraLight.ttf"; sourceTree = "<group>"; };
 		C4BB274A2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 			children = (
 				C49624E32B77AEA0009159FD /* NutritionViewController.swift */,
 				C49624E52B78D6CD009159FD /* NutritionViewModel.swift */,
+				C49624E72B78DD4F009159FD /* NutritionModel.swift */,
 			);
 			path = Nutrition;
 			sourceTree = "<group>";
@@ -724,6 +727,7 @@
 				C473B0962B63BF1300C34CC0 /* SaveWorkoutViewController.swift in Sources */,
 				C4D4E51D2B57F873000B0AE1 /* ColorExtension.swift in Sources */,
 				C4BB27C42B5ABA430021AE4C /* AuthEmailFieldComponent.swift in Sources */,
+				C49624E82B78DD4F009159FD /* NutritionModel.swift in Sources */,
 				C4D4E5062B57F3FF000B0AE1 /* AppDelegate.swift in Sources */,
 				C4E027AD2B72489B000FA8B6 /* EditProfileView.swift in Sources */,
 				C4F3A01F2B5D3D4100B921FB /* ExerciseModel.swift in Sources */,
