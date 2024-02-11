@@ -16,6 +16,7 @@ class NutritionViewController: UIViewController {
         label.text = "heyap"
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .white
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -45,10 +46,19 @@ class NutritionViewController: UIViewController {
         definesPresentationContext = true
         setupNutritionNameLabel()
         setupNutritionImageView()
+        
     }
     
     private func setupNutritionNameLabel() {
         view.addSubview(nutritionNameLabel)
+        nutritionImageView.layer.shadowColor = UIColor.black.cgColor
+        nutritionImageView.layer.shadowOpacity = 0.5
+        nutritionImageView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        nutritionImageView.layer.shadowRadius = 4
+        
+        nutritionImageView.layer.shadowPath = UIBezierPath(rect: nutritionImageView.bounds).cgPath
+        nutritionImageView.layer.shouldRasterize = true
+        nutritionImageView.layer.rasterizationScale = UIScreen.main.scale
         
         NSLayoutConstraint.activate([
             nutritionNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
@@ -66,16 +76,15 @@ class NutritionViewController: UIViewController {
             nutritionImageView.topAnchor.constraint(equalTo: nutritionNameLabel.bottomAnchor, constant: 20),
             nutritionImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             nutritionImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            nutritionImageView.heightAnchor.constraint(equalToConstant: 400)
+            nutritionImageView.heightAnchor.constraint(equalToConstant: 300)
         ])
+        
     }
 }
 
 extension NutritionViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text else { return }
-        
-        //        viewModel.fetchImageData(for: searchText)
         searchBar.resignFirstResponder()
     }
     
@@ -92,20 +101,28 @@ extension NutritionViewController: UISearchBarDelegate {
             }
         }
         
+        
         viewModel.fetchImageData(for: searchText) { imageData in
-                guard let imageData = imageData else {
-                    // Handle case when no image data is available
+            guard let url = URL(string: self.viewModel.imageUrl) else {
+                return
+            }
+            
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                
+                if let error = error {
+                    print("Error downloading image: \(error)")
                     return
                 }
-        
-            let url = URL(string: self.viewModel.imageUrl)
-            
-            if let data = try? Data(contentsOf: url!) {
+                
+                guard let data = data, let image = UIImage(data: data) else {
+                    print("Invalid image data")
+                    return
+                }
                 
                 DispatchQueue.main.async {
-                    self.nutritionImageView.image = UIImage(data: data)
+                    self.nutritionImageView.image = image
                 }
-            }
+            }.resume()
         }
         
         searchBar.resignFirstResponder()
@@ -120,7 +137,7 @@ extension NutritionViewController: UISearchBarDelegate {
         guard let firstNutrition = nutritionData.first else {
             return
         }
-        nutritionNameLabel.text = "Name: \(firstNutrition.name)\nCalories: \(firstNutrition.calories)"
+        nutritionNameLabel.text = "\(firstNutrition.name)"
     }
     
     
