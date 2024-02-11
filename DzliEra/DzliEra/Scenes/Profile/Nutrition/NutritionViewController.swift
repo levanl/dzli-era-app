@@ -21,11 +21,12 @@ class NutritionViewController: UIViewController {
     }()
     
     private let nutritionImageView: UIImageView = {
-            let imageView = UIImageView()
-            imageView.contentMode = .scaleAspectFit
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            return imageView
-        }()
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +56,19 @@ class NutritionViewController: UIViewController {
             nutritionNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }
+    
+    private func setupNutritionImageView() {
+        view.addSubview(nutritionImageView)
+        
+        nutritionImageView.image = UIImage(named: "onboarding1")
+        
+        NSLayoutConstraint.activate([
+            nutritionImageView.topAnchor.constraint(equalTo: nutritionNameLabel.bottomAnchor, constant: 20),
+            nutritionImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            nutritionImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            nutritionImageView.heightAnchor.constraint(equalToConstant: 400)
+        ])
+    }
 }
 
 extension NutritionViewController: UISearchBarDelegate {
@@ -67,9 +81,10 @@ extension NutritionViewController: UISearchBarDelegate {
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         guard let searchText = searchBar.text else { return true }
+        
         viewModel.fetchNutritionData(for: searchText) { nutritionData in
             guard let nutritionData = nutritionData else {
-                // Handle case when no data is available
+                
                 return
             }
             DispatchQueue.main.async {
@@ -77,6 +92,21 @@ extension NutritionViewController: UISearchBarDelegate {
             }
         }
         
+        viewModel.fetchImageData(for: searchText) { imageData in
+                guard let imageData = imageData else {
+                    // Handle case when no image data is available
+                    return
+                }
+        
+            let url = URL(string: self.viewModel.imageUrl)
+            
+            if let data = try? Data(contentsOf: url!) {
+                
+                DispatchQueue.main.async {
+                    self.nutritionImageView.image = UIImage(data: data)
+                }
+            }
+        }
         
         searchBar.resignFirstResponder()
         return true

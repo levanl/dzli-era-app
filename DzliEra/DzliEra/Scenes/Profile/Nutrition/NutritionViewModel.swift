@@ -11,7 +11,7 @@ import NetworkingPackageRapid
 final class NutritionViewModel {
     
     var nutritionData: [NutritionModel] = []
-    var imageData: [NutritionImageResult] = []
+    var imageUrl: String = ""
     
     
     func fetchNutritionData(for query: String, completion: @escaping ([NutritionModel]?) -> Void) {
@@ -28,15 +28,16 @@ final class NutritionViewModel {
                 self.nutritionData = nutrition
                 completion(nutrition)
             case .failure(let error):
-                
+                    
                 print("Error: \(error)")
                 completion(nil)
             }
         }
+        
     }
     
-    func fetchImageData(for query: String) {
-        
+    
+    func fetchImageData(for query: String, completion: @escaping ([NutritionImageResult]?) -> Void) {
         let urlString = "https://free-images-api.p.rapidapi.com/images/\(query)"
         
         let headers = [
@@ -47,12 +48,17 @@ final class NutritionViewModel {
         NetworkManagerRapid.fetchData(from: urlString, headers: headers, modelType: NutritionImageModel.self) { result in
             switch result {
             case .success(let imageData):
-                self.imageData = imageData.results
                 
-                print(imageData)
+                if let secondImageURL = imageData.results[1].download{
+                    print("First image URL: \(secondImageURL)")
+                    self.imageUrl = secondImageURL
+                } else {
+                    print("No image URLs found")
+                }
+                completion(imageData.results)
             case .failure(let error):
                 print("Error fetching image data: \(error)")
-                
+                completion(nil)
             }
         }
     }
