@@ -159,6 +159,7 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
         view.addSubview(routineStackView)
         routineStackView.addArrangedSubview(newRoutineButton)
         routineStackView.addArrangedSubview(exploreButton)
+        exploreButton.addTarget(self, action: #selector(exploreButtonTapped), for: .touchUpInside)
         newRoutineButton.addTarget(self, action: #selector(newRoutineButtonTapped), for: .touchUpInside)
         NSLayoutConstraint.activate([
             routineStackView.topAnchor.constraint(equalTo: routinesLabel.bottomAnchor, constant: 24),
@@ -188,6 +189,12 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
         let newRoutineVC = NewRoutineViewController()
         newRoutineVC.delegate = self
         navigationController?.pushViewController(newRoutineVC, animated: true)
+    }
+    
+    @objc func exploreButtonTapped() {
+        let exploreRoutineVC = ExploreRoutinesViewController()
+        exploreRoutineVC.delegate = self
+        navigationController?.pushViewController(exploreRoutineVC, animated: true)
     }
     
     func didSaveRoutine(title: String, exercises: [Exercise]) {
@@ -261,3 +268,12 @@ extension WorkoutViewController: WorkoutTableViewCellDelegate {
         navigationController?.pushViewController(startedRoutineVC, animated: true)
     }
 }
+
+extension WorkoutViewController: ExploreRoutinesViewControllerDelegate {
+    func didAddRoutine(_ routine: Routine) {
+        viewModel.addRoutine(title: routine.title, exercises: routine.exercises)
+               tableView.reloadData()
+    }
+}
+
+

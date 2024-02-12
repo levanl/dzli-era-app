@@ -56,10 +56,13 @@ final class WorkoutViewModel {
         }
     }
     
-    enum FetchingStatus {
-        case idle
-        case fetching
-        case success
-        case failure
-    }
+    
+}
+
+
+enum FetchingStatus {
+    case idle
+    case fetching
+    case success
+    case failure
 }
