@@ -25,6 +25,12 @@ class StartedRoutineViewController: UIViewController {
         return label
     }()
     
+    private var isFinishButtonEnabled: Bool = false {
+        didSet {
+            navigationItem.rightBarButtonItem?.isEnabled = isFinishButtonEnabled
+        }
+    }
+    
     private let volumeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 14)
@@ -118,6 +124,7 @@ class StartedRoutineViewController: UIViewController {
         
         let finishButton = UIBarButtonItem(title: "Finish", style: .plain, target: self, action: #selector(finishButtonTapped))
         navigationItem.rightBarButtonItem = finishButton
+        isFinishButtonEnabled = false
         startTimer()
         setupWorkoutInfoStack()
         setupWorkoutInfoCounterStack()
@@ -208,6 +215,16 @@ class StartedRoutineViewController: UIViewController {
         updateTimerLabel()
     }
     
+    private func updateFinishButtonState() {
+        // Check your conditions here and set isFinishButtonEnabled accordingly
+        // For example:
+        if elapsedTime > 0 && totalSets > 0 && totalReps > 0 {
+            isFinishButtonEnabled = true
+        } else {
+            isFinishButtonEnabled = false
+        }
+    }
+    
     private func updateTimerLabel() {
         let minutes = elapsedTime / 60
         let seconds = elapsedTime % 60
@@ -265,12 +282,16 @@ extension StartedRoutineViewController: StartedWorkoutTableViewCellDelegate {
             totalSets += sets
             totalReps += reps
             print(sets)
+            
         } else {
             totalSets -= sets
             totalReps -= reps
             print(sets)
+            
         }
         repsCounterLabel.text = String(totalReps)
         setCounterLabel.text = String(totalSets)
+        
+        updateFinishButtonState()
     }
 }
