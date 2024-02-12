@@ -7,13 +7,13 @@
 
 import UIKit
 
-class StartedRoutineViewController: UIViewController {
+// MARK: - StartedRoutineViewController
+final class StartedRoutineViewController: UIViewController {
     
+    // MARK: - Properties
     var routine: Routine?
-    var timer: Timer?
-    var elapsedTime: Int = 0
-    var totalSets: Int = 0
-    var totalReps: Int = 0
+    
+    var viewModel = StartedRoutineViewModel()
     
     private let durationLabel: UILabel = {
         let label = UILabel()
@@ -60,32 +60,17 @@ class StartedRoutineViewController: UIViewController {
     }()
     
     private let timerLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.text = "0"
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
+        let label = SaveWorkoutLabelComponent(frame: .zero, text: "0", textColor: .white)
         return label
     }()
     
     private let repsCounterLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.text = "0"
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
+        let label = SaveWorkoutLabelComponent(frame: .zero, text: "0", textColor: .white)
         return label
     }()
     
     private let setCounterLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.text = "0"
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
+        let label = SaveWorkoutLabelComponent(frame: .zero, text: "0", textColor: .white)
         return label
     }()
     
@@ -97,30 +82,44 @@ class StartedRoutineViewController: UIViewController {
         return stackView
     }()
     
-    let separatorView: UIView = {
+    private let separatorView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(red: 255/255, green: 253/255, blue: 208/255, alpha: 1.0) // Cream color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let stackSeparatorView: UIView = {
+    private let stackSeparatorView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let tableView: UITableView = {
+    private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .clear
         return tableView
     }()
     
+    // MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
+        setupUI()
+    }
+    
+    deinit {
+        stopTimer()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopTimer()
+    }
+    
+    private func setupUI() {
+        view.backgroundColor = UIColor(AppColors.backgroundColor)
         
         let finishButton = UIBarButtonItem(title: "Finish", style: .plain, target: self, action: #selector(finishButtonTapped))
         navigationItem.rightBarButtonItem = finishButton
@@ -130,16 +129,6 @@ class StartedRoutineViewController: UIViewController {
         setupWorkoutInfoCounterStack()
         setupStackSeparator()
         setupTableView()
-    }
-    
-    deinit {
-        stopTimer()
-        print("aiufuisa")
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        stopTimer()
     }
     
     private func setupWorkoutInfoStack() {
@@ -155,6 +144,8 @@ class StartedRoutineViewController: UIViewController {
             workoutInfoStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }
+    
+    
     
     private func setupWorkoutInfoCounterStack() {
         view.addSubview(workoutInfoCounterStack)
@@ -200,25 +191,23 @@ class StartedRoutineViewController: UIViewController {
     }
     
     func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+        viewModel.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             self?.updateTimer()
         }
     }
     
     func stopTimer() {
-        timer?.invalidate()
-        timer = nil
+        viewModel.timer?.invalidate()
+        viewModel.timer = nil
     }
     
     @objc func updateTimer() {
-        elapsedTime += 1
+        viewModel.elapsedTime += 1
         updateTimerLabel()
     }
     
     private func updateFinishButtonState() {
-        // Check your conditions here and set isFinishButtonEnabled accordingly
-        // For example:
-        if elapsedTime > 0 && totalSets > 0 && totalReps > 0 {
+        if viewModel.elapsedTime > 0 && viewModel.totalSets > 0 && viewModel.totalReps > 0 {
             isFinishButtonEnabled = true
         } else {
             isFinishButtonEnabled = false
@@ -226,8 +215,8 @@ class StartedRoutineViewController: UIViewController {
     }
     
     private func updateTimerLabel() {
-        let minutes = elapsedTime / 60
-        let seconds = elapsedTime % 60
+        let minutes = viewModel.elapsedTime / 60
+        let seconds = viewModel.elapsedTime % 60
         
         let timerText: String
         
@@ -242,9 +231,9 @@ class StartedRoutineViewController: UIViewController {
     @objc private func finishButtonTapped() {
         let saveWorkoutVC = SaveWorkoutViewController()
         
-        saveWorkoutVC.elapsedTime = elapsedTime
-        saveWorkoutVC.totalSets = totalSets
-        saveWorkoutVC.totalReps = totalReps
+        saveWorkoutVC.elapsedTime = viewModel.elapsedTime
+        saveWorkoutVC.totalSets = viewModel.totalSets
+        saveWorkoutVC.totalReps = viewModel.totalReps
         saveWorkoutVC.exercises = routine?.exercises ?? []
         
         navigationController?.pushViewController(saveWorkoutVC, animated: true)
@@ -276,22 +265,22 @@ extension StartedRoutineViewController: UITableViewDelegate, UITableViewDataSour
     
 }
 
+// MARK: - StartedWorkoutTableViewCellDelegate
 extension StartedRoutineViewController: StartedWorkoutTableViewCellDelegate {
     func updateValues(in cell: StartedWorkoutTableViewCell, with sets: Int, reps: Int) {
         if cell.isSelected {
-            totalSets += sets
-            totalReps += reps
+            viewModel.totalSets += sets
+            viewModel.totalReps += reps
             print(sets)
             
         } else {
-            totalSets -= sets
-            totalReps -= reps
+            viewModel.totalSets -= sets
+            viewModel.totalReps -= reps
             print(sets)
             
         }
-        repsCounterLabel.text = String(totalReps)
-        setCounterLabel.text = String(totalSets)
-        
+        repsCounterLabel.text = String(viewModel.totalReps)
+        setCounterLabel.text = String(viewModel.totalSets)
         updateFinishButtonState()
     }
 }

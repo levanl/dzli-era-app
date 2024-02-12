@@ -11,8 +11,10 @@ protocol StartedWorkoutTableViewCellDelegate: AnyObject {
     func updateValues(in cell: StartedWorkoutTableViewCell, with sets: Int, reps: Int)
 }
 
-class StartedWorkoutTableViewCell: UITableViewCell {
+// MARK: - StartedWorkoutTableViewCell
+final class StartedWorkoutTableViewCell: UITableViewCell {
     
+    // MARK: - Properties
     weak var delegate: StartedWorkoutTableViewCellDelegate?
     var currentSets: Int = 0
     var currentReps: Int = 0
@@ -29,7 +31,7 @@ class StartedWorkoutTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textColor = .systemBlue
+        label.textColor = UIColor(AppColors.primaryRed)
         label.lineBreakMode = .byTruncatingTail
         label.widthAnchor.constraint(lessThanOrEqualToConstant: 200).isActive = true
         return label
@@ -83,7 +85,7 @@ class StartedWorkoutTableViewCell: UITableViewCell {
         stackView.axis = .horizontal
         stackView.spacing = 8
         stackView.distribution = .fillEqually
-        stackView.backgroundColor = .black
+        stackView.backgroundColor = UIColor(AppColors.backgroundColor)
         return stackView
     }()
     
@@ -118,9 +120,10 @@ class StartedWorkoutTableViewCell: UITableViewCell {
         return imageView
     }()
     
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .black
+        contentView.backgroundColor = UIColor(AppColors.backgroundColor)
         setupStackView()
         setupHeaderStackView()
         setupInfoStackView()
@@ -132,7 +135,7 @@ class StartedWorkoutTableViewCell: UITableViewCell {
     
     func configure(with exercise: Exercise) {
         self.exerciseImageView.image = UIImage(named: "DzlieraImageHolder")
-
+        
         if let imageURL = URL(string: exercise.gifURL) {
             DispatchQueue.global().async {
                 if let data = try? Data(contentsOf: imageURL) {
@@ -202,7 +205,7 @@ class StartedWorkoutTableViewCell: UITableViewCell {
     
     @objc private func checkmarkTapped() {
         
-        if infoStackView.backgroundColor == .black {
+        if infoStackView.backgroundColor == UIColor(AppColors.backgroundColor) {
             
             let newPaletteColors: [UIColor] = [.white, UIColor(red: 129/255, green: 203/255, blue: 74/255, alpha: 1.0), UIColor(red: 129/255, green: 203/255, blue: 74/255, alpha: 1.0)]
             let newConfig = UIImage.SymbolConfiguration(paletteColors: newPaletteColors)
@@ -218,7 +221,7 @@ class StartedWorkoutTableViewCell: UITableViewCell {
             let config = UIImage.SymbolConfiguration(paletteColors: [.white, .secondaryLabel, .secondaryLabel])
             let newImage = UIImage(systemName: "checkmark.diamond.fill", withConfiguration: config)
             checkmarkBox.image = newImage
-            infoStackView.backgroundColor = .black
+            infoStackView.backgroundColor = UIColor(AppColors.backgroundColor)
             setSelected(false, animated: true)
             currentSets = Int(setsTextField.text ?? "") ?? 0
             currentReps = Int(repsTextField.text ?? "") ?? 0

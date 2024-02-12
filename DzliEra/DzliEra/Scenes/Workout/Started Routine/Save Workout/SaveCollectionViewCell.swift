@@ -7,7 +7,10 @@
 
 import UIKit
 
-class SaveCollectionViewCell: UICollectionViewCell {
+// MARK: - SaveCollectionViewCell
+final class SaveCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: - Properties
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -16,6 +19,7 @@ class SaveCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(imageView)

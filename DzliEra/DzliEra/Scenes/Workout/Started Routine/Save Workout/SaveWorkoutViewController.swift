@@ -8,7 +8,10 @@
 import UIKit
 import SwiftUI
 
-class SaveWorkoutViewController: UIViewController {
+// MARK: - SaveWorkoutViewController
+final class SaveWorkoutViewController: UIViewController {
+    
+    // MARK: - Properties
     private var libraryImages: [UIImage] = []
     var elapsedTime: Int = 0
     var totalSets: Int = 0
@@ -16,32 +19,17 @@ class SaveWorkoutViewController: UIViewController {
     var exercises: [Exercise] = []
 
     private let durationLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.text = "Duration"
-        label.textColor = .gray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
+        let label = SaveWorkoutLabelComponent(frame: .zero, text: "Duration", textColor: .gray)
         return label
     }()
     
     private let volumeLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.text = "Reps"
-        label.textColor = .gray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
+        let label = SaveWorkoutLabelComponent(frame: .zero, text: "Reps", textColor: .gray)
         return label
     }()
     
     private let setsLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.text = "Sets"
-        label.textColor = .gray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
+        let label = SaveWorkoutLabelComponent(frame: .zero, text: "Sets", textColor: .gray)
         return label
     }()
     
@@ -54,32 +42,17 @@ class SaveWorkoutViewController: UIViewController {
     }()
     
     private let timerLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.text = "0"
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
+        let label = SaveWorkoutLabelComponent(frame: .zero, text: "0", textColor: .white)
         return label
     }()
     
     private let repsCounterLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.text = "0"
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
+        let label = SaveWorkoutLabelComponent(frame: .zero, text: "0", textColor: .white)
         return label
     }()
     
     private let setCounterLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.text = "0"
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
+        let label = SaveWorkoutLabelComponent(frame: .zero, text: "0", textColor: .white)
         return label
     }()
     
@@ -176,9 +149,14 @@ class SaveWorkoutViewController: UIViewController {
         return button
     }()
     
-    
+    // MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+    }
+    
+    // MARK: - Methods
+    private func setupUI() {
         
         let finishButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(finishButtonTapped))
         navigationItem.rightBarButtonItem = finishButton
@@ -330,11 +308,8 @@ class SaveWorkoutViewController: UIViewController {
     
     @objc private func finishButtonTapped() {
         let title = titleTextView.text ?? ""
-        let workout = DoneWorkout(title: title, elapsedTime: elapsedTime, totalReps: totalReps, images: libraryImages, exercises: exercises)
-        
-        
+        let workout = DoneWorkout(title: title, elapsedTime: elapsedTime, totalReps: totalReps, totalSets: totalSets, images: libraryImages, exercises: exercises)
         self.navigationController?.present(UIHostingController(rootView: NiceJobView(workout: workout)), animated: true)
-
             print("finish")
     }
     
@@ -402,10 +377,3 @@ extension SaveWorkoutViewController: UICollectionViewDelegate, UICollectionViewD
 
 
 
-struct DoneWorkout {
-    var title: String
-    var elapsedTime: Int
-    var totalReps: Int
-    var images: [UIImage]
-    var exercises: [Exercise]
-}
