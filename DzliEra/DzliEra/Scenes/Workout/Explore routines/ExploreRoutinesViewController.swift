@@ -25,15 +25,15 @@ class ExploreRoutinesViewController: UIViewController {
     private let viewModel = ExploreRoutinesViewModel()
     
     let games = [
-        Game("Pacman", "1980"),
-        Game("Space Invaders", "1978"),
-        Game("Frogger", "1981"),
-        Game("Pacman", "1980"),
-        Game("Space Invaders", "1978"),
-        Game("Frogger", "1981"),
-        Game("Pacman", "1980"),
-        Game("Space Invaders", "1978"),
-        Game("Frogger", "1981")
+        PlaceHolderModel("Pacman", "1980"),
+        PlaceHolderModel("Space Invaders", "1978"),
+        PlaceHolderModel("Frogger", "1981"),
+        PlaceHolderModel("Pacman", "1980"),
+        PlaceHolderModel("Space Invaders", "1978"),
+        PlaceHolderModel("Frogger", "1981"),
+        PlaceHolderModel("Pacman", "1980"),
+        PlaceHolderModel("Space Invaders", "1978"),
+        PlaceHolderModel("Frogger", "1981")
     ]
     
     

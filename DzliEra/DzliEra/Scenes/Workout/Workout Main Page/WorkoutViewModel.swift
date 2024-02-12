@@ -13,6 +13,12 @@ final class WorkoutViewModel {
     
     var fetchingStatus: FetchingStatus = .idle
     
+    let games = [
+        PlaceHolderModel("Pacman", "1980"),
+        PlaceHolderModel("Space Invaders", "1978"),
+        PlaceHolderModel("Frogger", "1981")
+    ]
+    
     var user: DBUser?
     
     var onDataUpdate: (() -> Void)?
@@ -32,26 +38,19 @@ final class WorkoutViewModel {
             do {
                 let authDataResult = try await AuthenticationManager.shared.getAuthenticatedUser()
                 self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
-                print("User loaded: \(self.user?.email ?? "Unknown email")")
                 let routines = try await UserManager.shared.getRoutines(userId: user?.userId ?? "none")
                 self.routines = routines
                 
                 if routines.isEmpty {
-                                // Set status to idle
-                                self.fetchingStatus = .idle
-                            } else {
-                                // Set status to success
-                                self.fetchingStatus = .success
-                            }
+                    self.fetchingStatus = .idle
+                } else {
+                    self.fetchingStatus = .success
+                }
                 DispatchQueue.main.async {
                     self.onDataUpdate?()
                 }
-                
             } catch {
-                print("Error loading user: \(error)")
-                
                 self.fetchingStatus = .failure
-                
             }
         }
     }

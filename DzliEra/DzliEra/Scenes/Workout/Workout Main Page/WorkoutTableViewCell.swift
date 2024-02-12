@@ -15,10 +15,10 @@ protocol WorkoutTableViewCellDelegate: AnyObject {
 // MARK: - WorkoutTableViewCell
 final class WorkoutTableViewCell: UITableViewCell {
     static let identifier = "WorkoutCell"
-
+    
     weak var delegate: WorkoutTableViewCellDelegate?
     var routine: Routine?
-
+    
     // MARK: - Properties
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -101,13 +101,14 @@ final class WorkoutTableViewCell: UITableViewCell {
         workoutNamesLabel.text = "Workouts: \(routine.exercises.map { $0.name }.joined(separator: ", "))"
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(cellTapped))
-            contentView.addGestureRecognizer(tapGesture)
+        contentView.addGestureRecognizer(tapGesture)
     }
     
+    // MARK: - Button Methods
     @objc private func cellTapped() {
-            guard let routine = routine else { return }
-            delegate?.didSelectRoutine(routine)
-        }
+        guard let routine = routine else { return }
+        delegate?.didSelectRoutine(routine)
+    }
     
     @objc private func startRoutineButtonTapped() {
         guard let routine = routine else { return }

@@ -17,7 +17,7 @@ class ExerciseSkeletonCell: UITableViewCell {
         let titleLayer = CAGradientLayer()
         let workoutNamesLayer = CAGradientLayer()
     
-    var game: Game? {
+    var game: PlaceHolderModel? {
         didSet {
             guard let game = game else { return }
             titleLabel.text = game.title

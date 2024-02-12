@@ -7,14 +7,6 @@
 
 import UIKit
 
-struct Game {
-    let title: String
-    let year: String
-    init(_ name: String, _ year: String) {
-        self.title = name
-        self.year = year
-    }
-}
 
 class WorkoutSkeletonCell: UITableViewCell {
     static let identifier = "SkeletonCell"
@@ -25,7 +17,7 @@ class WorkoutSkeletonCell: UITableViewCell {
         let titleLayer = CAGradientLayer()
         let workoutNamesLayer = CAGradientLayer()
     
-    var game: Game? {
+    var game: PlaceHolderModel? {
         didSet {
             guard let game = game else { return }
             titleLabel.text = game.title
@@ -103,7 +95,7 @@ extension WorkoutSkeletonCell {
         }
 }
 
-// inherit
+
 extension WorkoutSkeletonCell: SkeletonLoadable {}
 
 extension UIColor {

@@ -11,42 +11,9 @@ import UIKit
 final class WorkoutViewController: UIViewController, NewRoutineDelegate {
     
     // MARK: - Properties
-    private let quickStartLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Quick Start"
-        label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let games = [
-        Game("Pacman", "1980"),
-        Game("Space Invaders", "1978"),
-        Game("Frogger", "1981")
-    ]
-    
     private let routinesLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Routines"
-        label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
+        let label = WorkoutPageLabelComponent(text: "Routines")
         return label
-    }()
-    
-    private let startEmptyWorkoutButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        let plusIcon = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(UIColor(AppColors.secondaryRed), renderingMode: .alwaysOriginal)
-        button.setTitle("  Start Empty Workout", for: .normal)
-        button.setImage(plusIcon, for: .normal)
-        button.tintColor = .white
-        button.semanticContentAttribute = .forceLeftToRight
-        button.layer.cornerRadius = 6
-        button.backgroundColor = UIColor(AppColors.secondaryBackgroundColor)
-        button.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        return button
     }()
     
     private let routineStackView: UIStackView = {
@@ -59,28 +26,16 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
     }()
     
     private let newRoutineButton: UIButton = {
-        let button = UIButton()
         let list = UIImage(systemName: "list.clipboard", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(UIColor(AppColors.secondaryRed), renderingMode: .alwaysOriginal)
-        button.setImage(list, for: .normal)
-        button.setTitle("  New Routine", for: .normal)
-        button.tintColor = .white
-        button.backgroundColor = UIColor(AppColors.secondaryBackgroundColor)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        button.layer.cornerRadius = 6
+        let button = WorkoutPageButtonComponent(image: list, title: "New Routine", tintColor: .white)
+        button.setCustomBackgroundColor(UIColor(AppColors.secondaryBackgroundColor))
         return button
     }()
     
     private let exploreButton: UIButton = {
-        let button = UIButton()
         let magnifyingglass = UIImage(systemName: "magnifyingglass", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(UIColor(AppColors.secondaryRed), renderingMode: .alwaysOriginal)
-        button.setImage(magnifyingglass, for: .normal)
-        button.setTitle("  Explore", for: .normal)
-        button.tintColor = .white
-        button.backgroundColor = UIColor(AppColors.secondaryBackgroundColor)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        button.layer.cornerRadius = 6
+        let button = WorkoutPageButtonComponent(image: magnifyingglass, title: "Explore", tintColor: .white)
+        button.setCustomBackgroundColor(UIColor(AppColors.secondaryBackgroundColor))
         return button
     }()
     
@@ -98,34 +53,31 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.onDataUpdate = { [weak self] in
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
-            }
-        }
-        
-        viewModel.fetchRoutines()
-        
         setupUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //        viewModel.fetchRoutines()
-        //        tableView.reloadData()
     }
-    
     
     // MARK: - Private Methods
     
     private func setupUI() {
+        fetchRoutinesOnLoad()
         view.backgroundColor = UIColor(AppColors.backgroundColor)
-        
         setupRoutinesLabel()
         setupRoutineStackView()
         setupTableView()
     }
-
+    
+    private func fetchRoutinesOnLoad() {
+        viewModel.onDataUpdate = { [weak self] in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
+        viewModel.fetchRoutines()
+    }
     
     private func setupRoutinesLabel() {
         view.addSubview(routinesLabel)
@@ -135,8 +87,6 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
             routinesLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }
-    
-    
     
     private func setupRoutineStackView() {
         view.addSubview(routineStackView)
@@ -191,7 +141,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch viewModel.fetchingStatus {
         case .fetching:
-            return games.count
+            return viewModel.games.count
         case .success:
             return viewModel.routines.count
         case .failure:
@@ -205,7 +155,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         switch viewModel.fetchingStatus {
         case .fetching:
             let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutSkeletonCell.identifier, for: indexPath) as! WorkoutSkeletonCell
-            cell.game = games[indexPath.row]
+            cell.game = viewModel.games[indexPath.row]
             cell.backgroundColor =  UIColor(AppColors.backgroundColor)
             return cell
         case .success:
@@ -238,6 +188,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 
+// MARK: - Cell Delegate Listener
 extension WorkoutViewController: WorkoutTableViewCellDelegate {
     func didSelectRoutine(_ routine: Routine) {
         let routineDetailVC = RoutineDetailViewController()
@@ -252,10 +203,12 @@ extension WorkoutViewController: WorkoutTableViewCellDelegate {
     }
 }
 
+
+// MARK: - Explore Routines Delegate Listener
 extension WorkoutViewController: ExploreRoutinesViewControllerDelegate {
     func didAddRoutine(_ routine: Routine) {
         viewModel.addRoutine(title: routine.title, exercises: routine.exercises)
-               tableView.reloadData()
+        tableView.reloadData()
     }
 }
 
