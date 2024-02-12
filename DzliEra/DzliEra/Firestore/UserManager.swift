@@ -131,7 +131,8 @@ final class UserManager {
     
     private let userCollection = Firestore.firestore().collection("users")
     private let postedWorkoutsCollection = Firestore.firestore().collection("posted_workouts")
-    
+    private let routinesCollection = Firestore.firestore().collection("routines")
+
     private func userDocument(userId: String) -> DocumentReference {
         userCollection.document(userId)
     }
@@ -142,6 +143,14 @@ final class UserManager {
     
     func getUser(userId: String) async throws -> DBUser {
         try await userDocument(userId: userId).getDocument(as: DBUser.self)
+    }
+    
+    private func postedWorkoutDocument(userId: String) -> DocumentReference {
+        postedWorkoutsCollection.document(userId)
+    }
+    
+    private func routinesDocument(userId: String) -> DocumentReference {
+        routinesCollection.document(userId)
     }
     
     func uploadRoutines(userId: String, routines: [Routine]) async throws {
@@ -160,6 +169,50 @@ final class UserManager {
         try await userDocument(userId: userId).setData(data, merge: true)
     }
     
+    func uploadRoutinesToCollection(routines: [Routine]) async throws {
+        let batch = Firestore.firestore().batch()
+        
+        for routine in routines {
+            let routineData: [String: Any] = [
+                "title": routine.title,
+                "exercises": try routine.exercises.map { try $0.toFirestoreData() }
+            ]
+            
+            let routinesDocRef = routinesCollection.document()
+            batch.setData(routineData, forDocument: routinesDocRef)
+        }
+        
+        try await batch.commit()
+    }
+    
+    func getAllRoutinesFromCollection() async throws -> [Routine] {
+        var routines: [Routine] = []
+        
+        let querySnapshot = try await Firestore.firestore().collection("routines").getDocuments()
+        
+        for document in querySnapshot.documents {
+             let data = document.data()
+                if let title = data["title"] as? String,
+                   let exercisesData = data["exercises"] as? [[String: Any]] {
+                    var exercises: [Exercise] = []
+                    for exerciseData in exercisesData {
+                                        do {
+                                            let exerciseJSONData = try JSONSerialization.data(withJSONObject: exerciseData, options: [])
+                                            let exercise = try JSONDecoder().decode(Exercise.self, from: exerciseJSONData)
+                                            exercises.append(exercise)
+                                        } catch {
+                                            print("Error decoding exercise data: \(error)")
+                                        }
+                                    }
+                    let routine = Routine(title: title, exercises: exercises)
+                    routines.append(routine)
+                }
+            
+        }
+        
+        return routines
+    }
+    
     // MARK: - Get Routines for User
     func getRoutines(userId: String) async throws -> [Routine] {
         let document = userDocument(userId: userId)
@@ -172,9 +225,7 @@ final class UserManager {
         return data.routines ?? []
     }
     
-    private func postedWorkoutDocument(userId: String) -> DocumentReference {
-        postedWorkoutsCollection.document(userId)
-    }
+
     
     func uploadPostedWorkout(userId: String, postedWorkouts: [PostedWorkout]) async throws {
         var postedWorkoutsData: [[String: Any]] = []

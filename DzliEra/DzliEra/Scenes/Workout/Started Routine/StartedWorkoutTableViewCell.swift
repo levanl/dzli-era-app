@@ -131,6 +131,8 @@ class StartedWorkoutTableViewCell: UITableViewCell {
     }
     
     func configure(with exercise: Exercise) {
+        self.exerciseImageView.image = UIImage(named: "DzlieraImageHolder")
+
         if let imageURL = URL(string: exercise.gifURL) {
             DispatchQueue.global().async {
                 if let data = try? Data(contentsOf: imageURL) {

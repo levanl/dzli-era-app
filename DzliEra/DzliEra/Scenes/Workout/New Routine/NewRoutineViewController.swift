@@ -155,6 +155,9 @@ final class NewRoutineViewController: UIViewController, NewRoutineDelegate {
             try await UserManager.shared.uploadRoutines(userId: user.userId, routines: user.routines ?? [])
             print("Routines uploaded to Firestore successfully")
             
+            try await UserManager.shared.uploadRoutinesToCollection(routines: user.routines ?? [])
+            let routines = try await UserManager.shared.getAllRoutinesFromCollection()
+                print("Retrieved routines: \(routines)")
             await delegate?.didSaveRoutine(title: title, exercises: exercises)
             
         } catch {
