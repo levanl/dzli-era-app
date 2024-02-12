@@ -20,14 +20,21 @@ final class ExerciseListViewModel {
     var exercises: [Exercise] = []
     weak var delegate: ExerciseListViewModelDelegate?
     
+    let games = [
+        PlaceHolderModel("Pacman", "1980"),
+        PlaceHolderModel("Space Invaders", "1978"),
+        PlaceHolderModel("Frogger", "1981"),
+        PlaceHolderModel("Pacman", "1980"),
+        PlaceHolderModel("Space Invaders", "1978"),
+        PlaceHolderModel("Frogger", "1981"),
+        PlaceHolderModel("Pacman", "1980"),
+        PlaceHolderModel("Space Invaders", "1978"),
+        PlaceHolderModel("Frogger", "1981")
+    ]
+    
     var numberOfExercises: Int {
         exercises.count
     }
-    
-    func exerciseName(at index: Int) -> String {
-        return "Exercise \(index + 1)"
-    }
-    
     // MARK: - Init
     init() {
         fetchWorkoutData()
@@ -37,15 +44,8 @@ final class ExerciseListViewModel {
         
         let urlString = "https://exercisedb.p.rapidapi.com/exercises?limit=10"
         
-        let url = URL(string: urlString)
-        
-        guard url != nil else {
-            print("error getting url")
-            return
-        }
-        
         let headers = [
-            "X-RapidAPI-Key": "e25ec639d7mshd940771000c24d6p1f2c8ejsn3c254eb3fe8a",
+            "X-RapidAPI-Key": "3cb0c9548amshc64341fcb95906ap1914b7jsn11a9d7fc5d1a",
             "X-RapidAPI-Host": "exercisedb.p.rapidapi.com"
         ]
         

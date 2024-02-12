@@ -23,7 +23,7 @@ struct OnBoardingView: View, WithRootNavigationController {
                                 if page == viewModel.pages.last {
                                     Button(action: {
                                         UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
-
+                                        
                                         self.push(viewController: UIHostingController(rootView: SignInEmailView()), animated: true)
                                     }) {
                                         Text("Get Started")
@@ -56,8 +56,6 @@ struct OnBoardingView: View, WithRootNavigationController {
         .onAppear {
             viewModel.dotAppearance.currentPageIndicatorTintColor = .white
             viewModel.dotAppearance.pageIndicatorTintColor = .gray
-            
-            print(AuthenticationManager.shared.isUserLoggedIn())
         }
         .background(Color.black)
         

@@ -31,3 +31,15 @@ extension Color {
         self.init(red: red, green: green, blue: blue, opacity: alpha)
     }
 }
+
+extension UIColor {
+    
+    static var gradientDarkGrey: UIColor {
+        return UIColor(red: 210 / 255.0, green: 210 / 255.0, blue: 210 / 255.0, alpha: 1)
+    }
+    
+    static var gradientLightGrey: UIColor {
+        return UIColor(AppColors.secondaryBackgroundColor)
+    }
+    
+}

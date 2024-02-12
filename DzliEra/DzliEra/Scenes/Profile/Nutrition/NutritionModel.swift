@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - NutritionModel
 struct NutritionModel: Codable {
     let name: String
     let calories, servingSizeG, fatTotalG, fatSaturatedG: Double

@@ -8,10 +8,12 @@
 import UIKit
 import SwiftUI
 
-
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     
+    // MARK: - Properties
     private var user: DBUser? = nil
+    
+    private let viewModel = ProfileViewModel()
     
     private let profileLabel: UILabel = {
         let label = UILabel()
@@ -25,6 +27,7 @@ class ProfileViewController: UIViewController {
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "DzlieraImageHolder")
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = imageView.frame.size.width / 2
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -37,19 +40,6 @@ class ProfileViewController: UIViewController {
         stackView.axis = .horizontal
         stackView.spacing = 8
         return stackView
-    }()
-    
-    private let statisticsButton: UIButton = {
-        let button = UIButton()
-        let list = UIImage(systemName: "chart.bar", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal)
-        button.setImage(list, for: .normal)
-        button.setTitle("  Statistics", for: .normal)
-        button.tintColor = .white
-        button.backgroundColor = UIColor(AppColors.primaryRed)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        button.layer.cornerRadius = 6
-        return button
     }()
     
     private let exerciseLibraryButton: UIButton = {
@@ -87,19 +77,6 @@ class ProfileViewController: UIViewController {
         return button
     }()
     
-    private let calendarButton: UIButton = {
-        let button = UIButton()
-        let magnifyingglass = UIImage(systemName: "calendar", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal)
-        button.setImage(magnifyingglass, for: .normal)
-        button.setTitle("  Calendar", for: .normal)
-        button.tintColor = .white
-        button.backgroundColor = UIColor(AppColors.primaryRed)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        button.layer.cornerRadius = 6
-        return button
-    }()
-    
     private let secondaryInfoStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -111,9 +88,9 @@ class ProfileViewController: UIViewController {
     
     private let editProfileButton: UIButton = {
         let button = UIButton()
-        let magnifyingglass = UIImage(systemName: "brain.head.profile.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        let magnifyingglass = UIImage(systemName: "gear", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal)
         button.setImage(magnifyingglass, for: .normal)
-        button.setTitle("  Edit Profile", for: .normal)
+        button.setTitle("  Settings", for: .normal)
         button.tintColor = .white
         button.backgroundColor = UIColor(AppColors.primaryRed)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -122,8 +99,32 @@ class ProfileViewController: UIViewController {
         return button
     }()
     
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Name"
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let bioLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Bio"
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    // MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         Task {
             do {
@@ -132,20 +133,24 @@ class ProfileViewController: UIViewController {
                 print("User loaded: \(self.user?.email ?? "Unknown email")")
                 DispatchQueue.main.async {
                     self.profileLabel.text = self.user?.email
-                    self.loadProfileImage()
+                    self.loadProfileInfo()
                 }
             } catch {
                 print("Error loading user: \(error)")
             }
         }
-        
+    }
+    
+    
+    // MARK: - Methods
+    private func setupUI() {
         view.backgroundColor = UIColor(AppColors.backgroundColor)
         
         setupProfileStackView()
+        setupProfileLabels()
         setupInfoStackViews()
         setupEditProfileButton()
     }
-    
     
     private func setupProfileStackView() {
         
@@ -167,28 +172,35 @@ class ProfileViewController: UIViewController {
     private func setupInfoStackViews() {
         view.addSubview(infoStackView)
         
-        infoStackView.addArrangedSubview(statisticsButton)
-        statisticsButton.addTarget(self, action: #selector(statisticsButtonTapped), for: .touchUpInside)
-        
         infoStackView.addArrangedSubview(exerciseLibraryButton)
+        infoStackView.addArrangedSubview(foodButton)
         exerciseLibraryButton.addTarget(self, action: #selector(exerciseLibraryButtonTapped), for: .touchUpInside)
-
+        
         
         NSLayoutConstraint.activate([
-            infoStackView.topAnchor.constraint(equalTo: profileStackView.bottomAnchor, constant: 60),
+            infoStackView.topAnchor.constraint(equalTo: bioLabel.bottomAnchor, constant: 40),
             infoStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             infoStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
         
-        view.addSubview(secondaryInfoStackView)
-        
-        secondaryInfoStackView.addArrangedSubview(foodButton)
-        secondaryInfoStackView.addArrangedSubview(calendarButton)
         foodButton.addTarget(self, action: #selector(foodButtonTapped), for: .touchUpInside)
+    }
+    
+    private func setupProfileLabels() {
+        view.addSubview(nameLabel)
+        
         NSLayoutConstraint.activate([
-            secondaryInfoStackView.topAnchor.constraint(equalTo: infoStackView.bottomAnchor, constant: 8),
-            secondaryInfoStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            secondaryInfoStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+            nameLabel.topAnchor.constraint(equalTo: profileStackView.bottomAnchor, constant: 30),
+            nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            nameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+        ])
+        
+        view.addSubview(bioLabel)
+        
+        NSLayoutConstraint.activate([
+            bioLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 20),
+            bioLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            bioLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }
     
@@ -198,45 +210,21 @@ class ProfileViewController: UIViewController {
         editProfileButton.addTarget(self, action: #selector(editProfileTapped), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
-            editProfileButton.topAnchor.constraint(equalTo: secondaryInfoStackView.bottomAnchor, constant: 8),
+            editProfileButton.topAnchor.constraint(equalTo: infoStackView.bottomAnchor, constant: 8),
             editProfileButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             editProfileButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }
-
-    private func loadProfileImage() {
-        guard let userId = user?.userId, let imagePath = user?.profileImagePath, let imageURL = user?.photoUrl else {
-            self.profileImageView.image = UIImage(named: "onboarding1") // Load default image if user or image path is nil
-            return
-        }
-
-        // Construct the full URL for the image
-
-        // Download the image data from the URL
-        URLSession.shared.dataTask(with: URL(string: imageURL)!) { data, response, error in
-            guard let data = data, error == nil else {
-                print("Error loading profile image: \(error?.localizedDescription ?? "Unknown error")")
-                DispatchQueue.main.async {
-                    self.profileImageView.image = UIImage(named: "onboarding1") // Load default image on error
-                }
-                return
-            }
-            
-            // Convert the downloaded data to UIImage and update the profileImageView
-            DispatchQueue.main.async {
-                self.profileImageView.image = UIImage(data: data)
-            }
-        }.resume()
+    
+    private func loadProfileInfo() {
+        profileImageView.image = UIImage(named: "DzlieraImageHolder")
+        nameLabel.text = "\(user?.name ?? "Name:")"
+        bioLabel.text = "Bio: \(user?.bio ?? "Bio:")"
     }
     
-    
-
+    // MARK: - Button Functions
     @objc private func foodButtonTapped() {
         self.navigationController?.pushViewController(NutritionViewController(), animated: true)
-    }
-    
-    @objc private func statisticsButtonTapped() {
-        self.navigationController?.pushViewController(UIHostingController(rootView: StatisticsView()), animated: true)
     }
     
     @objc private func exerciseLibraryButtonTapped() {

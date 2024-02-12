@@ -11,8 +11,10 @@ protocol ExerciseCellDelegate: AnyObject {
     func didTapDetailsButton(in cell: ExerciseTableViewCell, with exercise: Exercise)
 }
 
-class ExerciseTableViewCell: UITableViewCell {
+// MARK: - ExerciseTableViewCell
+final class ExerciseTableViewCell: UITableViewCell {
     
+    // MARK: - Properties
     private let exerciseImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -67,14 +69,10 @@ class ExerciseTableViewCell: UITableViewCell {
     
     var exercise: Exercise?
     
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        contentView.backgroundColor = UIColor(AppColors.backgroundColor)
-        setupImageView()
-        setupStackView()
-        setupActionIcon()
-        setupRectangle()
+        setupUI()
     }
     
     required init?(coder: NSCoder) {
@@ -93,9 +91,10 @@ class ExerciseTableViewCell: UITableViewCell {
         
     }
     
-    
+    // MARK: - Configure Method
     func configure(with exercise: Exercise) {
         self.exercise = exercise
+        self.exerciseImageView.image = UIImage(named: "DzlieraImageHolder")
         if let imageURL = URL(string: exercise.gifURL) {
             DispatchQueue.global().async {
                 if let data = try? Data(contentsOf: imageURL) {
@@ -110,6 +109,16 @@ class ExerciseTableViewCell: UITableViewCell {
         
         nameLabel.text = exercise.name
         bodyPartLabel.text = exercise.bodyPart
+    }
+    
+    // MARK: - Methods
+    private func setupUI() {
+        
+        contentView.backgroundColor = UIColor(AppColors.backgroundColor)
+        setupImageView()
+        setupStackView()
+        setupActionIcon()
+        setupRectangle()
     }
     
     private func setupImageView() {
@@ -180,8 +189,6 @@ class ExerciseTableViewCell: UITableViewCell {
             return
         }
         delegate?.didTapDetailsButton(in: self, with: exercise)
-        
-        print("was tapped")
     }
     
 }

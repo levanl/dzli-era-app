@@ -22,10 +22,8 @@ struct SignInEmailView: View, WithRootNavigationController {
             
             VStack(spacing: 60) {
                 AuthEmailFieldComponent(email: $viewModel.email)
-                
                 AuthPasswordFieldComponent(password: $viewModel.password)
-                
-                AuthButton(action: temporaryNavToTabBar, label: Text("Sign In"))
+                AuthButton(action: signInWithUser, label: Text("Sign In"))
                     .padding(.bottom, 60)
             }
             
@@ -43,12 +41,19 @@ struct SignInEmailView: View, WithRootNavigationController {
         
     }
     
-    func temporaryNavToTabBar() {
+    func signInWithUser() {
         Task {
             do {
                 try await viewModel.signIn()
                 
-                self.push(viewController: TabController(), animated: true)
+                let tabController = TabController()
+                let navigationController = UINavigationController(rootViewController: tabController)
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let window = windowScene.windows.first {
+                    window.rootViewController = navigationController
+                    window.makeKeyAndVisible()
+                }
+                
             } catch {
                 print("Error signing in: \(error)")
             }

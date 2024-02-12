@@ -7,8 +7,9 @@
 
 import UIKit
 
-class WorkoutInfoTableViewCell: UITableViewCell {
-    
+// MARK: - WorkoutInfoTableViewCell
+final class WorkoutInfoTableViewCell: UITableViewCell {
+    // MARK: - Properties
     private let infoStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -46,6 +47,7 @@ class WorkoutInfoTableViewCell: UITableViewCell {
         return imageView
     }()
     
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .black
@@ -56,9 +58,9 @@ class WorkoutInfoTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Methods
     private func setupUI() {
         contentView.addSubview(infoStackView)
-        
         
         infoStackView.addArrangedSubview(setsTextField)
         infoStackView.addArrangedSubview(repsTextField)

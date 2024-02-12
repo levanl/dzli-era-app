@@ -7,19 +7,42 @@
 
 import UIKit
 
-class NutritionViewController: UIViewController {
+// MARK: - NutritionViewController
+final class NutritionViewController: UIViewController {
     
+    // MARK: - Properties
     private let viewModel = NutritionViewModel()
     
     private let nutritionNameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "heyap"
-        label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textColor = .white
+        let label = NutritionLabelComponent(text: "Egg")
         label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    private let caloriesLabel: UILabel = {
+        let label = NutritionLabelComponent(text: "Calories:")
+        label.textAlignment = .left
+        return label
+    }()
+    
+    private let proteinLabel: UILabel = {
+        let label = NutritionLabelComponent(text: "Proteins:")
+        label.textAlignment = .left
+        return label
+    }()
+    
+    private let totalFatLabel: UILabel = {
+        let label = NutritionLabelComponent(text: "TotalFatG:")
+        label.textAlignment = .left
+        return label
+    }()
+    
+    private let totalSugarLabel: UILabel = {
+        let label = NutritionLabelComponent(text: "Sugar:")
+        label.textAlignment = .left
+        return label
+    }()
+    
     
     private let nutritionImageView: UIImageView = {
         let imageView = UIImageView()
@@ -29,9 +52,14 @@ class NutritionViewController: UIViewController {
         return imageView
     }()
     
+    // MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupUI()
+    }
+    
+    // MARK: - Methods
+    private func setupUI() {
         view.backgroundColor = UIColor(AppColors.backgroundColor)
         
         let searchController = UISearchController(searchResultsController: nil)
@@ -46,7 +74,7 @@ class NutritionViewController: UIViewController {
         definesPresentationContext = true
         setupNutritionNameLabel()
         setupNutritionImageView()
-        
+        setupNutritionLabels()
     }
     
     private func setupNutritionNameLabel() {
@@ -70,7 +98,7 @@ class NutritionViewController: UIViewController {
     private func setupNutritionImageView() {
         view.addSubview(nutritionImageView)
         
-        nutritionImageView.image = UIImage(named: "onboarding1")
+        nutritionImageView.image = UIImage(named: "kvercxi")
         
         NSLayoutConstraint.activate([
             nutritionImageView.topAnchor.constraint(equalTo: nutritionNameLabel.bottomAnchor, constant: 20),
@@ -80,13 +108,45 @@ class NutritionViewController: UIViewController {
         ])
         
     }
+    
+    private func setupNutritionLabels() {
+        view.addSubview(caloriesLabel)
+        
+        view.addSubview(proteinLabel)
+        
+        view.addSubview(totalFatLabel)
+        
+        view.addSubview(totalSugarLabel)
+        
+        NSLayoutConstraint.activate([
+            caloriesLabel.topAnchor.constraint(equalTo: nutritionImageView.bottomAnchor, constant: 20),
+            caloriesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            caloriesLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+        ])
+        
+        NSLayoutConstraint.activate([
+            proteinLabel.topAnchor.constraint(equalTo: caloriesLabel.bottomAnchor, constant: 12),
+            proteinLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            proteinLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+        ])
+        
+        NSLayoutConstraint.activate([
+            totalFatLabel.topAnchor.constraint(equalTo: proteinLabel.bottomAnchor, constant: 12),
+            totalFatLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            totalFatLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+        ])
+        
+        NSLayoutConstraint.activate([
+            totalSugarLabel.topAnchor.constraint(equalTo: totalFatLabel.bottomAnchor, constant: 12),
+            totalSugarLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            totalSugarLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+        ])
+        
+    }
+    
 }
 
 extension NutritionViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let searchText = searchBar.text else { return }
-        searchBar.resignFirstResponder()
-    }
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         guard let searchText = searchBar.text else { return true }
@@ -138,6 +198,10 @@ extension NutritionViewController: UISearchBarDelegate {
             return
         }
         nutritionNameLabel.text = "\(firstNutrition.name)"
+        caloriesLabel.text =  "Calories: \(firstNutrition.calories)"
+        proteinLabel.text = "Proteins: \(firstNutrition.proteinG)"
+        totalFatLabel.text = "TotalFat: \(firstNutrition.fatTotalG)"
+        totalSugarLabel.text = "Sugar: \(firstNutrition.sugarG)"
     }
     
     

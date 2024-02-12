@@ -6,16 +6,22 @@
 //
 
 import SwiftUI
+// Vortex is animations library and used only for animations.
 import Vortex
 
+// MARK: - NiceJobView
 struct NiceJobView: View, WithRootNavigationController {
+    
+    // MARK: - Properties
     var workout: DoneWorkout
     @State private var isFireworksActive = false
-    @ObservedObject var sharedViewModel = SharedViewModel.shared
+    @ObservedObject var sharedViewModel = PostedWorkoutViewModel.shared
+    @StateObject var viewModel = NiceJobViewModel()
+    
     @State private var isOverlayVisible = true
     @Environment(\.presentationMode) var presentationMode
     
-    
+    // MARK: - Body
     var body: some View {
         VStack {
             
@@ -26,7 +32,7 @@ struct NiceJobView: View, WithRootNavigationController {
             
             VStack {
                 TabView {
-                    ForEach (0..<workout.images.count + 1) {  index in
+                    ForEach (0..<workout.images.count + 1, id: \.self) {  index in
                         if index == 0 {
                             VStack(alignment: .leading) {
                                 Text("Summary")
@@ -56,8 +62,6 @@ struct NiceJobView: View, WithRootNavigationController {
                                 Spacer()
                             }
                             
-                            
-                            
                         } else {
                             Image(uiImage: workout.images[index - 1])
                                 .resizable()
@@ -78,19 +82,15 @@ struct NiceJobView: View, WithRootNavigationController {
             
             Spacer()
             Button(action: {
-                
-                let newWorkout = PostedWorkout(userEmail: sharedViewModel.user?.email ?? "Default@gmail.com", time: String(workout.elapsedTime), reps: String(workout.totalReps), sets: "21", exercises: workout.exercises)
+                let newWorkout = PostedWorkout(userEmail: sharedViewModel.user?.email ?? "Default@gmail.com", time: String(workout.elapsedTime), reps: String(workout.totalReps), sets: String(workout.totalSets), exercises: workout.exercises)
                 Task {
                     do {
-                        
                         sharedViewModel.user?.addPostedWorkout(newWorkout)
-                        
-                        try await UserManager.shared.uploadPostedWorkout(userId: sharedViewModel.user?.userId ?? "ravidzma", postedWorkouts: sharedViewModel.user?.postedWorkouts ?? [])
-                        
+                        try await UserManager.shared.uploadPostedWorkout(userId: sharedViewModel.user?.userId ?? "", postedWorkouts: sharedViewModel.user?.postedWorkouts ?? [])
                         try await UserManager.shared.savePostedWorkoutsToCollection(postedWorkouts: sharedViewModel.user?.postedWorkouts ?? [])
                     }
                     catch {
-                        
+                        print("error")
                     }
                 }
                 sharedViewModel.postableWorkouts.append(newWorkout)
@@ -122,7 +122,7 @@ struct NiceJobView: View, WithRootNavigationController {
         .overlay(
             Group {
                 if isOverlayVisible {
-                    VortexView(createFireworks()) {
+                    VortexView(viewModel.createFireworks()) {
                         Circle()
                             .fill(.white)
                             .frame(width: 32)
@@ -133,98 +133,5 @@ struct NiceJobView: View, WithRootNavigationController {
             }
         )
     }
-    
-    func createFireworks() -> VortexSystem {
-        let sparkles = VortexSystem(
-            tags: ["circle"],
-            spawnOccasion: .onUpdate,
-            emissionLimit: 1,
-            lifespan: 0.5,
-            speed: 0.05,
-            angleRange: .degrees(90),
-            size: 0.05
-        )
-        
-        let explosion = VortexSystem(
-            tags: ["circle"],
-            spawnOccasion: .onDeath,
-            position: [0.5, 1],
-            birthRate: 100_000,
-            emissionLimit: 500,
-            speed: 0.5,
-            speedVariation: 1,
-            angleRange: .degrees(360),
-            acceleration: [0, 1.5],
-            dampingFactor: 4,
-            colors: .randomRamp(
-                [.white, .pink, .pink],
-                [.white, .blue, .blue],
-                [.white, .green, .green],
-                [.white, .orange, .orange],
-                [.white, .cyan, .cyan]
-            ),
-            size: 0.15,
-            sizeVariation: 0.1,
-            sizeMultiplierAtDeath: 0
-        )
-        
-        let mainSystem = VortexSystem(
-            tags: ["circle"],
-            secondarySystems: [sparkles, explosion],
-            position: [0.5, 1],
-            birthRate: 2,
-            emissionLimit: 10,
-            speed: 1.5,
-            speedVariation: 0.75,
-            angleRange: .degrees(60),
-            dampingFactor: 2,
-            size: 0.15,
-            stretchFactor: 4
-        )
-        
-        return mainSystem
-    }
 }
 
-
-//struct NiceJobView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NiceJobView(workout: DoneWorkout(title: "abara", elapsedTime: 52, totalReps: 5, images: [UIImage(named: "onboarding1")!, UIImage(named: "onboarding2")!, UIImage(named: "onboarding3")!]))
-//    }
-//}
-
-
-struct InfoBox: View {
-    var title: String
-    var value: String
-    var icon: String?
-    
-    
-    var body: some View {
-        VStack {
-            if let icon = icon {
-                Image(icon)
-                    .resizable()
-                    .frame(width: 40, height: 40)
-                    .foregroundColor(.white)
-                    .padding(.bottom, 4)
-            }
-            
-            Text(value)
-                .font(.title)
-                .foregroundColor(.black)
-            
-            Text(title)
-                .font(.footnote)
-                .foregroundColor(.gray)
-        }
-        .padding()
-        .frame(maxWidth: .infinity)
-        .background(Color.white)
-        .cornerRadius(10)
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.gray, lineWidth: 1)
-        )
-    }
-}

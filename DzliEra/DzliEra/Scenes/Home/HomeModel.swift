@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - Posted Workout Model
 struct PostedWorkout: Identifiable, Codable {
     var id = UUID()
     let userEmail: String

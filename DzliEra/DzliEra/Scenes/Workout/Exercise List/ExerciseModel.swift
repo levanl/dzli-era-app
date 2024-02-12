@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Exercise: Codable {
+// MARK: - Exercise Model
+struct Exercise: Codable, Identifiable {
     let bodyPart: String
     let equipment: Equipment
     let gifURL: String
@@ -22,15 +23,15 @@ struct Exercise: Codable {
     
     
     init(name: String, bodyPart: String, equipment: Equipment, gifURL: String, id: String, target: String, secondaryMuscles: [String]? = nil, instructions: [String]? = nil) {
-            self.name = name
-            self.bodyPart = bodyPart
-            self.equipment = equipment
-            self.gifURL = gifURL
-            self.id = id
-            self.target = target
-            self.secondaryMuscles = secondaryMuscles ?? []
-            self.instructions = instructions ?? []
-        }
+        self.name = name
+        self.bodyPart = bodyPart
+        self.equipment = equipment
+        self.gifURL = gifURL
+        self.id = id
+        self.target = target
+        self.secondaryMuscles = secondaryMuscles ?? []
+        self.instructions = instructions ?? []
+    }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

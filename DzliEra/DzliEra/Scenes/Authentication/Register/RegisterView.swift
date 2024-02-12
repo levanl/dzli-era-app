@@ -11,7 +11,6 @@ struct RegisterView: View, WithRootNavigationController {
     // MARK: - Properties
     @StateObject private var viewModel = RegisterViewModel()
     
-    
     // MARK: - Body
     var body: some View {
         
@@ -31,7 +30,7 @@ struct RegisterView: View, WithRootNavigationController {
         .background(AppColors.authPageBackground)
     }
     
-    func registerToSignIn() {
+    private func registerToSignIn() {
         viewModel.Register {
             if viewModel.didCompleteRegistration {
                 self.pop(animated: true)

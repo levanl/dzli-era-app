@@ -125,7 +125,6 @@ class ExerciseDetailsViewController: UIViewController {
         
         let instructionsString = numberedInstructions?.joined(separator: "\n\n")
         
-        
         nameLabel.text = exercise.name
         targetLabel.text = "Target: " + exercise.target
         secondaryLabel.text = "Secondary: " + (secondaryMusclesString ?? "none")

@@ -11,7 +11,7 @@ struct AuthButton: View {
     // MARK: - Properties
     let action: () -> Void
     let label: Text
-
+    
     // MARK: - bODY
     var body: some View {
         Button(action: action) {

@@ -8,12 +8,15 @@
 import Foundation
 import NetworkingPackageRapid
 
+// MARK: - NutritionViewModel
 final class NutritionViewModel {
     
+    // MARK: - Properties
     var nutritionData: [NutritionModel] = []
     var imageUrl: String = ""
     
     
+    // MARK: - Methods
     func fetchNutritionData(for query: String, completion: @escaping ([NutritionModel]?) -> Void) {
         let urlString = "https://nutrition-by-api-ninjas.p.rapidapi.com/v1/nutrition?query=\(query)"
         
@@ -28,14 +31,13 @@ final class NutritionViewModel {
                 self.nutritionData = nutrition
                 completion(nutrition)
             case .failure(let error):
-                    
+                
                 print("Error: \(error)")
                 completion(nil)
             }
         }
         
     }
-    
     
     func fetchImageData(for query: String, completion: @escaping ([NutritionImageResult]?) -> Void) {
         let urlString = "https://free-images-api.p.rapidapi.com/images/\(query)"
