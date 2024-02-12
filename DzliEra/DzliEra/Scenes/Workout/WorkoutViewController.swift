@@ -120,40 +120,23 @@ final class WorkoutViewController: UIViewController, NewRoutineDelegate {
     
     private func setupUI() {
         view.backgroundColor = UIColor(AppColors.backgroundColor)
-        setupQuickStartLabel()
-        setupStartEmptyWorkoutButton()
+        
         setupRoutinesLabel()
         setupRoutineStackView()
         setupTableView()
     }
-    
-    private func setupQuickStartLabel() {
-        view.addSubview(quickStartLabel)
-        NSLayoutConstraint.activate([
-            quickStartLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            quickStartLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            quickStartLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
-        ])
-    }
+
     
     private func setupRoutinesLabel() {
         view.addSubview(routinesLabel)
         NSLayoutConstraint.activate([
-            routinesLabel.topAnchor.constraint(equalTo: startEmptyWorkoutButton.bottomAnchor, constant: 24),
+            routinesLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
             routinesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             routinesLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }
     
-    private func setupStartEmptyWorkoutButton() {
-        view.addSubview(startEmptyWorkoutButton)
-        
-        NSLayoutConstraint.activate([
-            startEmptyWorkoutButton.topAnchor.constraint(equalTo: quickStartLabel.bottomAnchor, constant: 24),
-            startEmptyWorkoutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            startEmptyWorkoutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
-        ])
-    }
+    
     
     private func setupRoutineStackView() {
         view.addSubview(routineStackView)

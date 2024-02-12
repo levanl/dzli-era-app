@@ -126,5 +126,7 @@ extension ExploreRoutinesViewController: ExploreTableViewCellDelegate {
     func didTapAddRoutine(in cell: ExploreTableViewCell) {
         guard let tappedRoutine = cell.routine else { return }
         delegate?.didAddRoutine(tappedRoutine)
+        
+        self.navigationController?.popViewController(animated: true)
     }
 }

@@ -48,7 +48,14 @@ struct SignInEmailView: View, WithRootNavigationController {
             do {
                 try await viewModel.signIn()
                 
-                self.push(viewController: TabController(), animated: true)
+                let tabController = TabController()
+                let navigationController = UINavigationController(rootViewController: tabController)
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let window = windowScene.windows.first {
+                    window.rootViewController = navigationController
+                    window.makeKeyAndVisible()
+                }
+                
             } catch {
                 print("Error signing in: \(error)")
             }
