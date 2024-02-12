@@ -54,8 +54,7 @@ final class WorkoutViewModel {
             }
         }
     }
-    
-    
+
 }
 
 

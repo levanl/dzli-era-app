@@ -41,6 +41,7 @@
 		C496250B2B7A5DCB009159FD /* PlaceHolderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C496250A2B7A5DCB009159FD /* PlaceHolderModel.swift */; };
 		C496250E2B7A5EDA009159FD /* WorkoutPageButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C496250D2B7A5EDA009159FD /* WorkoutPageButtonComponent.swift */; };
 		C49625102B7A614C009159FD /* WorkoutPageLabelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C496250F2B7A614C009159FD /* WorkoutPageLabelComponent.swift */; };
+		C49625132B7A644A009159FD /* NewRoutineTextFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49625122B7A644A009159FD /* NewRoutineTextFieldComponent.swift */; };
 		C4BB27472B5858580021AE4C /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB27462B5858580021AE4C /* ButtonExtension.swift */; };
 		C4BB275B2B590CD80021AE4C /* Kanit-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4BB27492B590CD80021AE4C /* Kanit-ExtraLight.ttf */; };
 		C4BB275C2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4BB274A2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf */; };
@@ -164,6 +165,7 @@
 		C496250A2B7A5DCB009159FD /* PlaceHolderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolderModel.swift; sourceTree = "<group>"; };
 		C496250D2B7A5EDA009159FD /* WorkoutPageButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutPageButtonComponent.swift; sourceTree = "<group>"; };
 		C496250F2B7A614C009159FD /* WorkoutPageLabelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutPageLabelComponent.swift; sourceTree = "<group>"; };
+		C49625122B7A644A009159FD /* NewRoutineTextFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRoutineTextFieldComponent.swift; sourceTree = "<group>"; };
 		C4BB27462B5858580021AE4C /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		C4BB27492B590CD80021AE4C /* Kanit-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-ExtraLight.ttf"; sourceTree = "<group>"; };
 		C4BB274A2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -428,6 +430,22 @@
 			path = WorkoutPageComponents;
 			sourceTree = "<group>";
 		};
+		C49625112B7A63FC009159FD /* New Routine Components */ = {
+			isa = PBXGroup;
+			children = (
+				C49625122B7A644A009159FD /* NewRoutineTextFieldComponent.swift */,
+			);
+			path = "New Routine Components";
+			sourceTree = "<group>";
+		};
+		C49625142B7A6DA8009159FD /* Exercise Skeleton Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C49624DD2B766DFB009159FD /* ExerciseSkeletonCell.swift */,
+			);
+			path = "Exercise Skeleton Cell";
+			sourceTree = "<group>";
+		};
 		C4BB27482B590CBC0021AE4C /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -673,6 +691,7 @@
 		C4F3A0142B5D178600B921FB /* New Routine */ = {
 			isa = PBXGroup;
 			children = (
+				C49625112B7A63FC009159FD /* New Routine Components */,
 				C4F3A0172B5D17D600B921FB /* NewRoutineViewController.swift */,
 				C4F3A0292B5FC38700B921FB /* NewRoutineViewModel.swift */,
 			);
@@ -682,11 +701,11 @@
 		C4F3A0192B5D311100B921FB /* Exercise List */ = {
 			isa = PBXGroup;
 			children = (
+				C49625142B7A6DA8009159FD /* Exercise Skeleton Cell */,
 				C4F3A01A2B5D316400B921FB /* ExerciseListViewController.swift */,
 				C4F3A01C2B5D32F900B921FB /* ExerciseListViewModel.swift */,
 				C4F3A01E2B5D3D4100B921FB /* ExerciseModel.swift */,
 				C4F3A0202B5E5EFB00B921FB /* ExerciseTableViewCell.swift */,
-				C49624DD2B766DFB009159FD /* ExerciseSkeletonCell.swift */,
 			);
 			path = "Exercise List";
 			sourceTree = "<group>";
@@ -845,6 +864,7 @@
 				C49625032B7A5887009159FD /* PostedWorkoutInfoViewModel.swift in Sources */,
 				C4BB27B12B59514A0021AE4C /* AuthenticationManager.swift in Sources */,
 				C49624ED2B7A20CF009159FD /* ExploreRoutinesViewController.swift in Sources */,
+				C49625132B7A644A009159FD /* NewRoutineTextFieldComponent.swift in Sources */,
 				C49624DE2B766DFB009159FD /* ExerciseSkeletonCell.swift in Sources */,
 				C4D4E5272B57FC19000B0AE1 /* OnBoardingModel.swift in Sources */,
 				C4F3A0262B5E993200B921FB /* GifLoader.swift in Sources */,

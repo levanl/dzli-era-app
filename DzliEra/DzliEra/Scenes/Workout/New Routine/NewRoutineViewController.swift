@@ -17,17 +17,8 @@ final class NewRoutineViewController: UIViewController, NewRoutineDelegate {
     
     // MARK: - Properties
     private let titleTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Enter Routine Title"
-        textField.font = UIFont.systemFont(ofSize: 16)
-        textField.textColor = .white
-        textField.backgroundColor = UIColor(AppColors.secondaryGray)
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        textField.layer.cornerRadius = 6
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 0))
-        textField.leftViewMode = .always
-        return textField
+        let titleTextField = NewRoutineTextFieldComponent()
+        return titleTextField
     }()
     
     private let addExerciseButton: UIButton = {
@@ -138,8 +129,7 @@ final class NewRoutineViewController: UIViewController, NewRoutineDelegate {
         }
     }
     
-    func didSaveRoutine(title: String, exercises: [Exercise])  async {
-        
+    func didSaveRoutine(title: String, exercises: [Exercise]) async {
         do {
             guard var user = viewModel.user else {
                 print("Error: User not found.")
@@ -150,14 +140,10 @@ final class NewRoutineViewController: UIViewController, NewRoutineDelegate {
             
             user.addRoutine(newRoutine)
             
-            print(user.routines ?? "araachemodzmao da")
+            try await viewModel.uploadRoutines(userId: user.userId, routines: user.routines ?? [])
             
-            try await UserManager.shared.uploadRoutines(userId: user.userId, routines: user.routines ?? [])
-            print("Routines uploaded to Firestore successfully")
+            try await viewModel.uploadRoutinesToCollection(routines: user.routines ?? [])
             
-            try await UserManager.shared.uploadRoutinesToCollection(routines: user.routines ?? [])
-            let routines = try await UserManager.shared.getAllRoutinesFromCollection()
-                print("Retrieved routines: \(routines)")
             await delegate?.didSaveRoutine(title: title, exercises: exercises)
             
         } catch {
@@ -166,6 +152,7 @@ final class NewRoutineViewController: UIViewController, NewRoutineDelegate {
         
         navigationController?.popViewController(animated: true)
     }
+    
     
 }
 

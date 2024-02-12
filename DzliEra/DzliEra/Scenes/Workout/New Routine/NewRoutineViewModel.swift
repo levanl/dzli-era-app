@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+// MARK: - View Model
 final class NewRoutineViewModel {
     
     var user: DBUser?
@@ -20,6 +20,7 @@ final class NewRoutineViewModel {
         exercises.append(exercise)
     }
     
+    // MARK: - Methods
     func loadUser() {
         Task {
             do {
@@ -30,5 +31,15 @@ final class NewRoutineViewModel {
                 print("Error loading user: \(error)")
             }
         }
+    }
+    
+    func uploadRoutines(userId: String, routines: [Routine]) async throws {
+        try await UserManager.shared.uploadRoutines(userId: userId, routines: routines)
+        print("Routines uploaded to Firestore successfully")
+    }
+    
+    func uploadRoutinesToCollection(routines: [Routine]) async throws {
+        try await UserManager.shared.uploadRoutinesToCollection(routines: routines)
+        print("Routines uploaded to collection successfully")
     }
 }

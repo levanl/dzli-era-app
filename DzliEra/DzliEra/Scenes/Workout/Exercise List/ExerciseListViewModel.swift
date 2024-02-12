@@ -20,14 +20,21 @@ final class ExerciseListViewModel {
     var exercises: [Exercise] = []
     weak var delegate: ExerciseListViewModelDelegate?
     
+    let games = [
+        PlaceHolderModel("Pacman", "1980"),
+        PlaceHolderModel("Space Invaders", "1978"),
+        PlaceHolderModel("Frogger", "1981"),
+        PlaceHolderModel("Pacman", "1980"),
+        PlaceHolderModel("Space Invaders", "1978"),
+        PlaceHolderModel("Frogger", "1981"),
+        PlaceHolderModel("Pacman", "1980"),
+        PlaceHolderModel("Space Invaders", "1978"),
+        PlaceHolderModel("Frogger", "1981")
+    ]
+    
     var numberOfExercises: Int {
         exercises.count
     }
-    
-    func exerciseName(at index: Int) -> String {
-        return "Exercise \(index + 1)"
-    }
-    
     // MARK: - Init
     init() {
         fetchWorkoutData()

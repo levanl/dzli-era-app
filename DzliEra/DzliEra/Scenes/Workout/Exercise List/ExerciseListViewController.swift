@@ -11,8 +11,9 @@ protocol ExerciseListDelegate: AnyObject {
     func didSelectExercises(_ exercise: [Exercise])
 }
 
-class ExerciseListViewController: UIViewController {
+final class ExerciseListViewController: UIViewController {
     
+    // MARK: - Properties
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -22,18 +23,6 @@ class ExerciseListViewController: UIViewController {
         tableView.allowsMultipleSelection = true
         return tableView
     }()
-    
-    let games = [
-        PlaceHolderModel("Pacman", "1980"),
-        PlaceHolderModel("Space Invaders", "1978"),
-        PlaceHolderModel("Frogger", "1981"),
-        PlaceHolderModel("Pacman", "1980"),
-        PlaceHolderModel("Space Invaders", "1978"),
-        PlaceHolderModel("Frogger", "1981"),
-        PlaceHolderModel("Pacman", "1980"),
-        PlaceHolderModel("Space Invaders", "1978"),
-        PlaceHolderModel("Frogger", "1981")
-    ]
     
     private let selectButton: UIButton = {
         let button = UIButton()
@@ -55,15 +44,21 @@ class ExerciseListViewController: UIViewController {
     
     weak var exerciseListDelegate: ExerciseListDelegate?
     
+    // MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+    }
+    
+    // MARK: - Methods
+    private func setupUI() {
         view.backgroundColor = UIColor(AppColors.backgroundColor)
         viewModel.delegate = self
         setupTableView()
         setupSelectButton()
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -79,7 +74,7 @@ class ExerciseListViewController: UIViewController {
         ])
     }
     
-    func setupSelectButton() {
+    private func setupSelectButton() {
         selectButton.addTarget(self, action: #selector(selectButtonTapped), for: .touchUpInside)
         view.addSubview(selectButton)
         
@@ -94,25 +89,26 @@ class ExerciseListViewController: UIViewController {
     
     @objc func selectButtonTapped() {
         guard let selectedIndexPaths = tableView.indexPathsForSelectedRows else {
-                    return
-                }
-                
-                let selectedExercises = selectedIndexPaths.map { viewModel.exercises[$0.row] }
-                exerciseListDelegate?.didSelectExercises(selectedExercises)
-                navigationController?.popViewController(animated: true)
+            return
+        }
+        
+        let selectedExercises = selectedIndexPaths.map { viewModel.exercises[$0.row] }
+        exerciseListDelegate?.didSelectExercises(selectedExercises)
+        navigationController?.popViewController(animated: true)
     }
 }
 
+// MARK: - Tableview
 extension ExerciseListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.exercises.count > 0 ? viewModel.exercises.count : games.count
+        viewModel.exercises.count > 0 ? viewModel.exercises.count : viewModel.games.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if viewModel.exercises.isEmpty {
             let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseSkeletonCell.identifier, for: indexPath) as! ExerciseSkeletonCell
-            cell.game = games[indexPath.row]
+            cell.game = viewModel.games[indexPath.row]
             cell.backgroundColor =  UIColor(AppColors.backgroundColor)
             return cell
         } else {
@@ -139,13 +135,14 @@ extension ExerciseListViewController: UITableViewDelegate, UITableViewDataSource
     }
 }
 
-
+// MARK: - fetch data delegate
 extension ExerciseListViewController: ExerciseListViewModelDelegate {
     func exerciseListViewModelDidFetchData(_ viewModel: ExerciseListViewModel) {
         tableView.reloadData()
     }
 }
 
+// MARK: - Exercise cell delegate to details
 extension ExerciseListViewController: ExerciseCellDelegate {
     
     func didTapDetailsButton(in cell: ExerciseTableViewCell, with exercise: Exercise) {
