@@ -44,13 +44,6 @@ final class ExerciseListViewModel {
         
         let urlString = "https://exercisedb.p.rapidapi.com/exercises?limit=10"
         
-        let url = URL(string: urlString)
-        
-        guard url != nil else {
-            print("error getting url")
-            return
-        }
-        
         let headers = [
             "X-RapidAPI-Key": "3cb0c9548amshc64341fcb95906ap1914b7jsn11a9d7fc5d1a",
             "X-RapidAPI-Host": "exercisedb.p.rapidapi.com"

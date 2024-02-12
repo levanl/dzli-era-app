@@ -7,12 +7,15 @@
 
 import SwiftUI
 
+// MARK: - InfoBox
 struct InfoBox: View {
+    
+    // MARK: - Properties
     var title: String
     var value: String
     var icon: String?
     
-    
+    // MARK: - Body
     var body: some View {
         VStack {
             if let icon = icon {

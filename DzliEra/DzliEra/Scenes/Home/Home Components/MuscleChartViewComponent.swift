@@ -21,7 +21,7 @@ struct MuscleChartViewComponent: View {
                         height: 10
                 )
                 .annotation(position: .trailing, alignment: .leading) {
-                    Text("33%")
+                    Text("")
                         .foregroundStyle(Color.white)
                 }
             }

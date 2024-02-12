@@ -15,11 +15,11 @@ protocol ExploreTableViewCellDelegate: AnyObject {
 // MARK: - WorkoutTableViewCell
 final class ExploreTableViewCell: UITableViewCell {
     static let identifier = "ExploreCell"
-
+    
     weak var delegate: ExploreTableViewCellDelegate?
-
+    
     var routine: Routine?
-
+    
     // MARK: - Properties
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -86,7 +86,7 @@ final class ExploreTableViewCell: UITableViewCell {
             startRoutineButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             startRoutineButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
-                
+        
         let selectedBackgroundView = UIView()
         selectedBackgroundView.backgroundColor = UIColor(AppColors.gray)
         selectedBackgroundView.layer.cornerRadius = 8
@@ -103,7 +103,7 @@ final class ExploreTableViewCell: UITableViewCell {
     }
     
     @objc private func addRoutineButtonTapped() {
-            delegate?.didTapAddRoutine(in: self)
+        delegate?.didTapAddRoutine(in: self)
         print("tapped")
-        }
+    }
 }

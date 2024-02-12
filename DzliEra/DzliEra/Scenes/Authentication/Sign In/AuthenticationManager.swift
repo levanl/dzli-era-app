@@ -50,14 +50,12 @@ final class AuthenticationManager {
     }
     
     func signOut() throws {
-
+        
         try Auth.auth().signOut()
     }
     
     func isUserLoggedIn() -> Bool {
-
+        
         return Auth.auth().currentUser != nil
     }
-    
-
 }

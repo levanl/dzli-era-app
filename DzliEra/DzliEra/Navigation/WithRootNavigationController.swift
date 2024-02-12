@@ -15,7 +15,7 @@ protocol WithRootNavigationController {
     // MARK: - Methods
     func push(viewController: UIViewController, animated: Bool)
     func pop(animated: Bool)
-
+    
 }
 
 extension WithRootNavigationController where Self:View {
@@ -38,5 +38,5 @@ extension WithRootNavigationController where Self:View {
     func pop(animated: Bool) {
         rootNavigationController?.popViewController(animated: animated)
     }
-
+    
 }

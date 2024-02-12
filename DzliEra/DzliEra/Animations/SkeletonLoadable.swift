@@ -27,12 +27,11 @@ extension SkeletonLoadable {
 
         let group = CAAnimationGroup()
         group.animations = [anim1, anim2]
-        group.repeatCount = .greatestFiniteMagnitude // infinite
+        group.repeatCount = .greatestFiniteMagnitude
         group.duration = anim2.beginTime + anim2.duration
         group.isRemovedOnCompletion = false
 
         if let previousGroup = previousGroup {
-            // Offset groups by 0.33 seconds for effect
             group.beginTime = previousGroup.beginTime + 0.33
         }
 
