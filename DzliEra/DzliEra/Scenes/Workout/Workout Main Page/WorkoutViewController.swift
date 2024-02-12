@@ -190,11 +190,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: - Cell Delegate Listener
 extension WorkoutViewController: WorkoutTableViewCellDelegate {
-    func didSelectRoutine(_ routine: Routine) {
-        let routineDetailVC = RoutineDetailViewController()
-        routineDetailVC.routine = routine
-        navigationController?.pushViewController(routineDetailVC, animated: true)
-    }
+    func didSelectRoutine(_ routine: Routine) { }
     
     func didTapStartRoutine(_ routine: Routine) {
         let startedRoutineVC = StartedRoutineViewController()

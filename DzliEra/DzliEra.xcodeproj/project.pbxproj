@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C40920CB2B6030650089F99E /* WorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40920CA2B6030650089F99E /* WorkoutTableViewCell.swift */; };
-		C40920CE2B6128D10089F99E /* RoutineDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40920CD2B6128D10089F99E /* RoutineDetailViewController.swift */; };
 		C40920D12B6151640089F99E /* StartedRoutineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40920D02B6151640089F99E /* StartedRoutineViewController.swift */; };
 		C40920D32B6179D40089F99E /* StartedWorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40920D22B6179D40089F99E /* StartedWorkoutTableViewCell.swift */; };
 		C40920D52B6276110089F99E /* WorkoutInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40920D42B6276110089F99E /* WorkoutInfoTableViewCell.swift */; };
@@ -135,7 +134,6 @@
 
 /* Begin PBXFileReference section */
 		C40920CA2B6030650089F99E /* WorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTableViewCell.swift; sourceTree = "<group>"; };
-		C40920CD2B6128D10089F99E /* RoutineDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineDetailViewController.swift; sourceTree = "<group>"; };
 		C40920D02B6151640089F99E /* StartedRoutineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedRoutineViewController.swift; sourceTree = "<group>"; };
 		C40920D22B6179D40089F99E /* StartedWorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedWorkoutTableViewCell.swift; sourceTree = "<group>"; };
 		C40920D42B6276110089F99E /* WorkoutInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -273,14 +271,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C40920CC2B6128A40089F99E /* Routine Datails */ = {
-			isa = PBXGroup;
-			children = (
-				C40920CD2B6128D10089F99E /* RoutineDetailViewController.swift */,
-			);
-			path = "Routine Datails";
-			sourceTree = "<group>";
-		};
 		C40920CF2B61514C0089F99E /* Started Routine */ = {
 			isa = PBXGroup;
 			children = (
@@ -668,7 +658,6 @@
 				C49624EB2B7A20B6009159FD /* Explore routines */,
 				C473B09F2B6A715100C34CC0 /* Nice Job */,
 				C40920CF2B61514C0089F99E /* Started Routine */,
-				C40920CC2B6128A40089F99E /* Routine Datails */,
 				C4F3A0242B5E8E9B00B921FB /* Exercise Details */,
 				C4F3A0192B5D311100B921FB /* Exercise List */,
 				C4F3A0142B5D178600B921FB /* New Routine */,
@@ -915,7 +904,6 @@
 				C49624E62B78D6CD009159FD /* NutritionViewModel.swift in Sources */,
 				C4F3A0112B5D163100B921FB /* WorkoutViewModel.swift in Sources */,
 				C4F3A01B2B5D316400B921FB /* ExerciseListViewController.swift in Sources */,
-				C40920CE2B6128D10089F99E /* RoutineDetailViewController.swift in Sources */,
 				C4D4E5082B57F3FF000B0AE1 /* SceneDelegate.swift in Sources */,
 				C4BB27AF2B594B310021AE4C /* SignInEmailViewModel.swift in Sources */,
 				C4F3A0182B5D17D600B921FB /* NewRoutineViewController.swift in Sources */,

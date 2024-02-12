@@ -7,18 +7,27 @@
 
 import Foundation
 
-
+// MARK: - ExploreRoutinesViewModel
 final class ExploreRoutinesViewModel {
-    
+    // MARK: - properties
     var fetchingStatus: FetchingStatus = .idle
-    
     var user: DBUser?
-    
     var onDataUpdate: (() -> Void)?
-    
     var routines: [Routine] = []
     
+    let games = [
+        PlaceHolderModel("Pacman", "1980"),
+        PlaceHolderModel("Space Invaders", "1978"),
+        PlaceHolderModel("Frogger", "1981"),
+        PlaceHolderModel("Pacman", "1980"),
+        PlaceHolderModel("Space Invaders", "1978"),
+        PlaceHolderModel("Frogger", "1981"),
+        PlaceHolderModel("Pacman", "1980"),
+        PlaceHolderModel("Space Invaders", "1978"),
+        PlaceHolderModel("Frogger", "1981")
+    ]
     
+    // MARK: - Methods
     func fetchAllRoutines() {
         self.fetchingStatus = .fetching
         
@@ -30,10 +39,10 @@ final class ExploreRoutinesViewModel {
                 
                 print(routines)
                 if routines.isEmpty {
-                                self.fetchingStatus = .idle
-                            } else {
-                                self.fetchingStatus = .success
-                            }
+                    self.fetchingStatus = .idle
+                } else {
+                    self.fetchingStatus = .success
+                }
                 DispatchQueue.main.async {
                     self.onDataUpdate?()
                 }
@@ -46,5 +55,5 @@ final class ExploreRoutinesViewModel {
             }
         }
     }
-
+    
 }

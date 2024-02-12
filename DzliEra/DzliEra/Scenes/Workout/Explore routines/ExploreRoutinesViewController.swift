@@ -11,8 +11,10 @@ protocol ExploreRoutinesViewControllerDelegate: AnyObject {
     func didAddRoutine(_ routine: Routine)
 }
 
+// MARK: - ExploreRoutinesViewController
 class ExploreRoutinesViewController: UIViewController {
-
+    
+    // MARK: - Properties
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -21,26 +23,17 @@ class ExploreRoutinesViewController: UIViewController {
     }()
     
     weak var delegate: ExploreRoutinesViewControllerDelegate?
-
+    
     private let viewModel = ExploreRoutinesViewModel()
     
-    let games = [
-        PlaceHolderModel("Pacman", "1980"),
-        PlaceHolderModel("Space Invaders", "1978"),
-        PlaceHolderModel("Frogger", "1981"),
-        PlaceHolderModel("Pacman", "1980"),
-        PlaceHolderModel("Space Invaders", "1978"),
-        PlaceHolderModel("Frogger", "1981"),
-        PlaceHolderModel("Pacman", "1980"),
-        PlaceHolderModel("Space Invaders", "1978"),
-        PlaceHolderModel("Frogger", "1981")
-    ]
-    
-    
+    // MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
+        setupUI()
+    }
+    
+    // MARK: - Methods
+    private func setupUI() {
         viewModel.onDataUpdate = { [weak self] in
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
@@ -51,7 +44,6 @@ class ExploreRoutinesViewController: UIViewController {
         view.backgroundColor = UIColor(AppColors.backgroundColor)
         setupTableView()
     }
-
     
     private func setupTableView() {
         view.addSubview(tableView)
@@ -75,7 +67,7 @@ extension ExploreRoutinesViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch viewModel.fetchingStatus {
         case .fetching:
-            return games.count
+            return viewModel.games.count
         case .success:
             return viewModel.routines.count
         case .failure:
@@ -91,7 +83,7 @@ extension ExploreRoutinesViewController: UITableViewDelegate, UITableViewDataSou
         switch viewModel.fetchingStatus {
         case .fetching:
             let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutSkeletonCell.identifier, for: indexPath) as! WorkoutSkeletonCell
-            cell.game = games[indexPath.row]
+            cell.game = viewModel.games[indexPath.row]
             cell.backgroundColor =  UIColor(AppColors.backgroundColor)
             return cell
         case .success:
@@ -113,7 +105,7 @@ extension ExploreRoutinesViewController: UITableViewDelegate, UITableViewDataSou
             cell.backgroundColor = UIColor(AppColors.backgroundColor)
             return cell
         }
-
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -122,6 +114,7 @@ extension ExploreRoutinesViewController: UITableViewDelegate, UITableViewDataSou
     
 }
 
+// MARK: - ExploreTableViewCellDelegate
 extension ExploreRoutinesViewController: ExploreTableViewCellDelegate {
     func didTapAddRoutine(in cell: ExploreTableViewCell) {
         guard let tappedRoutine = cell.routine else { return }

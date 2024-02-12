@@ -189,8 +189,6 @@ final class ExerciseTableViewCell: UITableViewCell {
             return
         }
         delegate?.didTapDetailsButton(in: self, with: exercise)
-        
-        print("was tapped")
     }
     
 }
