@@ -11,7 +11,7 @@ import Vortex
 struct NiceJobView: View, WithRootNavigationController {
     var workout: DoneWorkout
     @State private var isFireworksActive = false
-    @ObservedObject var sharedViewModel = SharedViewModel.shared
+    @ObservedObject var sharedViewModel = PostedWorkoutViewModel.shared
     @State private var isOverlayVisible = true
     @Environment(\.presentationMode) var presentationMode
     

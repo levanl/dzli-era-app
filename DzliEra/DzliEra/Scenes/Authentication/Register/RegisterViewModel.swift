@@ -14,6 +14,7 @@ final class RegisterViewModel: ObservableObject {
     @Published var password = ""
     @Published var didCompleteRegistration = false
     
+    // MARK: - Methods
     func Register(completion: @escaping () -> Void) {
         guard !email.isEmpty, !password.isEmpty else {
             print("no email and password found")
@@ -25,18 +26,15 @@ final class RegisterViewModel: ObservableObject {
                 let authDataResult = try await AuthenticationManager.shared.createUser(email: email, password: password)
                 let user = DBUser(auth: authDataResult)
                 try await UserManager.shared.createNewUser(user: user)
-                print("Success Registerd")
-                print(authDataResult)
                 
                 DispatchQueue.main.async {
                     self.didCompleteRegistration = true
                     completion()
                 }
             } catch {
-                print("Error \(error)")
                 DispatchQueue.main.async {
                     self.didCompleteRegistration = false
-                    completion() 
+                    completion()
                 }
             }
         }

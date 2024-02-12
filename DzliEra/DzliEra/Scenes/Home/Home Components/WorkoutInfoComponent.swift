@@ -1,16 +1,14 @@
 //
-//  PostedWorkoutView.swift
+//  WorkoutInfoComponent.swift
 //  DzliEra
 //
-//  Created by Levan Loladze on 04.02.24.
+//  Created by Levan Loladze on 12.02.24.
 //
 
 import SwiftUI
-import Charts
 
-struct PostedWorkoutView: View {
+struct WorkoutInfoComponent: View {
     // MARK: - Properties
-    @StateObject private var viewModel = PostedWorkoutInfoViewModel()
     let workout: PostedWorkout
     
     // MARK: - Body
@@ -22,12 +20,12 @@ struct PostedWorkoutView: View {
             
             Divider().overlay(Color.pink)
             
-            MuscleChartViewComponent(muscleSplitData: viewModel.calculateMuscleSplitData(workout.exercises))
+            ExerciseListViewComponent(exercises: workout.exercises)
             
             Spacer()
         }
-        .padding()
-        .background(Color.black.edgesIgnoringSafeArea(.all))
+        .frame(height: 300)
+        .padding(.bottom, 30)
+        .listRowBackground(AppColors.secondaryBackgroundColor)
     }
 }
-

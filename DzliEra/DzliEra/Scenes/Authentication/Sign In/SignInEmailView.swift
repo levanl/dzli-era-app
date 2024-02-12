@@ -22,10 +22,8 @@ struct SignInEmailView: View, WithRootNavigationController {
             
             VStack(spacing: 60) {
                 AuthEmailFieldComponent(email: $viewModel.email)
-                
                 AuthPasswordFieldComponent(password: $viewModel.password)
-                
-                AuthButton(action: temporaryNavToTabBar, label: Text("Sign In"))
+                AuthButton(action: signInWithUser, label: Text("Sign In"))
                     .padding(.bottom, 60)
             }
             
@@ -43,7 +41,7 @@ struct SignInEmailView: View, WithRootNavigationController {
         
     }
     
-    func temporaryNavToTabBar() {
+    func signInWithUser() {
         Task {
             do {
                 try await viewModel.signIn()
