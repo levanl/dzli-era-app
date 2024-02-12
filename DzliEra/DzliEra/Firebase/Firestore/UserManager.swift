@@ -172,7 +172,7 @@ final class UserManager {
     // MARK: - Update User Profile
     func updateUserProfile(userId: String, name: String, bio: String, sex: String, image: UIImage?) async throws {
         
-        if let image = image {
+    
             let storageRef = Storage.storage().reference().child("profile_images").child(userId)
             
             Task {
@@ -192,7 +192,7 @@ final class UserManager {
                     print("Error uploading image or getting download URL: \(error.localizedDescription)")
                 }
             }
-        }
+        
     }
     
     // MARK: - UpdateUserProfileImage
