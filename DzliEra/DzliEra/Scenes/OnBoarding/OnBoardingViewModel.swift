@@ -13,6 +13,8 @@ final class OnBoardingViewModel: ObservableObject {
     @Published var pages: [OnBoardingPageModel] = OnBoardingPageModel.sampleOnBoardingPages
     @Published var dotAppearance = UIPageControl.appearance()
     
+    
+    // MARK: - Methods
     func incrementPage() {
         pageIndex += 1
     }

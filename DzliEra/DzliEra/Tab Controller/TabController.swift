@@ -10,6 +10,7 @@ import SwiftUI
 
 final class TabController: UITabBarController {
     
+    // MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupTabs()
@@ -20,6 +21,7 @@ final class TabController: UITabBarController {
         self.tabBar.clipsToBounds = true
     }
     
+    // MARK: - Private Methods
     private func setupTabs() {
         let tabBarAppearance: UITabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithDefaultBackground()
@@ -39,7 +41,6 @@ final class TabController: UITabBarController {
     private func createNav(with title: String, and image: UIImage?, vc: UIViewController) -> UIViewController {
         
         vc.tabBarItem.image = image
-        
         
         return vc
     }

@@ -322,6 +322,32 @@
 			path = "Explore routines";
 			sourceTree = "<group>";
 		};
+		C49624F22B7A4E45009159FD /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				C4E027B22B738A24000FA8B6 /* Storage */,
+				C473B09C2B6685A200C34CC0 /* Firestore */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		C49624F32B7A4EB5009159FD /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				C4D4E50E2B57F400000B0AE1 /* Assets.xcassets */,
+				C4F3A0272B5E9F3800B921FB /* workout.gif */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		C49624F42B7A4ED9009159FD /* Tab Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C4F3A00B2B5BC7B600B921FB /* TabController.swift */,
+			);
+			path = "Tab Controller";
+			sourceTree = "<group>";
+		};
 		C4BB27482B590CBC0021AE4C /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -423,19 +449,17 @@
 		C4D4E5042B57F3FF000B0AE1 /* DzliEra */ = {
 			isa = PBXGroup;
 			children = (
-				C4E027B22B738A24000FA8B6 /* Storage */,
-				C473B09C2B6685A200C34CC0 /* Firestore */,
+				C49624F42B7A4ED9009159FD /* Tab Controller */,
+				C49624F22B7A4E45009159FD /* Firebase */,
 				C4BB27BA2B5A874D0021AE4C /* Navigation */,
 				C4BB27482B590CBC0021AE4C /* Fonts */,
 				C4D4E5192B57F7DB000B0AE1 /* App */,
 				C4D4E51A2B57F851000B0AE1 /* Scenes */,
-				C4D4E50E2B57F400000B0AE1 /* Assets.xcassets */,
 				C4D4E5132B57F400000B0AE1 /* Info.plist */,
 				C4BB27722B5939C60021AE4C /* GoogleService-Info.plist */,
 				C4D4E51B2B57F85C000B0AE1 /* Extensions */,
 				C4D4E51E2B57F99F000B0AE1 /* LaunchScreen */,
-				C4F3A0272B5E9F3800B921FB /* workout.gif */,
-				C4F3A00B2B5BC7B600B921FB /* TabController.swift */,
+				C49624F32B7A4EB5009159FD /* Assets */,
 			);
 			path = DzliEra;
 			sourceTree = "<group>";
