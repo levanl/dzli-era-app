@@ -88,6 +88,17 @@ struct NiceJobView: View, WithRootNavigationController {
                         sharedViewModel.user?.addPostedWorkout(newWorkout)
                         try await UserManager.shared.uploadPostedWorkout(userId: sharedViewModel.user?.userId ?? "", postedWorkouts: sharedViewModel.user?.postedWorkouts ?? [])
                         try await UserManager.shared.savePostedWorkoutsToCollection(postedWorkouts: sharedViewModel.user?.postedWorkouts ?? [])
+                        
+                        let tabController = TabController()
+                        let navigationController = UINavigationController(rootViewController: tabController)
+                        
+                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                           let window = windowScene.windows.first {
+                            UIView.transition(with: window, duration: 1, options: .transitionCrossDissolve, animations: {
+                                window.rootViewController = navigationController
+                                window.makeKeyAndVisible()
+                            }, completion: nil)
+                        }
                     }
                     catch {
                         print("error")
