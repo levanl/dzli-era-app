@@ -12,7 +12,7 @@ protocol StartedWorkoutTableViewCellDelegate: AnyObject {
 }
 
 // MARK: - StartedWorkoutTableViewCell
-final class StartedWorkoutTableViewCell: UITableViewCell {
+final class StartedWorkoutTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     // MARK: - Properties
     weak var delegate: StartedWorkoutTableViewCellDelegate?
@@ -127,6 +127,9 @@ final class StartedWorkoutTableViewCell: UITableViewCell {
         setupStackView()
         setupHeaderStackView()
         setupInfoStackView()
+        
+        setsTextField.delegate = self
+        repsTextField.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -235,4 +238,15 @@ final class StartedWorkoutTableViewCell: UITableViewCell {
         
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let allowedCharacters = CharacterSet(charactersIn: "0123456789")
+        let characterSet = CharacterSet(charactersIn: string)
+        return allowedCharacters.isSuperset(of: characterSet)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField.text == "0" {
+            textField.text = ""
+        }
+    }
 }
