@@ -16,9 +16,7 @@ struct ExerciseListViewComponent: View {
         List {
             ForEach(exercises) { exercise in
                 HStack(spacing: 10) {
-                    Image(exercise.gifURL)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
+                    AsyncImageView(url: exercise.gifURL)
                         .frame(width: 40, height: 40)
                         .clipShape(Circle())
                     
@@ -30,5 +28,36 @@ struct ExerciseListViewComponent: View {
             }
         }
         .listStyle(.plain)
+    }
+}
+
+struct AsyncImageView: View {
+    let url: String
+    @State private var imageData: Data?
+    
+    var body: some View {
+        if let imageData = imageData, let uiImage = UIImage(data: imageData) {
+            Image(uiImage: uiImage)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .onAppear {
+                    loadImage()
+                }
+        } else {
+            Image("DzlieraImageHolder")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+        }
+    }
+    
+    private func loadImage() {
+        guard let url = URL(string: url) else { return }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            DispatchQueue.main.async {
+                self.imageData = data
+            }
+        }.resume()
     }
 }

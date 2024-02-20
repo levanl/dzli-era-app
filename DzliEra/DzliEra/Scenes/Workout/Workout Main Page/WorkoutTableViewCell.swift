@@ -10,6 +10,7 @@ import UIKit
 protocol WorkoutTableViewCellDelegate: AnyObject {
     func didSelectRoutine(_ routine: Routine)
     func didTapStartRoutine(_ routine: Routine)
+    func didTapRoutineInfoButton(for routine: Routine)
 }
 
 // MARK: - WorkoutTableViewCell
@@ -36,6 +37,15 @@ final class WorkoutTableViewCell: UITableViewCell {
         return label
     }()
     
+    private let routineStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 8
+        return stackView
+    }()
+    
     private let startRoutineButton: UIButton = {
         let button = UIButton()
         button.setTitle("Start Routine", for: .normal)
@@ -44,6 +54,16 @@ final class WorkoutTableViewCell: UITableViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    private let routineInfoButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Info", for: .normal)
+        button.backgroundColor = UIColor(AppColors.primaryRed)
+        button.layer.cornerRadius = 6
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -67,8 +87,12 @@ final class WorkoutTableViewCell: UITableViewCell {
     private func setupViews() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(workoutNamesLabel)
-        contentView.addSubview(startRoutineButton)
+        contentView.addSubview(routineStackView)
         
+        routineStackView.addArrangedSubview(startRoutineButton)
+        routineStackView.addArrangedSubview(routineInfoButton)
+        
+        routineInfoButton.addTarget(self, action: #selector(routineInfoButtonTapped), for: .touchUpInside)
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -78,10 +102,10 @@ final class WorkoutTableViewCell: UITableViewCell {
             workoutNamesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             workoutNamesLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            startRoutineButton.topAnchor.constraint(equalTo: workoutNamesLabel.bottomAnchor, constant: 10),
-            startRoutineButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            startRoutineButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            startRoutineButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+            routineStackView.topAnchor.constraint(equalTo: workoutNamesLabel.bottomAnchor, constant: 10),
+            routineStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            routineStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            routineStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
         
         startRoutineButton.addTarget(self, action: #selector(startRoutineButtonTapped), for: .touchUpInside)
@@ -114,4 +138,11 @@ final class WorkoutTableViewCell: UITableViewCell {
         guard let routine = routine else { return }
         delegate?.didTapStartRoutine(routine)
     }
+    
+    @objc private func routineInfoButtonTapped() {
+        guard let routine = routine else { return }
+        delegate?.didTapRoutineInfoButton(for: routine)
+    }
+
 }
+
