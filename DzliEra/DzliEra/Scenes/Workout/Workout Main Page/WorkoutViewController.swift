@@ -159,9 +159,10 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
             cell.backgroundColor =  UIColor(AppColors.backgroundColor)
             return cell
         case .success:
+            let reversedRoutines = Array(viewModel.routines.reversed())
             let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutTableViewCell.identifier, for: indexPath) as! WorkoutTableViewCell
-            
-            let routine = viewModel.routines[indexPath.row]
+
+            let routine = reversedRoutines[indexPath.row]
             cell.configure(with: routine)
             cell.delegate = self
             
