@@ -297,6 +297,15 @@
 			path = "Started Routine";
 			sourceTree = "<group>";
 		};
+		C40A35F82B87229000725C6B /* Routine Details */ = {
+			isa = PBXGroup;
+			children = (
+				C40A35F42B850E5000725C6B /* RoutineInfoViewController.swift */,
+				C40A35F62B852C9500725C6B /* RoutineWorkoutTableViewCell.swift */,
+			);
+			path = "Routine Details";
+			sourceTree = "<group>";
+		};
 		C473B0942B63BEE600C34CC0 /* Save Workout */ = {
 			isa = PBXGroup;
 			children = (
@@ -396,14 +405,13 @@
 		C49625062B7A5D3C009159FD /* Workout Main Page */ = {
 			isa = PBXGroup;
 			children = (
+				C40A35F82B87229000725C6B /* Routine Details */,
 				C496250C2B7A5EC3009159FD /* WorkoutPageComponents */,
 				C49625072B7A5D66009159FD /* Workout Skeleton Cell */,
 				C4F3A0072B5BC04700B921FB /* WorkoutViewController.swift */,
 				C4F3A0102B5D163100B921FB /* WorkoutViewModel.swift */,
 				C4F3A0122B5D164400B921FB /* WorkoutModel.swift */,
 				C40920CA2B6030650089F99E /* WorkoutTableViewCell.swift */,
-				C40A35F42B850E5000725C6B /* RoutineInfoViewController.swift */,
-				C40A35F62B852C9500725C6B /* RoutineWorkoutTableViewCell.swift */,
 			);
 			path = "Workout Main Page";
 			sourceTree = "<group>";

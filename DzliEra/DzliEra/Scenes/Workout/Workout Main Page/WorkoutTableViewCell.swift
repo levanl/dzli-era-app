@@ -143,6 +143,6 @@ final class WorkoutTableViewCell: UITableViewCell {
         guard let routine = routine else { return }
         delegate?.didTapRoutineInfoButton(for: routine)
     }
-
+    
 }
 
