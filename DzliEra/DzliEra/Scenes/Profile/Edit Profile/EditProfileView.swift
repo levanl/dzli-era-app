@@ -154,17 +154,28 @@ struct EditProfileView: View, WithRootNavigationController {
             
             Button(action: {
                 Task {
-                    do {
-                        print(AuthenticationManager.shared.isUserLoggedIn())
-                        
-                        try viewModel.logOut()
-                        self.push(viewController: UIHostingController(rootView: SignInEmailView()), animated: true)
-                        print(AuthenticationManager.shared.isUserLoggedIn())
+                        do {
+                            print(AuthenticationManager.shared.isUserLoggedIn())
+                            
+                            try viewModel.logOut()
+                            print(AuthenticationManager.shared.isUserLoggedIn())
+                            
+                            let signInView = SignInEmailView()
+                            let hostingController = UIHostingController(rootView: signInView)
+                            let navigationController = UINavigationController(rootViewController: hostingController)
+                            
+                            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                               let window = windowScene.windows.first {
+                                UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                                    window.rootViewController = navigationController
+                                    window.makeKeyAndVisible()
+                                }, completion: nil)
+                            }
+                        }
+                        catch {
+                            
+                        }
                     }
-                    catch {
-                        
-                    }
-                }
             }) {
                 Text("log out")
                     .foregroundColor(.red)

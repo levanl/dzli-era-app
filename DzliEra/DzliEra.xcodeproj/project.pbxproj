@@ -11,6 +11,8 @@
 		C40920D12B6151640089F99E /* StartedRoutineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40920D02B6151640089F99E /* StartedRoutineViewController.swift */; };
 		C40920D32B6179D40089F99E /* StartedWorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40920D22B6179D40089F99E /* StartedWorkoutTableViewCell.swift */; };
 		C40920D52B6276110089F99E /* WorkoutInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40920D42B6276110089F99E /* WorkoutInfoTableViewCell.swift */; };
+		C40A35F52B850E5000725C6B /* RoutineInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40A35F42B850E5000725C6B /* RoutineInfoViewController.swift */; };
+		C40A35F72B852C9500725C6B /* RoutineWorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40A35F62B852C9500725C6B /* RoutineWorkoutTableViewCell.swift */; };
 		C473B0962B63BF1300C34CC0 /* SaveWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */; };
 		C473B0982B63DEAD00C34CC0 /* SaveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B0972B63DEAD00C34CC0 /* SaveCollectionViewCell.swift */; };
 		C473B09E2B6685BF00C34CC0 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B09D2B6685BF00C34CC0 /* UserManager.swift */; };
@@ -142,6 +144,8 @@
 		C40920D02B6151640089F99E /* StartedRoutineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedRoutineViewController.swift; sourceTree = "<group>"; };
 		C40920D22B6179D40089F99E /* StartedWorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedWorkoutTableViewCell.swift; sourceTree = "<group>"; };
 		C40920D42B6276110089F99E /* WorkoutInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutInfoTableViewCell.swift; sourceTree = "<group>"; };
+		C40A35F42B850E5000725C6B /* RoutineInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineInfoViewController.swift; sourceTree = "<group>"; };
+		C40A35F62B852C9500725C6B /* RoutineWorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineWorkoutTableViewCell.swift; sourceTree = "<group>"; };
 		C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveWorkoutViewController.swift; sourceTree = "<group>"; };
 		C473B0972B63DEAD00C34CC0 /* SaveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCollectionViewCell.swift; sourceTree = "<group>"; };
 		C473B09D2B6685BF00C34CC0 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
@@ -293,6 +297,15 @@
 			path = "Started Routine";
 			sourceTree = "<group>";
 		};
+		C40A35F82B87229000725C6B /* Routine Details */ = {
+			isa = PBXGroup;
+			children = (
+				C40A35F42B850E5000725C6B /* RoutineInfoViewController.swift */,
+				C40A35F62B852C9500725C6B /* RoutineWorkoutTableViewCell.swift */,
+			);
+			path = "Routine Details";
+			sourceTree = "<group>";
+		};
 		C473B0942B63BEE600C34CC0 /* Save Workout */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,6 +405,7 @@
 		C49625062B7A5D3C009159FD /* Workout Main Page */ = {
 			isa = PBXGroup;
 			children = (
+				C40A35F82B87229000725C6B /* Routine Details */,
 				C496250C2B7A5EC3009159FD /* WorkoutPageComponents */,
 				C49625072B7A5D66009159FD /* Workout Skeleton Cell */,
 				C4F3A0072B5BC04700B921FB /* WorkoutViewController.swift */,
@@ -883,6 +897,7 @@
 				C4F3A0262B5E993200B921FB /* GifLoader.swift in Sources */,
 				C496251B2B7A7440009159FD /* SaveWorkoutLabelComponent.swift in Sources */,
 				C496251D2B7A75A9009159FD /* SaveWorkoutModel.swift in Sources */,
+				C40A35F52B850E5000725C6B /* RoutineInfoViewController.swift in Sources */,
 				C49625212B7A8514009159FD /* EditProfileViewModel.swift in Sources */,
 				C4BB27702B5915950021AE4C /* OnBoardingViewModel.swift in Sources */,
 				C473B0962B63BF1300C34CC0 /* SaveWorkoutViewController.swift in Sources */,
@@ -918,6 +933,7 @@
 				C49624FF2B7A56A8009159FD /* WorkoutInfoComponent.swift in Sources */,
 				C4BB27AD2B594B1A0021AE4C /* SignInEmailView.swift in Sources */,
 				C496252A2B7A916E009159FD /* ProfileViewModel.swift in Sources */,
+				C40A35F72B852C9500725C6B /* RoutineWorkoutTableViewCell.swift in Sources */,
 				C49624FD2B7A5654009159FD /* ExerciseListViewComponent.swift in Sources */,
 				C4E027A52B6FAE39000FA8B6 /* PostedWorkoutView.swift in Sources */,
 				C4F3A0212B5E5EFB00B921FB /* ExerciseTableViewCell.swift in Sources */,

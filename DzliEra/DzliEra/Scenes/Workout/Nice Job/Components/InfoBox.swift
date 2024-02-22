@@ -28,7 +28,7 @@ struct InfoBox: View {
             
             Text(value)
                 .font(.title)
-                .foregroundColor(.black)
+                .foregroundColor(.white)
             
             Text(title)
                 .font(.footnote)
@@ -36,7 +36,7 @@ struct InfoBox: View {
         }
         .padding()
         .frame(maxWidth: .infinity)
-        .background(Color.white)
+        .background(AppColors.secondaryBackgroundColor)
         .cornerRadius(10)
         .overlay(
             RoundedRectangle(cornerRadius: 10)

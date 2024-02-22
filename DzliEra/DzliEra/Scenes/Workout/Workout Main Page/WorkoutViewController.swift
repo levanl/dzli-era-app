@@ -159,9 +159,10 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
             cell.backgroundColor =  UIColor(AppColors.backgroundColor)
             return cell
         case .success:
+            let reversedRoutines = Array(viewModel.routines.reversed())
             let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutTableViewCell.identifier, for: indexPath) as! WorkoutTableViewCell
-            
-            let routine = viewModel.routines[indexPath.row]
+
+            let routine = reversedRoutines[indexPath.row]
             cell.configure(with: routine)
             cell.delegate = self
             
@@ -190,6 +191,13 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: - Cell Delegate Listener
 extension WorkoutViewController: WorkoutTableViewCellDelegate {
+    func didTapRoutineInfoButton(for routine: Routine) {
+        let routineInfoVC = RoutineInfoViewController()
+        
+        routineInfoVC.routine = routine
+        
+        navigationController?.pushViewController(routineInfoVC, animated: true)
+    }
     func didSelectRoutine(_ routine: Routine) { }
     
     func didTapStartRoutine(_ routine: Routine) {
@@ -197,6 +205,7 @@ extension WorkoutViewController: WorkoutTableViewCellDelegate {
         startedRoutineVC.routine = routine
         navigationController?.pushViewController(startedRoutineVC, animated: true)
     }
+    
 }
 
 

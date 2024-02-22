@@ -48,17 +48,20 @@ struct SignInEmailView: View, WithRootNavigationController {
                 
                 let tabController = TabController()
                 let navigationController = UINavigationController(rootViewController: tabController)
+                
                 if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                    let window = windowScene.windows.first {
-                    window.rootViewController = navigationController
-                    window.makeKeyAndVisible()
+                    UIView.transition(with: window, duration: 1, options: .transitionCrossDissolve, animations: {
+                        window.rootViewController = navigationController
+                        window.makeKeyAndVisible()
+                    }, completion: nil)
                 }
-                
             } catch {
                 print("Error signing in: \(error)")
             }
         }
     }
+
 }
 
 #Preview {

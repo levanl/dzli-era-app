@@ -29,6 +29,7 @@ struct NiceJobView: View, WithRootNavigationController {
                 .font(.title)
                 .foregroundColor(.white)
                 .padding(.bottom, 30)
+                .padding(.top, 20)
             
             VStack {
                 TabView {
@@ -38,7 +39,7 @@ struct NiceJobView: View, WithRootNavigationController {
                                 Text("Summary")
                                     .multilineTextAlignment(.center)
                                     .font(.title)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.white)
                                     .frame(maxWidth: .infinity)
                                     .padding(.horizontal, 16)
                                     .padding(.top, 24)
@@ -72,7 +73,7 @@ struct NiceJobView: View, WithRootNavigationController {
                         }
                     }
                 }
-                .background(.white)
+                .background(AppColors.secondaryBackgroundColor)
                 .tabViewStyle(PageTabViewStyle())
                 .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
                 .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -88,6 +89,17 @@ struct NiceJobView: View, WithRootNavigationController {
                         sharedViewModel.user?.addPostedWorkout(newWorkout)
                         try await UserManager.shared.uploadPostedWorkout(userId: sharedViewModel.user?.userId ?? "", postedWorkouts: sharedViewModel.user?.postedWorkouts ?? [])
                         try await UserManager.shared.savePostedWorkoutsToCollection(postedWorkouts: sharedViewModel.user?.postedWorkouts ?? [])
+                        
+                        let tabController = TabController()
+                        let navigationController = UINavigationController(rootViewController: tabController)
+                        
+                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                           let window = windowScene.windows.first {
+                            UIView.transition(with: window, duration: 1, options: .transitionCrossDissolve, animations: {
+                                window.rootViewController = navigationController
+                                window.makeKeyAndVisible()
+                            }, completion: nil)
+                        }
                     }
                     catch {
                         print("error")
@@ -112,7 +124,7 @@ struct NiceJobView: View, WithRootNavigationController {
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.black.edgesIgnoringSafeArea(.all))
+        .background(AppColors.backgroundColor.edgesIgnoringSafeArea(.all))
         .onAppear {
             Timer.scheduledTimer(withTimeInterval: 7, repeats: false) { _ in
                 isOverlayVisible = false
