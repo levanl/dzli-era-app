@@ -51,6 +51,7 @@
 		C49625262B7A8B8B009159FD /* NutritionLabelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49625252B7A8B8B009159FD /* NutritionLabelComponent.swift */; };
 		C49625282B7A8E17009159FD /* DBUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49625272B7A8E17009159FD /* DBUserModel.swift */; };
 		C496252A2B7A916E009159FD /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49625292B7A916E009159FD /* ProfileViewModel.swift */; };
+		C49A20B52B90AF43005F0DCF /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A20B42B90AF43005F0DCF /* UserService.swift */; };
 		C4BB27472B5858580021AE4C /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB27462B5858580021AE4C /* ButtonExtension.swift */; };
 		C4BB275B2B590CD80021AE4C /* Kanit-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4BB27492B590CD80021AE4C /* Kanit-ExtraLight.ttf */; };
 		C4BB275C2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4BB274A2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf */; };
@@ -181,6 +182,7 @@
 		C49625252B7A8B8B009159FD /* NutritionLabelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionLabelComponent.swift; sourceTree = "<group>"; };
 		C49625272B7A8E17009159FD /* DBUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBUserModel.swift; sourceTree = "<group>"; };
 		C49625292B7A916E009159FD /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		C49A20B42B90AF43005F0DCF /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		C4BB27462B5858580021AE4C /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		C4BB27492B590CD80021AE4C /* Kanit-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-ExtraLight.ttf"; sourceTree = "<group>"; };
 		C4BB274A2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -481,6 +483,14 @@
 			path = "Nutrition Components";
 			sourceTree = "<group>";
 		};
+		C49A20B32B90AF36005F0DCF /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				C49A20B42B90AF43005F0DCF /* UserService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		C4BB27482B590CBC0021AE4C /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -582,6 +592,7 @@
 		C4D4E5042B57F3FF000B0AE1 /* DzliEra */ = {
 			isa = PBXGroup;
 			children = (
+				C49A20B32B90AF36005F0DCF /* Service */,
 				C49625092B7A5DB4009159FD /* Models */,
 				C49625082B7A5D84009159FD /* Animations */,
 				C49624F42B7A4ED9009159FD /* Tab Controller */,
@@ -906,6 +917,7 @@
 				C49624F12B7A218B009159FD /* ExploreTableViewCell.swift in Sources */,
 				C4D4E51D2B57F873000B0AE1 /* ColorExtension.swift in Sources */,
 				C4BB27C42B5ABA430021AE4C /* AuthEmailFieldComponent.swift in Sources */,
+				C49A20B52B90AF43005F0DCF /* UserService.swift in Sources */,
 				C49624E82B78DD4F009159FD /* NutritionModel.swift in Sources */,
 				C4D4E5062B57F3FF000B0AE1 /* AppDelegate.swift in Sources */,
 				C4E027AD2B72489B000FA8B6 /* EditProfileView.swift in Sources */,

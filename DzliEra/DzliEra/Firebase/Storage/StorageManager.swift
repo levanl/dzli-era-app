@@ -25,7 +25,6 @@ final class StorageManager {
     }
     
     private func userReference(userId: String) -> StorageReference {
-        
         storage.child("users").child(userId)
     }
     

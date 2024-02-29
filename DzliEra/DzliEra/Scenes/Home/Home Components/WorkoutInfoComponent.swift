@@ -19,8 +19,9 @@ struct WorkoutInfoComponent: View {
             TimeRepsWorkoutComponent(workout: workout)
             
             Divider().overlay(Color.pink)
-            
-            ExerciseListViewComponent(exercises: workout.exercises)
+            HStack {
+                ExerciseListViewComponent(exercises: workout.exercises)
+            }
             
             Spacer()
         }

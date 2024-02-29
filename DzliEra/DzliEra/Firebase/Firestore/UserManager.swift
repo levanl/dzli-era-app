@@ -172,26 +172,26 @@ final class UserManager {
     // MARK: - Update User Profile
     func updateUserProfile(userId: String, name: String, bio: String, sex: String, image: UIImage?) async throws {
         
-    
-            let storageRef = Storage.storage().reference().child("profile_images").child(userId)
-            
-            Task {
-                do {
-                    let url = try await storageRef.downloadURL()
-                    let imageUrl = url.absoluteString
-                    
-                    let userData: [String: Any] = [
-                        "name": name,
-                        "bio": bio,
-                        "sex": sex,
-                        "photoUrl": imageUrl
-                    ]
-                    
-                    try await userDocument(userId: userId).setData(userData, merge: true)
-                } catch {
-                    print("Error uploading image or getting download URL: \(error.localizedDescription)")
-                }
+        
+        let storageRef = Storage.storage().reference().child("profile_images").child(userId)
+        
+        Task {
+            do {
+                let url = try await storageRef.downloadURL()
+                let imageUrl = url.absoluteString
+                
+                let userData: [String: Any] = [
+                    "name": name,
+                    "bio": bio,
+                    "sex": sex,
+                    "photoUrl": imageUrl
+                ]
+                
+                try await userDocument(userId: userId).setData(userData, merge: true)
+            } catch {
+                print("Error uploading image or getting download URL: \(error.localizedDescription)")
             }
+        }
         
     }
     
