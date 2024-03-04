@@ -33,7 +33,6 @@ final class ExploreRoutinesViewModel {
         
         Task {
             do {
-                
                 let routines = try await UserManager.shared.getAllRoutinesFromCollection()
                 self.routines = routines
                 
