@@ -25,7 +25,7 @@ final class RegisterViewModel: ObservableObject {
         Task {
             do {
                 let authDataResult = try await AuthenticationManager.shared.createUser(email: email, password: password)
-                let user = DBUser(auth: authDataResult)
+                let user = DBUser(auth: authDataResult, name: name)
                 try await UserManager.shared.createNewUser(user: user)
                 
                 DispatchQueue.main.async {
