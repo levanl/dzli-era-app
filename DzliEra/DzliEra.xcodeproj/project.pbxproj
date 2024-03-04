@@ -13,6 +13,7 @@
 		C40920D52B6276110089F99E /* WorkoutInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40920D42B6276110089F99E /* WorkoutInfoTableViewCell.swift */; };
 		C40A35F52B850E5000725C6B /* RoutineInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40A35F42B850E5000725C6B /* RoutineInfoViewController.swift */; };
 		C40A35F72B852C9500725C6B /* RoutineWorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40A35F62B852C9500725C6B /* RoutineWorkoutTableViewCell.swift */; };
+		C45D81442B961F9C00583B86 /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45D81432B961F9C00583B86 /* AlertExtension.swift */; };
 		C473B0962B63BF1300C34CC0 /* SaveWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */; };
 		C473B0982B63DEAD00C34CC0 /* SaveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B0972B63DEAD00C34CC0 /* SaveCollectionViewCell.swift */; };
 		C473B09E2B6685BF00C34CC0 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B09D2B6685BF00C34CC0 /* UserManager.swift */; };
@@ -147,6 +148,7 @@
 		C40920D42B6276110089F99E /* WorkoutInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutInfoTableViewCell.swift; sourceTree = "<group>"; };
 		C40A35F42B850E5000725C6B /* RoutineInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineInfoViewController.swift; sourceTree = "<group>"; };
 		C40A35F62B852C9500725C6B /* RoutineWorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineWorkoutTableViewCell.swift; sourceTree = "<group>"; };
+		C45D81432B961F9C00583B86 /* AlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
 		C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveWorkoutViewController.swift; sourceTree = "<group>"; };
 		C473B0972B63DEAD00C34CC0 /* SaveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCollectionViewCell.swift; sourceTree = "<group>"; };
 		C473B09D2B6685BF00C34CC0 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
@@ -637,6 +639,7 @@
 				C4D4E51C2B57F873000B0AE1 /* ColorExtension.swift */,
 				C4BB27462B5858580021AE4C /* ButtonExtension.swift */,
 				C4F3A0252B5E993200B921FB /* GifLoader.swift */,
+				C45D81432B961F9C00583B86 /* AlertExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -946,6 +949,7 @@
 				C4BB27AD2B594B1A0021AE4C /* SignInEmailView.swift in Sources */,
 				C496252A2B7A916E009159FD /* ProfileViewModel.swift in Sources */,
 				C40A35F72B852C9500725C6B /* RoutineWorkoutTableViewCell.swift in Sources */,
+				C45D81442B961F9C00583B86 /* AlertExtension.swift in Sources */,
 				C49624FD2B7A5654009159FD /* ExerciseListViewComponent.swift in Sources */,
 				C4E027A52B6FAE39000FA8B6 /* PostedWorkoutView.swift in Sources */,
 				C4F3A0212B5E5EFB00B921FB /* ExerciseTableViewCell.swift in Sources */,
