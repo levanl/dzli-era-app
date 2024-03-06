@@ -13,6 +13,7 @@
 		C40920D52B6276110089F99E /* WorkoutInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40920D42B6276110089F99E /* WorkoutInfoTableViewCell.swift */; };
 		C40A35F52B850E5000725C6B /* RoutineInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40A35F42B850E5000725C6B /* RoutineInfoViewController.swift */; };
 		C40A35F72B852C9500725C6B /* RoutineWorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40A35F62B852C9500725C6B /* RoutineWorkoutTableViewCell.swift */; };
+		C45D81442B961F9C00583B86 /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45D81432B961F9C00583B86 /* AlertExtension.swift */; };
 		C473B0962B63BF1300C34CC0 /* SaveWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */; };
 		C473B0982B63DEAD00C34CC0 /* SaveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B0972B63DEAD00C34CC0 /* SaveCollectionViewCell.swift */; };
 		C473B09E2B6685BF00C34CC0 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B09D2B6685BF00C34CC0 /* UserManager.swift */; };
@@ -51,6 +52,7 @@
 		C49625262B7A8B8B009159FD /* NutritionLabelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49625252B7A8B8B009159FD /* NutritionLabelComponent.swift */; };
 		C49625282B7A8E17009159FD /* DBUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49625272B7A8E17009159FD /* DBUserModel.swift */; };
 		C496252A2B7A916E009159FD /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49625292B7A916E009159FD /* ProfileViewModel.swift */; };
+		C49A20B52B90AF43005F0DCF /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A20B42B90AF43005F0DCF /* UserService.swift */; };
 		C4BB27472B5858580021AE4C /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BB27462B5858580021AE4C /* ButtonExtension.swift */; };
 		C4BB275B2B590CD80021AE4C /* Kanit-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4BB27492B590CD80021AE4C /* Kanit-ExtraLight.ttf */; };
 		C4BB275C2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4BB274A2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf */; };
@@ -146,6 +148,7 @@
 		C40920D42B6276110089F99E /* WorkoutInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutInfoTableViewCell.swift; sourceTree = "<group>"; };
 		C40A35F42B850E5000725C6B /* RoutineInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineInfoViewController.swift; sourceTree = "<group>"; };
 		C40A35F62B852C9500725C6B /* RoutineWorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineWorkoutTableViewCell.swift; sourceTree = "<group>"; };
+		C45D81432B961F9C00583B86 /* AlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
 		C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveWorkoutViewController.swift; sourceTree = "<group>"; };
 		C473B0972B63DEAD00C34CC0 /* SaveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCollectionViewCell.swift; sourceTree = "<group>"; };
 		C473B09D2B6685BF00C34CC0 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
@@ -181,6 +184,7 @@
 		C49625252B7A8B8B009159FD /* NutritionLabelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionLabelComponent.swift; sourceTree = "<group>"; };
 		C49625272B7A8E17009159FD /* DBUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBUserModel.swift; sourceTree = "<group>"; };
 		C49625292B7A916E009159FD /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		C49A20B42B90AF43005F0DCF /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		C4BB27462B5858580021AE4C /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		C4BB27492B590CD80021AE4C /* Kanit-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-ExtraLight.ttf"; sourceTree = "<group>"; };
 		C4BB274A2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kanit-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -481,6 +485,14 @@
 			path = "Nutrition Components";
 			sourceTree = "<group>";
 		};
+		C49A20B32B90AF36005F0DCF /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				C49A20B42B90AF43005F0DCF /* UserService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		C4BB27482B590CBC0021AE4C /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -582,6 +594,7 @@
 		C4D4E5042B57F3FF000B0AE1 /* DzliEra */ = {
 			isa = PBXGroup;
 			children = (
+				C49A20B32B90AF36005F0DCF /* Service */,
 				C49625092B7A5DB4009159FD /* Models */,
 				C49625082B7A5D84009159FD /* Animations */,
 				C49624F42B7A4ED9009159FD /* Tab Controller */,
@@ -626,6 +639,7 @@
 				C4D4E51C2B57F873000B0AE1 /* ColorExtension.swift */,
 				C4BB27462B5858580021AE4C /* ButtonExtension.swift */,
 				C4F3A0252B5E993200B921FB /* GifLoader.swift */,
+				C45D81432B961F9C00583B86 /* AlertExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -906,6 +920,7 @@
 				C49624F12B7A218B009159FD /* ExploreTableViewCell.swift in Sources */,
 				C4D4E51D2B57F873000B0AE1 /* ColorExtension.swift in Sources */,
 				C4BB27C42B5ABA430021AE4C /* AuthEmailFieldComponent.swift in Sources */,
+				C49A20B52B90AF43005F0DCF /* UserService.swift in Sources */,
 				C49624E82B78DD4F009159FD /* NutritionModel.swift in Sources */,
 				C4D4E5062B57F3FF000B0AE1 /* AppDelegate.swift in Sources */,
 				C4E027AD2B72489B000FA8B6 /* EditProfileView.swift in Sources */,
@@ -934,6 +949,7 @@
 				C4BB27AD2B594B1A0021AE4C /* SignInEmailView.swift in Sources */,
 				C496252A2B7A916E009159FD /* ProfileViewModel.swift in Sources */,
 				C40A35F72B852C9500725C6B /* RoutineWorkoutTableViewCell.swift in Sources */,
+				C45D81442B961F9C00583B86 /* AlertExtension.swift in Sources */,
 				C49624FD2B7A5654009159FD /* ExerciseListViewComponent.swift in Sources */,
 				C4E027A52B6FAE39000FA8B6 /* PostedWorkoutView.swift in Sources */,
 				C4F3A0212B5E5EFB00B921FB /* ExerciseTableViewCell.swift in Sources */,

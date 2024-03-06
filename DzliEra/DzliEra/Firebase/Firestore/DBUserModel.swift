@@ -21,7 +21,7 @@ struct DBUser: Codable {
     var sex: String?
     let profileImagePath: String?
     
-    init(auth: AuthDataResultModel) {
+    init(auth: AuthDataResultModel, name: String) {
         self.userId = auth.uid
         self.email = auth.email
         self.photoUrl = auth.photoUrl
@@ -29,7 +29,7 @@ struct DBUser: Codable {
         self.isPremium = false
         self.routines = nil
         self.postedWorkouts = nil
-        self.name = nil
+        self.name = name
         self.bio = nil
         self.sex = nil
         self.profileImagePath = nil

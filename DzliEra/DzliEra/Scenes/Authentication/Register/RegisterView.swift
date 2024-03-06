@@ -19,6 +19,8 @@ struct RegisterView: View, WithRootNavigationController {
                 .padding(.bottom, 100)
             
             VStack(spacing: 60) {
+                
+                AuthNameFieldComponent(name: $viewModel.name)
                 AuthEmailFieldComponent(email: $viewModel.email)
                 AuthPasswordFieldComponent(password: $viewModel.password)
                 AuthButton(action: registerToSignIn, label: Text("Register"))

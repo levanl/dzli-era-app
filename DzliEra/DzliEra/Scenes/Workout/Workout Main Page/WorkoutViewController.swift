@@ -161,7 +161,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         case .success:
             let reversedRoutines = Array(viewModel.routines.reversed())
             let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutTableViewCell.identifier, for: indexPath) as! WorkoutTableViewCell
-
+            
             let routine = reversedRoutines[indexPath.row]
             cell.configure(with: routine)
             cell.delegate = self
