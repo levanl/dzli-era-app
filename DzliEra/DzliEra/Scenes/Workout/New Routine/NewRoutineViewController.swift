@@ -136,6 +136,8 @@ final class NewRoutineViewController: UIViewController, NewRoutineDelegate {
                 return
             }
             
+            self.showAlert(alertText: "Completed", alertMessage: "Added \(title) routine")
+            
             let newRoutine = Routine(title: title, exercises: exercises)
             
             user.addRoutine(newRoutine)
