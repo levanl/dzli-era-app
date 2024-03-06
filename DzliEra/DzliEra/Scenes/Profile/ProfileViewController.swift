@@ -99,6 +99,19 @@ final class ProfileViewController: UIViewController {
         return button
     }()
     
+    private let cardsButton: UIButton = {
+        let button = UIButton()
+        let magnifyingglass = UIImage(systemName: "creditcard.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        button.setImage(magnifyingglass, for: .normal)
+        button.setTitle("  Your Cards", for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = UIColor(AppColors.primaryRed)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        button.layer.cornerRadius = 6
+        return button
+    }()
+    
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Name"
@@ -214,6 +227,15 @@ final class ProfileViewController: UIViewController {
             editProfileButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             editProfileButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
+        
+        view.addSubview(cardsButton)
+        
+        NSLayoutConstraint.activate([
+            cardsButton.topAnchor.constraint(equalTo: editProfileButton.bottomAnchor, constant: 8),
+            cardsButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            cardsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+        ])
+        
     }
     
     private func loadProfileInfo() {

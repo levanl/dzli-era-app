@@ -139,6 +139,7 @@
 		C4F3A0262B5E993200B921FB /* GifLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0252B5E993200B921FB /* GifLoader.swift */; };
 		C4F3A0282B5E9F3800B921FB /* workout.gif in Resources */ = {isa = PBXBuildFile; fileRef = C4F3A0272B5E9F3800B921FB /* workout.gif */; };
 		C4F3A02A2B5FC38700B921FB /* NewRoutineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0292B5FC38700B921FB /* NewRoutineViewModel.swift */; };
+		C4F4C52F2B988BA1003E4497 /* CardManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F4C52E2B988BA1003E4497 /* CardManagerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -245,6 +246,7 @@
 		C4F3A0252B5E993200B921FB /* GifLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifLoader.swift; sourceTree = "<group>"; };
 		C4F3A0272B5E9F3800B921FB /* workout.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = workout.gif; sourceTree = "<group>"; };
 		C4F3A0292B5FC38700B921FB /* NewRoutineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRoutineViewModel.swift; sourceTree = "<group>"; };
+		C4F4C52E2B988BA1003E4497 /* CardManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -720,6 +722,7 @@
 		C4F3A0042B5BBFC300B921FB /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				C4F4C52D2B988395003E4497 /* Card Manager */,
 				C49624E22B77AE86009159FD /* Nutrition */,
 				C4E027AB2B724885000FA8B6 /* Edit Profile */,
 				C4F3A0052B5BC02B00B921FB /* ProfileViewController.swift */,
@@ -756,6 +759,14 @@
 				C4F3A0222B5E87E800B921FB /* ExerciseDetailsViewController.swift */,
 			);
 			path = "Exercise Details";
+			sourceTree = "<group>";
+		};
+		C4F4C52D2B988395003E4497 /* Card Manager */ = {
+			isa = PBXGroup;
+			children = (
+				C4F4C52E2B988BA1003E4497 /* CardManagerView.swift */,
+			);
+			path = "Card Manager";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -936,6 +947,7 @@
 				C4F3A0082B5BC04700B921FB /* WorkoutViewController.swift in Sources */,
 				C49624EF2B7A20DE009159FD /* ExploreRoutinesViewModel.swift in Sources */,
 				C4F3A01D2B5D32F900B921FB /* ExerciseListViewModel.swift in Sources */,
+				C4F4C52F2B988BA1003E4497 /* CardManagerView.swift in Sources */,
 				C4BB27BC2B5A87660021AE4C /* WithRootNavigationController.swift in Sources */,
 				C40920D52B6276110089F99E /* WorkoutInfoTableViewCell.swift in Sources */,
 				C49625102B7A614C009159FD /* WorkoutPageLabelComponent.swift in Sources */,
