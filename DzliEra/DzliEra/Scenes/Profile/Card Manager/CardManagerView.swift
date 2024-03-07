@@ -9,26 +9,59 @@ import SwiftUI
 import SplineRuntime
 
 struct CardManagerView: View {
+    
+    @State private var activeTF: ActiveKeyboardField
+    
     var body: some View {
         VStack {
-            ContentView()
+            HStack {
+                Button {
+                    
+                } label: {
+                    Image(systemName: "xmark")
+                }
+                
+                Text("Add Card")
+                    .font(.title3)
+                    .padding(.leading, 10)
+                
+                Spacer(minLength: 0)
+                
+                Button {
+                    
+                } label: {
+                    Image(systemName: "arrow.counterclockwise")
+                }
+            }
+            
+            CardView()
+            
+            Spacer(minLength: 0)
         }
+        .padding()
+    }
+    
+    @ViewBuilder
+    func CardView() -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .fill(.linearGradient(colors: [Color("CardGradient1"),
+                                               Color("CardGradient2")],
+                                      startPoint: .topLeading, endPoint: .bottomTrailing) )
+        }
+        .frame(height: 200)
+        .padding(.top, 35)
     }
 }
 
 #Preview {
-    CardManagerView()
+    CardManagerView(activeTF: <#ActiveKeyboardField#>)
 }
 
 
-struct ContentView: View {
-    var body: some View {
-        // fetching from cloud
-        let url = URL(string: "https://build.spline.design/NAVqDg9ozc3CafQZQkVU/scene.splineswift")!
-
-        // // fetching from local
-        // let url = Bundle.main.url(forResource: "scene", withExtension: "splineswift")!
-
-        try? SplineView(sceneFileURL: url).ignoresSafeArea(.all)
-    }
+enum ActiveKeyboardField {
+    case cardNumber
+    case cardHolderName
+    case expirationDate
+    case ccv
 }
