@@ -10,7 +10,11 @@ import SplineRuntime
 
 struct CardManagerView: View {
     
-    @State private var activeTF: ActiveKeyboardField
+    @FocusState private var activeTF: ActiveKeyboardField!
+    @State private var cardNumber: String = ""
+    @State private var cardHolderName: String = ""
+    @State private var cvvCode: String = ""
+    @State private var expireDate: String = ""
     
     var body: some View {
         VStack {
@@ -48,6 +52,50 @@ struct CardManagerView: View {
                 .fill(.linearGradient(colors: [Color("CardGradient1"),
                                                Color("CardGradient2")],
                                       startPoint: .topLeading, endPoint: .bottomTrailing) )
+            
+            VStack(spacing: 10) {
+                HStack {
+                    TextField("XXXX XXXX XXXX XXXX", text: $cardNumber)
+                        .font(.title3)
+                        .keyboardType(.numberPad)
+                        .focused($activeTF, equals: .cardNumber)
+                    
+                    
+                    Spacer(minLength: 0)
+                    
+                    Image("Visa")
+                        .resizable()
+                        .renderingMode(.template)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 35)
+                }
+                
+                HStack(spacing: 12) {
+                    TextField("MM/YY", text: $expireDate)
+                        .keyboardType(.numberPad)
+                        .focused($activeTF, equals: .expirationDate)
+                    
+                    Spacer(minLength: 0)
+                    
+                    TextField("CVV", text: $cvvCode)
+                        .frame(width: 35)
+                        .focused($activeTF, equals: .ccv)
+                        .keyboardType(.numberPad)
+                    
+                    Image(systemName: "questionmark.circle.fill")
+                }
+                .padding(.top, 15)
+                
+                Spacer(minLength: 0)
+
+                TextField("CARD HOLDER NAME", text: $cardNumber)
+                    .focused($activeTF, equals: .cardHolderName)
+                
+            }
+            .padding(20)
+            .environment(\.colorScheme, .dark)
+            .tint(.white)
+            
         }
         .frame(height: 200)
         .padding(.top, 35)
@@ -55,7 +103,7 @@ struct CardManagerView: View {
 }
 
 #Preview {
-    CardManagerView(activeTF: <#ActiveKeyboardField#>)
+    CardManagerView()
 }
 
 

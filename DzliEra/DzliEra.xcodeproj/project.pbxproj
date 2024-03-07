@@ -141,6 +141,7 @@
 		C4F3A02A2B5FC38700B921FB /* NewRoutineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0292B5FC38700B921FB /* NewRoutineViewModel.swift */; };
 		C4F4C52F2B988BA1003E4497 /* CardManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F4C52E2B988BA1003E4497 /* CardManagerView.swift */; };
 		C4F4C5322B988EBC003E4497 /* SplineRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = C4F4C5312B988EBC003E4497 /* SplineRuntime */; };
+		C4F4C5342B99E55B003E4497 /* Visa.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F4C5332B99E55B003E4497 /* Visa.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -248,6 +249,7 @@
 		C4F3A0272B5E9F3800B921FB /* workout.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = workout.gif; sourceTree = "<group>"; };
 		C4F3A0292B5FC38700B921FB /* NewRoutineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRoutineViewModel.swift; sourceTree = "<group>"; };
 		C4F4C52E2B988BA1003E4497 /* CardManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagerView.swift; sourceTree = "<group>"; };
+		C4F4C5332B99E55B003E4497 /* Visa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Visa.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -384,6 +386,7 @@
 		C49624F32B7A4EB5009159FD /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				C4F4C5332B99E55B003E4497 /* Visa.png */,
 				C4D4E50E2B57F400000B0AE1 /* Assets.xcassets */,
 				C4F3A0272B5E9F3800B921FB /* workout.gif */,
 			);
@@ -875,6 +878,7 @@
 				C4BB27612B590CD80021AE4C /* Kanit-Bold.ttf in Resources */,
 				C4BB275C2B590CD80021AE4C /* Kanit-ExtraLightItalic.ttf in Resources */,
 				C4BB27672B590CD80021AE4C /* Kanit-ExtraBoldItalic.ttf in Resources */,
+				C4F4C5342B99E55B003E4497 /* Visa.png in Resources */,
 				C4BB27632B590CD80021AE4C /* Kanit-BoldItalic.ttf in Resources */,
 				C4BB276A2B590CD80021AE4C /* Kanit-SemiBoldItalic.ttf in Resources */,
 				C4BB27652B590CD80021AE4C /* Kanit-Black.ttf in Resources */,
