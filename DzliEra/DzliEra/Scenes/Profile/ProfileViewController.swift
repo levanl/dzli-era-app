@@ -230,6 +230,7 @@ final class ProfileViewController: UIViewController {
         
         view.addSubview(cardsButton)
         
+        cardsButton.addTarget(self, action: #selector(cardButtonTapped), for: .touchUpInside)
         NSLayoutConstraint.activate([
             cardsButton.topAnchor.constraint(equalTo: editProfileButton.bottomAnchor, constant: 8),
             cardsButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -255,5 +256,8 @@ final class ProfileViewController: UIViewController {
     
     @objc private func editProfileTapped() {
         self.navigationController?.pushViewController(UIHostingController(rootView: EditProfileView()), animated: true)
+    }
+    @objc private func cardButtonTapped() {
+        self.navigationController?.pushViewController(UIHostingController(rootView: CardManagerView()), animated: true)
     }
 }

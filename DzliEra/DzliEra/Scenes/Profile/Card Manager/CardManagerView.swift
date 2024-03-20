@@ -2,64 +2,85 @@
 //  CardManagerView.swift
 //  DzliEra
 //
-//  Created by Levan Loladze on 06.03.24.
+//  Created by Levan Loladze on 20.03.24.
 //
 
 import SwiftUI
-import SplineRuntime
+
+struct CreditCard: Identifiable {
+    let id = UUID()
+    let holderName: String
+    let cardNumber: String
+    let cvvCode: String
+    let expireDate: String
+}
 
 struct CardManagerView: View {
+    @State private var cards: [CreditCard] = [
+        CreditCard(holderName: "John Doe", cardNumber: "1234567812345678", cvvCode: "123", expireDate: "12/24"),
+        CreditCard(holderName: "Jane Smith", cardNumber: "9876543298765432", cvvCode: "456", expireDate: "05/25")
+    ]
     
-    @FocusState private var activeTF: ActiveKeyboardField!
-    @State private var cardNumber: String = ""
-    @State private var cardHolderName: String = ""
-    @State private var cvvCode: String = ""
-    @State private var expireDate: String = ""
+    @State private var isShowingAddCardSheet = false
     
     var body: some View {
         VStack {
-            HStack {
-                Button {
+            List {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 20)
+                        .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [10]))
+                        .frame(height: 200)
                     
-                } label: {
-                    Image(systemName: "xmark")
+                    Text("Add Your Card")
+                        .font(.title2)
+                        .foregroundColor(.black)
+                        .multilineTextAlignment(.center)
                 }
-                
-                Text("Add Card")
-                    .font(.title3)
-                    .padding(.leading, 10)
-                
-                Spacer(minLength: 0)
-                
-                Button {
-                    
-                } label: {
-                    Image(systemName: "arrow.counterclockwise")
+                .onTapGesture {
+                    isShowingAddCardSheet.toggle()
+                }
+                ForEach(cards) { card in
+                    CardView(card: card)
+                }
+                .listRowSeparator(.hidden)
+                .sheet(isPresented: $isShowingAddCardSheet) {
+                    CardAddView()
                 }
             }
-            
-            CardView()
-            
-            Spacer(minLength: 0)
+            .listStyle(.plain)
         }
-        .padding()
+    }
+}
+
+
+#Preview {
+    CardManagerView()
+}
+
+
+struct CardView: View {
+    let card: CreditCard
+    
+    var formattedCardNumber: String {
+        var formattedNumber = ""
+        for i in 0..<card.cardNumber.count {
+            formattedNumber.append(card.cardNumber[card.cardNumber.index(card.cardNumber.startIndex, offsetBy: i)])
+            if i % 4 == 3 && i < card.cardNumber.count - 1 {
+                formattedNumber.append(" ")
+            }
+        }
+        return formattedNumber
     }
     
-    @ViewBuilder
-    func CardView() -> some View {
+    var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .fill(.linearGradient(colors: [Color("CardGradient1"),
-                                               Color("CardGradient2")],
-                                      startPoint: .topLeading, endPoint: .bottomTrailing) )
+                .fill(LinearGradient(colors: [Color("CardGradient1"), Color("CardGradient2")],
+                                     startPoint: .topLeading, endPoint: .bottomTrailing))
             
             VStack(spacing: 10) {
                 HStack {
-                    TextField("XXXX XXXX XXXX XXXX", text: $cardNumber)
-                        .font(.title3)
-                        .keyboardType(.numberPad)
-                        .focused($activeTF, equals: .cardNumber)
-                    
+                    Text(formattedCardNumber)
                     
                     Spacer(minLength: 0)
                     
@@ -71,45 +92,25 @@ struct CardManagerView: View {
                 }
                 
                 HStack(spacing: 12) {
-                    TextField("MM/YY", text: $expireDate)
-                        .keyboardType(.numberPad)
-                        .focused($activeTF, equals: .expirationDate)
+                    Text(card.expireDate)
                     
                     Spacer(minLength: 0)
                     
-                    TextField("CVV", text: $cvvCode)
-                        .frame(width: 35)
-                        .focused($activeTF, equals: .ccv)
-                        .keyboardType(.numberPad)
+                    Text(card.cvvCode)
                     
                     Image(systemName: "questionmark.circle.fill")
                 }
                 .padding(.top, 15)
                 
                 Spacer(minLength: 0)
-
-                TextField("CARD HOLDER NAME", text: $cardNumber)
-                    .focused($activeTF, equals: .cardHolderName)
                 
+                Text(card.holderName)
             }
             .padding(20)
             .environment(\.colorScheme, .dark)
             .tint(.white)
-            
         }
         .frame(height: 200)
-        .padding(.top, 35)
+        //    .padding(.top, 35)
     }
-}
-
-#Preview {
-    CardManagerView()
-}
-
-
-enum ActiveKeyboardField {
-    case cardNumber
-    case cardHolderName
-    case expirationDate
-    case ccv
 }

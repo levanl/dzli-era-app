@@ -13,6 +13,7 @@
 		C40920D52B6276110089F99E /* WorkoutInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40920D42B6276110089F99E /* WorkoutInfoTableViewCell.swift */; };
 		C40A35F52B850E5000725C6B /* RoutineInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40A35F42B850E5000725C6B /* RoutineInfoViewController.swift */; };
 		C40A35F72B852C9500725C6B /* RoutineWorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40A35F62B852C9500725C6B /* RoutineWorkoutTableViewCell.swift */; };
+		C4456DA02BAB13E100C9419B /* CardManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4456D9F2BAB13E100C9419B /* CardManagerView.swift */; };
 		C45D81442B961F9C00583B86 /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45D81432B961F9C00583B86 /* AlertExtension.swift */; };
 		C473B0962B63BF1300C34CC0 /* SaveWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */; };
 		C473B0982B63DEAD00C34CC0 /* SaveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B0972B63DEAD00C34CC0 /* SaveCollectionViewCell.swift */; };
@@ -139,7 +140,7 @@
 		C4F3A0262B5E993200B921FB /* GifLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0252B5E993200B921FB /* GifLoader.swift */; };
 		C4F3A0282B5E9F3800B921FB /* workout.gif in Resources */ = {isa = PBXBuildFile; fileRef = C4F3A0272B5E9F3800B921FB /* workout.gif */; };
 		C4F3A02A2B5FC38700B921FB /* NewRoutineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3A0292B5FC38700B921FB /* NewRoutineViewModel.swift */; };
-		C4F4C52F2B988BA1003E4497 /* CardManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F4C52E2B988BA1003E4497 /* CardManagerView.swift */; };
+		C4F4C52F2B988BA1003E4497 /* CardAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F4C52E2B988BA1003E4497 /* CardAddView.swift */; };
 		C4F4C5322B988EBC003E4497 /* SplineRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = C4F4C5312B988EBC003E4497 /* SplineRuntime */; };
 		C4F4C5342B99E55B003E4497 /* Visa.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F4C5332B99E55B003E4497 /* Visa.png */; };
 /* End PBXBuildFile section */
@@ -151,6 +152,7 @@
 		C40920D42B6276110089F99E /* WorkoutInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutInfoTableViewCell.swift; sourceTree = "<group>"; };
 		C40A35F42B850E5000725C6B /* RoutineInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineInfoViewController.swift; sourceTree = "<group>"; };
 		C40A35F62B852C9500725C6B /* RoutineWorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineWorkoutTableViewCell.swift; sourceTree = "<group>"; };
+		C4456D9F2BAB13E100C9419B /* CardManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagerView.swift; sourceTree = "<group>"; };
 		C45D81432B961F9C00583B86 /* AlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
 		C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveWorkoutViewController.swift; sourceTree = "<group>"; };
 		C473B0972B63DEAD00C34CC0 /* SaveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -248,7 +250,7 @@
 		C4F3A0252B5E993200B921FB /* GifLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifLoader.swift; sourceTree = "<group>"; };
 		C4F3A0272B5E9F3800B921FB /* workout.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = workout.gif; sourceTree = "<group>"; };
 		C4F3A0292B5FC38700B921FB /* NewRoutineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRoutineViewModel.swift; sourceTree = "<group>"; };
-		C4F4C52E2B988BA1003E4497 /* CardManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagerView.swift; sourceTree = "<group>"; };
+		C4F4C52E2B988BA1003E4497 /* CardAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAddView.swift; sourceTree = "<group>"; };
 		C4F4C5332B99E55B003E4497 /* Visa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Visa.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -769,7 +771,8 @@
 		C4F4C52D2B988395003E4497 /* Card Manager */ = {
 			isa = PBXGroup;
 			children = (
-				C4F4C52E2B988BA1003E4497 /* CardManagerView.swift */,
+				C4F4C52E2B988BA1003E4497 /* CardAddView.swift */,
+				C4456D9F2BAB13E100C9419B /* CardManagerView.swift */,
 			);
 			path = "Card Manager";
 			sourceTree = "<group>";
@@ -955,7 +958,7 @@
 				C4F3A0082B5BC04700B921FB /* WorkoutViewController.swift in Sources */,
 				C49624EF2B7A20DE009159FD /* ExploreRoutinesViewModel.swift in Sources */,
 				C4F3A01D2B5D32F900B921FB /* ExerciseListViewModel.swift in Sources */,
-				C4F4C52F2B988BA1003E4497 /* CardManagerView.swift in Sources */,
+				C4F4C52F2B988BA1003E4497 /* CardAddView.swift in Sources */,
 				C4BB27BC2B5A87660021AE4C /* WithRootNavigationController.swift in Sources */,
 				C40920D52B6276110089F99E /* WorkoutInfoTableViewCell.swift in Sources */,
 				C49625102B7A614C009159FD /* WorkoutPageLabelComponent.swift in Sources */,
@@ -976,6 +979,7 @@
 				C49625012B7A57FA009159FD /* MuscleChartViewComponent.swift in Sources */,
 				C49624DC2B7662E7009159FD /* SkeletonLoadable.swift in Sources */,
 				C4BB27C02B5AB8640021AE4C /* AuthButtonComponent.swift in Sources */,
+				C4456DA02BAB13E100C9419B /* CardManagerView.swift in Sources */,
 				C49625192B7A7132009159FD /* NiceJobViewModel.swift in Sources */,
 				C4BB27B72B5A85720021AE4C /* RegisterView.swift in Sources */,
 				C49624F92B7A55B6009159FD /* UserWorkoutInfoComponent.swift in Sources */,
