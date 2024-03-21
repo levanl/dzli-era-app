@@ -36,6 +36,29 @@ struct CardAddView: View {
             }
         }
     }
+    
+    @State private var editingTextField3 = false {
+        didSet {
+            guard editingTextField1 != oldValue else {
+                return
+            }
+            if editingTextField1 {
+                editingTextField2 = false
+            }
+        }
+    }
+    
+    @State private var editingTextField4 = false {
+        didSet {
+            guard editingTextField2 != oldValue else {
+                return
+            }
+            if editingTextField2 {
+                editingTextField1 = false
+            }
+        }
+    }
+    
     var body: some View {
         VStack {
             HStack {
@@ -62,19 +85,35 @@ struct CardAddView: View {
             VStack {
                 MaterialDesignTextField($cardNumber, placeholder: "Card Number", editing: $editingTextField1)
                     .padding()
-                    .onTapGesture { editingTextField1 = true }
+                    .onTapGesture { editingTextField1 = true
+                        editingTextField2 = false
+                        editingTextField3 = false
+                        editingTextField4 = false
+                    }
                 
                 MaterialDesignTextField($cardHolderName, placeholder: "Name On Card", editing: $editingTextField2)
                     .padding()
-                    .onTapGesture { editingTextField2 = true }
+                    .onTapGesture { editingTextField2 = true
+                        editingTextField1 = false
+                        editingTextField3 = false
+                        editingTextField4 = false
+                    }
                 HStack(spacing: 0){
-                    MaterialDesignTextField($cardHolderName, placeholder: "Expiry Date", editing: $editingTextField2)
+                    MaterialDesignTextField($cardHolderName, placeholder: "Expiry Date", editing: $editingTextField3)
                         .padding()
-                        .onTapGesture { editingTextField2 = true }
+                        .onTapGesture { editingTextField3 = true
+                            editingTextField1 = false
+                            editingTextField2 = false
+                            editingTextField4 = false
+                        }
                     
-                    MaterialDesignTextField($cardHolderName, placeholder: "Security Code", editing: $editingTextField2)
+                    MaterialDesignTextField($cardHolderName, placeholder: "Security Code", editing: $editingTextField4)
                         .padding()
-                        .onTapGesture { editingTextField2 = true }
+                        .onTapGesture { editingTextField4 = true
+                            editingTextField1 = false
+                            editingTextField3 = false
+                            editingTextField2 = false
+                        }
                 }
                 
             }
