@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SplineRuntime
+import Combine
 
 struct CardAddView: View {
     
@@ -59,6 +60,17 @@ struct CardAddView: View {
         }
     }
     
+    private func formatCardNumber(value: String) -> String {
+        var formattedNumber = ""
+        for i in 0..<value.count {
+          formattedNumber.append(value[value.index(value.startIndex, offsetBy: i)])
+          if i % 4 == 3 && i < value.count - 1 {
+            formattedNumber.append(" ")
+          }
+        }
+        return formattedNumber
+      }
+    
     var body: some View {
         VStack {
             HStack {
@@ -85,6 +97,7 @@ struct CardAddView: View {
             VStack {
                 MaterialDesignTextField($cardNumber, placeholder: "Card Number", editing: $editingTextField1)
                     .padding()
+                    .keyboardType(.numberPad)
                     .onTapGesture { editingTextField1 = true
                         editingTextField2 = false
                         editingTextField3 = false
@@ -227,7 +240,11 @@ struct MaterialDesignTextField: View {
     var body: some View {
         ZStack {
             TextField("", text: $text)
-                .padding(10.0)
+              .onChange(of: text) { value in
+                if value.count > 16 {
+                  text = String(value.prefix(16))
+                }
+              }                .padding(10.0)
                 .background(RoundedRectangle(cornerRadius: 4.0, style: .continuous)
                     .stroke(borderColor, lineWidth: borderWidth))
                 .focused($focusField, equals: .textField)
