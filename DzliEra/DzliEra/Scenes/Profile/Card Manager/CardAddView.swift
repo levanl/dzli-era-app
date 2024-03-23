@@ -16,6 +16,8 @@ struct CardAddView: View {
     @State private var cardHolderName: String = ""
     @State private var cvvCode: String = ""
     @State private var expireDate: String = ""
+    @Environment(\.dismiss) var dismiss
+    
     @State private var editingTextField1 = false {
         didSet {
             guard editingTextField1 != oldValue else {
@@ -75,7 +77,7 @@ struct CardAddView: View {
         VStack {
             HStack {
                 Button {
-                    
+                    dismiss()
                 } label: {
                     Image(systemName: "xmark")
                 }
