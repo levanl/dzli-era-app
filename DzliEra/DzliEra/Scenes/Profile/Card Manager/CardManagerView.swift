@@ -17,8 +17,7 @@ struct CreditCard: Identifiable {
 
 struct CardManagerView: View {
     @State private var cards: [CreditCard] = [
-        CreditCard(holderName: "John Doe", cardNumber: "1234567812345678", cvvCode: "123", expireDate: "12/24"),
-        CreditCard(holderName: "Jane Smith", cardNumber: "9876543298765432", cvvCode: "456", expireDate: "05/25")
+        CreditCard(holderName: "John Doe", cardNumber: "1234567812345678", cvvCode: "123", expireDate: "12/24")
     ]
     
     @State private var isShowingAddCardSheet = false
@@ -44,7 +43,7 @@ struct CardManagerView: View {
                 }
                 .listRowSeparator(.hidden)
                 .sheet(isPresented: $isShowingAddCardSheet) {
-                    CardAddView()
+                    CardAddView(cards: $cards)
                         .presentationDetents([.fraction(0.8)])
                 }
             }

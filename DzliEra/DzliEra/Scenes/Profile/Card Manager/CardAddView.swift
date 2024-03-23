@@ -17,6 +17,7 @@ struct CardAddView: View {
     @State private var cvvCode: String = ""
     @State private var expireDate: String = ""
     @Environment(\.dismiss) var dismiss
+    @Binding var cards: [CreditCard]
     
     @State private var editingTextField1 = false {
         didSet {
@@ -144,7 +145,10 @@ struct CardAddView: View {
             
             
             Button(action: {
-                print("Save Card")
+                let newCard = CreditCard(holderName: cardHolderName, cardNumber: cardNumber, cvvCode: cvvCode, expireDate: expireDate)
+                            cards.append(newCard)
+                            dismiss()
+                
             }) {
                 Text("Save Card")
                     .foregroundColor(.white)
@@ -246,7 +250,7 @@ struct CardAddView: View {
 }
 
 #Preview {
-    CardAddView()
+    CardAddView(cards: .constant([]))
 }
 
 
