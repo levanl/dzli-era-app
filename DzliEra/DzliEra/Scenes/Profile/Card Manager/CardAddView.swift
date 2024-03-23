@@ -63,13 +63,13 @@ struct CardAddView: View {
     private func formatCardNumber(value: String) -> String {
         var formattedNumber = ""
         for i in 0..<value.count {
-          formattedNumber.append(value[value.index(value.startIndex, offsetBy: i)])
-          if i % 4 == 3 && i < value.count - 1 {
-            formattedNumber.append(" ")
-          }
+            formattedNumber.append(value[value.index(value.startIndex, offsetBy: i)])
+            if i % 4 == 3 && i < value.count - 1 {
+                formattedNumber.append(" ")
+            }
         }
         return formattedNumber
-      }
+    }
     
     var body: some View {
         VStack {
@@ -112,16 +112,18 @@ struct CardAddView: View {
                         editingTextField4 = false
                     }
                 HStack(spacing: 0){
-                    MaterialDesignTextField($cardHolderName, placeholder: "Expiry Date", editing: $editingTextField3)
+                    MaterialDesignTextField($expireDate, placeholder: "Expiry Date", editing: $editingTextField3)
                         .padding()
+                        .keyboardType(.numberPad)
                         .onTapGesture { editingTextField3 = true
                             editingTextField1 = false
                             editingTextField2 = false
                             editingTextField4 = false
                         }
                     
-                    MaterialDesignTextField($cardHolderName, placeholder: "Security Code", editing: $editingTextField4)
+                    MaterialDesignTextField($cvvCode, placeholder: "Security Code", editing: $editingTextField4)
                         .padding()
+                        .keyboardType(.numberPad)
                         .onTapGesture { editingTextField4 = true
                             editingTextField1 = false
                             editingTextField3 = false
@@ -131,13 +133,31 @@ struct CardAddView: View {
                 
             }
             .padding(0)
-            
             .onTapGesture {
                 editingTextField1 = false
                 editingTextField2 = false
             }
-            
+           
             Spacer(minLength: 0)
+            
+            
+            Button(action: {
+                print("Save Card")
+            }) {
+                Text("Save Card")
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+            }
+            .background(
+              LinearGradient(colors: [Color("CardGradient1"), Color("CardGradient2")],
+                             startPoint: .topLeading, endPoint: .bottomTrailing)
+            )
+            .cornerRadius(10)
+            .padding()
+            
+            
+            
         }
         .padding()
     }
@@ -240,11 +260,11 @@ struct MaterialDesignTextField: View {
     var body: some View {
         ZStack {
             TextField("", text: $text)
-              .onChange(of: text) { value in
-                if value.count > 16 {
-                  text = String(value.prefix(16))
-                }
-              }                .padding(10.0)
+                .onChange(of: text) { value in
+                    if value.count > 16 {
+                        text = String(value.prefix(16))
+                    }
+                }                .padding(10.0)
                 .background(RoundedRectangle(cornerRadius: 4.0, style: .continuous)
                     .stroke(borderColor, lineWidth: borderWidth))
                 .focused($focusField, equals: .textField)
