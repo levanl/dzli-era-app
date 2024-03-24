@@ -203,6 +203,12 @@ final class UserManager {
         try await userDocument(userId: userId).updateData(data)
     }
     
+    // MARK: - Update User Premium Status
+    
+    func updateUserPremiumStatus(user: DBUser) async throws {
+        try userDocument(userId: user.userId).setData(from: user, merge: true)
+    }
+    
 }
 
 extension Exercise {

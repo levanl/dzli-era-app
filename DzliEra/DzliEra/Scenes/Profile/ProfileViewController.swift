@@ -252,7 +252,7 @@ final class ProfileViewController: UIViewController {
         
         view.addSubview(premiumButton)
         
-        premiumButton.addTarget(self, action: #selector(cardButtonTapped), for: .touchUpInside)
+        premiumButton.addTarget(self, action: #selector(premiumButtonTapped), for: .touchUpInside)
         NSLayoutConstraint.activate([
             premiumButton.topAnchor.constraint(equalTo: cardsButton.bottomAnchor, constant: 8),
             premiumButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -284,6 +284,13 @@ final class ProfileViewController: UIViewController {
     }
     
     @objc private func premiumButtonTapped() {
+        guard let user else { return }
         
+        let currentValue = user.isPremium ?? false
+        let updatedUser = DBUser(userId: user.userId,isPremium: !currentValue)
+        Task {
+            try await UserManager.shared.updateUserPremiumStatus(user: updatedUser)
+            self.user = try await UserManager.shared.getUser(userId: user.userId)
+        }
     }
 }
