@@ -112,6 +112,19 @@ final class ProfileViewController: UIViewController {
         return button
     }()
     
+    private let premiumButton: UIButton = {
+        let button = UIButton()
+        let magnifyingglass = UIImage(systemName: "dollarsign.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        button.setImage(magnifyingglass, for: .normal)
+        button.setTitle("  Premium", for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = UIColor(AppColors.primaryRed)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        button.layer.cornerRadius = 6
+        return button
+    }()
+    
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Name"
@@ -237,6 +250,15 @@ final class ProfileViewController: UIViewController {
             cardsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
         
+        view.addSubview(premiumButton)
+        
+        premiumButton.addTarget(self, action: #selector(cardButtonTapped), for: .touchUpInside)
+        NSLayoutConstraint.activate([
+            premiumButton.topAnchor.constraint(equalTo: cardsButton.bottomAnchor, constant: 8),
+            premiumButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            premiumButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+        ])
+        
     }
     
     private func loadProfileInfo() {
@@ -259,5 +281,9 @@ final class ProfileViewController: UIViewController {
     }
     @objc private func cardButtonTapped() {
         self.navigationController?.pushViewController(UIHostingController(rootView: CardManagerView()), animated: true)
+    }
+    
+    @objc private func premiumButtonTapped() {
+        
     }
 }

@@ -18,7 +18,7 @@ struct CreditCard: Identifiable {
 
 struct CardManagerView: View {
     @State private var cards: [CreditCard] = [
-        CreditCard(holderName: "John Doe", cardNumber: "1234567812345678", cvvCode: "123", expireDate: "12/24")
+        CreditCard(holderName: "levex", cardNumber: "1234567812345678", cvvCode: "123", expireDate: "12/24")
     ]
     
     @State private var isShowingAddCardSheet = false
