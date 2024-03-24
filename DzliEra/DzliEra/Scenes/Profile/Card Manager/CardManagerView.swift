@@ -45,7 +45,7 @@ struct CardManagerView: View {
                 .listRowSeparator(.hidden)
                 .sheet(isPresented: $isShowingAddCardSheet) {
                     CardAddView(cards: $cards)
-                        .presentationDetents([.fraction(0.8)])
+                        .presentationDetents([.fraction(1.0)])
                 }
             }
             .listStyle(.plain)

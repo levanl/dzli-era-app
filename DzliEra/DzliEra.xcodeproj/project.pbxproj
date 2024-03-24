@@ -15,6 +15,9 @@
 		C40A35F72B852C9500725C6B /* RoutineWorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40A35F62B852C9500725C6B /* RoutineWorkoutTableViewCell.swift */; };
 		C422959B2BB04C5A008E04A9 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = C422959A2BB04C5A008E04A9 /* Lottie */; };
 		C422959D2BB0565C008E04A9 /* CreditCard.json in Resources */ = {isa = PBXBuildFile; fileRef = C422959C2BB0565C008E04A9 /* CreditCard.json */; };
+		C422959F2BB05D44008E04A9 /* CardAnimationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C422959E2BB05D44008E04A9 /* CardAnimationDialog.swift */; };
+		C42295A12BB072D1008E04A9 /* MaterialDesignTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42295A02BB072D1008E04A9 /* MaterialDesignTextField.swift */; };
+		C42295A32BB07354008E04A9 /* CardAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42295A22BB07354008E04A9 /* CardAddViewModel.swift */; };
 		C4456DA02BAB13E100C9419B /* CardManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4456D9F2BAB13E100C9419B /* CardManagerView.swift */; };
 		C45D81442B961F9C00583B86 /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45D81432B961F9C00583B86 /* AlertExtension.swift */; };
 		C473B0962B63BF1300C34CC0 /* SaveWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */; };
@@ -155,6 +158,9 @@
 		C40A35F42B850E5000725C6B /* RoutineInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineInfoViewController.swift; sourceTree = "<group>"; };
 		C40A35F62B852C9500725C6B /* RoutineWorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineWorkoutTableViewCell.swift; sourceTree = "<group>"; };
 		C422959C2BB0565C008E04A9 /* CreditCard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CreditCard.json; sourceTree = "<group>"; };
+		C422959E2BB05D44008E04A9 /* CardAnimationDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAnimationDialog.swift; sourceTree = "<group>"; };
+		C42295A02BB072D1008E04A9 /* MaterialDesignTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialDesignTextField.swift; sourceTree = "<group>"; };
+		C42295A22BB07354008E04A9 /* CardAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAddViewModel.swift; sourceTree = "<group>"; };
 		C4456D9F2BAB13E100C9419B /* CardManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagerView.swift; sourceTree = "<group>"; };
 		C45D81432B961F9C00583B86 /* AlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
 		C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveWorkoutViewController.swift; sourceTree = "<group>"; };
@@ -320,6 +326,15 @@
 				C40A35F62B852C9500725C6B /* RoutineWorkoutTableViewCell.swift */,
 			);
 			path = "Routine Details";
+			sourceTree = "<group>";
+		};
+		C42295A42BB07368008E04A9 /* Card Add */ = {
+			isa = PBXGroup;
+			children = (
+				C4F4C52E2B988BA1003E4497 /* CardAddView.swift */,
+				C42295A22BB07354008E04A9 /* CardAddViewModel.swift */,
+			);
+			path = "Card Add";
 			sourceTree = "<group>";
 		};
 		C473B0942B63BEE600C34CC0 /* Save Workout */ = {
@@ -776,8 +791,10 @@
 		C4F4C52D2B988395003E4497 /* Card Manager */ = {
 			isa = PBXGroup;
 			children = (
-				C4F4C52E2B988BA1003E4497 /* CardAddView.swift */,
+				C42295A42BB07368008E04A9 /* Card Add */,
 				C4456D9F2BAB13E100C9419B /* CardManagerView.swift */,
+				C422959E2BB05D44008E04A9 /* CardAnimationDialog.swift */,
+				C42295A02BB072D1008E04A9 /* MaterialDesignTextField.swift */,
 			);
 			path = "Card Manager";
 			sourceTree = "<group>";
@@ -949,6 +966,7 @@
 				C49625262B7A8B8B009159FD /* NutritionLabelComponent.swift in Sources */,
 				C49624F12B7A218B009159FD /* ExploreTableViewCell.swift in Sources */,
 				C4D4E51D2B57F873000B0AE1 /* ColorExtension.swift in Sources */,
+				C42295A12BB072D1008E04A9 /* MaterialDesignTextField.swift in Sources */,
 				C4BB27C42B5ABA430021AE4C /* AuthEmailFieldComponent.swift in Sources */,
 				C49A20B52B90AF43005F0DCF /* UserService.swift in Sources */,
 				C49624E82B78DD4F009159FD /* NutritionModel.swift in Sources */,
@@ -972,6 +990,7 @@
 				C49625102B7A614C009159FD /* WorkoutPageLabelComponent.swift in Sources */,
 				C4F3A00C2B5BC7B600B921FB /* TabController.swift in Sources */,
 				C496251F2B7A7700009159FD /* StartedWorkoutViewModel.swift in Sources */,
+				C422959F2BB05D44008E04A9 /* CardAnimationDialog.swift in Sources */,
 				C4BB27C22B5AB89D0021AE4C /* AuthTitleComponent.swift in Sources */,
 				C49624F62B7A5352009159FD /* HomeSharedViewModel.swift in Sources */,
 				C49624DA2B7662C9009159FD /* WorkoutSkeletonCell.swift in Sources */,
@@ -988,6 +1007,7 @@
 				C49624DC2B7662E7009159FD /* SkeletonLoadable.swift in Sources */,
 				C4BB27C02B5AB8640021AE4C /* AuthButtonComponent.swift in Sources */,
 				C4456DA02BAB13E100C9419B /* CardManagerView.swift in Sources */,
+				C42295A32BB07354008E04A9 /* CardAddViewModel.swift in Sources */,
 				C49625192B7A7132009159FD /* NiceJobViewModel.swift in Sources */,
 				C4BB27B72B5A85720021AE4C /* RegisterView.swift in Sources */,
 				C49624F92B7A55B6009159FD /* UserWorkoutInfoComponent.swift in Sources */,
