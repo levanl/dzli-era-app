@@ -143,12 +143,11 @@ struct CardAddView: View {
            
             Spacer(minLength: 0)
             
-            
+            LottieView(name: "CreditCard")
             Button(action: {
                 let newCard = CreditCard(holderName: cardHolderName, cardNumber: cardNumber, cvvCode: cvvCode, expireDate: expireDate)
                             cards.append(newCard)
                             dismiss()
-                
             }) {
                 Text("Save Card")
                     .foregroundColor(.white)
@@ -161,8 +160,6 @@ struct CardAddView: View {
             )
             .cornerRadius(10)
             .padding()
-            
-            
             
         }
         .padding()

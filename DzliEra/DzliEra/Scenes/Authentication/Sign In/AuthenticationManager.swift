@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseAuth
+import Lottie
 
 struct AuthDataResultModel {
     let uid: String

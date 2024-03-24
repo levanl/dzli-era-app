@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Lottie
 
 struct CreditCard: Identifiable {
     let id = UUID()
@@ -111,6 +112,38 @@ struct CardView: View {
             .tint(.white)
         }
         .frame(height: 200)
-        //    .padding(.top, 35)
+    }
+}
+
+
+struct LottieView: UIViewRepresentable {
+    
+    var url: URL?
+    var name: String
+    
+    func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
+        let view = UIView(frame: .zero)
+        
+        let animationView = LottieAnimationView()
+        let animation = LottieAnimation.named(name)
+        animationView.animation = animation
+        
+        
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .loop
+        animationView.play()
+        
+        view.addSubview(animationView)
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            animationView.heightAnchor.constraint(equalTo: view.heightAnchor),
+            animationView.widthAnchor.constraint(equalTo: view.widthAnchor)
+        ])
+
+        return view
+    }
+    
+    func updateUIView(_ uiView: UIView, context: Context) {
+        
     }
 }
