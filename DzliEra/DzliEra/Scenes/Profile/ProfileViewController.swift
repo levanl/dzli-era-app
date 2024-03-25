@@ -344,7 +344,37 @@ class PopupViewController: UIViewController {
         return label
     }()
     
-    private let
+    private let premiumStackView: UIStackView =  {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 8
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let upgradeNowButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Upgrade Now", for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = UIColor(AppColors.animationBackground)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        button.layer.cornerRadius = 6
+        return button
+    }()
+    
+    
+    private let dismissButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Dismiss", for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(UIColor(AppColors.gray), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        button.layer.cornerRadius = 6
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -411,5 +441,17 @@ class PopupViewController: UIViewController {
             premiumText.leadingAnchor.constraint(equalTo: premiumView.leadingAnchor, constant: 16),
             premiumText.trailingAnchor.constraint(equalTo: premiumView.trailingAnchor, constant: -16)
         ])
+        
+        premiumView.addSubview(premiumStackView)
+        premiumStackView.addArrangedSubview(upgradeNowButton)
+        premiumStackView.addArrangedSubview(dismissButton)
+        
+        NSLayoutConstraint.activate([
+            premiumStackView.bottomAnchor.constraint(equalTo: premiumView.bottomAnchor, constant: -24),
+            premiumStackView.leadingAnchor.constraint(equalTo: premiumView.leadingAnchor, constant: 16),
+            premiumStackView.trailingAnchor.constraint(equalTo: premiumView.trailingAnchor, constant: -16)
+        ])
+        
+        
     }
 }
