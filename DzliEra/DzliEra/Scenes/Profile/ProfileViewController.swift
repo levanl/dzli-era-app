@@ -303,70 +303,113 @@ final class ProfileViewController: UIViewController {
 
 
 class PopupViewController: UIViewController {
-
-  let animationView = LottieAnimationView()
-
-  private let premiumView: UIView = {
-    let view = UIView()
-    view.translatesAutoresizingMaskIntoConstraints = false
-    view.backgroundColor = UIColor.white
-    view.layer.cornerRadius = 10.0
-    view.clipsToBounds = true
-    return view
-  }()
-
-  private let overlayView: UIView = {
-    let view = UIView()
-    view.translatesAutoresizingMaskIntoConstraints = false
-    view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-    return view
-  }()
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-
-    view.backgroundColor = UIColor.clear
-
-    view.addSubview(overlayView)
-
-    NSLayoutConstraint.activate([
-      overlayView.topAnchor.constraint(equalTo: view.topAnchor),
-      overlayView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      overlayView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      overlayView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-    ])
-
-    overlayView.addSubview(premiumView)
-
-    NSLayoutConstraint.activate([
-      premiumView.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor),
-      premiumView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor),
-      premiumView.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 32),
-      premiumView.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: -32),
-      premiumView.heightAnchor.constraint(equalToConstant: 440)
-    ])
-      
-  }
-
-  @objc func closeButtonTapped() {
-    dismiss(animated: true, completion: nil)
-  }
-
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    setupAnimation()
-  }
-
-  private func setupAnimation() {
-    animationView.animation = LottieAnimation.named("FoodAnimation")
-      
-      let horizontalCenterOffset = (premiumView.frame.width - animationView.frame.width) / 2.0
-      animationView.frame = CGRect(x: 0, y: 0, width: 330, height: 200)
-    animationView.backgroundColor = .blue
-    animationView.contentMode = .scaleAspectFit
-    animationView.loopMode = .loop
-    animationView.play()
-
-    premiumView.addSubview(animationView)
-  }
+    
+    let animationView = LottieAnimationView()
+    
+    private let premiumView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.white
+        view.layer.cornerRadius = 10.0
+        view.clipsToBounds = true
+        return view
+    }()
+    
+    private let overlayView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        return view
+    }()
+    
+    private let premiumLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Want More Premium Features?"
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.font = UIFont.boldSystemFont(ofSize: 28)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let premiumText: UILabel = {
+        let label = UILabel()
+        label.text = "Upgrade to Gold Status for full access to our Food Tracker. Enjoy premium features and personalized nutrition insights."
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.textColor = UIColor(AppColors.gray)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = UIColor.clear
+        
+        view.addSubview(overlayView)
+        
+        NSLayoutConstraint.activate([
+            overlayView.topAnchor.constraint(equalTo: view.topAnchor),
+            overlayView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            overlayView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            overlayView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
+        overlayView.addSubview(premiumView)
+        
+        NSLayoutConstraint.activate([
+            premiumView.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor),
+            premiumView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor),
+            premiumView.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 32),
+            premiumView.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: -32),
+            premiumView.heightAnchor.constraint(equalToConstant: 480)
+        ])
+        
+    }
+    
+    @objc func closeButtonTapped() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupAnimation()
+        setupLabels()
+    }
+    
+    private func setupAnimation() {
+        animationView.animation = LottieAnimation.named("FoodAnimation")
+        
+        let horizontalCenterOffset = (premiumView.frame.width - animationView.frame.width) / 2.0
+        animationView.frame = CGRect(x: 0, y: 0, width: 330, height: 200)
+        animationView.backgroundColor = UIColor(AppColors.animationBackground)
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .loop
+        animationView.play()
+        
+        premiumView.addSubview(animationView)
+    }
+    
+    private func setupLabels() {
+        premiumView.addSubview(premiumLabel)
+        
+        NSLayoutConstraint.activate([
+            premiumLabel.topAnchor.constraint(equalTo: animationView.bottomAnchor, constant: 16),
+            premiumLabel.leadingAnchor.constraint(equalTo: premiumView.leadingAnchor, constant: 16),
+            premiumLabel.trailingAnchor.constraint(equalTo: premiumView.trailingAnchor, constant: -16)
+        ])
+        
+        premiumView.addSubview(premiumText)
+        
+        NSLayoutConstraint.activate([
+            premiumText.topAnchor.constraint(equalTo: premiumLabel.bottomAnchor, constant: 24),
+            premiumText.leadingAnchor.constraint(equalTo: premiumView.leadingAnchor, constant: 16),
+            premiumText.trailingAnchor.constraint(equalTo: premiumView.trailingAnchor, constant: -16)
+        ])
+    }
 }
