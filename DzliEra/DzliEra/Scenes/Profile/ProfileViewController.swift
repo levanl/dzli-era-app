@@ -309,7 +309,7 @@ class PopupViewController: UIViewController {
   private let premiumView: UIView = {
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
-    view.backgroundColor = UIColor.red
+    view.backgroundColor = UIColor.white
     view.layer.cornerRadius = 10.0
     view.clipsToBounds = true
     return view
@@ -343,15 +343,15 @@ class PopupViewController: UIViewController {
       premiumView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor),
       premiumView.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 32),
       premiumView.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: -32),
-      premiumView.heightAnchor.constraint(equalToConstant: 320)
+      premiumView.heightAnchor.constraint(equalToConstant: 440)
     ])
+      
   }
 
   @objc func closeButtonTapped() {
     dismiss(animated: true, completion: nil)
   }
 
-  // Call setupAnimation after layout is complete
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     setupAnimation()
@@ -359,8 +359,10 @@ class PopupViewController: UIViewController {
 
   private func setupAnimation() {
     animationView.animation = LottieAnimation.named("FoodAnimation")
-    animationView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
-    animationView.backgroundColor = .white
+      
+      let horizontalCenterOffset = (premiumView.frame.width - animationView.frame.width) / 2.0
+      animationView.frame = CGRect(x: 0, y: 0, width: 330, height: 200)
+    animationView.backgroundColor = .blue
     animationView.contentMode = .scaleAspectFit
     animationView.loopMode = .loop
     animationView.play()
