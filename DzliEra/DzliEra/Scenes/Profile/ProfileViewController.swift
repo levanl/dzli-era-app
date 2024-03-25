@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import Lottie
 
 final class ProfileViewController: UIViewController {
     
@@ -293,69 +294,77 @@ final class ProfileViewController: UIViewController {
             self.user = try await UserManager.shared.getUser(userId: user.userId)
         }
         let popupVC = PopupViewController()
-                popupVC.modalPresentationStyle = .overFullScreen
-                present(popupVC, animated: true, completion: nil)
-            
+        popupVC.modalPresentationStyle = .overFullScreen
+        present(popupVC, animated: true, completion: nil)
+        
     }
 }
 
 
 
 class PopupViewController: UIViewController {
-    
-    private let premiumView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor.red
-        view.layer.cornerRadius = 10.0
-        view.clipsToBounds = true
-        return view
-    }()
-    
-    private let xmarkButton: UIButton = {
-        let closeButton = UIButton(type: .custom)
-        closeButton.translatesAutoresizingMaskIntoConstraints = false
-        closeButton.setImage(UIImage(systemName: "xmark"), for: .normal)
-        closeButton.tintColor = UIColor.white
-        return closeButton
-    }()
-    
-    private let overlayView: UIView = {
-            let view = UIView()
-            view.translatesAutoresizingMaskIntoConstraints = false
-            view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-            return view
-        }()
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = UIColor.clear
-        
-        view.addSubview(premiumView)
-        
-        NSLayoutConstraint.activate([
-            premiumView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            premiumView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            premiumView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
-            premiumView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
-            premiumView.heightAnchor.constraint(equalToConstant: 320)
-        ])
-    
-        xmarkButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
-        premiumView.addSubview(xmarkButton)
-        
-        NSLayoutConstraint.activate([
-            xmarkButton.topAnchor.constraint(equalTo: premiumView.topAnchor, constant: 20),
-            xmarkButton.trailingAnchor.constraint(equalTo: premiumView.trailingAnchor, constant: -20),
-            xmarkButton.widthAnchor.constraint(equalToConstant: 30),
-            xmarkButton.heightAnchor.constraint(equalToConstant: 30)
-        ])
-    }
-    
-    @objc func closeButtonTapped() {
 
-        dismiss(animated: true, completion: nil)
-    }
+  let animationView = LottieAnimationView()
+
+  private let premiumView: UIView = {
+    let view = UIView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.backgroundColor = UIColor.red
+    view.layer.cornerRadius = 10.0
+    view.clipsToBounds = true
+    return view
+  }()
+
+  private let overlayView: UIView = {
+    let view = UIView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+    return view
+  }()
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
+    view.backgroundColor = UIColor.clear
+
+    view.addSubview(overlayView)
+
+    NSLayoutConstraint.activate([
+      overlayView.topAnchor.constraint(equalTo: view.topAnchor),
+      overlayView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      overlayView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      overlayView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+    ])
+
+    overlayView.addSubview(premiumView)
+
+    NSLayoutConstraint.activate([
+      premiumView.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor),
+      premiumView.centerYAnchor.constraint(equalTo: overlayView.centerYAnchor),
+      premiumView.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 32),
+      premiumView.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: -32),
+      premiumView.heightAnchor.constraint(equalToConstant: 320)
+    ])
+  }
+
+  @objc func closeButtonTapped() {
+    dismiss(animated: true, completion: nil)
+  }
+
+  // Call setupAnimation after layout is complete
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    setupAnimation()
+  }
+
+  private func setupAnimation() {
+    animationView.animation = LottieAnimation.named("FoodAnimation")
+    animationView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+    animationView.backgroundColor = .white
+    animationView.contentMode = .scaleAspectFit
+    animationView.loopMode = .loop
+    animationView.play()
+
+    premiumView.addSubview(animationView)
+  }
 }

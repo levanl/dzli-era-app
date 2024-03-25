@@ -18,6 +18,7 @@
 		C422959F2BB05D44008E04A9 /* CardAnimationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C422959E2BB05D44008E04A9 /* CardAnimationDialog.swift */; };
 		C42295A12BB072D1008E04A9 /* MaterialDesignTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42295A02BB072D1008E04A9 /* MaterialDesignTextField.swift */; };
 		C42295A32BB07354008E04A9 /* CardAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42295A22BB07354008E04A9 /* CardAddViewModel.swift */; };
+		C42295A82BB1C46B008E04A9 /* FoodAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = C42295A72BB1C46A008E04A9 /* FoodAnimation.json */; };
 		C4456DA02BAB13E100C9419B /* CardManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4456D9F2BAB13E100C9419B /* CardManagerView.swift */; };
 		C45D81442B961F9C00583B86 /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45D81432B961F9C00583B86 /* AlertExtension.swift */; };
 		C473B0962B63BF1300C34CC0 /* SaveWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */; };
@@ -161,6 +162,7 @@
 		C422959E2BB05D44008E04A9 /* CardAnimationDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAnimationDialog.swift; sourceTree = "<group>"; };
 		C42295A02BB072D1008E04A9 /* MaterialDesignTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialDesignTextField.swift; sourceTree = "<group>"; };
 		C42295A22BB07354008E04A9 /* CardAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAddViewModel.swift; sourceTree = "<group>"; };
+		C42295A72BB1C46A008E04A9 /* FoodAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FoodAnimation.json; sourceTree = "<group>"; };
 		C4456D9F2BAB13E100C9419B /* CardManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagerView.swift; sourceTree = "<group>"; };
 		C45D81432B961F9C00583B86 /* AlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
 		C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveWorkoutViewController.swift; sourceTree = "<group>"; };
@@ -407,6 +409,7 @@
 		C49624F32B7A4EB5009159FD /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				C42295A72BB1C46A008E04A9 /* FoodAnimation.json */,
 				C422959C2BB0565C008E04A9 /* CreditCard.json */,
 				C4F4C5332B99E55B003E4497 /* Visa.png */,
 				C4D4E50E2B57F400000B0AE1 /* Assets.xcassets */,
@@ -923,6 +926,7 @@
 				C4D4E50F2B57F400000B0AE1 /* Assets.xcassets in Resources */,
 				C4BB276B2B590CD80021AE4C /* Kanit-Italic.ttf in Resources */,
 				C4BB27622B590CD80021AE4C /* Kanit-MediumItalic.ttf in Resources */,
+				C42295A82BB1C46B008E04A9 /* FoodAnimation.json in Resources */,
 				C4F3A0282B5E9F3800B921FB /* workout.gif in Resources */,
 				C4BB27732B5939C60021AE4C /* GoogleService-Info.plist in Resources */,
 			);
