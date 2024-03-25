@@ -402,10 +402,6 @@ class PopupViewController: UIViewController {
         
     }
     
-    @objc func closeButtonTapped() {
-        dismiss(animated: true, completion: nil)
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupAnimation()
@@ -445,13 +441,16 @@ class PopupViewController: UIViewController {
         premiumView.addSubview(premiumStackView)
         premiumStackView.addArrangedSubview(upgradeNowButton)
         premiumStackView.addArrangedSubview(dismissButton)
+        dismissButton.addTarget(self, action: #selector(dismissButtonTapped), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             premiumStackView.bottomAnchor.constraint(equalTo: premiumView.bottomAnchor, constant: -24),
             premiumStackView.leadingAnchor.constraint(equalTo: premiumView.leadingAnchor, constant: 16),
             premiumStackView.trailingAnchor.constraint(equalTo: premiumView.trailingAnchor, constant: -16)
         ])
-        
-        
+    }
+    
+    @objc func dismissButtonTapped() {
+        dismiss(animated: true, completion: nil)
     }
 }
