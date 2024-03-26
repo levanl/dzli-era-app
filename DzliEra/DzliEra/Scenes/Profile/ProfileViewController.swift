@@ -422,7 +422,6 @@ class PopupViewController: UIViewController {
     private func setupAnimation() {
         animationView.animation = LottieAnimation.named("FoodAnimation")
         
-        let horizontalCenterOffset = (premiumView.frame.width - animationView.frame.width) / 2.0
         animationView.frame = CGRect(x: 0, y: 0, width: 330, height: 200)
         animationView.backgroundColor = UIColor(AppColors.animationBackground)
         animationView.contentMode = .scaleAspectFit

@@ -20,6 +20,7 @@ struct AppColors {
     static let primaryRed = Color(hex: 0xDF455D)
     static let secondaryGray = Color(hex: 0x2D2D39)
     static let animationBackground = Color(hex: 0x6E65DE)
+    static let foodSectionBackground = Color(hex: 0xF8FBFC)
 }
 
 extension Color {
