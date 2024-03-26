@@ -285,14 +285,6 @@ final class ProfileViewController: UIViewController {
     }
     
     @objc private func premiumButtonTapped() {
-        guard let user else { return }
-        
-        let currentValue = user.isPremium ?? false
-        let updatedUser = DBUser(userId: user.userId,isPremium: !currentValue)
-        Task {
-            try await UserManager.shared.updateUserPremiumStatus(user: updatedUser)
-            self.user = try await UserManager.shared.getUser(userId: user.userId)
-        }
         let popupVC = PopupViewController()
         popupVC.modalPresentationStyle = .overFullScreen
         present(popupVC, animated: true, completion: nil)
@@ -305,6 +297,9 @@ final class ProfileViewController: UIViewController {
 class PopupViewController: UIViewController {
     
     let animationView = LottieAnimationView()
+    
+    private var user: DBUser? = nil
+
     
     private let premiumView: UIView = {
         let view = UIView()
@@ -408,6 +403,22 @@ class PopupViewController: UIViewController {
         setupLabels()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        Task {
+            do {
+                let authDataResult = try await AuthenticationManager.shared.getAuthenticatedUser()
+                self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
+                print("User loaded: \(self.user?.email ?? "Unknown email")")
+                
+            } catch {
+                print("Error loading user: \(error)")
+            }
+        }
+    }
+
+    
     private func setupAnimation() {
         animationView.animation = LottieAnimation.named("FoodAnimation")
         
@@ -453,4 +464,17 @@ class PopupViewController: UIViewController {
     @objc func dismissButtonTapped() {
         dismiss(animated: true, completion: nil)
     }
+    
+    @objc func upgradeNowButtonTapped() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+//    guard let user else { return }
+//    
+//    let currentValue = user.isPremium ?? false
+//    let updatedUser = DBUser(userId: user.userId,isPremium: !currentValue)
+//    Task {
+//        try await UserManager.shared.updateUserPremiumStatus(user: updatedUser)
+//        self.user = try await UserManager.shared.getUser(userId: user.userId)
+//    }
 }
