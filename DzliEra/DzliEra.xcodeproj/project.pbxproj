@@ -19,6 +19,7 @@
 		C42295A12BB072D1008E04A9 /* MaterialDesignTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42295A02BB072D1008E04A9 /* MaterialDesignTextField.swift */; };
 		C42295A32BB07354008E04A9 /* CardAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42295A22BB07354008E04A9 /* CardAddViewModel.swift */; };
 		C42295AA2BB1D84A008E04A9 /* FoodAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = C42295A92BB1D84A008E04A9 /* FoodAnimation.json */; };
+		C42295AD2BB323B8008E04A9 /* FoodTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42295AC2BB323B8008E04A9 /* FoodTrackerViewController.swift */; };
 		C4456DA02BAB13E100C9419B /* CardManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4456D9F2BAB13E100C9419B /* CardManagerView.swift */; };
 		C45D81442B961F9C00583B86 /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45D81432B961F9C00583B86 /* AlertExtension.swift */; };
 		C473B0962B63BF1300C34CC0 /* SaveWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */; };
@@ -163,6 +164,7 @@
 		C42295A02BB072D1008E04A9 /* MaterialDesignTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialDesignTextField.swift; sourceTree = "<group>"; };
 		C42295A22BB07354008E04A9 /* CardAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAddViewModel.swift; sourceTree = "<group>"; };
 		C42295A92BB1D84A008E04A9 /* FoodAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FoodAnimation.json; sourceTree = "<group>"; };
+		C42295AC2BB323B8008E04A9 /* FoodTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTrackerViewController.swift; sourceTree = "<group>"; };
 		C4456D9F2BAB13E100C9419B /* CardManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagerView.swift; sourceTree = "<group>"; };
 		C45D81432B961F9C00583B86 /* AlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
 		C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveWorkoutViewController.swift; sourceTree = "<group>"; };
@@ -337,6 +339,14 @@
 				C42295A22BB07354008E04A9 /* CardAddViewModel.swift */,
 			);
 			path = "Card Add";
+			sourceTree = "<group>";
+		};
+		C42295AB2BB32394008E04A9 /* Food Tracker */ = {
+			isa = PBXGroup;
+			children = (
+				C42295AC2BB323B8008E04A9 /* FoodTrackerViewController.swift */,
+			);
+			path = "Food Tracker";
 			sourceTree = "<group>";
 		};
 		C473B0942B63BEE600C34CC0 /* Save Workout */ = {
@@ -656,6 +666,7 @@
 		C4D4E51A2B57F851000B0AE1 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				C42295AB2BB32394008E04A9 /* Food Tracker */,
 				C4F3A0022B5BBF5800B921FB /* Home */,
 				C4F3A0032B5BBFBC00B921FB /* Workout */,
 				C4F3A0042B5BBFC300B921FB /* Profile */,
@@ -958,6 +969,7 @@
 				C49624ED2B7A20CF009159FD /* ExploreRoutinesViewController.swift in Sources */,
 				C49625132B7A644A009159FD /* NewRoutineTextFieldComponent.swift in Sources */,
 				C49624DE2B766DFB009159FD /* ExerciseSkeletonCell.swift in Sources */,
+				C42295AD2BB323B8008E04A9 /* FoodTrackerViewController.swift in Sources */,
 				C4D4E5272B57FC19000B0AE1 /* OnBoardingModel.swift in Sources */,
 				C4F3A0262B5E993200B921FB /* GifLoader.swift in Sources */,
 				C496251B2B7A7440009159FD /* SaveWorkoutLabelComponent.swift in Sources */,
