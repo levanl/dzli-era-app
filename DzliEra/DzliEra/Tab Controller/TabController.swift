@@ -35,8 +35,9 @@ final class TabController: UITabBarController {
         let home = self.createNav(with: "Home", and: UIImage(systemName: "house"), vc: homeView)
         let profile = self.createNav(with: "Workout", and: UIImage(systemName: "list.clipboard.fill"), vc: WorkoutViewController())
         let workout = self.createNav(with: "Profile", and: UIImage(systemName: "person.crop.circle"), vc: ProfileViewController())
+        let foodTracker = self.createNav(with: "Food", and: UIImage(systemName: "fork.knife"), vc: ProfileViewController())
         
-        self.setViewControllers([home, profile, workout], animated: true)
+        self.setViewControllers([home, profile, workout, foodTracker], animated: true)
     }
     
     private func createNav(with title: String, and image: UIImage?, vc: UIViewController) -> UIViewController {

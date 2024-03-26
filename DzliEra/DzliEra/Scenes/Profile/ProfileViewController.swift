@@ -299,7 +299,7 @@ class PopupViewController: UIViewController {
     let animationView = LottieAnimationView()
     
     private var user: DBUser? = nil
-
+    
     
     private let premiumView: UIView = {
         let view = UIView()
@@ -417,7 +417,7 @@ class PopupViewController: UIViewController {
             }
         }
     }
-
+    
     
     private func setupAnimation() {
         animationView.animation = LottieAnimation.named("FoodAnimation")
@@ -452,6 +452,8 @@ class PopupViewController: UIViewController {
         premiumView.addSubview(premiumStackView)
         premiumStackView.addArrangedSubview(upgradeNowButton)
         premiumStackView.addArrangedSubview(dismissButton)
+        
+        upgradeNowButton.addTarget(self, action: #selector(upgradeNowButtonTapped), for: .touchUpInside)
         dismissButton.addTarget(self, action: #selector(dismissButtonTapped), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
@@ -466,15 +468,14 @@ class PopupViewController: UIViewController {
     }
     
     @objc func upgradeNowButtonTapped() {
-        dismiss(animated: true, completion: nil)
+        guard let user else { return }
+        
+        let currentValue = user.isPremium ?? false
+        let updatedUser = DBUser(userId: user.userId,isPremium: !currentValue)
+        Task {
+            try await UserManager.shared.updateUserPremiumStatus(user: updatedUser)
+            self.user = try await UserManager.shared.getUser(userId: user.userId)
+        }
+        
     }
-    
-//    guard let user else { return }
-//    
-//    let currentValue = user.isPremium ?? false
-//    let updatedUser = DBUser(userId: user.userId,isPremium: !currentValue)
-//    Task {
-//        try await UserManager.shared.updateUserPremiumStatus(user: updatedUser)
-//        self.user = try await UserManager.shared.getUser(userId: user.userId)
-//    }
 }
