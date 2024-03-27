@@ -20,6 +20,8 @@
 		C42295A32BB07354008E04A9 /* CardAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42295A22BB07354008E04A9 /* CardAddViewModel.swift */; };
 		C42295AA2BB1D84A008E04A9 /* FoodAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = C42295A92BB1D84A008E04A9 /* FoodAnimation.json */; };
 		C42295AD2BB323B8008E04A9 /* FoodTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42295AC2BB323B8008E04A9 /* FoodTrackerViewController.swift */; };
+		C42295AF2BB49177008E04A9 /* FoodTrackerHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42295AE2BB49177008E04A9 /* FoodTrackerHomeView.swift */; };
+		C42295B22BB49231008E04A9 /* CDFoodclass.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C42295B02BB49231008E04A9 /* CDFoodclass.xcdatamodeld */; };
 		C4456DA02BAB13E100C9419B /* CardManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4456D9F2BAB13E100C9419B /* CardManagerView.swift */; };
 		C45D81442B961F9C00583B86 /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45D81432B961F9C00583B86 /* AlertExtension.swift */; };
 		C473B0962B63BF1300C34CC0 /* SaveWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */; };
@@ -165,6 +167,8 @@
 		C42295A22BB07354008E04A9 /* CardAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAddViewModel.swift; sourceTree = "<group>"; };
 		C42295A92BB1D84A008E04A9 /* FoodAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FoodAnimation.json; sourceTree = "<group>"; };
 		C42295AC2BB323B8008E04A9 /* FoodTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTrackerViewController.swift; sourceTree = "<group>"; };
+		C42295AE2BB49177008E04A9 /* FoodTrackerHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTrackerHomeView.swift; sourceTree = "<group>"; };
+		C42295B12BB49231008E04A9 /* CDFoodclass.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CDFoodclass.xcdatamodel; sourceTree = "<group>"; };
 		C4456D9F2BAB13E100C9419B /* CardManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagerView.swift; sourceTree = "<group>"; };
 		C45D81432B961F9C00583B86 /* AlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
 		C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveWorkoutViewController.swift; sourceTree = "<group>"; };
@@ -345,6 +349,8 @@
 			isa = PBXGroup;
 			children = (
 				C42295AC2BB323B8008E04A9 /* FoodTrackerViewController.swift */,
+				C42295AE2BB49177008E04A9 /* FoodTrackerHomeView.swift */,
+				C42295B02BB49231008E04A9 /* CDFoodclass.xcdatamodeld */,
 			);
 			path = "Food Tracker";
 			sourceTree = "<group>";
@@ -988,6 +994,7 @@
 				C49624E82B78DD4F009159FD /* NutritionModel.swift in Sources */,
 				C4D4E5062B57F3FF000B0AE1 /* AppDelegate.swift in Sources */,
 				C4E027AD2B72489B000FA8B6 /* EditProfileView.swift in Sources */,
+				C42295B22BB49231008E04A9 /* CDFoodclass.xcdatamodeld in Sources */,
 				C4F3A01F2B5D3D4100B921FB /* ExerciseModel.swift in Sources */,
 				C4F3A0062B5BC02B00B921FB /* ProfileViewController.swift in Sources */,
 				C4D4E5292B582CCB000B0AE1 /* OnBoardingView.swift in Sources */,
@@ -996,6 +1003,7 @@
 				C473B0982B63DEAD00C34CC0 /* SaveCollectionViewCell.swift in Sources */,
 				C4E027B42B738A34000FA8B6 /* StorageManager.swift in Sources */,
 				C4E027A22B6E7AE6000FA8B6 /* HomeModel.swift in Sources */,
+				C42295AF2BB49177008E04A9 /* FoodTrackerHomeView.swift in Sources */,
 				C49624FB2B7A5610009159FD /* TimeRepsWorkoutComponent.swift in Sources */,
 				C4F3A0082B5BC04700B921FB /* WorkoutViewController.swift in Sources */,
 				C49624EF2B7A20DE009159FD /* ExploreRoutinesViewModel.swift in Sources */,
@@ -1478,6 +1486,19 @@
 			productName = SplineRuntime;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		C42295B02BB49231008E04A9 /* CDFoodclass.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C42295B12BB49231008E04A9 /* CDFoodclass.xcdatamodel */,
+			);
+			currentVersion = C42295B12BB49231008E04A9 /* CDFoodclass.xcdatamodel */;
+			path = CDFoodclass.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C4D4E4FA2B57F3FF000B0AE1 /* Project object */;
 }

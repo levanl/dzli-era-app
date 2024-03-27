@@ -60,7 +60,7 @@ class FoodTrackerViewController: UIViewController {
         let centerPoint = CGPoint(x: 180, y: 150)
         
         let circularPath = UIBezierPath(arcCenter: centerPoint, radius: 100, startAngle: -CGFloat.pi / 2, endAngle: 2 * CGFloat.pi, clockwise: true)
-
+        
         trackLayer.path = circularPath.cgPath
         trackLayer.strokeColor = UIColor.black.cgColor
         trackLayer.lineWidth = 10
@@ -88,14 +88,12 @@ class FoodTrackerViewController: UIViewController {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
         
         whiteBoxView.addSubview(precentageLabel)
-
-            NSLayoutConstraint.activate([
-                precentageLabel.centerXAnchor.constraint(equalTo: whiteBoxView.centerXAnchor),
-                precentageLabel.centerYAnchor.constraint(equalTo: whiteBoxView.centerYAnchor),
-            ])
         
-        progressPercentage = 0.75 
-
+        NSLayoutConstraint.activate([
+            precentageLabel.centerXAnchor.constraint(equalTo: whiteBoxView.centerXAnchor),
+            precentageLabel.centerYAnchor.constraint(equalTo: whiteBoxView.centerYAnchor),
+        ])
+        
     }
     
     func setupBlurView() {
@@ -112,24 +110,21 @@ class FoodTrackerViewController: UIViewController {
     }
     
     @objc private func handleTap() {
-        print("Attempt to animate stroke")
-        
+        progressPercentage = 0.75
         let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        
+    
         basicAnimation.toValue = progressPercentage
         basicAnimation.duration = 2
         basicAnimation.fillMode = CAMediaTimingFillMode.forwards
         basicAnimation.isRemovedOnCompletion = false
         
         let percentageAnimation = CABasicAnimation(keyPath: "string")
-            percentageAnimation.fromValue = precentageLabel.text ?? "0%"
-            percentageAnimation.toValue = "\(Int(progressPercentage * 100))%"
-            percentageAnimation.duration = 2
-            percentageAnimation.fillMode = CAMediaTimingFillMode.forwards
-            percentageAnimation.isRemovedOnCompletion = false
-
+        percentageAnimation.fromValue = precentageLabel.text ?? "0%"
+        percentageAnimation.toValue = "\(Int(progressPercentage * 100))%"
+        percentageAnimation.duration = 2
+        percentageAnimation.fillMode = CAMediaTimingFillMode.forwards
+        percentageAnimation.isRemovedOnCompletion = false
         precentageLabel.layer.add(percentageAnimation, forKey: "updateText")
-        
         shapeLayer.add(basicAnimation, forKey: "urSoBasic")
     }
     
