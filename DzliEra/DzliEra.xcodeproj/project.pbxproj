@@ -22,6 +22,12 @@
 		C42295AD2BB323B8008E04A9 /* FoodTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42295AC2BB323B8008E04A9 /* FoodTrackerViewController.swift */; };
 		C42295AF2BB49177008E04A9 /* FoodTrackerHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42295AE2BB49177008E04A9 /* FoodTrackerHomeView.swift */; };
 		C42295B22BB49231008E04A9 /* CDFoodclass.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C42295B02BB49231008E04A9 /* CDFoodclass.xcdatamodeld */; };
+		C42295B42BB53D9E008E04A9 /* CDDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42295B32BB53D9E008E04A9 /* CDDataModel.swift */; };
+		C42295B62BB54628008E04A9 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42295B52BB54628008E04A9 /* RingView.swift */; };
+		C42295B82BB546F4008E04A9 /* FoodTrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42295B72BB546F4008E04A9 /* FoodTrackerView.swift */; };
+		C42295BA2BB5622D008E04A9 /* FoodTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42295B92BB5622D008E04A9 /* FoodTabView.swift */; };
+		C42295BC2BB56522008E04A9 /* FoodCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42295BB2BB56522008E04A9 /* FoodCard.swift */; };
+		C42295BE2BB56A26008E04A9 /* WaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42295BD2BB56A26008E04A9 /* WaterView.swift */; };
 		C4456DA02BAB13E100C9419B /* CardManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4456D9F2BAB13E100C9419B /* CardManagerView.swift */; };
 		C45D81442B961F9C00583B86 /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45D81432B961F9C00583B86 /* AlertExtension.swift */; };
 		C473B0962B63BF1300C34CC0 /* SaveWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */; };
@@ -169,6 +175,12 @@
 		C42295AC2BB323B8008E04A9 /* FoodTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTrackerViewController.swift; sourceTree = "<group>"; };
 		C42295AE2BB49177008E04A9 /* FoodTrackerHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTrackerHomeView.swift; sourceTree = "<group>"; };
 		C42295B12BB49231008E04A9 /* CDFoodclass.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CDFoodclass.xcdatamodel; sourceTree = "<group>"; };
+		C42295B32BB53D9E008E04A9 /* CDDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDDataModel.swift; sourceTree = "<group>"; };
+		C42295B52BB54628008E04A9 /* RingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
+		C42295B72BB546F4008E04A9 /* FoodTrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTrackerView.swift; sourceTree = "<group>"; };
+		C42295B92BB5622D008E04A9 /* FoodTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTabView.swift; sourceTree = "<group>"; };
+		C42295BB2BB56522008E04A9 /* FoodCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCard.swift; sourceTree = "<group>"; };
+		C42295BD2BB56A26008E04A9 /* WaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterView.swift; sourceTree = "<group>"; };
 		C4456D9F2BAB13E100C9419B /* CardManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagerView.swift; sourceTree = "<group>"; };
 		C45D81432B961F9C00583B86 /* AlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
 		C473B0952B63BF1300C34CC0 /* SaveWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveWorkoutViewController.swift; sourceTree = "<group>"; };
@@ -350,7 +362,13 @@
 			children = (
 				C42295AC2BB323B8008E04A9 /* FoodTrackerViewController.swift */,
 				C42295AE2BB49177008E04A9 /* FoodTrackerHomeView.swift */,
+				C42295B52BB54628008E04A9 /* RingView.swift */,
 				C42295B02BB49231008E04A9 /* CDFoodclass.xcdatamodeld */,
+				C42295B32BB53D9E008E04A9 /* CDDataModel.swift */,
+				C42295B72BB546F4008E04A9 /* FoodTrackerView.swift */,
+				C42295B92BB5622D008E04A9 /* FoodTabView.swift */,
+				C42295BB2BB56522008E04A9 /* FoodCard.swift */,
+				C42295BD2BB56A26008E04A9 /* WaterView.swift */,
 			);
 			path = "Food Tracker";
 			sourceTree = "<group>";
@@ -963,8 +981,10 @@
 				C49624E42B77AEA0009159FD /* NutritionViewController.swift in Sources */,
 				C40920D32B6179D40089F99E /* StartedWorkoutTableViewCell.swift in Sources */,
 				C496250B2B7A5DCB009159FD /* PlaceHolderModel.swift in Sources */,
+				C42295BC2BB56522008E04A9 /* FoodCard.swift in Sources */,
 				C4F3A0232B5E87E800B921FB /* ExerciseDetailsViewController.swift in Sources */,
 				C4E027A02B6E77F4000FA8B6 /* HomeView.swift in Sources */,
+				C42295B82BB546F4008E04A9 /* FoodTrackerView.swift in Sources */,
 				C473B0A12B6A717700C34CC0 /* NiceJobView.swift in Sources */,
 				C40920CB2B6030650089F99E /* WorkoutTableViewCell.swift in Sources */,
 				C49625052B7A5891009159FD /* PostedWorkoutModel.swift in Sources */,
@@ -986,6 +1006,7 @@
 				C473B0962B63BF1300C34CC0 /* SaveWorkoutViewController.swift in Sources */,
 				C49625172B7A7080009159FD /* InfoBox.swift in Sources */,
 				C49625262B7A8B8B009159FD /* NutritionLabelComponent.swift in Sources */,
+				C42295B62BB54628008E04A9 /* RingView.swift in Sources */,
 				C49624F12B7A218B009159FD /* ExploreTableViewCell.swift in Sources */,
 				C4D4E51D2B57F873000B0AE1 /* ColorExtension.swift in Sources */,
 				C42295A12BB072D1008E04A9 /* MaterialDesignTextField.swift in Sources */,
@@ -1006,6 +1027,7 @@
 				C42295AF2BB49177008E04A9 /* FoodTrackerHomeView.swift in Sources */,
 				C49624FB2B7A5610009159FD /* TimeRepsWorkoutComponent.swift in Sources */,
 				C4F3A0082B5BC04700B921FB /* WorkoutViewController.swift in Sources */,
+				C42295BA2BB5622D008E04A9 /* FoodTabView.swift in Sources */,
 				C49624EF2B7A20DE009159FD /* ExploreRoutinesViewModel.swift in Sources */,
 				C4F3A01D2B5D32F900B921FB /* ExerciseListViewModel.swift in Sources */,
 				C4F4C52F2B988BA1003E4497 /* CardAddView.swift in Sources */,
@@ -1016,6 +1038,7 @@
 				C496251F2B7A7700009159FD /* StartedWorkoutViewModel.swift in Sources */,
 				C422959F2BB05D44008E04A9 /* CardAnimationDialog.swift in Sources */,
 				C4BB27C22B5AB89D0021AE4C /* AuthTitleComponent.swift in Sources */,
+				C42295BE2BB56A26008E04A9 /* WaterView.swift in Sources */,
 				C49624F62B7A5352009159FD /* HomeSharedViewModel.swift in Sources */,
 				C49624DA2B7662C9009159FD /* WorkoutSkeletonCell.swift in Sources */,
 				C473B09E2B6685BF00C34CC0 /* UserManager.swift in Sources */,
@@ -1026,6 +1049,7 @@
 				C45D81442B961F9C00583B86 /* AlertExtension.swift in Sources */,
 				C49624FD2B7A5654009159FD /* ExerciseListViewComponent.swift in Sources */,
 				C4E027A52B6FAE39000FA8B6 /* PostedWorkoutView.swift in Sources */,
+				C42295B42BB53D9E008E04A9 /* CDDataModel.swift in Sources */,
 				C4F3A0212B5E5EFB00B921FB /* ExerciseTableViewCell.swift in Sources */,
 				C49625012B7A57FA009159FD /* MuscleChartViewComponent.swift in Sources */,
 				C49624DC2B7662E7009159FD /* SkeletonLoadable.swift in Sources */,

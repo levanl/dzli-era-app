@@ -44,7 +44,7 @@ struct MaterialDesignTextField: View {
                 updatePlaceholder()
             }
         }
-        .frame(width: .infinity, height: customHeight)
+//        .frame(width: .infinity, height: customHeight)
     }
     private let placeholder: String
     @State private var borderColor = Color.gray
